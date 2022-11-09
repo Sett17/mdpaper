@@ -1,0 +1,4141 @@
+%PDF-1.5
+%оооо
+1 0 obj
+<<
+/Type /Catalog
+/PageMode /UseOutlines
+/Pages 20 0 R
+>>
+endobj
+2 0 obj
+[250 333 408 500 500 833 778 333 333 333 500 564 250 333 250 278 500 500 500 500 500 500 500 500 500 500 278 278 564 564 564 444 921 722 667 667 722 611 556 722 722 333 389 722 611 889 722 722 556 722 667 556 611 722 722 944 722 722 611 333 278 333 469 500 333 444 500 444 500 444 333 500 500 278 278 500 278 778 500 500 500 500 333 389 278 500 500 722 500 500 444 480 200 480 541 333 500 500 167 500 500 500 500 180 444 500 333 333 556 556 500 500 500 250 453 350 333 444 444 500 1000 1000 444 333 333 333 333 333 333 333 333 333 333 333 333 333 1000 889 276 611 722 889 310 667 278 278 500 722 500]
+endobj
+3 0 obj
+<<
+/Flags 2
+/FontBBox {[-168 -218 1000 898]}
+/ItalicAngle 0
+/Ascent 683
+/Descent -217
+/CapHeight 669
+/Type /FontDescriptor
+/FontName /Times-Roman
+>>
+endobj
+4 0 obj
+<<
+/Name times
+/BaseFont /Times-Roman
+/FirstChar 32
+/LastChar 251
+/Widths 2 0 R
+/FontDescriptor 3 0 R
+/Type /Font
+/Subtype /Type1
+>>
+endobj
+5 0 obj
+[250 333 408 500 500 833 778 333 333 333 500 564 250 333 250 278 500 500 500 500 500 500 500 500 500 500 278 278 564 564 564 444 921 722 667 667 722 611 556 722 722 333 389 722 611 889 722 722 556 722 667 556 611 722 722 944 722 722 611 333 278 333 469 500 333 444 500 444 500 444 333 500 500 278 278 500 278 778 500 500 500 500 333 389 278 500 500 722 500 500 444 480 200 480 541 333 500 500 167 500 500 500 500 180 444 500 333 333 556 556 500 500 500 250 453 350 333 444 444 500 1000 1000 444 333 333 333 333 333 333 333 333 333 333 333 333 333 1000 889 276 611 722 889 310 667 278 278 500 722 500]
+endobj
+6 0 obj
+<<
+/Type /FontDescriptor
+/FontName /Times-Bold
+/Flags 2
+/FontBBox {[-168 -218 1000 935]}
+/ItalicAngle 0
+/Ascent 683
+/Descent -217
+/CapHeight 676
+>>
+endobj
+7 0 obj
+<<
+/Subtype /Type1
+/Name timesbold
+/BaseFont /Times-Bold
+/FirstChar 32
+/LastChar 251
+/Widths 5 0 R
+/FontDescriptor 6 0 R
+/Type /Font
+>>
+endobj
+8 0 obj
+[250 333 408 500 500 833 778 333 333 333 500 564 250 333 250 278 500 500 500 500 500 500 500 500 500 500 278 278 564 564 564 444 921 722 667 667 722 611 556 722 722 333 389 722 611 889 722 722 556 722 667 556 611 722 722 944 722 722 611 333 278 333 469 500 333 444 500 444 500 444 333 500 500 278 278 500 278 778 500 500 500 500 333 389 278 500 500 722 500 500 444 480 200 480 541 333 500 500 167 500 500 500 500 180 444 500 333 333 556 556 500 500 500 250 453 350 333 444 444 500 1000 1000 444 333 333 333 333 333 333 333 333 333 333 333 333 333 1000 889 276 611 722 889 310 667 278 278 500 722 500]
+endobj
+9 0 obj
+<<
+/FontName /Times-Italic
+/Flags 2
+/FontBBox {[-169 -217 1010 883]}
+/ItalicAngle -15
+/Ascent 683
+/Descent -217
+/CapHeight 669
+/Type /FontDescriptor
+>>
+endobj
+10 0 obj
+<<
+/BaseFont /Times-Italic
+/FirstChar 32
+/LastChar 251
+/Widths 8 0 R
+/FontDescriptor 9 0 R
+/Type /Font
+/Subtype /Type1
+/Name timesitalic
+>>
+endobj
+11 0 obj
+[250 389 555 500 500 833 778 333 333 333 500 570 250 333 250 278 500 500 500 500 500 500 500 500 500 500 333 333 570 570 570 500 832 667 667 667 722 667 667 722 778 389 500 667 611 889 722 722 611 722 667 556 611 722 667 889 667 611 611 333 278 333 570 500 333 500 500 444 500 444 333 500 556 278 278 500 278 778 556 500 500 500 389 389 278 556 444 667 500 444 389 348 220 348 570 389 500 500 167 500 500 500 500 278 500 500 333 333 556 556 500 500 500 250 500 350 333 500 500 500 1000 1000 500 333 333 333 333 333 333 333 333 333 333 333 333 333 1000 944 266 611 722 944 300 722 278 278 500 722 500]
+endobj
+12 0 obj
+<<
+/CapHeight 676
+/Type /FontDescriptor
+/FontName /Times-BoldItalic
+/Flags 2
+/FontBBox {[-200 -218 996 921]}
+/ItalicAngle -15
+/Ascent 683
+/Descent -217
+>>
+endobj
+13 0 obj
+<<
+/FontDescriptor 12 0 R
+/Type /Font
+/Subtype /Type1
+/Name timesbolditalic
+/BaseFont /Times-BoldItalic
+/FirstChar 32
+/LastChar 251
+/Widths 11 0 R
+>>
+endobj
+14 0 obj
+[500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500]
+endobj
+15 0 obj
+<<
+/ItalicAngle 0
+/Ascent 629
+/Descent -157
+/CapHeight 562
+/Type /FontDescriptor
+/FontName /Courier
+/Flags 2
+/FontBBox {[-23 -250 715 805]}
+>>
+endobj
+16 0 obj
+<<
+/Type /Font
+/Subtype /Type1
+/Name courier
+/BaseFont /Courier
+/FirstChar 32
+/LastChar 251
+/Widths 14 0 R
+/FontDescriptor 15 0 R
+>>
+endobj
+17 0 obj
+[278 278 355 556 556 889 667 222 333 333 389 584 278 333 278 278 556 556 556 556 556 556 556 556 556 556 278 278 584 584 584 556 1015 667 667 722 722 667 611 778 722 278 500 667 556 833 722 778 667 778 722 667 611 722 667 944 667 667 611 278 278 278 469 556 222 556 556 500 556 556 278 556 556 222 222 500 222 833 556 556 556 556 333 500 278 556 500 722 500 500 500 334 260 334 584 333 556 556 167 556 556 556 556 191 333 556 333 333 500 500 556 556 556 278 537 350 222 333 333 556 1000 1000 611 333 333 333 333 333 333 333 333 333 333 333 333 333 1000 1000 370 556 778 1000 365 889 278 222 611 944 611]
+endobj
+18 0 obj
+<<
+/FontName /Helvetica
+/Flags 2
+/FontBBox {[-166 -225 1000 931]}
+/ItalicAngle 0
+/Ascent 718
+/Descent -207
+/CapHeight 718
+/Type /FontDescriptor
+>>
+endobj
+19 0 obj
+<<
+/Widths 17 0 R
+/FontDescriptor 18 0 R
+/Type /Font
+/Subtype /Type1
+/Name helvetica
+/BaseFont /Helvetica
+/FirstChar 32
+/LastChar 251
+>>
+endobj
+20 0 obj
+<<
+/Type /Pages
+/Kids [23 0 R 27 0 R 31 0 R 35 0 R 39 0 R 43 0 R 47 0 R]
+/Count 7
+>>
+endobj
+21 0 obj
+<<
+/Size 4901
+>>
+stream
+BT
+46.771654 783.510236 TD
+21.600000 TL
+T*
+1.000000 Tw
+/timesbold 12 Tf
+(1 Practical Phase at scVenus) Tj
+ET
+BT
+51.023622 761.910236 TD
+21.600000 TL
+T*
+1.000000 Tw
+/timesbold 12 Tf
+(1.1 Introduction) Tj
+ET
+BT
+42.519685 734.910236 TD
+12.000000 TL
+T*
+0.061819 Tw
+/times 10 Tf
+(At Atos, we have the possibility to choose the department in) Tj
+T*
+2.509799 Tw
+/times 10 Tf
+(which we want to perform our practical phase. For this) Tj
+T*
+-0.058976 Tw
+/times 10 Tf
+(purpose, a lot of departments introduce themselves and what) Tj
+T*
+0.030744 Tw
+/times 10 Tf
+(they do, to the students. That is how I found my department,) Tj
+T*
+1.000000 Tw
+/times 10 Tf
+(science+computing, and more specific scVenus.) Tj
+ET
+BT
+42.519685 668.910236 TD
+12.000000 TL
+T*
+0.117274 Tw
+/times 10 Tf
+(The overarching project I worked in, is called PeekabooAV.) Tj
+T*
+0.371819 Tw
+/times 10 Tf
+(This is an Anti-Virus software, which can receive a file, for) Tj
+T*
+1.228819 Tw
+/times 10 Tf
+(example from an email client, and pass it through its own) Tj
+T*
+0.997577 Tw
+/times 10 Tf
+(rule engine, which intern may use other programs, such as) Tj
+T*
+1.000000 Tw
+/times 10 Tf
+(behavioral analysis, to determine the risk of the file.) Tj
+ET
+BT
+55.275591 607.410236 TD
+18.000000 TL
+T*
+1.000000 Tw
+/timesbold 10 Tf
+(1.1.1 Motivation) Tj
+ET
+BT
+42.519685 584.910236 TD
+12.000000 TL
+T*
+6.226024 Tw
+/times 10 Tf
+(PeekabooAV is written to have a high degree of) Tj
+T*
+-0.031687 Tw
+/times 10 Tf
+(configurability and extendability. A major problem with this) Tj
+T*
+3.361516 Tw
+/times 10 Tf
+(approach is that it is not trivial for a user to try out) Tj
+T*
+1.000000 Tw
+/times 10 Tf
+(PeekabooAV in an efficient manner.) Tj
+ET
+BT
+42.519685 530.910236 TD
+12.000000 TL
+T*
+1.000000 Tw
+/times 10 Tf
+(Imagine this scenario:) Tj
+ET
+BT
+42.519685 518.910236 TD
+12.000000 TL
+T*
+0.703524 Tw
+/times 10 Tf
+(You are a System Administrator, with an on-premise email) Tj
+T*
+3.345456 Tw
+/times 10 Tf
+(service. You are looking through GitHub, or searching) Tj
+T*
+0.657577 Tw
+/times 10 Tf
+(articles for better Anti-Virus, to cut down the manual work) Tj
+T*
+2.334774 Tw
+/times 10 Tf
+(you have to do. You stumble upon PeekabooAV, which) Tj
+T*
+0.109091 Tw
+/times 10 Tf
+(sounds promising to you. But to know if it is the right fit for) Tj
+T*
+4.284819 Tw
+/times 10 Tf
+(your needs, you would need to set up a whole test) Tj
+T*
+3.272274 Tw
+/times 10 Tf
+(environment, with at least spam filtering and an email) Tj
+T*
+0.529774 Tw
+/times 10 Tf
+(service. This process is cumbersome, and would likely stop) Tj
+T*
+1.000000 Tw
+/times 10 Tf
+(you from even testing out PeekabooAV.) Tj
+ET
+BT
+42.519685 404.910236 TD
+12.000000 TL
+T*
+0.725819 Tw
+/times 10 Tf
+(Although it is possible to test out PeekabooAV on its own,) Tj
+T*
+0.889835 Tw
+/times 10 Tf
+(there is the definite need to test it with a full environment.) Tj
+T*
+0.312819 Tw
+/times 10 Tf
+(This hurdle of setting up an environment, to test a software,) Tj
+T*
+1.000000 Tw
+/times 10 Tf
+(is a major problem for adoption.) Tj
+ET
+BT
+42.519685 350.910236 TD
+12.000000 TL
+T*
+3.104027 Tw
+/times 10 Tf
+(The motivation behind my work with the PeekabooAV) Tj
+T*
+1.093472 Tw
+/times 10 Tf
+(Installer repository, is to provide a faster way to get a full) Tj
+T*
+9.269698 Tw
+/times 10 Tf
+(pipeline environment, to foster the adoption of) Tj
+T*
+1.000000 Tw
+/times 10 Tf
+(PeekabooAV.) Tj
+ET
+BT
+55.275591 301.410236 TD
+18.000000 TL
+T*
+1.000000 Tw
+/timesbold 10 Tf
+(1.1.2 Assignment) Tj
+ET
+BT
+42.519685 278.910236 TD
+12.000000 TL
+T*
+3.188313 Tw
+/times 10 Tf
+(My specific task was to containerize the bleeding-edge) Tj
+T*
+0.879774 Tw
+/times 10 Tf
+(version of PeekabooAV, to make a showcase pipeline, and) Tj
+T*
+-0.143535 Tw
+/times 10 Tf
+(further ease the future deployment of PeekabooAV. This is a) Tj
+T*
+4.454243 Tw
+/times 10 Tf
+(sentence to pad out the page for dev. The pipeline,) Tj
+T*
+5.209741 Tw
+/times 10 Tf
+(orchestrated with docker compose, is to include the) Tj
+T*
+1.000000 Tw
+/times 10 Tf
+(following services:) Tj
+ET
+BT
+55.275591 205.410236 TD
+18.000000 TL
+T*
+1.000000 Tw
+/timesbold 10 Tf
+(1.1.3 Workflow) Tj
+ET
+BT
+42.519685 182.910236 TD
+12.000000 TL
+T*
+2.789698 Tw
+/times 10 Tf
+(Throughout the phase, my workflow was predominantly) Tj
+T*
+2.258819 Tw
+/times 10 Tf
+(guided by a meeting twice a week. In these meetings, I) Tj
+T*
+1.460910 Tw
+/times 10 Tf
+(presented the current state of my work, and discussed the) Tj
+T*
+3.123132 Tw
+/times 10 Tf
+(next steps with my two colleagues in this project. My) Tj
+T*
+5.738524 Tw
+/times 10 Tf
+(workday changed a lot during the duration of my) Tj
+T*
+0.422349 Tw
+/times 10 Tf
+(involvement in the project. This is due to the fact that I had) Tj
+T*
+2.415354 Tw
+/times 10 Tf
+(to make myself comfortable with the new tools and the) Tj
+T*
+3.151170 Tw
+/times 10 Tf
+(already quite mature codebase of PeekabooAV. After I) Tj
+T*
+2.267274 Tw
+/times 10 Tf
+(acquainted myself with the Docker tools and the overall) Tj
+ET
+
+endstream
+endobj
+22 0 obj
+<<
+/Size 5188
+>>
+stream
+BT
+308.267717 778.110236 TD
+12.000000 TL
+T*
+1.029799 Tw
+/times 10 Tf
+(created each part of the pipeline. This process started with) Tj
+T*
+-0.058976 Tw
+/times 10 Tf
+(PeekabooAV itself, and culminated with the 3 other services) Tj
+T*
+1.000000 Tw
+/times 10 Tf
+(together with their respective containers.) Tj
+ET
+BT
+308.267717 736.110236 TD
+12.000000 TL
+T*
+2.789698 Tw
+/times 10 Tf
+(Throughout the phase, my workflow was predominantly) Tj
+T*
+2.258819 Tw
+/times 10 Tf
+(guided by a meeting twice a week. In these meetings, I) Tj
+T*
+1.460910 Tw
+/times 10 Tf
+(presented the current state of my work, and discussed the) Tj
+T*
+3.123132 Tw
+/times 10 Tf
+(next steps with my two colleagues in this project. My) Tj
+T*
+5.738524 Tw
+/times 10 Tf
+(workday changed a lot during the duration of my) Tj
+T*
+0.422349 Tw
+/times 10 Tf
+(involvement in the project. This is due to the fact that I had) Tj
+T*
+2.415354 Tw
+/times 10 Tf
+(to make myself comfortable with the new tools and the) Tj
+T*
+3.151170 Tw
+/times 10 Tf
+(already quite mature codebase of PeekabooAV. After I) Tj
+T*
+2.267274 Tw
+/times 10 Tf
+(acquainted myself with the Docker tools and the overall) Tj
+T*
+1.000000 Tw
+/times 10 Tf
+(structure of the PeekabooAV codebase, I incrementally) Tj
+ET
+BT
+321.023622 614.610236 TD
+18.000000 TL
+T*
+1.000000 Tw
+/timesbold 10 Tf
+(1.1.4 Open Source) Tj
+ET
+BT
+308.267717 592.110236 TD
+12.000000 TL
+T*
+0.739835 Tw
+/times 10 Tf
+(Open source is, at its core, a way to develop something. In) Tj
+T*
+0.719799 Tw
+/times 10 Tf
+(many cases software. It does not rely on companies paying) Tj
+T*
+2.757577 Tw
+/times 10 Tf
+(developers to produce a piece of software, instead it is) Tj
+T*
+1.403031 Tw
+/times 10 Tf
+(community driven. Interested developers can contribute to) Tj
+T*
+0.952819 Tw
+/times 10 Tf
+(the source code of the software, which is openly visible to) Tj
+T*
+1.151819 Tw
+/times 10 Tf
+(anyone. To ensure the correct usage of the code, there are) Tj
+T*
+1.471024 Tw
+/times 10 Tf
+(specific open source licenses, which dictate the way open) Tj
+T*
+2.234774 Tw
+/times 10 Tf
+(source software can be used. Some often used examples) Tj
+T*
+0.780910 Tw
+/times 10 Tf
+(include: The MIT License, which allows anyone to use the) Tj
+T*
+4.656884 Tw
+/times 10 Tf
+(software for commercial and private use, and allows) Tj
+T*
+1.836884 Tw
+/times 10 Tf
+(modification and redistribution of the software under any) Tj
+T*
+0.967577 Tw
+/times 10 Tf
+(terms. A license that verges more towards the open source) Tj
+T*
+0.461024 Tw
+/times 10 Tf
+(community, is the GNU General Public License v3.0 \(often) Tj
+T*
+2.441024 Tw
+/times 10 Tf
+(abbreviated as GPLv3\). This license also allows use for) Tj
+T*
+2.829741 Tw
+/times 10 Tf
+(private and commercial use, aswell as modification and) Tj
+T*
+3.097274 Tw
+/times 10 Tf
+(redistribution, but only under the same license. This is) Tj
+T*
+0.009799 Tw
+/times 10 Tf
+(supposed to guarantee that further progress stays in the open) Tj
+T*
+1.577274 Tw
+/times 10 Tf
+(source realm. There are many other open source licenses,) Tj
+T*
+2.286819 Tw
+/times 10 Tf
+(not only for use with software and source code, but for) Tj
+T*
+0.916024 Tw
+/times 10 Tf
+(example regarding media. One of these open source media) Tj
+T*
+2.233638 Tw
+/times 10 Tf
+(licenses is the Creative Commons Attribution-ShareAlike) Tj
+T*
+0.565354 Tw
+/times 10 Tf
+(4.0 International License. This license allows for the use of) Tj
+T*
+0.494774 Tw
+/times 10 Tf
+(the media, and modification and redistribution of the media) Tj
+T*
+0.780910 Tw
+/times 10 Tf
+(under the same license, similar to the GNU General Public) Tj
+T*
+1.000000 Tw
+/times 10 Tf
+(License v3.0.) Tj
+ET
+BT
+308.267717 286.110236 TD
+12.000000 TL
+T*
+1.180910 Tw
+/times 10 Tf
+(The licenses mostly do not cover how the development of) Tj
+T*
+0.814819 Tw
+/times 10 Tf
+(software is done, but rather how the software is used. That) Tj
+T*
+0.504243 Tw
+/times 10 Tf
+(induces the need to govern the development of open source) Tj
+T*
+0.079835 Tw
+/times 10 Tf
+(software. The most common way to do this is by using tools) Tj
+T*
+2.233031 Tw
+/times 10 Tf
+(like GitHub, which provides workflows opportunities for) Tj
+T*
+0.926884 Tw
+/times 10 Tf
+(both open source and closed source software development.) Tj
+T*
+2.128524 Tw
+/times 10 Tf
+(GitHubs role in the development process of open source) Tj
+T*
+6.004027 Tw
+/times 10 Tf
+(software will be further discussed under the ) Tj
+/courier 10 Tf
+(Used) Tj
+T*
+1.000000 Tw
+/courier 10 Tf
+(Technologies > GitHub) Tj
+/times 10 Tf
+( section.) Tj
+ET
+BT
+316.771654 177.510236 TD
+21.600000 TL
+T*
+1.000000 Tw
+/timesbold 12 Tf
+(1.2 Used Technologies) Tj
+ET
+BT
+321.023622 155.010236 TD
+18.000000 TL
+T*
+1.000000 Tw
+/timesbold 10 Tf
+(1.2.5 GitHub) Tj
+ET
+BT
+308.267717 132.510236 TD
+12.000000 TL
+T*
+3.579741 Tw
+/times 10 Tf
+(Millions of developers and companies build, ship, and) Tj
+T*
+1.736465 Tw
+/times 10 Tf
+(maintain their software on GitHub - the largest and most) Tj
+T*
+1.000000 Tw
+/times 10 Tf
+(advanced development platform in the world. ~GitHub) Tj
+ET
+BT
+308.267717 90.510236 TD
+12.000000 TL
+T*
+1.613132 Tw
+/times 10 Tf
+(Above is how GitHub describes itself. For this paper, we) Tj
+T*
+1.399741 Tw
+/times 10 Tf
+(will concentrate on the 'building' and 'maintaining' parts.) Tj
+ET
+
+endstream
+endobj
+23 0 obj
+<<
+/Type Page
+/MediaBox [0 0 595.2755905511812 841.8897637795276]
+/Parent 1 0 R
+/Resources <<
+/Font <<
+/times 4 0 R
+/timesbold 7 0 R
+/timesitalic 10 0 R
+/timesbolditalic 13 0 R
+/courier 16 0 R
+/helvetica 19 0 R
+>>
+
+>>
+
+/Contents [21 0 R 22 0 R 24 0 R]
+>>
+endobj
+24 0 obj
+<<
+/Size 82
+>>
+stream
+BT
+294.857795 21.259843 TD
+10.000000 TL
+T*
+1.000000 Tw
+/helvetica 10 Tf
+(1) Tj
+ET
+
+endstream
+endobj
+25 0 obj
+<<
+/Size 5298
+>>
+stream
+BT
+42.519685 778.110236 TD
+12.000000 TL
+T*
+0.806884 Tw
+/times 10 Tf
+(open source version control software. Version control, also) Tj
+T*
+1.583132 Tw
+/times 10 Tf
+(called revision control, is a tool for managing changes of) Tj
+T*
+2.312598 Tw
+/times 10 Tf
+(information. Today's version control software, is able to) Tj
+T*
+1.539774 Tw
+/times 10 Tf
+(track changes of information, keep the history of changes) Tj
+T*
+1.000000 Tw
+/times 10 Tf
+(available, and log who made which changes.) Tj
+ET
+BT
+42.519685 712.110236 TD
+12.000000 TL
+T*
+1.613132 Tw
+/times 10 Tf
+(Above is how GitHub describes itself. For this paper, we) Tj
+T*
+1.399741 Tw
+/times 10 Tf
+(will concentrate on the 'building' and 'maintaining' parts.) Tj
+T*
+1.000000 Tw
+/times 10 Tf
+(GitHubs name is derived from the git software. Git is an) Tj
+ET
+BT
+42.519685 670.110236 TD
+12.000000 TL
+T*
+1.429799 Tw
+/times 10 Tf
+(The open source workflow for GitHub starts by forking a) Tj
+T*
+0.078524 Tw
+/times 10 Tf
+(repository you want to contribute to. This essentially creates) Tj
+T*
+3.373132 Tw
+/times 10 Tf
+(your own copy of the repository, which you can then) Tj
+T*
+1.000000 Tw
+/times 10 Tf
+(modify. The next concept are branches.) Tj
+ET
+BT
+42.519685 616.110236 TD
+12.000000 TL
+T*
+-0.184181 Tw
+/times 10 Tf
+(Branches are used to diverge from the main branch, or trunk,) Tj
+T*
+0.236199 Tw
+/times 10 Tf
+(in order to not affect the work of other developers. With the) Tj
+T*
+0.182563 Tw
+/times 10 Tf
+(use of branching, we also gain the possibility to make a pull) Tj
+T*
+0.120819 Tw
+/times 10 Tf
+(request. Pull requests \(often abbreviated as PR\) are a way to) Tj
+T*
+1.028688 Tw
+/times 10 Tf
+(propose to merge your own branch into another one, often) Tj
+T*
+1.000000 Tw
+/times 10 Tf
+(the main branch.) Tj
+ET
+BT
+42.519685 538.110236 TD
+12.000000 TL
+T*
+2.758819 Tw
+/times 10 Tf
+(As pull requests are the primary way that new code is) Tj
+T*
+0.706024 Tw
+/times 10 Tf
+(contributed to open source software on GitHub, we wanted) Tj
+T*
+0.104871 Tw
+/times 10 Tf
+(to have the results of my work in a pull request at the end of) Tj
+T*
+1.087274 Tw
+/times 10 Tf
+(the phase. That includes the branching workflow, and also) Tj
+T*
+0.788819 Tw
+/times 10 Tf
+(the review process once a pull request has been opened. In) Tj
+T*
+0.133132 Tw
+/times 10 Tf
+(summary, a review is done by another developer, who looks) Tj
+T*
+0.566465 Tw
+/times 10 Tf
+(over all your changes. They then either suggest changes, or) Tj
+T*
+1.331024 Tw
+/times 10 Tf
+(approve your changes by closing the review. This process) Tj
+T*
+2.263132 Tw
+/times 10 Tf
+(has the benefit of being transparent, and also allows for) Tj
+T*
+-0.143116 Tw
+/times 10 Tf
+(multiple reviewers. When a reviewer proposes changes, they) Tj
+T*
+1.187349 Tw
+/times 10 Tf
+(can do so in form of a conversation directly on top of the) Tj
+T*
+3.901170 Tw
+/times 10 Tf
+(code. In these conversations, anybody can discuss the) Tj
+T*
+1.000000 Tw
+/times 10 Tf
+(proposal and the conversation can be marked as resolved.) Tj
+ET
+BT
+42.519685 376.110236 TD
+12.000000 TL
+T*
+0.923819 Tw
+/times 10 Tf
+(The last part of the pull request flow, is merging. Merging) Tj
+T*
+2.169799 Tw
+/times 10 Tf
+(describes how the changes from the pull request will be) Tj
+T*
+0.348688 Tw
+/times 10 Tf
+(combined with the main branch. There are multiple ways to) Tj
+T*
+3.066024 Tw
+/times 10 Tf
+(merge pull requests, each with its own advantages and) Tj
+T*
+2.544774 Tw
+/times 10 Tf
+(disadvantages. Merging with a merge commit, or a true) Tj
+T*
+2.325354 Tw
+/times 10 Tf
+(merge, creates a new commit with both branches as the) Tj
+T*
+0.784819 Tw
+/times 10 Tf
+(parent, to then include the other wanted commits on top of) Tj
+T*
+1.229819 Tw
+/times 10 Tf
+(that. This way of merging is often avoided in more active) Tj
+T*
+0.380910 Tw
+/times 10 Tf
+(projects, because the extra merge commits it creates, do not) Tj
+T*
+-0.019181 Tw
+/times 10 Tf
+(include any useful information and thus can be seen as spam) Tj
+T*
+1.016024 Tw
+/times 10 Tf
+(by some developers. Another way is squash merging. This) Tj
+T*
+0.129799 Tw
+/times 10 Tf
+(method squashes the changes from all commits into just one) Tj
+T*
+1.055354 Tw
+/times 10 Tf
+(commit, and pushes that commit on the main branch. This) Tj
+T*
+0.393819 Tw
+/times 10 Tf
+(does not clutter up the history, but when too many commits) Tj
+T*
+1.286819 Tw
+/times 10 Tf
+(are squashes into one, it can be hard finding what exactly) Tj
+T*
+-0.199318 Tw
+/times 10 Tf
+(has been changed, or which part is the origin of an error. The) Tj
+T*
+1.007819 Tw
+/times 10 Tf
+(third way is rebase merging. This way of merging is often) Tj
+T*
+0.565819 Tw
+/times 10 Tf
+(used in more active projects, because it does not create any) Tj
+T*
+1.953132 Tw
+/times 10 Tf
+(extra clutter, but instead rewrites the history of the main) Tj
+T*
+1.275354 Tw
+/times 10 Tf
+(branch. As the commits are patched onto the main branch) Tj
+T*
+0.135354 Tw
+/times 10 Tf
+(one after the other, there could occur conflicts. Conflicts are) Tj
+T*
+0.309016 Tw
+/times 10 Tf
+(blocks of a file where git can not resolve how to change the) Tj
+T*
+3.805354 Tw
+/times 10 Tf
+(file with the current patch. This needs to be handled) Tj
+T*
+1.000000 Tw
+/times 10 Tf
+(manually.) Tj
+ET
+BT
+42.519685 82.110236 TD
+12.000000 TL
+T*
+0.565819 Tw
+/times 10 Tf
+(We used rebase merging in our project, because we did not) Tj
+ET
+
+endstream
+endobj
+26 0 obj
+<<
+/Size 5425
+>>
+stream
+BT
+308.267717 778.110236 TD
+12.000000 TL
+T*
+2.632598 Tw
+/times 10 Tf
+(as we developed alongside the bleeding-edge version of) Tj
+T*
+1.000000 Tw
+/times 10 Tf
+(PeekabooAV.) Tj
+ET
+BT
+308.267717 748.110236 TD
+12.000000 TL
+T*
+0.565819 Tw
+/times 10 Tf
+(We used rebase merging in our project, because we did not) Tj
+T*
+1.000000 Tw
+/times 10 Tf
+(want the spam merge commits, and there were no conflicts) Tj
+ET
+BT
+321.023622 722.610236 TD
+18.000000 TL
+T*
+1.000000 Tw
+/timesbold 10 Tf
+(1.2.6 Docker and docker compose) Tj
+ET
+BT
+308.267717 700.110236 TD
+12.000000 TL
+T*
+0.256465 Tw
+/times 10 Tf
+(Docker is another tool, that is used industry-wide, for easier) Tj
+T*
+1.907638 Tw
+/times 10 Tf
+(deployment of software, through containerization. Docker) Tj
+T*
+0.094027 Tw
+/times 10 Tf
+(can, through virtualization, create containers which can then) Tj
+T*
+-0.081312 Tw
+/times 10 Tf
+(run software. Virtualization is a concept to create an isolated) Tj
+T*
+2.383132 Tw
+/times 10 Tf
+(computer system, that runs on top of the host computer) Tj
+T*
+1.534774 Tw
+/times 10 Tf
+(system. This means that the virtualized system believes it) Tj
+T*
+4.496884 Tw
+/times 10 Tf
+(can communicate with the hardware directly, but the) Tj
+T*
+2.786884 Tw
+/times 10 Tf
+(communication is routed and managed through the host) Tj
+T*
+0.257819 Tw
+/times 10 Tf
+(system. In the case we discuss here, virtualization is used to) Tj
+T*
+0.262349 Tw
+/times 10 Tf
+(create a smaller system for a specific task on top of the host) Tj
+T*
+-0.179090 Tw
+/times 10 Tf
+(system. Another way virtualization is used in the industry, to) Tj
+T*
+2.350910 Tw
+/times 10 Tf
+(split up the whole host system with many other smaller) Tj
+T*
+0.810910 Tw
+/times 10 Tf
+(systems, so the host has minimal ressources left over, after) Tj
+T*
+1.954243 Tw
+/times 10 Tf
+(lending each sub system an amount. These can either be) Tj
+T*
+2.635354 Tw
+/times 10 Tf
+(ones made for a specific task, or more general purpose) Tj
+T*
+1.000000 Tw
+/times 10 Tf
+(systems.) Tj
+ET
+BT
+308.267717 502.110236 TD
+12.000000 TL
+T*
+1.715456 Tw
+/times 10 Tf
+(Another advantage of using virtualization, is the isolating) Tj
+T*
+-0.076181 Tw
+/times 10 Tf
+(effect it has. By default, the virtualized systems do not know) Tj
+T*
+1.675354 Tw
+/times 10 Tf
+(anything about each other, they are fully isolated. By the) Tj
+T*
+0.533132 Tw
+/times 10 Tf
+(virtue of being achieved in software, there is the possibility) Tj
+T*
+3.692274 Tw
+/times 10 Tf
+(to create a network of virtualized systems, which can) Tj
+T*
+1.000000 Tw
+/times 10 Tf
+(communicate with each other.) Tj
+ET
+BT
+308.267717 424.110236 TD
+12.000000 TL
+T*
+0.588182 Tw
+/times 10 Tf
+(In the case of Docker this is used to create another layer of) Tj
+T*
+1.017638 Tw
+/times 10 Tf
+(abstractions, containers. The specialized virtualized system) Tj
+T*
+0.149819 Tw
+/times 10 Tf
+(mentioned before, is what is often referred to as a container.) Tj
+T*
+3.775354 Tw
+/times 10 Tf
+(Docker is the software tool to run and manage these) Tj
+T*
+2.058524 Tw
+/times 10 Tf
+(containers, which are build with another tool, in dockers) Tj
+T*
+1.437274 Tw
+/times 10 Tf
+(case Mobyproject. To create a container with docker, you) Tj
+T*
+0.912274 Tw
+/times 10 Tf
+(need a ) Tj
+/courier 10 Tf
+(Dockerfile) Tj
+/times 10 Tf
+( that describes the desired system. This) Tj
+T*
+0.259835 Tw
+/times 10 Tf
+(text file consists of the commands that are to be executed to) Tj
+T*
+0.931516 Tw
+/times 10 Tf
+(get the system to the wanted state. It is not needed to start) Tj
+T*
+-0.082423 Tw
+/times 10 Tf
+(from scratch with every ) Tj
+/courier 10 Tf
+(Dockerfile) Tj
+/times 10 Tf
+(, you can start from any) Tj
+T*
+3.829774 Tw
+/times 10 Tf
+(other image. Images are what results from building a) Tj
+T*
+0.965354 Tw
+/courier 10 Tf
+(Dockerfile) Tj
+/times 10 Tf
+(, this image can then be made into a container) Tj
+T*
+0.717577 Tw
+/times 10 Tf
+(by the Docker engine. So the making of said ) Tj
+/courier 10 Tf
+(Dockerfiles) Tj
+/times 10 Tf
+T*
+1.000000 Tw
+/times 10 Tf
+(is recursive at its core.) Tj
+ET
+BT
+308.267717 250.110236 TD
+12.000000 TL
+T*
+0.759819 Tw
+/times 10 Tf
+(If, for example, you want a simple container to capture the) Tj
+T*
+0.675819 Tw
+/times 10 Tf
+(network traffic in a network, you begin from an image like) Tj
+T*
+1.005819 Tw
+/courier 10 Tf
+(alpine) Tj
+/times 10 Tf
+( and install a tool like ) Tj
+/courier 10 Tf
+(tcpdump) Tj
+/times 10 Tf
+(, or if available you) Tj
+T*
+0.462274 Tw
+/times 10 Tf
+(start from another small container that has ) Tj
+/courier 10 Tf
+(tcpdump) Tj
+/times 10 Tf
+( already) Tj
+T*
+1.000000 Tw
+/times 10 Tf
+(installed.) Tj
+ET
+BT
+308.267717 184.110236 TD
+12.000000 TL
+T*
+0.214027 Tw
+/times 10 Tf
+(There are other technologies around docker containers, with) Tj
+T*
+0.786819 Tw
+/times 10 Tf
+(which they interact with the host or with each other. There) Tj
+T*
+0.289819 Tw
+/times 10 Tf
+(are volumes, to create a shared directory or file between the) Tj
+T*
+2.115456 Tw
+/times 10 Tf
+(host and the container. Additionally, there are Networks,) Tj
+T*
+2.666465 Tw
+/times 10 Tf
+(which are used to create a virtual network between the) Tj
+T*
+1.000000 Tw
+/times 10 Tf
+(containers, that can also be accessed by the host if needed.) Tj
+ET
+BT
+308.267717 106.110236 TD
+12.000000 TL
+T*
+3.934774 Tw
+/times 10 Tf
+(Another tool made by Docker is docker compose \(or) Tj
+T*
+8.254698 Tw
+/times 10 Tf
+(docker-compose\). This makes it easy to manage) Tj
+T*
+10.574547 Tw
+/times 10 Tf
+(multi-container apps, which use above-mentioned) Tj
+ET
+
+endstream
+endobj
+27 0 obj
+<<
+/Contents [25 0 R 26 0 R 28 0 R]
+/Type Page
+/MediaBox [0 0 595.2755905511812 841.8897637795276]
+/Parent 1 0 R
+/Resources <<
+/Font <<
+/courier 16 0 R
+/helvetica 19 0 R
+/times 4 0 R
+/timesbold 7 0 R
+/timesitalic 10 0 R
+/timesbolditalic 13 0 R
+>>
+
+>>
+
+>>
+endobj
+28 0 obj
+<<
+/Size 82
+>>
+stream
+BT
+294.857795 21.259843 TD
+10.000000 TL
+T*
+1.000000 Tw
+/helvetica 10 Tf
+(2) Tj
+ET
+
+endstream
+endobj
+29 0 obj
+<<
+/Size 5713
+>>
+stream
+BT
+42.519685 778.110236 TD
+12.000000 TL
+T*
+2.647274 Tw
+/times 10 Tf
+(file \(to spec named ) Tj
+/courier 10 Tf
+(compose.yaml) Tj
+/times 10 Tf
+(\), in which you fully) Tj
+T*
+5.528313 Tw
+/times 10 Tf
+(define all the needed containers, volumes for those) Tj
+T*
+1.000000 Tw
+/times 10 Tf
+(containers, and networks to connect them.) Tj
+ET
+BT
+42.519685 736.110236 TD
+12.000000 TL
+T*
+3.934774 Tw
+/times 10 Tf
+(Another tool made by Docker is docker compose \(or) Tj
+T*
+8.254698 Tw
+/times 10 Tf
+(docker-compose\). This makes it easy to manage) Tj
+T*
+10.574547 Tw
+/times 10 Tf
+(multi-container apps, which use above-mentioned) Tj
+T*
+1.000000 Tw
+/times 10 Tf
+(technologies. With docker compose you need another text) Tj
+ET
+BT
+42.519685 682.110236 TD
+12.000000 TL
+T*
+0.845354 Tw
+/times 10 Tf
+(To make clear how those containers are described, we will) Tj
+T*
+1.046884 Tw
+/times 10 Tf
+(continue the example of capturing network traffic between) Tj
+T*
+1.000000 Tw
+/times 10 Tf
+(containers.) Tj
+ET
+BT
+42.519685 640.110236 TD
+12.000000 TL
+T*
+1.816024 Tw
+/times 10 Tf
+(Above code represents a ) Tj
+/courier 10 Tf
+(compose.yaml) Tj
+/times 10 Tf
+( file, setting up a) Tj
+T*
+2.436884 Tw
+/times 10 Tf
+(microservice backend with an according database, and a) Tj
+T*
+0.358524 Tw
+/times 10 Tf
+(container that uses tcpdump to capture network traffic. This) Tj
+T*
+1.985354 Tw
+/times 10 Tf
+(file follows the version three of the docker compose file) Tj
+T*
+2.420910 Tw
+/times 10 Tf
+(format. One creates a service for each container, that is) Tj
+T*
+1.319741 Tw
+/times 10 Tf
+(described mainly by its name, for example ) Tj
+/courier 10 Tf
+(microservice) Tj
+/times 10 Tf
+T*
+0.099849 Tw
+/times 10 Tf
+(on line four, and the image used, for example in line five. In) Tj
+T*
+3.000910 Tw
+/times 10 Tf
+(this example, the use of volumes and networks is also) Tj
+T*
+7.976365 Tw
+/times 10 Tf
+(illustrated. There are two volumes with different) Tj
+T*
+3.864774 Tw
+/times 10 Tf
+(responsibilities, one for the database, and one for the) Tj
+T*
+0.287274 Tw
+/times 10 Tf
+(tcpdump container. The ) Tj
+/courier 10 Tf
+(db_data) Tj
+/times 10 Tf
+( volume is needed to make) Tj
+T*
+0.983524 Tw
+/times 10 Tf
+(the database persistent. Due to the reproducability of these) Tj
+T*
+1.744774 Tw
+/times 10 Tf
+(containers, no data on the virtualized system is persistent) Tj
+T*
+-0.263116 Tw
+/times 10 Tf
+(after runtime. To achieve persistence, the ) Tj
+/courier 10 Tf
+(db_data) Tj
+/times 10 Tf
+( directory,) Tj
+T*
+-0.022181 Tw
+/times 10 Tf
+(from the host system, is mounted inside the container, and is) Tj
+T*
+0.335290 Tw
+/times 10 Tf
+(thus not a direct part of the virtualized system. On the other) Tj
+T*
+1.841819 Tw
+/times 10 Tf
+(hand, the ) Tj
+/courier 10 Tf
+(dump) Tj
+/times 10 Tf
+( volume is for easy access to the network) Tj
+T*
+1.263524 Tw
+/times 10 Tf
+(traffic capture files produced by the tcpdump container. If) Tj
+T*
+-0.160181 Tw
+/times 10 Tf
+(this volume would not exist, one would have to have another) Tj
+T*
+2.729819 Tw
+/times 10 Tf
+(way to access the capture files, most likely by using a) Tj
+T*
+0.590819 Tw
+/times 10 Tf
+(lengthy command to copy the file from the container to the) Tj
+T*
+1.243132 Tw
+/times 10 Tf
+(host system. With the volume, one can directly access the) Tj
+T*
+1.000000 Tw
+/times 10 Tf
+(files from the host system.) Tj
+ET
+BT
+42.519685 358.110236 TD
+12.000000 TL
+T*
+0.949774 Tw
+/times 10 Tf
+(After all wanted services are defined in the ) Tj
+/courier 10 Tf
+(compose.yaml) Tj
+/times 10 Tf
+T*
+2.724243 Tw
+/times 10 Tf
+(file, one can start all elements with a single command,) Tj
+T*
+5.998313 Tw
+/courier 10 Tf
+(docker compose up) Tj
+/times 10 Tf
+(. This command will start all) Tj
+T*
+0.319799 Tw
+/times 10 Tf
+(containers, if they are not already running, and if applicable) Tj
+T*
+0.984774 Tw
+/times 10 Tf
+(restarts containers with changes made to them, and creates) Tj
+T*
+1.000000 Tw
+/times 10 Tf
+(the networks.) Tj
+ET
+BT
+42.519685 280.110236 TD
+12.000000 TL
+T*
+3.313524 Tw
+/times 10 Tf
+(I will cover more specific features Docker and docker) Tj
+T*
+1.000000 Tw
+/times 10 Tf
+(compose offer, where needed at a later point in this paper.) Tj
+ET
+BT
+55.275591 254.610236 TD
+18.000000 TL
+T*
+1.000000 Tw
+/timesbold 10 Tf
+(1.2.7 MTA) Tj
+ET
+BT
+42.519685 232.110236 TD
+12.000000 TL
+T*
+0.812274 Tw
+/times 10 Tf
+(Generally, MTA is an abbreviation for ) Tj
+/timesbold 10 Tf
+(M) Tj
+/times 10 Tf
+(essage ) Tj
+/timesbold 10 Tf
+(T) Tj
+/times 10 Tf
+(ransfer ) Tj
+/timesbold 10 Tf
+(A) Tj
+T*
+1.068017 Tw
+/times 10 Tf
+(gent, but for our use case the ) Tj
+/timesbold 10 Tf
+(M) Tj
+/times 10 Tf
+( stands for **M**ail. The) Tj
+T*
+-0.024544 Tw
+/times 10 Tf
+(name is reasonably self-explanatory, this software can either) Tj
+T*
+2.535819 Tw
+/timesbold 10 Tf
+(t) Tj
+/times 10 Tf
+(ransfer emails to another MTA or to an MDA, ) Tj
+/timesbold 10 Tf
+(M) Tj
+/times 10 Tf
+(ail ) Tj
+/timesbold 10 Tf
+(D) Tj
+T*
+2.408017 Tw
+/times 10 Tf
+(elivery ) Tj
+/timesbold 10 Tf
+(A) Tj
+/times 10 Tf
+(gent. Or it can reject or block the email for a) Tj
+T*
+1.000000 Tw
+/times 10 Tf
+(number of reasons.) Tj
+ET
+BT
+42.519685 154.110236 TD
+12.000000 TL
+T*
+-0.144710 Tw
+/times 10 Tf
+(The process of rejecting an email is the important part to this) Tj
+T*
+-0.140165 Tw
+/times 10 Tf
+(project. An email can be rejected for a variety of reasons, for) Tj
+T*
+0.358524 Tw
+/times 10 Tf
+(example by a connected spam filtering system, as described) Tj
+T*
+2.278926 Tw
+/times 10 Tf
+(in the next section. When an email is rejected, it is not) Tj
+T*
+1.274243 Tw
+/times 10 Tf
+(forwared to the next MTA/MDA, but a notification of the) Tj
+T*
+1.898819 Tw
+/times 10 Tf
+(rejection is sent back to the sender. The sender can then) Tj
+T*
+0.794016 Tw
+/times 10 Tf
+(decide what to do next. In most cases the sender is also an) Tj
+ET
+
+endstream
+endobj
+30 0 obj
+<<
+/Size 5256
+>>
+stream
+BT
+308.267717 778.110236 TD
+12.000000 TL
+T*
+1.000000 Tw
+/times 10 Tf
+(sent again when the queue is flushed.) Tj
+ET
+BT
+308.267717 766.110236 TD
+12.000000 TL
+T*
+-0.144710 Tw
+/times 10 Tf
+(The process of rejecting an email is the important part to this) Tj
+T*
+-0.140165 Tw
+/times 10 Tf
+(project. An email can be rejected for a variety of reasons, for) Tj
+T*
+0.358524 Tw
+/times 10 Tf
+(example by a connected spam filtering system, as described) Tj
+T*
+2.278926 Tw
+/times 10 Tf
+(in the next section. When an email is rejected, it is not) Tj
+T*
+1.274243 Tw
+/times 10 Tf
+(forwared to the next MTA/MDA, but a notification of the) Tj
+T*
+1.898819 Tw
+/times 10 Tf
+(rejection is sent back to the sender. The sender can then) Tj
+T*
+0.794016 Tw
+/times 10 Tf
+(decide what to do next. In most cases the sender is also an) Tj
+T*
+1.000000 Tw
+/times 10 Tf
+(MTA, and it puts the email back in its queue, so it can be) Tj
+ET
+BT
+308.267717 664.110236 TD
+12.000000 TL
+T*
+-0.053535 Tw
+/times 10 Tf
+(PeekabooAV uses this mechanism to reject an email while it) Tj
+T*
+-0.018346 Tw
+/times 10 Tf
+(is still being analyzed, and once the same email is sent again) Tj
+T*
+1.521654 Tw
+/times 10 Tf
+(the cached result will be used to determine if it is finally) Tj
+T*
+1.000000 Tw
+/times 10 Tf
+(rejected or accepted.) Tj
+ET
+BT
+321.023622 614.610236 TD
+18.000000 TL
+T*
+1.000000 Tw
+/timesbold 10 Tf
+(1.2.8 Spam Filtering System) Tj
+ET
+BT
+308.267717 592.110236 TD
+12.000000 TL
+T*
+1.034819 Tw
+/times 10 Tf
+(Spam filtering system are the systems used to decide if an) Tj
+T*
+0.896819 Tw
+/times 10 Tf
+(otherwise valid email is unwanted or not. An email can be) Tj
+T*
+5.289698 Tw
+/times 10 Tf
+(unwanted due to being an unsolicited advertisement,) Tj
+T*
+0.439799 Tw
+/times 10 Tf
+(containing a phishing link, having a virus attached, or other) Tj
+T*
+2.369774 Tw
+/times 10 Tf
+(reasons. Most of these spam filtering system make their) Tj
+T*
+2.539799 Tw
+/times 10 Tf
+(descision after running the email, or parts of the email,) Tj
+T*
+0.737274 Tw
+/times 10 Tf
+(through possibly hundreds or thousands of rules of varying) Tj
+T*
+1.676024 Tw
+/times 10 Tf
+(importance. They then combine the resulsts to a heuristic) Tj
+T*
+1.471654 Tw
+/times 10 Tf
+(value which is used to decide if the email is classified as) Tj
+T*
+3.097577 Tw
+/times 10 Tf
+(spam. These rules can use a variety of techniques, for) Tj
+T*
+1.504774 Tw
+/times 10 Tf
+(example scanning the text content for certain words often) Tj
+T*
+0.436199 Tw
+/times 10 Tf
+(used in scams, or looking at the sender email address in the) Tj
+T*
+3.065354 Tw
+/times 10 Tf
+(header of an email, or now with PeekabooAV test the) Tj
+T*
+1.000000 Tw
+/times 10 Tf
+(behavior of attachments.) Tj
+ET
+BT
+308.267717 418.110236 TD
+12.000000 TL
+T*
+0.426024 Tw
+/times 10 Tf
+(To achieve this, most spam filtering systems are configured) Tj
+T*
+-0.044710 Tw
+/times 10 Tf
+(in the MTA as a milter. Milter stands for Mailfilter, which is) Tj
+T*
+0.585682 Tw
+/times 10 Tf
+(a module that is registered as a step in the processing of an) Tj
+T*
+0.566465 Tw
+/times 10 Tf
+(email. In our specific case this means that, rspamd receives) Tj
+T*
+0.674819 Tw
+/times 10 Tf
+(emails as a milter from postfix, and uses PeekabooAV as a) Tj
+T*
+1.000000 Tw
+/times 10 Tf
+(custom module to analyze the email.) Tj
+ET
+BT
+321.023622 344.610236 TD
+18.000000 TL
+T*
+1.000000 Tw
+/timesbold 10 Tf
+(1.2.9 Email spec) Tj
+ET
+BT
+308.267717 322.110236 TD
+12.000000 TL
+T*
+3.242274 Tw
+/times 10 Tf
+(The email spec, or more precise, the Internet Message) Tj
+T*
+0.218524 Tw
+/times 10 Tf
+(Format \(IMF\), is specified by the Internet Engineering Task) Tj
+T*
+2.868313 Tw
+/times 10 Tf
+(Force \(IETF\). The specification takes place with RFCs,) Tj
+T*
+2.232274 Tw
+/times 10 Tf
+(Request for Comment, which are documents that can be) Tj
+T*
+0.701024 Tw
+/times 10 Tf
+(discussed by other members. The most important RFCs for) Tj
+T*
+0.654243 Tw
+/times 10 Tf
+(the Email Framework are RFC 2822 and RFC 5321. Those) Tj
+T*
+1.146465 Tw
+/times 10 Tf
+(two RFCs are updated by other later RFCs like RFC6854.) Tj
+T*
+0.768182 Tw
+/times 10 Tf
+(The details of these RFCs do not fall into the scope of this) Tj
+T*
+3.436465 Tw
+/times 10 Tf
+(paper, therefore I will discuss only parts that were of) Tj
+T*
+1.000000 Tw
+/times 10 Tf
+(importance in the context of this project.) Tj
+ET
+BT
+308.267717 196.110236 TD
+12.000000 TL
+T*
+-0.193801 Tw
+/times 10 Tf
+(One notable aspect of these RFC is that they are not concrete) Tj
+T*
+1.093132 Tw
+/times 10 Tf
+(standards that are followed. They are better described as a) Tj
+T*
+1.607274 Tw
+/times 10 Tf
+(syntax or language for authoring Email messages. Due to) Tj
+T*
+1.048524 Tw
+/times 10 Tf
+(this, two emails, being visually and contentually the same,) Tj
+T*
+1.953132 Tw
+/times 10 Tf
+(can be different in mulitple points, if sent from different) Tj
+T*
+0.039799 Tw
+/times 10 Tf
+(Email clients. Due to these points, no concrete standard, and) Tj
+T*
+0.981024 Tw
+/times 10 Tf
+(the separated nature of the important RFCs, validating and) Tj
+T*
+1.319835 Tw
+/times 10 Tf
+(parsing an Email message is a hard problem with a lot of) Tj
+T*
+1.000000 Tw
+/times 10 Tf
+(possible edge cases.) Tj
+ET
+BT
+308.267717 82.110236 TD
+12.000000 TL
+T*
+0.564243 Tw
+/times 10 Tf
+(I experienced this first hand, while working on this project.) Tj
+ET
+
+endstream
+endobj
+31 0 obj
+<<
+/Type Page
+/MediaBox [0 0 595.2755905511812 841.8897637795276]
+/Parent 1 0 R
+/Resources <<
+/Font <<
+/timesitalic 10 0 R
+/timesbolditalic 13 0 R
+/courier 16 0 R
+/helvetica 19 0 R
+/times 4 0 R
+/timesbold 7 0 R
+>>
+
+>>
+
+/Contents [29 0 R 30 0 R 32 0 R]
+>>
+endobj
+32 0 obj
+<<
+/Size 82
+>>
+stream
+BT
+294.857795 21.259843 TD
+10.000000 TL
+T*
+1.000000 Tw
+/helvetica 10 Tf
+(3) Tj
+ET
+
+endstream
+endobj
+33 0 obj
+<<
+/Size 5244
+>>
+stream
+BT
+42.519685 778.110236 TD
+12.000000 TL
+T*
+0.080744 Tw
+/times 10 Tf
+(attachment is stored in the Email. To not go into specifics in) Tj
+T*
+2.566465 Tw
+/times 10 Tf
+(this chapter, this problem,and the solution to it, will be) Tj
+T*
+1.000000 Tw
+/times 10 Tf
+(discussed in the rspamd chapter under Services.) Tj
+ET
+BT
+42.519685 736.110236 TD
+12.000000 TL
+T*
+0.564243 Tw
+/times 10 Tf
+(I experienced this first hand, while working on this project.) Tj
+T*
+1.000000 Tw
+/times 10 Tf
+(The problematic feature was how the meta information of an) Tj
+ET
+BT
+51.023622 711.510236 TD
+21.600000 TL
+T*
+1.000000 Tw
+/timesbold 12 Tf
+(1.3 Pipeline) Tj
+ET
+BT
+55.275591 689.010236 TD
+18.000000 TL
+T*
+1.000000 Tw
+/timesbold 10 Tf
+(1.3.10 Services) Tj
+ET
+BT
+42.519685 666.510236 TD
+12.000000 TL
+T*
+0.562563 Tw
+/times 10 Tf
+(In the next section I will discuss which services we used in) Tj
+T*
+2.788524 Tw
+/times 10 Tf
+(the showcase and the reasoning behind them, aswell as) Tj
+T*
+1.000000 Tw
+/times 10 Tf
+(challenges or problem I have come across.) Tj
+ET
+BT
+59.527559 629.010236 TD
+18.000000 TL
+T*
+1.000000 Tw
+/timesbold 10 Tf
+(1.3.10.1 MTA - Postfixes) Tj
+ET
+BT
+42.519685 606.510236 TD
+12.000000 TL
+T*
+0.398819 Tw
+/times 10 Tf
+(As mentioned above, we need an MTA to receive the email) Tj
+T*
+2.821024 Tw
+/times 10 Tf
+(and use a spam filtering system. Additionally, we need) Tj
+T*
+0.284819 Tw
+/times 10 Tf
+(something to ensure the email is sent again, some time after) Tj
+T*
+3.397819 Tw
+/times 10 Tf
+(it was rejected. To make this as easy and realistic as) Tj
+T*
+0.536819 Tw
+/times 10 Tf
+(possible, we use another instance of an MTA, which uses a) Tj
+T*
+1.000000 Tw
+/times 10 Tf
+(queue to achieve this task.) Tj
+ET
+BT
+42.519685 528.510236 TD
+12.000000 TL
+T*
+0.783819 Tw
+/times 10 Tf
+(For both MTA instances we use Postfix, which is a widely) Tj
+T*
+3.253031 Tw
+/times 10 Tf
+(used open-source MTA. Postfix supports all UNIX-like) Tj
+T*
+0.173819 Tw
+/times 10 Tf
+(system and still receives multiple updates a year, at the time) Tj
+T*
+2.630910 Tw
+/times 10 Tf
+(of writing. For both postfix containers we use our own) Tj
+T*
+1.000000 Tw
+/times 10 Tf
+(Dockerfile.) Tj
+ET
+BT
+42.519685 462.510236 TD
+12.000000 TL
+T*
+0.386199 Tw
+/times 10 Tf
+(For this container we start from an alpine image, which is a) Tj
+T*
+0.810819 Tw
+/times 10 Tf
+(very minimal and small version of linux that only takes up) Tj
+T*
+4.383524 Tw
+/times 10 Tf
+(about 5.5 MB. We then install all needed programs,) Tj
+T*
+1.063819 Tw
+/times 10 Tf
+(especially postfix and swaks in line 3 to 6. Afterwards we) Tj
+T*
+1.000000 Tw
+/times 10 Tf
+(configure postfix to our needs:) Tj
+ET
+BT
+42.519685 396.510236 TD
+12.000000 TL
+T*
+6.125638 Tw
+/times 10 Tf
+(This script converts specially formatted environment) Tj
+T*
+1.541365 Tw
+/times 10 Tf
+(variables to postfix configuration commands and executes) Tj
+T*
+3.436465 Tw
+/times 10 Tf
+(them. These variables need to take the form of either) Tj
+T*
+4.269698 Tw
+/courier 10 Tf
+(POSTFIX_MAIN_CF) Tj
+/times 10 Tf
+( with the option name appended, or) Tj
+T*
+0.224243 Tw
+/courier 10 Tf
+(POSTFIX_VIRTUAL) Tj
+/times 10 Tf
+(. The value of the variable is then used to) Tj
+T*
+0.034819 Tw
+/times 10 Tf
+(set the option. These will be explained in more detail below.) Tj
+T*
+1.000000 Tw
+/times 10 Tf
+(Finally, the script starts postfix in the foreground.) Tj
+ET
+BT
+59.527559 311.010236 TD
+18.000000 TL
+T*
+1.000000 Tw
+/timesbold 10 Tf
+(1.3.10.2 Sending MTA) Tj
+ET
+BT
+42.519685 288.510236 TD
+12.000000 TL
+T*
+0.175819 Tw
+/times 10 Tf
+(As mentioned above, we use our own Docker image for this) Tj
+T*
+5.568031 Tw
+/times 10 Tf
+(postfix container. And configure it accordingly with) Tj
+T*
+1.000000 Tw
+/times 10 Tf
+(environment variables.) Tj
+ET
+BT
+42.519685 246.510236 TD
+12.000000 TL
+T*
+-0.050201 Tw
+/times 10 Tf
+(The code above is an excerpt from the ) Tj
+/courier 10 Tf
+(compose.yaml) Tj
+/times 10 Tf
+( where) Tj
+T*
+0.719799 Tw
+/times 10 Tf
+(we define the ) Tj
+/courier 10 Tf
+(postfix_tx) Tj
+/times 10 Tf
+( service. This is the service used) Tj
+T*
+8.342274 Tw
+/times 10 Tf
+(to send emails. The image we used is called) Tj
+T*
+4.733638 Tw
+/courier 10 Tf
+(peekabooav_postfix) Tj
+/times 10 Tf
+(, which corresponds to the build) Tj
+T*
+0.684027 Tw
+/times 10 Tf
+(directory ) Tj
+/courier 10 Tf
+(postfix) Tj
+/times 10 Tf
+(. The ) Tj
+/courier 10 Tf
+(Dockerfile) Tj
+/times 10 Tf
+( shown in the previous) Tj
+T*
+2.352598 Tw
+/times 10 Tf
+(chapter is inside this directory. Docker Compose always) Tj
+T*
+0.232563 Tw
+/times 10 Tf
+(checks if the image is present, otherwise it will build it with) Tj
+T*
+0.007577 Tw
+/times 10 Tf
+(the build directory just discussed. Next, we set the hostname) Tj
+T*
+0.843524 Tw
+/times 10 Tf
+(to ) Tj
+/courier 10 Tf
+(postfix_tx) Tj
+/times 10 Tf
+(, which corresponds to the name the service) Tj
+T*
+1.007819 Tw
+/times 10 Tf
+(has in the network. The most important part of the service) Tj
+T*
+0.083524 Tw
+/times 10 Tf
+(declaration are the environment variables. Here we set some) Tj
+T*
+1.000000 Tw
+/times 10 Tf
+(trivial options, for example:) Tj
+ET
+BT
+42.519685 96.510236 TD
+12.000000 TL
+T*
+0.891654 Tw
+/times 10 Tf
+(Finally, we set the ports so that we can actually access the) Tj
+T*
+1.000000 Tw
+/times 10 Tf
+(service from the network.) Tj
+ET
+BT
+59.527559 71.010236 TD
+18.000000 TL
+T*
+ET
+
+endstream
+endobj
+34 0 obj
+<<
+/Size 5674
+>>
+stream
+BT
+308.267717 778.110236 TD
+18.000000 TL
+T*
+1.000000 Tw
+ET
+BT
+325.275591 764.610236 TD
+18.000000 TL
+T*
+1.000000 Tw
+/timesbold 10 Tf
+(1.3.10.3 Receiving MTA) Tj
+ET
+BT
+308.267717 742.110236 TD
+12.000000 TL
+T*
+7.071170 Tw
+/times 10 Tf
+(Fundamentally this service is very similar to the) Tj
+T*
+1.000000 Tw
+/courier 10 Tf
+(postfix_tx) Tj
+/times 10 Tf
+( service.) Tj
+ET
+BT
+308.267717 712.110236 TD
+12.000000 TL
+T*
+-0.022423 Tw
+/times 10 Tf
+(This code is an excerpt from the ) Tj
+/courier 10 Tf
+(compose.yaml) Tj
+/times 10 Tf
+( aswell. This) Tj
+T*
+2.996024 Tw
+/courier 10 Tf
+(postfix_tx) Tj
+/times 10 Tf
+( service is used to receive emails. And the) Tj
+T*
+2.111170 Tw
+/times 10 Tf
+(declaration is mostly similiar to the ) Tj
+/courier 10 Tf
+(postfix_tx) Tj
+/times 10 Tf
+( service.) Tj
+T*
+1.363524 Tw
+/times 10 Tf
+(Configuring this service was more complicated due to the) Tj
+T*
+0.446884 Tw
+/times 10 Tf
+(lacking documentation specific to our problem. That results) Tj
+T*
+0.158926 Tw
+/times 10 Tf
+(in a config which is likely to be more verbose and extensive) Tj
+T*
+1.369835 Tw
+/times 10 Tf
+(than it needs to be. Nevertheless, this is not a problem as) Tj
+T*
+1.226024 Tw
+/times 10 Tf
+(these configurations do not impair the performance in any) Tj
+T*
+1.000000 Tw
+/times 10 Tf
+(meaningful way.) Tj
+ET
+BT
+308.267717 598.110236 TD
+12.000000 TL
+T*
+6.029698 Tw
+/times 10 Tf
+(The most important configurations, except the ones) Tj
+T*
+1.000000 Tw
+/times 10 Tf
+(explained in the previous section, are:) Tj
+ET
+BT
+308.267717 568.110236 TD
+12.000000 TL
+T*
+-0.157181 Tw
+/times 10 Tf
+(The last part if this excerpt sets the service dependencies. By) Tj
+T*
+1.124774 Tw
+/times 10 Tf
+(specifying the ) Tj
+/courier 10 Tf
+(rspamd) Tj
+/times 10 Tf
+( service as a dependency, we ensure) Tj
+T*
+0.564243 Tw
+/times 10 Tf
+(that the ) Tj
+/courier 10 Tf
+(postfix_rx) Tj
+/times 10 Tf
+( container will only be started after the) Tj
+T*
+1.992598 Tw
+/courier 10 Tf
+(rspamd) Tj
+/times 10 Tf
+( container. Additionally, we set the ) Tj
+/courier 10 Tf
+(condition) Tj
+/times 10 Tf
+( to) Tj
+T*
+2.072598 Tw
+/courier 10 Tf
+(service_healthy) Tj
+/times 10 Tf
+( to ensure that the ) Tj
+/courier 10 Tf
+(rspamd) Tj
+/times 10 Tf
+( container is) Tj
+T*
+0.287577 Tw
+/times 10 Tf
+(running as we expect it, before the ) Tj
+/courier 10 Tf
+(postfix_rx) Tj
+/times 10 Tf
+( container is) Tj
+T*
+0.119819 Tw
+/times 10 Tf
+(started. The ) Tj
+/timesitalic 10 Tf
+(healthiness) Tj
+/times 10 Tf
+( of a service is discussed more in the) Tj
+T*
+1.000000 Tw
+/times 10 Tf
+(Spam Filtering System - rspamd chapter.) Tj
+ET
+BT
+325.275591 470.610236 TD
+18.000000 TL
+T*
+1.000000 Tw
+/timesbold 10 Tf
+(1.3.10.4 Spam Filtering System - rspamd) Tj
+ET
+BT
+308.267717 448.110236 TD
+12.000000 TL
+T*
+1.336465 Tw
+/times 10 Tf
+(As explained above, we need a spam filtering system that) Tj
+T*
+1.851024 Tw
+/times 10 Tf
+(communicates with PeekabooAV and acts as a milter for) Tj
+T*
+1.089819 Tw
+/times 10 Tf
+(postfix. For this we chose rspamd, which is a widely used) Tj
+T*
+0.704774 Tw
+/times 10 Tf
+(open source spam filtering system. An important feature of) Tj
+T*
+1.026465 Tw
+/times 10 Tf
+(rspamd is the comprehensive Lua API, which allows us to) Tj
+T*
+2.599799 Tw
+/times 10 Tf
+(write scripts to extend the functionality of the system. [) Tj
+T*
+0.003524 Tw
+/times 10 Tf
+(@RspamdRspamd2022] We use this API to create a module) Tj
+T*
+3.687274 Tw
+/times 10 Tf
+(that uses PeekabooAV to filter. Similar to the postfix) Tj
+T*
+1.000000 Tw
+/times 10 Tf
+(containers, we created our own Dockerfile.) Tj
+ET
+BT
+308.267717 334.110236 TD
+12.000000 TL
+T*
+0.810910 Tw
+/times 10 Tf
+(The structure of this Dockerfile is very similar to postfixes) Tj
+T*
+0.905354 Tw
+/times 10 Tf
+(Dockerfile. We start from the same version of alpine linux) Tj
+T*
+4.038524 Tw
+/times 10 Tf
+(and then install needed packages. The block of ) Tj
+/courier 10 Tf
+(COPY) Tj
+/times 10 Tf
+T*
+3.582598 Tw
+/times 10 Tf
+(commands copy over some configuration files and the) Tj
+T*
+1.000000 Tw
+/times 10 Tf
+(custom Lua module that utilizes PeekabooAV.) Tj
+ET
+BT
+308.267717 268.110236 TD
+12.000000 TL
+T*
+3.381024 Tw
+/times 10 Tf
+(Afterwards we apply a patch file which concludes the) Tj
+T*
+2.272598 Tw
+/times 10 Tf
+(integration of PeekabooAV into rspamd, and some other) Tj
+T*
+1.000000 Tw
+/times 10 Tf
+(configurations.) Tj
+ET
+BT
+308.267717 226.110236 TD
+12.000000 TL
+T*
+0.311819 Tw
+/times 10 Tf
+(The ) Tj
+/courier 10 Tf
+(entrypoint.sh) Tj
+/times 10 Tf
+( we include is in one part similar to the) Tj
+T*
+1.951170 Tw
+/times 10 Tf
+(postfix ) Tj
+/courier 10 Tf
+(entrypoint.sh) Tj
+/times 10 Tf
+(, in the sense that rspamd options) Tj
+T*
+2.682274 Tw
+/times 10 Tf
+(can be set by using environment variables starting with) Tj
+T*
+0.208313 Tw
+/courier 10 Tf
+(RSPAMD_OPTIONS_) Tj
+/times 10 Tf
+(. The other part of the entrypoint disables) Tj
+T*
+2.618819 Tw
+/times 10 Tf
+(all rspamd modules, except the ones that are set in the) Tj
+T*
+7.149396 Tw
+/courier 10 Tf
+(RSPAMD_ENABLED_MODULES) Tj
+/times 10 Tf
+( environment variable. This) Tj
+T*
+0.496024 Tw
+/times 10 Tf
+(would not be wanted behaviour in a deployed environment,) Tj
+T*
+1.000000 Tw
+/times 10 Tf
+(but it is useful in a showcase.) Tj
+ET
+BT
+308.267717 124.110236 TD
+12.000000 TL
+T*
+-0.213181 Tw
+/times 10 Tf
+(This excerpt defines the ) Tj
+/courier 10 Tf
+(rspamd) Tj
+/times 10 Tf
+( service. We set ) Tj
+/courier 10 Tf
+(image) Tj
+/times 10 Tf
+( to the) Tj
+T*
+2.731819 Tw
+/times 10 Tf
+(image we created earlier, and ) Tj
+/courier 10 Tf
+(build) Tj
+/times 10 Tf
+( to the path to the) Tj
+T*
+3.705456 Tw
+/times 10 Tf
+(directory where the rspamd Dockerfile is located. The) Tj
+T*
+2.069741 Tw
+/courier 10 Tf
+(RSPAMD_ENABLED_MODULES) Tj
+/times 10 Tf
+( is the list of modules that we) Tj
+ET
+
+endstream
+endobj
+35 0 obj
+<<
+/MediaBox [0 0 595.2755905511812 841.8897637795276]
+/Parent 1 0 R
+/Resources <<
+/Font <<
+/times 4 0 R
+/timesbold 7 0 R
+/timesitalic 10 0 R
+/timesbolditalic 13 0 R
+/courier 16 0 R
+/helvetica 19 0 R
+>>
+
+>>
+
+/Contents [33 0 R 34 0 R 36 0 R]
+/Type Page
+>>
+endobj
+36 0 obj
+<<
+/Size 82
+>>
+stream
+BT
+294.857795 21.259843 TD
+10.000000 TL
+T*
+1.000000 Tw
+/helvetica 10 Tf
+(4) Tj
+ET
+
+endstream
+endobj
+37 0 obj
+<<
+/Size 5597
+>>
+stream
+BT
+42.519685 778.110236 TD
+12.000000 TL
+T*
+ET
+BT
+42.519685 772.110236 TD
+12.000000 TL
+T*
+-0.213181 Tw
+/times 10 Tf
+(This excerpt defines the ) Tj
+/courier 10 Tf
+(rspamd) Tj
+/times 10 Tf
+( service. We set ) Tj
+/courier 10 Tf
+(image) Tj
+/times 10 Tf
+( to the) Tj
+T*
+2.731819 Tw
+/times 10 Tf
+(image we created earlier, and ) Tj
+/courier 10 Tf
+(build) Tj
+/times 10 Tf
+( to the path to the) Tj
+T*
+3.705456 Tw
+/times 10 Tf
+(directory where the rspamd Dockerfile is located. The) Tj
+T*
+2.069741 Tw
+/courier 10 Tf
+(RSPAMD_ENABLED_MODULES) Tj
+/times 10 Tf
+( is the list of modules that we) Tj
+T*
+0.771024 Tw
+/times 10 Tf
+(want to enable. The ) Tj
+/courier 10 Tf
+(RSPAMD_OPTION_FILTERS) Tj
+/times 10 Tf
+( is the list of) Tj
+T*
+3.063819 Tw
+/times 10 Tf
+(filters that we set to be empty. Furthermore we add a) Tj
+T*
+5.766884 Tw
+/times 10 Tf
+(dependency on the ) Tj
+/courier 10 Tf
+(peekabooav) Tj
+/times 10 Tf
+( service, and add a) Tj
+T*
+1.000000 Tw
+/times 10 Tf
+(healthcheck.) Tj
+ET
+BT
+42.519685 670.110236 TD
+12.000000 TL
+T*
+1.503524 Tw
+/times 10 Tf
+(A healthcheck runs the ) Tj
+/courier 10 Tf
+(test) Tj
+/times 10 Tf
+( command with the specified) Tj
+T*
+0.426024 Tw
+/times 10 Tf
+(options. ) Tj
+/courier 10 Tf
+(interval) Tj
+/times 10 Tf
+( is the time between each check, ) Tj
+/courier 10 Tf
+(timeout) Tj
+T*
+3.589819 Tw
+/times 10 Tf
+(is the time to wait for the command to finish before) Tj
+T*
+1.827577 Tw
+/times 10 Tf
+(assuming failure, and ) Tj
+/courier 10 Tf
+(retries) Tj
+/times 10 Tf
+( is the number of times to) Tj
+T*
+1.119774 Tw
+/times 10 Tf
+(retry the command before giving up. ) Tj
+/courier 10 Tf
+(start_period) Tj
+/times 10 Tf
+( is the) Tj
+T*
+0.539835 Tw
+/times 10 Tf
+(time to wait before the first check. The service has a health) Tj
+T*
+1.034819 Tw
+/times 10 Tf
+(status that can be used in the ) Tj
+/courier 10 Tf
+(depends_on) Tj
+/times 10 Tf
+( section of other) Tj
+T*
+1.000000 Tw
+/times 10 Tf
+(services, like we did with ) Tj
+/courier 10 Tf
+(postfix_rx) Tj
+/times 10 Tf
+(.) Tj
+ET
+BT
+42.519685 568.110236 TD
+12.000000 TL
+T*
+0.509819 Tw
+/times 10 Tf
+(While creating this service a few problems came up. At the) Tj
+T*
+4.771170 Tw
+/times 10 Tf
+(time of my practical phase the old ) Tj
+/courier 10 Tf
+(docker-compose) Tj
+/times 10 Tf
+T*
+3.479774 Tw
+/times 10 Tf
+(command was still the default and standard. For most) Tj
+T*
+0.618819 Tw
+/times 10 Tf
+(features that was not a problem, but that command was not) Tj
+T*
+-0.061476 Tw
+/times 10 Tf
+(in line with the latest compose specification. Importantly the) Tj
+T*
+5.484027 Tw
+/courier 10 Tf
+(healthcheck) Tj
+/times 10 Tf
+( section was not supported by the old) Tj
+T*
+0.062819 Tw
+/times 10 Tf
+(command. Due to this we needed to use Compose V2 which) Tj
+T*
+1.478313 Tw
+/times 10 Tf
+(is the direct implementation of the compose specification.) Tj
+T*
+0.840744 Tw
+/times 10 Tf
+(As the goal of this project was to ease adoption, needing a) Tj
+T*
+1.000000 Tw
+/times 10 Tf
+(non-default installation of a tool was a regress.) Tj
+ET
+BT
+42.519685 442.110236 TD
+12.000000 TL
+T*
+0.646819 Tw
+/times 10 Tf
+(The other problem was with how the email spec is handled) Tj
+T*
+0.149774 Tw
+/times 10 Tf
+(by different clients. Specifically how exactly the filename is) Tj
+T*
+0.938031 Tw
+/times 10 Tf
+(sent in the content-type and/or content-disposition headers.) Tj
+T*
+3.339799 Tw
+/times 10 Tf
+(With some email clients the filename is sent with the) Tj
+T*
+9.966884 Tw
+/times 10 Tf
+(content-type, with others it is only with the) Tj
+T*
+1.000000 Tw
+/times 10 Tf
+(content-disposition.) Tj
+ET
+BT
+42.519685 364.110236 TD
+12.000000 TL
+T*
+1.155354 Tw
+/timesitalic 10 Tf
+(These are examples of email excerpts. They were taken at) Tj
+T*
+0.251024 Tw
+/timesitalic 10 Tf
+(the time of writing and presumably looked slightly different) Tj
+T*
+1.000000 Tw
+/timesitalic 10 Tf
+(at the time of the project) Tj
+ET
+BT
+42.519685 322.110236 TD
+12.000000 TL
+T*
+0.239016 Tw
+/times 10 Tf
+(As you can see, even if the filename is included in the same) Tj
+T*
+5.462274 Tw
+/times 10 Tf
+(header, the quotation can be different. Due to this) Tj
+T*
+-0.157181 Tw
+/times 10 Tf
+(discrepancy I discovered a bug in the Lua module code. This) Tj
+T*
+0.648819 Tw
+/times 10 Tf
+(bug was fixed by an external developer who also wrote the) Tj
+T*
+1.000000 Tw
+/times 10 Tf
+(Lua module for the project.) Tj
+ET
+BT
+59.527559 260.610236 TD
+18.000000 TL
+T*
+1.000000 Tw
+/timesbold 10 Tf
+(1.3.10.5 PeekabooAV) Tj
+ET
+BT
+42.519685 238.110236 TD
+12.000000 TL
+T*
+1.644774 Tw
+/times 10 Tf
+(The Dockerfile for PeekabooAV has to be more complex) Tj
+T*
+3.133524 Tw
+/times 10 Tf
+(than the previous Dockerfiles. This is primarily due to) Tj
+T*
+3.105456 Tw
+/times 10 Tf
+(PeekabooAV not being available for installation with a) Tj
+T*
+2.233132 Tw
+/times 10 Tf
+(package manager like apt. Instead, we need to build the) Tj
+T*
+0.904243 Tw
+/times 10 Tf
+(application from source, and still keep the final image size) Tj
+T*
+1.000000 Tw
+/times 10 Tf
+(small.) Tj
+ET
+BT
+42.519685 160.110236 TD
+12.000000 TL
+T*
+0.754243 Tw
+/times 10 Tf
+(To achieve this we used a special Dockerfile feature called) Tj
+T*
+2.589396 Tw
+/times 10 Tf
+(multi-stage builds. [@UseMultistageBuilds2022]With this) Tj
+T*
+0.693132 Tw
+/times 10 Tf
+(feature we can define a regular Docker image that includes) Tj
+T*
+0.904243 Tw
+/times 10 Tf
+(all the needed tools to build an application, and afterwards) Tj
+T*
+3.486024 Tw
+/times 10 Tf
+(we define the actual application image, where we can) Tj
+T*
+0.567274 Tw
+/times 10 Tf
+(include specific files or directories from the previous stage.) Tj
+T*
+-0.117437 Tw
+/times 10 Tf
+(This feature is useful to keep the image size small, because a) Tj
+ET
+
+endstream
+endobj
+38 0 obj
+<<
+/Size 5339
+>>
+stream
+BT
+308.267717 778.110236 TD
+12.000000 TL
+T*
+1.000000 Tw
+/times 10 Tf
+(not needed for running it.) Tj
+ET
+BT
+308.267717 766.110236 TD
+12.000000 TL
+T*
+0.754243 Tw
+/times 10 Tf
+(To achieve this we used a special Dockerfile feature called) Tj
+T*
+2.589396 Tw
+/times 10 Tf
+(multi-stage builds. [@UseMultistageBuilds2022]With this) Tj
+T*
+0.693132 Tw
+/times 10 Tf
+(feature we can define a regular Docker image that includes) Tj
+T*
+0.904243 Tw
+/times 10 Tf
+(all the needed tools to build an application, and afterwards) Tj
+T*
+3.486024 Tw
+/times 10 Tf
+(we define the actual application image, where we can) Tj
+T*
+0.567274 Tw
+/times 10 Tf
+(include specific files or directories from the previous stage.) Tj
+T*
+-0.117437 Tw
+/times 10 Tf
+(This feature is useful to keep the image size small, because a) Tj
+T*
+1.000000 Tw
+/times 10 Tf
+(lot of tools that are needed for building an application are) Tj
+ET
+BT
+308.267717 664.110236 TD
+12.000000 TL
+T*
+-0.266868 Tw
+/times 10 Tf
+(This excerpt is the first stage of the PeekabooAV Dockerfile,) Tj
+T*
+2.999799 Tw
+/times 10 Tf
+(which is named ) Tj
+/courier 10 Tf
+(build) Tj
+/times 10 Tf
+(. The build stage installs all the) Tj
+T*
+0.965456 Tw
+/times 10 Tf
+(needed dependencies and fully sets up PeekabooAV inside) Tj
+T*
+3.806365 Tw
+/times 10 Tf
+(the ) Tj
+/courier 10 Tf
+(/opt/peekaboo) Tj
+/times 10 Tf
+( directory. This closely follows the) Tj
+T*
+8.343638 Tw
+/times 10 Tf
+(installation instructions found in the PeekabooAV) Tj
+T*
+5.119638 Tw
+/times 10 Tf
+(documentation, by installing some development tools,) Tj
+T*
+3.348031 Tw
+/times 10 Tf
+(configuring a python environment, and creating needed) Tj
+T*
+1.000000 Tw
+/times 10 Tf
+(configuration files.) Tj
+ET
+BT
+308.267717 562.110236 TD
+12.000000 TL
+T*
+0.487108 Tw
+/times 10 Tf
+(This is the final stage of the Dockerfile, which will be used) Tj
+T*
+1.510819 Tw
+/times 10 Tf
+(as the actual image. Here we start from a more extensive) Tj
+T*
+1.709774 Tw
+/times 10 Tf
+(base image, the linux distribution Debian. From there we) Tj
+T*
+1.636884 Tw
+/times 10 Tf
+(copy the ) Tj
+/courier 10 Tf
+(/opt/peekaboo/) Tj
+/times 10 Tf
+( directory from the build stage,) Tj
+T*
+5.076024 Tw
+/times 10 Tf
+(this is the only interaction with the previous stage.) Tj
+T*
+2.294243 Tw
+/times 10 Tf
+(Afterwards it is a regular Dockerfile similar to the ones) Tj
+T*
+0.937577 Tw
+/times 10 Tf
+(before. We create a peekaboo user and install python, plus) Tj
+T*
+1.000000 Tw
+/times 10 Tf
+(the needed libraries.) Tj
+ET
+BT
+308.267717 460.110236 TD
+12.000000 TL
+T*
+1.706465 Tw
+/times 10 Tf
+(The entrypoint.sh is again set up to configure the service) Tj
+T*
+1.000000 Tw
+/times 10 Tf
+(with environment variables.) Tj
+ET
+BT
+308.267717 430.110236 TD
+12.000000 TL
+T*
+-0.267979 Tw
+/times 10 Tf
+(Once more the service definition is slightly different. We use) Tj
+T*
+7.172047 Tw
+/times 10 Tf
+(another condition in depends_on, service_completed_) Tj
+T*
+3.938313 Tw
+/times 10 Tf
+(successfully, which waits until the given service exits) Tj
+T*
+1.641024 Tw
+/times 10 Tf
+(without an error. Another important bit is the stop_grace_) Tj
+T*
+1.562819 Tw
+/times 10 Tf
+(period. This sets the amount of time docker waits for the) Tj
+T*
+0.965456 Tw
+/times 10 Tf
+(application to close itself after receiving the corresponding) Tj
+T*
+0.538182 Tw
+/times 10 Tf
+(signal. If it does not do so in the specified time, the service) Tj
+T*
+1.000000 Tw
+/times 10 Tf
+(is forcefully closed.) Tj
+ET
+BT
+308.267717 328.110236 TD
+12.000000 TL
+T*
+3.939741 Tw
+/times 10 Tf
+(Furthermore, we do not set the environment variables) Tj
+T*
+0.564243 Tw
+/times 10 Tf
+(directly inside the compose.yaml, but in an extra file called) Tj
+T*
+7.839698 Tw
+/times 10 Tf
+(compose.env. This was done because the needed) Tj
+T*
+1.761170 Tw
+/times 10 Tf
+(environment variables for most other services are already) Tj
+T*
+4.072274 Tw
+/times 10 Tf
+(known by many developers as those are the industry) Tj
+T*
+0.602274 Tw
+/times 10 Tf
+(standards. That is not the case with PeekabooAV, therefore) Tj
+T*
+1.000000 Tw
+/times 10 Tf
+(we wanted more structure to the way the variables are input.) Tj
+ET
+BT
+308.267717 238.110236 TD
+12.000000 TL
+T*
+1.591819 Tw
+/times 10 Tf
+(We also use this file in other services, such as MariaDB.) Tj
+T*
+-0.163976 Tw
+/times 10 Tf
+(Which is an industry standard small-mid scale SQL database) Tj
+T*
+4.494027 Tw
+/times 10 Tf
+(that is used by PeekabooAV. Both PeekabooAV and) Tj
+T*
+2.053031 Tw
+/times 10 Tf
+(MariaDB are configured with environment variables, and) Tj
+T*
+0.394774 Tw
+/times 10 Tf
+(some variables, for example the database password, need to) Tj
+T*
+0.623707 Tw
+/times 10 Tf
+(be the same in both services. Due to this it is logical to put) Tj
+T*
+1.000000 Tw
+/times 10 Tf
+(these settings in a singular file.) Tj
+ET
+BT
+308.267717 148.110236 TD
+12.000000 TL
+T*
+1.851024 Tw
+/times 10 Tf
+(The service definition for MariaDB does not include any) Tj
+T*
+1.552021 Tw
+/times 10 Tf
+(new components, as the only important parts are the env_) Tj
+T*
+1.582021 Tw
+/times 10 Tf
+(file, which also points to the compose.env file. The other) Tj
+T*
+5.208313 Tw
+/times 10 Tf
+(important bit is another healthcheck, to know when) Tj
+T*
+1.000000 Tw
+/times 10 Tf
+(MariaDB is fully running.) Tj
+ET
+BT
+325.275591 86.610236 TD
+18.000000 TL
+T*
+1.000000 Tw
+/timesbold 10 Tf
+(1.3.10.6 Behavioural Analysis - Cortex) Tj
+ET
+BT
+308.267717 64.110236 TD
+12.000000 TL
+T*
+ET
+
+endstream
+endobj
+39 0 obj
+<<
+/Resources <<
+/Font <<
+/helvetica 19 0 R
+/times 4 0 R
+/timesbold 7 0 R
+/timesitalic 10 0 R
+/timesbolditalic 13 0 R
+/courier 16 0 R
+>>
+
+>>
+
+/Contents [37 0 R 38 0 R 40 0 R]
+/Type Page
+/MediaBox [0 0 595.2755905511812 841.8897637795276]
+/Parent 1 0 R
+>>
+endobj
+40 0 obj
+<<
+/Size 82
+>>
+stream
+BT
+294.857795 21.259843 TD
+10.000000 TL
+T*
+1.000000 Tw
+/helvetica 10 Tf
+(5) Tj
+ET
+
+endstream
+endobj
+41 0 obj
+<<
+/Size 5481
+>>
+stream
+BT
+42.519685 778.110236 TD
+12.000000 TL
+T*
+3.002021 Tw
+/times 10 Tf
+(detecting if an attachment is malicious or not. We use) Tj
+T*
+0.369819 Tw
+/times 10 Tf
+(Cortex, a project by The Hive Project. With a very modular) Tj
+T*
+0.776024 Tw
+/times 10 Tf
+(system, you can analyze different observables, such as IPs,) Tj
+T*
+2.445354 Tw
+/times 10 Tf
+(domains, files, and more. Cortex can use many tools to) Tj
+T*
+1.000000 Tw
+/times 10 Tf
+(achieve this task, and it can be fully run via an API.) Tj
+ET
+BT
+42.519685 712.110236 TD
+12.000000 TL
+T*
+1.000000 Tw
+/times 10 Tf
+(The behavioural analysis service does the heavy lifting of) Tj
+ET
+BT
+42.519685 700.110236 TD
+12.000000 TL
+T*
+-0.060226 Tw
+/times 10 Tf
+(To go through an example, imagine file called ) Tj
+/courier 10 Tf
+(cat.png.bat) Tj
+/times 10 Tf
+T*
+1.000000 Tw
+/times 10 Tf
+(as an email attachment, with the following content:) Tj
+ET
+BT
+42.519685 670.110236 TD
+12.000000 TL
+T*
+0.977819 Tw
+/times 10 Tf
+(A malicious file similiar to this is a common attack vector) Tj
+T*
+0.007274 Tw
+/times 10 Tf
+(targeting Windows systems. As Windows does not show the) Tj
+T*
+1.468524 Tw
+/times 10 Tf
+(real file extension by default, an unsuspecting user would) Tj
+T*
+0.055290 Tw
+/times 10 Tf
+(see the file as just ) Tj
+/courier 10 Tf
+(cat.png) Tj
+/times 10 Tf
+( and would likely not think about) Tj
+T*
+1.601516 Tw
+/times 10 Tf
+(trying to open it. But in reality, the file is a script which) Tj
+T*
+1.889774 Tw
+/times 10 Tf
+(downloads an executable file from a remote server. Here) Tj
+T*
+-0.105181 Tw
+/times 10 Tf
+(nothing more happens, but it would be trivial for a malicious) Tj
+T*
+0.470910 Tw
+/times 10 Tf
+(actor to further compromise the system from this point. We) Tj
+T*
+1.057577 Tw
+/times 10 Tf
+(used this file in the development of PeekabooAV as demo) Tj
+T*
+1.000000 Tw
+/times 10 Tf
+(malware, to test functionality.) Tj
+ET
+BT
+42.519685 544.110236 TD
+12.000000 TL
+T*
+1.090910 Tw
+/times 10 Tf
+(With a behaviour analysis engine, we can analyze this file) Tj
+T*
+0.358524 Tw
+/times 10 Tf
+(with different analyzers. Some analyzers might try to detect) Tj
+T*
+1.091654 Tw
+/times 10 Tf
+(the mime-type of the file to specify it as malicious or not.) Tj
+T*
+0.263182 Tw
+/times 10 Tf
+(Others try to execute the file in a sandbox and keep track of) Tj
+T*
+0.174819 Tw
+/times 10 Tf
+(all changes to the filesystem. The latter could detect that the) Tj
+T*
+2.003031 Tw
+/times 10 Tf
+(supposed ) Tj
+/courier 10 Tf
+(cat.png) Tj
+/times 10 Tf
+( is actually downloading an executable) Tj
+T*
+1.246465 Tw
+/times 10 Tf
+(file. There are more than 100 analyzers that come Cortex,) Tj
+T*
+0.563132 Tw
+/times 10 Tf
+(these also include well known tools such as VirusTotal and) Tj
+T*
+-0.095226 Tw
+/times 10 Tf
+(Google Safe Browsing. Although for this showcase, we only) Tj
+T*
+1.000000 Tw
+/times 10 Tf
+(enabled a single analyzer called FileInfo.) Tj
+ET
+BT
+42.519685 418.110236 TD
+12.000000 TL
+T*
+4.218313 Tw
+/times 10 Tf
+(The service definition for Cortex has no fundamental) Tj
+T*
+0.349799 Tw
+/times 10 Tf
+(differences to the previous ones. Two notable things are the) Tj
+T*
+2.953819 Tw
+/times 10 Tf
+(use of a premade image by The Hive Project, and the) Tj
+T*
+0.764027 Tw
+/courier 10 Tf
+(docker.sock) Tj
+/times 10 Tf
+( volume. Internally Cortex uses docker to run) Tj
+T*
+1.398819 Tw
+/times 10 Tf
+(each analyzer, in our use case this would mean running a) Tj
+T*
+0.688313 Tw
+/times 10 Tf
+(docker instance inside another docker container. While this) Tj
+T*
+1.449819 Tw
+/times 10 Tf
+(is possible, it is not recommended as it does not conform) Tj
+T*
+0.079774 Tw
+/times 10 Tf
+(with the linux securiry model, and different issues regarding) Tj
+T*
+2.233638 Tw
+/times 10 Tf
+(file systems can arise. [@UsingDockerinDockerYour] To) Tj
+T*
+0.916199 Tw
+/times 10 Tf
+(solve this, Cortex can use any docker socket we pass to it.) Tj
+T*
+0.439799 Tw
+/times 10 Tf
+(This essentially gives a container the ability to start another) Tj
+T*
+0.702274 Tw
+/times 10 Tf
+(container alongside it on the same host machine, nullifying) Tj
+T*
+0.604027 Tw
+/times 10 Tf
+(above mentioned problems. One limitation to this approach) Tj
+T*
+0.838926 Tw
+/times 10 Tf
+(is that the host supposedly needs to be a linux machine, as) Tj
+T*
+0.936465 Tw
+/times 10 Tf
+(Docker running on Windows via Hyper-V does not have a) Tj
+T*
+1.000000 Tw
+/courier 10 Tf
+(docker.sock) Tj
+/times 10 Tf
+(.) Tj
+ET
+BT
+42.519685 220.110236 TD
+12.000000 TL
+T*
+1.339819 Tw
+/times 10 Tf
+(Furthermore, Cortex is not set up to use directly from the) Tj
+T*
+0.165354 Tw
+/times 10 Tf
+(docker image. As Cortex is controlled via web interface one) Tj
+T*
+1.000000 Tw
+/times 10 Tf
+(would normally go through these steps on the first startup:) Tj
+ET
+BT
+42.519685 178.110236 TD
+12.000000 TL
+T*
+-0.108484 Tw
+/times 10 Tf
+(As this is a showcase meant to be started from scratch with a) Tj
+T*
+-0.111312 Tw
+/times 10 Tf
+(single action, this is not acceptable. We therefore created the) Tj
+T*
+1.397274 Tw
+/courier 10 Tf
+(cortex_setup) Tj
+/times 10 Tf
+( service to do this. Below is the Dockerfile) Tj
+T*
+1.000000 Tw
+/times 10 Tf
+(for that container.) Tj
+ET
+BT
+42.519685 124.110236 TD
+12.000000 TL
+T*
+1.919799 Tw
+/times 10 Tf
+(As the cortexSetup.sh script is about 200 lines long, and) Tj
+T*
+2.782819 Tw
+/times 10 Tf
+(most of the important code is very similar, I will only) Tj
+T*
+1.000000 Tw
+/times 10 Tf
+(discuss parts of it here.) Tj
+ET
+BT
+42.519685 82.110236 TD
+12.000000 TL
+T*
+3.650910 Tw
+/times 10 Tf
+(The script needs to know the locations of cortex and) Tj
+ET
+
+endstream
+endobj
+42 0 obj
+<<
+/Size 5324
+>>
+stream
+BT
+308.267717 778.110236 TD
+12.000000 TL
+T*
+0.386199 Tw
+/times 10 Tf
+(is used by cortex. These locations can be given to the script) Tj
+T*
+-0.145757 Tw
+/times 10 Tf
+(either via argument in the command line, or via environment) Tj
+T*
+2.108688 Tw
+/times 10 Tf
+(variables, as seen above via the compose.env file that is) Tj
+T*
+1.000000 Tw
+/times 10 Tf
+(included in the service definition.) Tj
+ET
+BT
+308.267717 724.110236 TD
+12.000000 TL
+T*
+3.650910 Tw
+/times 10 Tf
+(The script needs to know the locations of cortex and) Tj
+T*
+1.000000 Tw
+/times 10 Tf
+(elasticsearch, which is an open source NoSQL database that) Tj
+ET
+BT
+308.267717 694.110236 TD
+12.000000 TL
+T*
+2.013638 Tw
+/times 10 Tf
+(The CORTEX_ADMIN_PASSWORD variable is used as) Tj
+T*
+2.569799 Tw
+/times 10 Tf
+(the admin password, or if empty a random password is) Tj
+T*
+1.000000 Tw
+/times 10 Tf
+(generated by the script.) Tj
+ET
+BT
+308.267717 652.110236 TD
+12.000000 TL
+T*
+1.243472 Tw
+/times 10 Tf
+(The first step for the setup script, is detecting if Cortex is) Tj
+T*
+0.979016 Tw
+/times 10 Tf
+(already set up. This is the case if we shut down the whole) Tj
+T*
+1.369799 Tw
+/times 10 Tf
+(showcase and start each service back up. Trivially, we do) Tj
+T*
+1.000000 Tw
+/times 10 Tf
+(not want to try to set up, an already set up system.) Tj
+ET
+BT
+308.267717 598.110236 TD
+12.000000 TL
+T*
+-0.130984 Tw
+/times 10 Tf
+(Above execerpt is used to check if Cortex needs to be set up.) Tj
+T*
+0.231819 Tw
+/times 10 Tf
+(The queried endpoint can return a status code of 520, which) Tj
+T*
+0.196465 Tw
+/times 10 Tf
+(indicates some internal error from which we deduce that the) Tj
+T*
+0.646784 Tw
+/times 10 Tf
+(server is not set up. If the status code is 401, we know that) Tj
+T*
+0.432168 Tw
+/times 10 Tf
+(Cortex is set up as it knows that the request we made is not) Tj
+T*
+1.816024 Tw
+/times 10 Tf
+(authorized for that endpoint. Other endpoints can also be) Tj
+T*
+0.358524 Tw
+/times 10 Tf
+(used, but some have more complex behaviour regarding the) Tj
+T*
+1.063819 Tw
+/times 10 Tf
+(status code. We also check and exit if the supplied Cortex) Tj
+T*
+1.000000 Tw
+/times 10 Tf
+(URL is not reachable.) Tj
+ET
+BT
+308.267717 484.110236 TD
+12.000000 TL
+T*
+2.634381 Tw
+/times 10 Tf
+(Once we know that we need to set up Cortex we start) Tj
+T*
+1.000000 Tw
+/times 10 Tf
+(following similiar steps as a user would do:) Tj
+ET
+BT
+308.267717 454.110236 TD
+12.000000 TL
+T*
+0.183472 Tw
+/times 10 Tf
+(Most of these steps can be done by calling an API endpoint,) Tj
+T*
+1.521654 Tw
+/times 10 Tf
+(which I found with the help of the developer tools in the) Tj
+T*
+1.000000 Tw
+/times 10 Tf
+(Chrome browser.) Tj
+ET
+BT
+308.267717 412.110236 TD
+12.000000 TL
+T*
+-0.235757 Tw
+/times 10 Tf
+(Above is an excerpt from the entrypoint.sh, where we handle) Tj
+T*
+2.252563 Tw
+/times 10 Tf
+(step 3. ) Tj
+/courier 10 Tf
+(curl) Tj
+/times 10 Tf
+( is one of the most common ways to make) Tj
+T*
+0.785819 Tw
+/times 10 Tf
+(arbitrary http request from the console or a script on linux.) Tj
+T*
+0.816199 Tw
+/times 10 Tf
+(Before the curl command we put out what we are going to) Tj
+T*
+0.812021 Tw
+/times 10 Tf
+(do, in this case create the organization, together with some) Tj
+T*
+3.861024 Tw
+/times 10 Tf
+(formatting to add color the output with VTS \(Virtual) Tj
+T*
+1.000000 Tw
+/times 10 Tf
+(Terminal Sequences\).) Tj
+ET
+BT
+308.267717 322.110236 TD
+12.000000 TL
+T*
+2.877577 Tw
+/times 10 Tf
+(Most of the other steps are handled similarly, with the) Tj
+T*
+3.204774 Tw
+/times 10 Tf
+(endpoint being different and the data specified with ) Tj
+/courier 10 Tf
+(-d) Tj
+T*
+1.000000 Tw
+/times 10 Tf
+(changed accordingly.) Tj
+ET
+BT
+308.267717 280.110236 TD
+12.000000 TL
+T*
+0.205819 Tw
+/times 10 Tf
+(The difference between the steps the script takes and what a) Tj
+T*
+0.108017 Tw
+/times 10 Tf
+(user would do, are in how the API key is handled. Normally) Tj
+T*
+0.750910 Tw
+/times 10 Tf
+(the user would copy the randomly generated API key from) Tj
+T*
+-0.130181 Tw
+/times 10 Tf
+(the web interface, and paste it in their other application. This) Tj
+T*
+2.577349 Tw
+/times 10 Tf
+(is not doable in our case as we can not have any user) Tj
+T*
+0.358524 Tw
+/times 10 Tf
+(interaction required in the setup process. Instead of copying) Tj
+T*
+2.783819 Tw
+/times 10 Tf
+(the random API key, and somehow saving it to use in) Tj
+T*
+1.244027 Tw
+/times 10 Tf
+(PeekabooAV, we find out in which Elasticsearch database) Tj
+T*
+1.090910 Tw
+/times 10 Tf
+(Cortex saves its internal data. Once we know the database) Tj
+T*
+1.398017 Tw
+/times 10 Tf
+(we can replace the API key with our own key, which the) Tj
+T*
+0.189799 Tw
+/times 10 Tf
+(user supplied with the compose.env. By supplying it with in) Tj
+T*
+0.065819 Tw
+/times 10 Tf
+(the compose.env file it can be accessed by any service using) Tj
+T*
+1.000000 Tw
+/times 10 Tf
+(the compose.env file.) Tj
+ET
+BT
+308.267717 118.110236 TD
+12.000000 TL
+T*
+0.287274 Tw
+/times 10 Tf
+(The function ) Tj
+/courier 10 Tf
+(check_last_command) Tj
+/times 10 Tf
+( is run after each step, it) Tj
+T*
+-0.155984 Tw
+/times 10 Tf
+(checks if the last command exited with status code 0. If so, it) Tj
+T*
+0.446516 Tw
+/times 10 Tf
+(prints a green ) Tj
+/courier 10 Tf
+(o) Tj
+/times 10 Tf
+( and the script continues. If not, it resets the) Tj
+T*
+1.000000 Tw
+/times 10 Tf
+(terminal with VTS and exits the script.) Tj
+ET
+BT
+321.023622 68.610236 TD
+18.000000 TL
+T*
+ET
+
+endstream
+endobj
+43 0 obj
+<<
+/Type Page
+/MediaBox [0 0 595.2755905511812 841.8897637795276]
+/Parent 1 0 R
+/Resources <<
+/Font <<
+/times 4 0 R
+/timesbold 7 0 R
+/timesitalic 10 0 R
+/timesbolditalic 13 0 R
+/courier 16 0 R
+/helvetica 19 0 R
+>>
+
+>>
+
+/Contents [41 0 R 42 0 R 44 0 R]
+>>
+endobj
+44 0 obj
+<<
+/Size 82
+>>
+stream
+BT
+294.857795 21.259843 TD
+10.000000 TL
+T*
+1.000000 Tw
+/helvetica 10 Tf
+(6) Tj
+ET
+
+endstream
+endobj
+45 0 obj
+<<
+/Size 2783
+>>
+stream
+BT
+42.519685 778.110236 TD
+18.000000 TL
+T*
+1.000000 Tw
+ET
+BT
+55.275591 764.610236 TD
+18.000000 TL
+T*
+1.000000 Tw
+/timesbold 10 Tf
+(1.3.11 Architecture) Tj
+ET
+BT
+42.519685 742.110236 TD
+12.000000 TL
+T*
+1.992274 Tw
+/times 10 Tf
+(There is essentially a chain of dependencies between the) Tj
+T*
+1.000000 Tw
+/times 10 Tf
+(services.) Tj
+ET
+BT
+42.519685 712.110236 TD
+12.000000 TL
+T*
+1.124243 Tw
+/times 10 Tf
+(In the figure above you can see the dependencies between) Tj
+T*
+1.958524 Tw
+/times 10 Tf
+(the services. Those dependencies have the effect that the) Tj
+T*
+0.437108 Tw
+/times 10 Tf
+(startup of the showcase can take a lot of time as postfix_rx,) Tj
+T*
+1.143472 Tw
+/times 10 Tf
+(which is used to send a test email, has a long dependency) Tj
+T*
+0.236516 Tw
+/times 10 Tf
+(chain. The upside to this is that you can not use the pipeline) Tj
+T*
+1.000000 Tw
+/times 10 Tf
+(if it is not set up properly, possibly eliminating confusion.) Tj
+ET
+BT
+51.023622 639.510236 TD
+21.600000 TL
+T*
+1.000000 Tw
+/timesbold 12 Tf
+(1.4 Result) Tj
+ET
+BT
+42.519685 612.510236 TD
+12.000000 TL
+T*
+1.191024 Tw
+/times 10 Tf
+(As explained in the beginning of this overarching chapter,) Tj
+T*
+0.741024 Tw
+/times 10 Tf
+(the assignment was to containerize a showcase pipeline for) Tj
+T*
+6.676884 Tw
+/times 10 Tf
+(PeekabooAV with the goal of easing adoption of) Tj
+T*
+1.000000 Tw
+/times 10 Tf
+(PeekabooAV.) Tj
+ET
+BT
+42.519685 558.510236 TD
+12.000000 TL
+T*
+0.391024 Tw
+/times 10 Tf
+(The assignment was fully functionally completed at the end) Tj
+T*
+3.169774 Tw
+/times 10 Tf
+(of my phase. Although some shortcuts were taken, for) Tj
+T*
+5.211170 Tw
+/times 10 Tf
+(example, only enabling one analyzer with cortex or) Tj
+T*
+0.037577 Tw
+/times 10 Tf
+(disabling all other rspamd modules. But this is acceptable as) Tj
+T*
+2.159016 Tw
+/times 10 Tf
+(it is made clear that it is a showcase and not suited for) Tj
+T*
+1.583132 Tw
+/times 10 Tf
+(production. These shortcuts also do not affect the goal of) Tj
+T*
+0.505819 Tw
+/times 10 Tf
+(easing adoption, as this is achieved by simply giving a user) Tj
+T*
+0.106199 Tw
+/times 10 Tf
+(the ability to try out the pipeline with sample emails or even) Tj
+T*
+0.839819 Tw
+/times 10 Tf
+(their own files as attachments. This pipeline is also a good) Tj
+T*
+0.034819 Tw
+/times 10 Tf
+(start if one wants to start using PeekabooAV in a production) Tj
+T*
+1.000000 Tw
+/times 10 Tf
+(environment.) Tj
+ET
+BT
+42.519685 420.510236 TD
+12.000000 TL
+T*
+2.017577 Tw
+/times 10 Tf
+(There was some more work done after my phase, which) Tj
+T*
+5.679638 Tw
+/times 10 Tf
+(mostly includes streamlining health-checks and some) Tj
+T*
+0.779799 Tw
+/times 10 Tf
+(configurations, and cleaning up what is logged and what is) Tj
+T*
+1.000000 Tw
+/times 10 Tf
+(suppressed, to improve the overall quality of the showcase.) Tj
+ET
+
+endstream
+endobj
+46 0 obj
+<<
+/Size 0
+>>
+stream
+
+endstream
+endobj
+47 0 obj
+<<
+/Type Page
+/MediaBox [0 0 595.2755905511812 841.8897637795276]
+/Parent 1 0 R
+/Resources <<
+/Font <<
+/timesitalic 10 0 R
+/timesbolditalic 13 0 R
+/courier 16 0 R
+/helvetica 19 0 R
+/times 4 0 R
+/timesbold 7 0 R
+>>
+
+>>
+
+/Contents [45 0 R 46 0 R 48 0 R]
+>>
+endobj
+48 0 obj
+<<
+/Size 82
+>>
+stream
+BT
+294.857795 21.259843 TD
+10.000000 TL
+T*
+1.000000 Tw
+/helvetica 10 Tf
+(7) Tj
+ET
+
+endstream
+endobj
+xref
+0 49
+0000000000 65535 f
+0000000015 00000 n
+0000000088 00000 n
+0000000704 00000 n
+0000000868 00000 n
+0000001016 00000 n
+0000001632 00000 n
+0000001795 00000 n
+0000001946 00000 n
+0000002562 00000 n
+0000002729 00000 n
+0000002885 00000 n
+0000003502 00000 n
+0000003673 00000 n
+0000003839 00000 n
+0000004453 00000 n
+0000004612 00000 n
+0000004761 00000 n
+0000005381 00000 n
+0000005544 00000 n
+0000005697 00000 n
+0000005798 00000 n
+0000010750 00000 n
+0000015989 00000 n
+0000016260 00000 n
+0000016391 00000 n
+0000021740 00000 n
+0000027216 00000 n
+0000027487 00000 n
+0000027618 00000 n
+0000033382 00000 n
+0000038689 00000 n
+0000038960 00000 n
+0000039091 00000 n
+0000044386 00000 n
+0000050111 00000 n
+0000050382 00000 n
+0000050513 00000 n
+0000056161 00000 n
+0000061551 00000 n
+0000061822 00000 n
+0000061953 00000 n
+0000067485 00000 n
+0000072860 00000 n
+0000073131 00000 n
+0000073262 00000 n
+0000076096 00000 n
+0000076144 00000 n
+0000076415 00000 n
+trailer
+<<
+/Root 1 0 R
+/Size 49
+>>
+startxref
+76546
+%%EOF

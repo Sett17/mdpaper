@@ -18,7 +18,7 @@ func NewPage(paper *Paper, number int) *Page {
 	p.Set("Type", "Page")
 	mediaBox := spec.NewArray()
 	mediaBox.Add(0, 0, globals.A4Width, globals.A4Height)
-	p.Set("MediaBox", string(mediaBox.Bytes()))
+	p.Set("MediaBox", mediaBox)
 	if globals.Cfg.Columns == 1 {
 		p.Columns = append(p.Columns, paper.SingleColumn())
 	} else if globals.Cfg.Columns == 2 {
@@ -32,7 +32,7 @@ func (p *Page) AddToPdf(pdf *spec.PDF, res spec.Dictionary, catalog string, page
 	page := spec.NewDictObject()
 	page.M = p.M
 	p.Set("Parent", catalog)
-	p.Set("Resources", string(res.Bytes()))
+	p.Set("Resources", res)
 	c := spec.Array{}
 	for _, col := range p.Columns {
 		pdf.AddObject(col.Pointer())
@@ -56,7 +56,7 @@ func (p *Page) AddToPdf(pdf *spec.PDF, res spec.Dictionary, catalog string, page
 		pdf.AddObject(pN.Pointer())
 		c.Add(pN.Reference())
 	}
-	p.Set("Contents", string(c.Bytes()))
+	p.Set("Contents", c)
 	pdf.AddObject(page.Pointer())
 	pages.Add(page.Reference())
 }

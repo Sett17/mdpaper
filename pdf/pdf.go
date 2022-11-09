@@ -62,7 +62,7 @@ func FromAst(md ast.Node) *spec.PDF {
 		page.AddToPdf(&pdf, pageResources, catalog.Reference(), &pagesArray)
 	}
 
-	pages.Set("Kids", string(pagesArray.Bytes()))
+	pages.Set("Kids", pagesArray)
 	pages.Set("Count", len(pagesArray.Items))
 	//endregion
 

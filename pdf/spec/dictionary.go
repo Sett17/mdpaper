@@ -35,10 +35,17 @@ func (d *Dictionary) Bytes() []byte {
 		return buf.Bytes()
 	}
 	buf.WriteString("<<")
-	for s, s2 := range d.M {
-		buf.WriteString(fmt.Sprintf("\n/%s %v", s, s2))
+	for k, s2 := range d.M {
+		var value string
+		switch s2.(type) {
+		case fmt.Stringer:
+			value = s2.(fmt.Stringer).String()
+		default:
+			value = fmt.Sprintf("%v", s2)
+		}
+		buf.WriteString(fmt.Sprintf("\n/%s %s", k, value))
 	}
-	buf.WriteString("\n>>\n")
+	buf.WriteString(">>\n")
 	return buf.Bytes()
 }
 

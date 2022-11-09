@@ -9,7 +9,7 @@ type Array struct {
 	Items []interface{}
 }
 
-func (a *Array) String() string {
+func (a Array) String() string {
 	return string(a.Bytes())
 }
 

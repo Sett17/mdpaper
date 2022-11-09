@@ -1,10 +1,8 @@
 package pdf
 
 import (
-	"fmt"
 	"mdpaper/globals"
 	"mdpaper/pdf/spec"
-	"strings"
 )
 
 type Paper struct {
@@ -73,39 +71,4 @@ func (p *Paper) nextColumn(width, height, x, y float64) (c *Column) {
 	}
 
 	return c
-}
-
-func (p *Paper) GenerateHeading() {
-	levels := []int{0, 0, 0, 0, 0, 0}
-	cur := 0
-	for _, e := range p.Elements {
-		if h, ok := (*e).(*Heading); ok {
-			if h.Level-1 > cur {
-				if cur == 6 {
-					panic("can't have more than 6 heading levels")
-				}
-				cur = h.Level - 1
-			} else if h.Level-1 < cur {
-				if cur == 0 {
-					panic("can't go under level 0")
-				}
-				cur = h.Level - 1
-			}
-			buf := strings.Builder{}
-			levels[cur]++
-			for i := 0; i <= cur; i++ {
-				buf.WriteString(fmt.Sprintf("%d", levels[i]))
-				if i != cur {
-					buf.WriteString(".")
-				}
-			}
-			buf.WriteString(" ")
-			seg := spec.Segment{Content: buf.String(), Font: h.Segments[0].Font}
-			segs := h.Segments
-			h.Segments = make([]*spec.Segment, 0)
-			h.Segments = append(h.Segments, &seg)
-			h.Segments = append(h.Segments, segs...)
-			h.Process(0)
-		}
-	}
 }

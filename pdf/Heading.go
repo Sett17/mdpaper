@@ -1,10 +1,15 @@
 package pdf
 
-import "mdpaper/pdf/spec"
+import (
+	"fmt"
+	"mdpaper/pdf/spec"
+	"strings"
+)
 
 type Heading struct {
 	spec.Text
-	Level int
+	Level  int
+	Prefix [6]int
 }
 
 func (h *Heading) SetPos(x float64, y float64) {
@@ -13,5 +18,12 @@ func (h *Heading) SetPos(x float64, y float64) {
 }
 
 func (h *Heading) Bytes() []byte {
+	p := strings.Builder{}
+	for _, n := range h.Prefix {
+		if n != 0 {
+			p.WriteString(fmt.Sprintf("%d.", n))
+		}
+	}
+	h.Text.Processed[0].Words[0] = p.String()[0:len(p.String())-1] + " " + h.Text.Processed[0].Words[0]
 	return h.Text.Bytes()
 }

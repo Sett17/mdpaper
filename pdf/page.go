@@ -25,6 +25,13 @@ func NewPage(paper *Paper, number int) *Page {
 		c1, c2 := paper.DoubleColumn()
 		p.Columns = append(p.Columns, c1, c2)
 	}
+	for _, col := range p.Columns {
+		for _, a := range col.Content {
+			if h, ok := (*a).(*Heading); ok {
+				h.Page = number
+			}
+		}
+	}
 	return p
 }
 

@@ -9,7 +9,12 @@ import (
 type Heading struct {
 	spec.Text
 	Level  int
+	Page   int
 	Prefix [6]int
+}
+
+func (h *Heading) String() string {
+	return fmt.Sprintf("Heading {lvl: %d page: %d content: %s}", h.Level, h.Page, h.Text.String())
 }
 
 func (h *Heading) SetPos(x float64, y float64) {

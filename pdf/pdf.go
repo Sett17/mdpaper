@@ -1,6 +1,7 @@
 package pdf
 
 import (
+	"fmt"
 	"github.com/yuin/goldmark/ast"
 	"mdpaper/pdf/spec"
 )
@@ -44,8 +45,17 @@ func FromAst(md ast.Node) *spec.PDF {
 			paper.Add(p)
 		}
 	}
-	paper.GenerateHeading()
-	//fmt.Printf("%#v\n", paper)
+	headings := make([]*Heading, 0)
+	for _, e := range paper.Elements {
+		if h, ok := (*e).(*Heading); ok {
+			headings = append(headings, h)
+		}
+	}
+	chapter := GenerateChapterTree(headings)
+	for i, c := range chapter.RootNodes() {
+		c.(ChapterNode).Heading.Prefix = [6]int{i + 1}
+		chapter.GenerateNumbering(c.(ChapterNode))
+	}
 	//endregion
 
 	//region generate pages and add to pdf
@@ -65,6 +75,8 @@ func FromAst(md ast.Node) *spec.PDF {
 	pages.Set("Kids", pagesArray)
 	pages.Set("Count", len(pagesArray.Items))
 	//endregion
+
+	fmt.Println(chapter)
 
 	return &pdf
 }

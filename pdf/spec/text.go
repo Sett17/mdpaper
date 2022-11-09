@@ -62,6 +62,14 @@ type Text struct {
 	SingleLine bool
 }
 
+func (p *Text) String() string {
+	str := strings.Builder{}
+	for _, segment := range p.Segments {
+		str.WriteString(segment.Content)
+	}
+	return str.String()
+}
+
 func (p *Text) Split(percent float64) (Addable, Addable) {
 	procCutoff := int(math.Floor(float64(len(p.Processed)) * percent))
 	cutoffText := strings.Join(p.Processed[procCutoff].Words, "")

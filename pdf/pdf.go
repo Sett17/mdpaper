@@ -51,10 +51,11 @@ func FromAst(md ast.Node) *spec.PDF {
 			headings = append(headings, h)
 		}
 	}
+	//GenerateChapterTree(headings)
 	chapter := GenerateChapterTree(headings)
-	for i, c := range chapter.RootNodes() {
-		c.(ChapterNode).Heading.Prefix = [6]int{i + 1}
-		chapter.GenerateNumbering(c.(ChapterNode))
+	for i, c := range chapter.Roots() {
+		c.Heading.Prefix = [6]int{i + 1}
+		chapter.GenerateNumbering(c)
 	}
 	//endregion
 
@@ -76,7 +77,19 @@ func FromAst(md ast.Node) *spec.PDF {
 	pages.Set("Count", len(pagesArray.Items))
 	//endregion
 
-	fmt.Println(chapter)
+	//region generate outline
+	outlines := spec.NewDictObject()
+	outlines.Set("Type", "/Outlines")
+	outlines.Set("Count", len(chapter))
+	pdf.AddObject(outlines.Pointer())
+	catalog.Set("Outlines", outlines.Reference())
+	outlineItems := chapter.GenerateOutline(&outlines, &pdf)
+	for _, item := range outlineItems {
+		pdf.AddObject(item.Pointer())
+	}
+	//endregion
+
+	fmt.Println(chapter.String())
 
 	return &pdf
 }

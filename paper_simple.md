@@ -26,11 +26,11 @@ Although it is possible to test out PeekabooAV on its own, there is the definite
 
 The motivation behind my work with the PeekabooAV Installer repository, is to provide a faster way to get a full pipeline environment, to foster the adoption of PeekabooAV.
 
-[//]: # (\fill)
-
 ### Assignment
 
 My specific task was to containerize the bleeding-edge version of PeekabooAV, to make a showcase pipeline, and further ease the future deployment of PeekabooAV. This is a sentence to pad out the page for dev. The pipeline, orchestrated with docker compose, is to include the following services:
+
+\fill
 
 ### Workflow
 
@@ -295,7 +295,11 @@ The function `check_last_command` is run after each step, it checks if the last 
 
 ### Architecture
 
+
+
 There is essentially a chain of dependencies between the services.
+
+
 
 In the figure above you can see the dependencies between the services. Those dependencies have the effect that the startup of the showcase can take a lot of time as postfix_rx, which is used to send a test email, has a long dependency chain. The upside to this is that you can not use the pipeline if it is not set up properly, possibly eliminating confusion.
 
@@ -307,3 +311,8 @@ The assignment was fully functionally completed at the end of my phase. Although
 
 There was some more work done after my phase, which mostly includes streamlining health-checks and some configurations, and cleaning up what is logged and what is suppressed, to improve the overall quality of the showcase.
 
+# Conclusion
+
+## Yoda
+
+Always pass on what you have learned. Death is a natural part of life. Rejoice for those around you who transform into the Force. Mourn them do not. Miss them do not. Attachment leads to jealously. The shadow of greed, that is. Once you start down the dark path, forever will it dominate your destiny, consume you it will.

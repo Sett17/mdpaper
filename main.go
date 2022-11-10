@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/dustin/go-humanize"
 	"github.com/yuin/goldmark"
 	meta "github.com/yuin/goldmark-meta"
 	"github.com/yuin/goldmark/text"
@@ -41,6 +42,10 @@ func main() {
 	}
 	pp.WriteTo(outp)
 	fmt.Printf("Done in %v\n", time.Since(start))
+	fi, err := outp.Stat()
+	if err == nil {
+		fmt.Printf("File size: %s\n", humanize.Bytes(uint64(fi.Size())))
+	}
 	dbgOut, err := os.Create("debug.txt")
 	if err != nil {
 		panic(err)

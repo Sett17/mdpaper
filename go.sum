@@ -1,3 +1,5 @@
+github.com/dustin/go-humanize v1.0.0 h1:VSnTsYCnlFHaM2/igO1h6X3HA71jcobQuxemgkq4zYo=
+github.com/dustin/go-humanize v1.0.0/go.mod h1:HtrtbFcZ19U5GC7JDqmcUSB87Iq5E25KnS6fMYU6eOk=
 github.com/jmichiels/tree v0.0.0-20171219112600-211d1cda377a h1:ST0af22TXtEgrbWii0cJvw7ycoFoHc2zuAwL2t46a5Q=
 github.com/jmichiels/tree v0.0.0-20171219112600-211d1cda377a/go.mod h1:yS9Ul1kvysTfwmE/YElQ483lNvW2gZlh0gnqx3ZqCgQ=
 github.com/yuin/goldmark v1.5.2 h1:ALmeCk/px5FSm1MAcFBAsVKZjDuMVj8Tm7FFIlMJnqU=

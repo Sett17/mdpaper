@@ -12,8 +12,8 @@ type PDF struct {
 	root    *Object
 }
 
-func (p *PDF) AddObject(obj *Object) {
-	p.objects = append(p.objects, obj)
+func (p *PDF) AddObject(obj ...*Object) {
+	p.objects = append(p.objects, obj...)
 }
 
 func (p *PDF) SetRoot(obj *Object) {

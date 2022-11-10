@@ -195,8 +195,8 @@ func (p *Text) Bytes() []byte {
 
 	buf.WriteString("T*\n")
 
+	var currFont *Font = nil
 	for i, l := range p.Processed {
-		var currFont *Font = nil
 		lineBuffer := strings.Builder{}
 		buf.WriteString(fmt.Sprintf("%f Tw\n", l.WordSpacing))
 		for j := 0; j < len(l.Words); j++ {
@@ -214,7 +214,7 @@ func (p *Text) Bytes() []byte {
 			buf.WriteString(fmt.Sprintf("(%s) Tj\n", lineBuffer.String()))
 		}
 		if i != len(p.Processed)-1 {
-			buf.WriteString("T*\n")
+			buf.WriteString("T* ")
 		}
 	}
 

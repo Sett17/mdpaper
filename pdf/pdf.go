@@ -3,6 +3,7 @@ package pdf
 import (
 	"fmt"
 	"github.com/yuin/goldmark/ast"
+	"mdpaper/globals"
 	"mdpaper/pdf/spec"
 )
 
@@ -22,6 +23,8 @@ func FromAst(md ast.Node) *spec.PDF {
 	boldItalicRef, boldItalicName := spec.TimesBoldItalic.AddToPDF(&pdf)
 	courierRef, courierName := spec.CourierMono.AddToPDF(&pdf)
 	helveticaRef, helveticaName := spec.HelveticaRegular.AddToPDF(&pdf)
+	helveticaBoldRef, helveticaBoldName := spec.HelveticaBold.AddToPDF(&pdf)
+	timesMonoRef, timesMonoName := spec.TimesMono.AddToPDF(&pdf)
 
 	pageResources := spec.NewDict()
 	fonts := spec.NewDict()
@@ -31,6 +34,8 @@ func FromAst(md ast.Node) *spec.PDF {
 	fonts.Set(boldItalicName, boldItalicRef)
 	fonts.Set(courierName, courierRef)
 	fonts.Set(helveticaName, helveticaRef)
+	fonts.Set(helveticaBoldName, helveticaBoldRef)
+	fonts.Set(timesMonoName, timesMonoRef)
 	pageResources.Set("Font", fonts)
 	//endregion
 
@@ -52,10 +57,10 @@ func FromAst(md ast.Node) *spec.PDF {
 		}
 	}
 	//GenerateChapterTree(headings)
-	chapter := GenerateChapterTree(headings)
-	for i, c := range chapter.Roots() {
+	chapters := GenerateChapterTree(headings)
+	for i, c := range chapters.Roots() {
 		c.Heading.Prefix = [6]int{i + 1}
-		chapter.GenerateNumbering(c)
+		chapters.GenerateNumbering(c)
 	}
 	//endregion
 
@@ -65,12 +70,26 @@ func FromAst(md ast.Node) *spec.PDF {
 	pdf.AddObject(pages.Pointer())
 	catalog.Set("Pages", pages.Reference())
 
-	pageNumber := 0
+	displayPageNumber := 0
+	realPageNumber := 0
 	pagesArray := spec.NewArray()
+	var tocPage *Page
+	if globals.Cfg.ToC {
+		realPageNumber++
+		tocPage = NewEmptyPage(0, realPageNumber)
+	}
 	for !paper.Finished() {
-		pageNumber++
-		page := NewPage(&paper, pageNumber)
+		displayPageNumber++
+		realPageNumber++
+		page := NewPage(&paper, displayPageNumber, realPageNumber)
 		page.AddToPdf(&pdf, pageResources, catalog.Reference(), &pagesArray)
+	}
+	if globals.Cfg.ToC {
+		toc := GenerateTOC(&chapters)
+		tocPage.Columns = append(tocPage.Columns, toc.GenerateColumn())
+		links := toc.GenerateLinks()
+		tocPage.Annots = append(tocPage.Annots, links...)
+		tocPage.AddToPdf(&pdf, pageResources, catalog.Reference(), &pagesArray)
 	}
 
 	pages.Set("Kids", pagesArray)
@@ -80,16 +99,16 @@ func FromAst(md ast.Node) *spec.PDF {
 	//region generate outline
 	outlines := spec.NewDictObject()
 	outlines.Set("Type", "/Outlines")
-	outlines.Set("Count", len(chapter))
+	outlines.Set("Count", len(chapters))
 	pdf.AddObject(outlines.Pointer())
 	catalog.Set("Outlines", outlines.Reference())
-	outlineItems := chapter.GenerateOutline(&outlines, &pdf)
+	outlineItems := chapters.GenerateOutline(&outlines, &pdf)
 	for _, item := range outlineItems {
 		pdf.AddObject(item.Pointer())
 	}
 	//endregion
 
-	fmt.Println(chapter.String())
+	fmt.Println(chapters.String())
 
 	return &pdf
 }

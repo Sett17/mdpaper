@@ -3,21 +3,25 @@ package globals
 import "mdpaper/pdf/spec"
 
 type Config struct {
-	FontSize   int
-	LineHeight float64
-	Margin     float64
-	Columns    int
-	Title      string
-	Authors    []string
+	FontSize      int
+	LineHeight    float64
+	Margin        float64
+	Columns       int
+	ToC           bool
+	ToCLineHeight float64
+	Title         string
+	Authors       []string
 }
 
 var DefaultConfig = Config{
-	FontSize:   11,
-	LineHeight: 1.2,
-	Margin:     spec.MmToPt(15),
-	Columns:    2,
-	Title:      "Paper",
-	Authors:    []string{"Anonymous"},
+	FontSize:      11,
+	LineHeight:    1.2,
+	Margin:        spec.MmToPt(15),
+	Columns:       2,
+	ToC:           true,
+	ToCLineHeight: 1.3,
+	Title:         "Paper",
+	Authors:       []string{"Anonymous"},
 }
 
 var Cfg Config
@@ -55,6 +59,15 @@ func FromMap(m map[string]interface{}) Config {
 				c.Columns = 1
 			} else if c.Columns > 2 {
 				c.Columns = 2
+			}
+		case "toc":
+			c.ToC = v.(bool)
+		case "tocStretch":
+			switch v.(type) {
+			case int:
+				c.ToCLineHeight = float64(v.(int))
+			case float64:
+				c.ToCLineHeight = v.(float64)
 			}
 		case "title":
 			c.Title = v.(string)

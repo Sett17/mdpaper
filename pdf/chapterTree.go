@@ -8,10 +8,10 @@ import (
 )
 
 const (
-	dash       string = `├── `
-	spacer     string = `│   `
-	dashLast   string = `└── `
-	spacerLast string = `    `
+	dashDbg       string = `├── `
+	spacerDbg     string = `│   `
+	dashLastDbg   string = `└── `
+	spacerLastDbg string = `    `
 )
 
 type ChapterNode struct {
@@ -28,7 +28,7 @@ func (n *ChapterNode) recChildCount() int {
 	return N
 }
 
-func (n *ChapterNode) format(root bool, prefix string, output io.Writer) {
+func (n *ChapterNode) formatDbg(root bool, prefix string, output io.Writer) {
 	if root {
 		output.Write([]byte("┌" + n.String() + "\n"))
 	}
@@ -37,19 +37,19 @@ func (n *ChapterNode) format(root bool, prefix string, output io.Writer) {
 		childPrefix := prefix
 		switch idx {
 		case len(n.ChildNodes) - 1:
-			lineBuffer += dashLast
-			childPrefix += spacerLast
+			lineBuffer += dashLastDbg
+			childPrefix += spacerLastDbg
 
 		default:
-			lineBuffer += dash
-			childPrefix += spacer
+			lineBuffer += dashDbg
+			childPrefix += spacerDbg
 		}
 		lineBuffer += node.String() + "\n"
 		// Write node string representation to output.
 		if _, err := output.Write([]byte(lineBuffer)); err != nil {
 			panic(err)
 		}
-		node.format(false, childPrefix, output)
+		node.formatDbg(false, childPrefix, output)
 	}
 }
 
@@ -59,9 +59,9 @@ func (n ChapterNode) String() string {
 
 type ChapterTree []*ChapterNode
 
-func (c ChapterTree) Roots() []*ChapterNode {
+func (tree ChapterTree) Roots() []*ChapterNode {
 	roots := make([]*ChapterNode, 0)
-	for _, n := range c {
+	for _, n := range tree {
 		if n.Parent == nil {
 			roots = append(roots, n)
 		}
@@ -69,10 +69,10 @@ func (c ChapterTree) Roots() []*ChapterNode {
 	return roots
 }
 
-func (c ChapterTree) String() string {
+func (tree ChapterTree) String() string {
 	var buffer bytes.Buffer
-	for _, n := range c.Roots() {
-		n.format(true, "", &buffer)
+	for _, n := range tree.Roots() {
+		n.formatDbg(true, "", &buffer)
 	}
 	return buffer.String()
 }
@@ -101,18 +101,18 @@ func GenerateChapterTree(headings []*Heading) ChapterTree {
 	return t
 }
 
-func (c ChapterTree) GenerateNumbering(root *ChapterNode) {
+func (tree ChapterTree) GenerateNumbering(root *ChapterNode) {
 	for i, r := range root.ChildNodes {
 		h := r.Heading
 		h.Prefix = root.Heading.Prefix
 		h.Prefix[h.Level-1] = i + 1
-		c.GenerateNumbering(r)
+		tree.GenerateNumbering(r)
 	}
 }
 
-func (c ChapterTree) GenerateOutline(outlines *spec.DictionaryObject, pdf *spec.PDF) []*spec.DictionaryObject {
+func (tree ChapterTree) GenerateOutline(outlines *spec.DictionaryObject, pdf *spec.PDF) []*spec.DictionaryObject {
 	items := make(map[*ChapterNode]*spec.DictionaryObject)
-	roots := c.Roots()
+	roots := tree.Roots()
 	for i, n := range roots {
 		d := spec.NewDictObject()
 		d.Set("Title", "("+n.Heading.Numbering()+" "+n.Heading.String()+")")
@@ -123,7 +123,7 @@ func (c ChapterTree) GenerateOutline(outlines *spec.DictionaryObject, pdf *spec.
 		if i == 0 {
 			outlines.Set("First", d.Reference())
 		}
-		if i == len(c.Roots())-1 {
+		if i == len(tree.Roots())-1 {
 			outlines.Set("Last", d.Reference())
 		}
 	}
@@ -135,11 +135,11 @@ func (c ChapterTree) GenerateOutline(outlines *spec.DictionaryObject, pdf *spec.
 			items[n].Set("Next", items[roots[i+1]].Reference())
 		}
 	}
-	for _, n := range c {
+	for _, n := range tree {
 		n.childrenOutline(&items)
 	}
 	ret := make([]*spec.DictionaryObject, 0)
-	for _, n := range c {
+	for _, n := range tree {
 		if items[n] != nil {
 			ret = append(ret, items[n])
 		}

@@ -13,11 +13,10 @@ import (
 )
 
 func main() {
-	//global.Start = time.Now()
 	file := "paper_simple.md"
-	//if len(os.Args) > 1 {
-	//	file = os.Args[1]
-	//}
+	if len(os.Args) > 1 {
+		file = os.Args[1]
+	}
 	fmt.Println(file)
 	inp, err := os.ReadFile(file)
 	if err != nil {

@@ -31,7 +31,7 @@ func (p *Paper) Finished() bool {
 
 func (p *Paper) SingleColumn() *Column {
 	return p.nextColumn(
-		globals.A4Height-2*globals.Cfg.Margin,
+		globals.A4Width-2*globals.Cfg.Margin,
 		globals.A4Height-2*globals.Cfg.Margin,
 		globals.Cfg.Margin,
 		globals.A4Height-globals.Cfg.Margin,

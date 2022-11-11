@@ -18,7 +18,8 @@ go install github.com/sett17/mdpaper
   - 1-6 `#`
 - [x] Paragraph
   - Just text, fallback for everything else
-- [ ] Generate TOC from headings
+- [x] Generate TOC from headings
+  - + pdf outline
 - [ ] Generate title page
 - [x] bold, italic, inline code inside of paragraph
   - `**bold**`, `*italic*`, \`inline code\`

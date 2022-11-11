@@ -95,7 +95,7 @@ func (t *tocEntry) Bytes() []byte {
 	buf.WriteString(fmt.Sprintf("(%s) Tj\n", t.processed))
 	buf.WriteString(fmt.Sprintf("%f %f TD\n", t.numberOffset-t.Offset, 0.0))
 	buf.WriteString(fmt.Sprintf("/%s %d Tf\n", spec.TimesMono.Name, 12))
-	buf.WriteString(fmt.Sprintf("(%s) Tj\n", fmt.Sprintf("%3d", t.Head.Page)))
+	buf.WriteString(fmt.Sprintf("(%s) Tj\n", fmt.Sprintf("%3d", t.Head.Page-1)))
 
 	buf.WriteString("ET\n")
 	buf.Write(t.line.Bytes())

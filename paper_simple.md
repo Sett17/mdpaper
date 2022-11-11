@@ -70,8 +70,6 @@ Docker is another tool, that is used industry-wide, for easier deployment of sof
 
 Another advantage of using virtualization, is the isolating effect it has. By default, the virtualized systems do not know anything about each other, they are fully isolated. By the virtue of being achieved in software, there is the possibility to create a network of virtualized systems, which can communicate with each other.
 
-[//]: # ([@Whatvirtualization] [@Understandingvirtualization] [@WhatDocker])
-
 In the case of Docker this is used to create another layer of abstractions, containers. The specialized virtualized system mentioned before, is what is often referred to as a container. Docker is the software tool to run and manage these containers, which are build with another tool, in dockers case Mobyproject. To create a container with docker, you need a `Dockerfile` that describes the desired system. This text file consists of the commands that are to be executed to get the system to the wanted state. It is not needed to start from scratch with every `Dockerfile`, you can start from any other image. Images are what results from building a `Dockerfile`, this image can then be made into a container by the Docker engine. So the making of said `Dockerfiles` is recursive at its core.
 
 If, for example, you want a simple container to capture the network traffic in a network, you begin from an image like `alpine` and install a tool like `tcpdump`, or if available you start from another small container that has `tcpdump` already installed.
@@ -136,20 +134,6 @@ As mentioned above, we use our own Docker image for this postfix container. And 
 
 The code above is an excerpt from the `compose.yaml` where we define the `postfix_tx` service. This is the service used to send emails. The image we used is called `peekabooav_postfix`, which corresponds to the build directory `postfix`. The `Dockerfile` shown in the previous chapter is inside this directory. Docker Compose always checks if the image is present, otherwise it will build it with the build directory just discussed. Next, we set the hostname to `postfix_tx`, which corresponds to the name the service has in the network. The most important part of the service declaration are the environment variables. Here we set some trivial options, for example:
 
-[//]: # (- MAILLOG_FILE: We set the file to write the logs to /dev/stdout. This is to ensure that the logs are written to the)
-
-[//]: # (  console, and easily accesed with Docker)
-
-[//]: # (- QUEUE_RUN_DELAY: We set the interval in which the queue is flushed. We flush the queue to ensure that the email is)
-
-[//]: # (  sent again in a timely manner, if it was rejected.)
-
-[//]: # (- VIRTUAL_ALIAS_MAPS: We set the virtual alias maps to the pcre module, which is a module that is used to parse regular)
-
-[//]: # (  expressions, and the location of the map file.)
-
-[//]: # (- POSTFIX_VIRTUAL: We alias all emails to root@postfix_rx, which is the address of the receiving MTA.)
-
 Finally, we set the ports so that we can actually access the service from the network.
 
 #### Receiving MTA
@@ -159,22 +143,6 @@ Fundamentally this service is very similar to the `postfix_tx` service.
 This code is an excerpt from the `compose.yaml` aswell. This `postfix_tx` service is used to receive emails. And the declaration is mostly similiar to the `postfix_tx` service. Configuring this service was more complicated due to the lacking documentation specific to our problem. That results in a config which is likely to be more verbose and extensive than it needs to be. Nevertheless, this is not a problem as these configurations do not impair the performance in any meaningful way.
 
 The most important configurations, except the ones explained in the previous section, are:
-
-[//]: # (- SMTPD_RECIPIENT_RESTRICTIONS: We set the restrictions on the allowed domains to include any email coming from a)
-
-[//]: # (  network configured in the `MYNETWORKS` variable.)
-
-[//]: # (- POSTFIX_VIRTUAL: We alias the root@postfix_rx address to root@localhost, which is the default email that exists in the)
-
-[//]: # (  postfix installation)
-
-[//]: # (- MILTER_DEFAULT_ACTION: We set the default action to accept an email if the milter throws an error or is unavailable in)
-
-[//]: # (  any other way)
-
-[//]: # (- SMTPD_MILTERS: Here we set the milter, to use a tcp connection to rspamd on the port 11332. This address is the)
-
-[//]: # (  address of the rspamd service.)
 
 The last part if this excerpt sets the service dependencies. By specifying the `rspamd` service as a dependency, we ensure that the `postfix_rx` container will only be started after the `rspamd` container. Additionally, we set the `condition` to `service_healthy` to ensure that the `rspamd` container is running as we expect it, before the `postfix_rx` container is started. The _healthiness_ of a service is discussed more in the Spam Filtering System - rspamd chapter.
 
@@ -238,20 +206,6 @@ The service definition for Cortex has no fundamental differences to the previous
 
 Furthermore, Cortex is not set up to use directly from the docker image. As Cortex is controlled via web interface one would normally go through these steps on the first startup:
 
-[//]: # (1. Click the _migrate database_ button)
-
-[//]: # (2. Create an admin user with username and password)
-
-[//]: # (3. Create an organization inside Cortex, here called _PeekabooAV_)
-
-[//]: # (4. Create an _orgAdmin_ user for the organization)
-
-[//]: # (5. Create a regular user)
-
-[//]: # (6. Copy the generated API key to use the Cortex API)
-
-[//]: # (7. Enable the analyzers you want to use, here only FileInfo 8.0)
-
 As this is a showcase meant to be started from scratch with a single action, this is not acceptable. We therefore created the `cortex_setup` service to do this. Below is the Dockerfile for that container.
 
 As the cortexSetup.sh script is about 200 lines long, and most of the important code is very similar, I will only discuss parts of it here.
@@ -265,22 +219,6 @@ The first step for the setup script, is detecting if Cortex is already set up. T
 Above execerpt is used to check if Cortex needs to be set up. The queried endpoint can return a status code of 520, which indicates some internal error from which we deduce that the server is not set up. If the status code is 401, we know that Cortex is set up as it knows that the request we made is not authorized for that endpoint. Other endpoints can also be used, but some have more complex behaviour regarding the status code. We also check and exit if the supplied Cortex URL is not reachable.
 
 Once we know that we need to set up Cortex we start following similiar steps as a user would do:
-
-[//]: # (1. Migrate the database)
-
-[//]: # (2. Create an admin user with the supplied or generated password)
-
-[//]: # (3. Create organization PeekabooAV)
-
-[//]: # (4. Create _orgAdmin_ user)
-
-[//]: # (5. Create a regular user)
-
-[//]: # (6. Get the elasticsearch index for Cortex' internal data)
-
-[//]: # (7. Write our own API key directly into the database)
-
-[//]: # (8. Enable FileInfo 8.0)
 
 Most of these steps can be done by calling an API endpoint, which I found with the help of the developer tools in the Chrome browser.
 
@@ -309,8 +247,121 @@ There was some more work done after my phase, which mostly includes streamlining
 
 \fill
 
-# Conclusion
+## Conclusion
 
-## Yoda
+### Yoda
 
 Always pass on what you have learned. Death is a natural part of life. Rejoice for those around you who transform into the Force. Mourn them do not. Miss them do not. Attachment leads to jealously. The shadow of greed, that is. Once you start down the dark path, forever will it dominate your destiny, consume you it will.
+
+\fill
+
+# Practical Phase at Energy4U
+
+## Introduction
+
+Similiar to the previous phase, we have the ability to choose the department of our practical phase. For my fourth overall phase, I worked in the subsidiary of Atos, Energy4U.
+
+Energy4U is best described as a service provider in the german energy sector. Meaning that it is contracted by mostly end-consumer facing suppliers to provide needed specific services to operate properly in the german enrgy sector.
+
+In this rather short phase I was working towards migrating the customer facing reports from the old SAP system to the new SAP system.
+
+Before I started working on my technical tasks, I was given a presentation and resoucres to familiarize myself with the german energy market. This was done to get an understanding as to why things are done the way they are. It also helped me to get into conversation with other colleagues. Nevertheless, the specifics of the german energy market are not important in the further contents of this paper, so they will be omitted.
+
+### Motivation
+
+For any modern technology focuced company, it is important to use modern systems and stay up to date in performance and security. Especially in the german energy market, which regularly has mandatory adjustments regarding communication.
+As SAP, which is used in a lot of industry markets, released an updated software package called SAP S/4HANA, there is a lot of work going into migrating current operations to the new system.
+
+### Assignment
+
+Considering one of the most important parts of a successful migration is having knowledge of the new system, my first task was to create a report that can find tables from simple search terms. This could be used in the further migration process for finding appropriate alternatives for tables that do not exist one-to-one in the new system.
+
+My seconds task was to migrate the customer facing parts of the E4U Toolbox. The toolbox is an intuitive user-interface that groups often used reports and transaction into a single navigatable place. It is also used to ease deployment, as there is no need to create a transaction for each single program.
+
+## Prerequisites
+
+<!-- ### German Energy Market -->
+
+### SAP Basics
+
+As SAP Technology is used in a wide field of industry for different tasks, we will only discuss the needed basics of SAP I used in my phase. This includes programming with ABAP and using the corresponding SAP tools.
+
+ABAP is the programming language used when developing for SAP systems. It is a high level language that can be described as a melting pot of different language features and influences, because it is almost 40 years old at the time of writing.
+There are many differences from other languages that a developer needs to be aware of, for example:
+
+- Keywords are case-insensitive, meaning that `WRITE` and `WrItE` are effectively the same.
+- Lines are concluded with a period, instead of a semicolon or a newline.
+- It is whitespace sensitive, such that a = b+c(d) and a = b + c( d ) are not the same.
+
+Many of the differences and unusual features are coming from the fact that ABAP is old and was made for a specific purpose. As languages like C or Java are made to be all-purpose languages, ABAP was made to solve complex business problems and work closely together with database tables.
+The way one can use databases in ABAP is with the OpenSQL dialect. This dialect was developed by SAP especially to be used in ABAP, because an SAP system can use a variety of different databases which all have their own dialect supporting different features. OpenSQL statements are _translated_ by an SQL Parser which creates, what SAP calls, Native SQL statements that are specific to the database that is used.
+
+To actualize an ABAP program, one needs a way to input the code. There are two mayor ways to do this:
+
+Either in the SAP GUI, which is the graphical user interface that is used to access a SAP System and execute transactions. A Transaction is a way to quickly execute a program by simply giving it a unique code (further called tcode) which can be input in the start screen of the SAP GUI. Many of the tools provided by default from SAP have a tcode. For writing programs, the most important tcode is `SE38`, which is the ABAP Editor. There you can write code simliar to any other IDE.
+
+There are some more unusal tasks in ABAP Programming which the developers have to do, distinct from the way they author their code. That is checking the code for any errors that can be detected at compile time, those include syntax errors, missing datatypes, and errors in OpenSQL statements. Afterwards the developer must activate the program. Activation is a very common operation when developing something with SAP, as every type of object must be activated before it can be used. This also includes programs, as internally code is saved in a database, similiar to most other elements in SAP and thus needs activation. Only when a program is active, can it be executed. These three operations can be performed by shortcuts, or by buttons visible under the headline in figure.
+
+ADT (ABAP Development Tools) are a set of plugins for the Eclipse IDE, that adapt Eclipse for use with SAP ABAP programming. When installed you can use the connections you have defined in SAP GUI or define new ones, and connect to SAP Systems.
+
+<!-- ![Screenshot of Eclipse with ABAP view active](images/adt.png){ #fig:adt width=65% } -->
+
+As visible in figure @fig:adt, the main way to interact with the connected ABAP system is the `Project Explorer` on the left-hand side. It is a panel showing all packages on the systems, where one can also add packages to their favorites. Packages are the way SAP elements, such as data elements, programs, etc., are organized. They can also be used recursively, meaning a package can be insider another package.
+
+![Screenshot of Project Explorer with some packages](images/pe.png){ #fig:pe width=90% }
+
+In figure @fig:pe, one can see an example of how packages can be used to organize programs together with other elements they depend on.
+
+Other than the interface, and how the developer starts the process of creating an ABAP program, there is not much of difference in using the SAP GUI and ADT.
+Trivially, the code is the exact same with both tools, and the three steps discussed above are still needed to execute a program. One quality of life improvement is that the code checking is done automatically while you type. This means that you know effectively instantly if you have made a mistake, for example in a `WHERE` clause in an OpenSQL statement. Subsequently, the developer must only activate and execute the program, which can be done by pressing the corresponding buttons in a toolbar similiar to the one found in the SAP GUI, or by using shortcuts.
+
+There is no dramatic difference in the development process between the two discussed tools. Choosing one or the other is mostly a matter of preference, and what your specific tasks entails. If, for example, you need to create a lot of other elements with your program, and maybe even fill out database tables, it makes sense to use the SAP GUI to limit your context changes when working. If, on the other hand, you mostly write code and are well accustomed to Eclipse or similiar IDEs, it makes sense to use ADT. From talking to colleagues throughout my phase, many where of the opinion that the programming workflow, and programming specific tooling are better in ADT.
+
+Other more specific parts of the SAP system will be discussed where necessary in the following sections.
+
+
+## Bruteforce Table Finder
+
+As explained briefly in the Assignment section, knowledge of the new system in compulsory for a successful migration. For this reason, and to accustom myself with SAP and ABAP, I created a report that can find tables from simple search terms. More specifically, a user can input any number of simple search terms comprised of one or multiple words. The report will then search every table and structure found in the `dd02t` database table. This table is a standard table that contains the name and description of all other tables and structures delivered by SAP.
+
+Above figure illustrates the flow of data in the report. The `WHERE` clause, mentioned multiple times, is an important element of this report. At the of writing, there are about 900 thousand entries in the `dd03t` table, and the `WHERE` clause is used to limit the search space by filtering the names beforehand. If the user, for example knows with high probability that what they are looking for includes the work `EMMA` they can input `%EMMA%` into the `WHERE` clause, to limit the search space to just above 100 entries. Guessing a substring of the table the user is looking for is not complete solution to limit the search space, although it is likely better to use a search space of around 100 entries first, and if needed, use a search space that is several magnitudes larger.
+
+![Screenshot of input screen for the report](images/input.png){ #fig:input width=95% }
+
+Figure @fig:input shows the input screen for the report. Here one can see another input field that was not discussed previously. The `Row Limit` field is used to limit the number of rows that are selected from the `dd03t` table. This is not useful in most use cases, as it uses the `UP TO x ROWS` statement, which arbitrarily ends the select after the specified number of rows. It still can be useful if, for example, the `WHERE` clause produces a large search space that the user wants to limit even more, with the chance of randomly cutting out a part of the search space. It was also usesful while developing the report, and it does not culminate in a problem as the field is optional.
+
+![Screenshot of output table for search terms `CHECK` and `CASE`](images/output.png){ #fig:output width=65% }
+
+In figure @fig:output, one can see the output table that is filled by the report. This exact table is the result from using the search terms `CHECK` and `CASE`, which one can see in the headline of the output screen. The table is composed of four columns, the tabname field contains the name of the table/structure, and three boolean columns that indicate whether the table/structure contains at least on of the search terms in the name, description, or columns.
+As this result table uses AVL (ABAP List Viewer), the user has the ability to sort or filter the table through the SAP GUI, and even export it directly to an Excel file for further work.
+
+One problem that has arisen, is that there is no straightforward way to set the header of the three boolean columns. As visible in the code snippet below, the type of the `in*` columns are `abap_bool`, which is a date element supplied with SAP.
+
+The problem is that this data element do not have any description texts. If they had those texts, they would not fit this use case, but they can be changed in code. This can not be done when the columns do not have a header text to begin with.
+
+Solving this problem was trivial, as it is a common operation to create data elements specifically for a report. Here I created three data elements, which have the data type of `abap_bool`, and the corresponding description texts.
+
+### Results
+
+As stated in the assigment, it is important to have a tool that can help a developer to find needed tables in a new system. This feature is well achieved by my report. Assuredly, there are more features that could be added to this report, that vary in usefulness. For example, letting the user decide where exactly the report looks for the search terms, or finding more useful places to find the information, increasing the search space. However, these features would mostly add to the quality of life when using the report, or increase the functionality slightly. No specific statement can be made to the real-world usefullness of this report, since the migration has only slowly started yet, and there is no usage feedback available to me, at the time of writing.
+
+
+## Toolbox migration
+
+As briefly mentioned in the assignments, the toolbox is a program that is used by customers to more easily navigate and manage all the tools delivered by Energy4U.
+
+<!-- ![Screenshot of the toolbox](images/explorer.png){ #fig:toolbox width=95% } -->
+
+The specific programs inside the toolbox are not of importance for my task, as I was only tasked to create the toolbox overview report itself.
+
+Before I could get started with the report, I needed to find and understand the structure of the toolbox program, which is very divided into singular parts.
+
+As one can see in above figure, the program `Toolbox Explorer` is the main program, that is executed when opening the toolbox. Not every class and program is displayed in the figure, rather explanations are given in the round nodes. As most of this task was the tedious process of copying SAP elements into the new system, there were some uncommon problems, that likely only arise in a similar situation. There were multiple instances where the dependencies between the elements were circular in nature. This is not a problem in the execution of a program, and not while developing either, as classes are likely to be developed step by step und activated in chunks instead of whole. One example of such a dependecy loop is in the Toolbox HTML package, where the class `CL_HTML_ELEMENT` being activated was depending on the table type `TT_HTML_ELEMENTS` being active, which intern was depending on the structure `S_HTML_ELEMENT` also begin active. The loop is created as the aforementioned structure is dependent on the cited class. To solve this I edited the `S_HTML_ELEMENT` structure to not contain a field of the class. This breaks the chain, and allows all 3 elements to be activated. After this, I added the field back into the structure, and activated it again.
+
+### Results
+
+As, at the time of writing, I am still in my practical phase at Energy4U, and the process of migrating the Toolbox to the new system is not finished yet. All elements inside the packages seen in the most recent figure, are migrated, and the database table are filled with the elements that are to be displayed in the tree. There seems to be some problem regarding the display output, that I am currently still working towards fixing.
+
+#### Acknowledgement
+
+Due to this, the screenshot visible in this section are taken from the Toolbox running on the old system

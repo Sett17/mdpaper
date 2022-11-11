@@ -30,8 +30,6 @@ The motivation behind my work with the PeekabooAV Installer repository, is to pr
 
 My specific task was to containerize the bleeding-edge version of PeekabooAV, to make a showcase pipeline, and further ease the future deployment of PeekabooAV. This is a sentence to pad out the page for dev. The pipeline, orchestrated with docker compose, is to include the following services:
 
-\fill
-
 ### Workflow
 
 Throughout the phase, my workflow was predominantly guided by a meeting twice a week. In these meetings, I presented the current state of my work, and discussed the next steps with my two colleagues in this project. My workday changed a lot during the duration of my involvement in the project. This is due to the fact that I had to make myself comfortable with the new tools and the already quite mature codebase of PeekabooAV. After I acquainted myself with the Docker tools and the overall structure of the PeekabooAV codebase, I incrementally created each part of the pipeline. This process started with PeekabooAV itself, and culminated with the 3 other services together with their respective containers.
@@ -224,6 +222,8 @@ We also use this file in other services, such as MariaDB. Which is an industry s
 
 The service definition for MariaDB does not include any new components, as the only important parts are the env_file, which also points to the compose.env file. The other important bit is another healthcheck, to know when MariaDB is fully running.
 
+\fill
+
 #### Behavioural Analysis - Cortex
 
 The behavioural analysis service does the heavy lifting of detecting if an attachment is malicious or not. We use Cortex, a project by The Hive Project. With a very modular system, you can analyze different observables, such as IPs, domains, files, and more. Cortex can use many tools to achieve this task, and it can be fully run via an API.
@@ -295,11 +295,7 @@ The function `check_last_command` is run after each step, it checks if the last 
 
 ### Architecture
 
-
-
 There is essentially a chain of dependencies between the services.
-
-
 
 In the figure above you can see the dependencies between the services. Those dependencies have the effect that the startup of the showcase can take a lot of time as postfix_rx, which is used to send a test email, has a long dependency chain. The upside to this is that you can not use the pipeline if it is not set up properly, possibly eliminating confusion.
 
@@ -310,6 +306,8 @@ As explained in the beginning of this overarching chapter, the assignment was to
 The assignment was fully functionally completed at the end of my phase. Although some shortcuts were taken, for example, only enabling one analyzer with cortex or disabling all other rspamd modules. But this is acceptable as it is made clear that it is a showcase and not suited for production. These shortcuts also do not affect the goal of easing adoption, as this is achieved by simply giving a user the ability to try out the pipeline with sample emails or even their own files as attachments. This pipeline is also a good start if one wants to start using PeekabooAV in a production environment.
 
 There was some more work done after my phase, which mostly includes streamlining health-checks and some configurations, and cleaning up what is logged and what is suppressed, to improve the overall quality of the showcase.
+
+\fill
 
 # Conclusion
 

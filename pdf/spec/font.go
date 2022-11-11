@@ -43,6 +43,9 @@ func (f *Font) WordWidth(w string, fs int) float64 {
 }
 
 func (f *Font) CharWidth(r rune) float64 {
+	if r < rune(f.FirstChar) || r > rune(f.LastChar) {
+		return 500 / 1000.0
+	}
 	return float64(f.Widths.Items[int(r)-f.FirstChar].(int)) / 1000
 }
 
@@ -158,6 +161,34 @@ var TimesBoldItalic = Font{
 	},
 }
 
+var TimesMono = Font{
+	FontName:  "/Times-Roman",
+	Name:      "timesmono",
+	FirstChar: 32,
+	LastChar:  251,
+	Widths: Array{
+		Items: []interface{}{
+			500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500,
+		},
+	},
+	Descriptor: Dictionary{
+		M: map[string]interface{}{
+			"Type":     "/FontDescriptor",
+			"FontName": "/Times-Roman",
+			"Flags":    0b00000000000000000000000000000010,
+			"FontBBox": Array{
+				Items: []interface{}{
+					-168, -218, 1000, 898,
+				},
+			},
+			"ItalicAngle": 0,
+			"Ascent":      683,
+			"Descent":     -217,
+			"CapHeight":   669,
+		},
+	},
+}
+
 var HelveticaRegular = Font{
 	FontName:  "/Helvetica",
 	Name:      "helvetica",
@@ -176,6 +207,34 @@ var HelveticaRegular = Font{
 			"FontBBox": Array{
 				Items: []interface{}{
 					-166, -225, 1000, 931,
+				},
+			},
+			"ItalicAngle": 0,
+			"Ascent":      718,
+			"Descent":     -207,
+			"CapHeight":   718,
+		},
+	},
+}
+
+var HelveticaBold = Font{
+	FontName:  "/Helvetica-Bold",
+	Name:      "helveticabold",
+	FirstChar: 32,
+	LastChar:  251,
+	Widths: Array{
+		Items: []interface{}{
+			278, 333, 474, 556, 556, 889, 722, 278, 333, 333, 389, 584, 278, 333, 278, 278, 556, 556, 556, 556, 556, 556, 556, 556, 556, 556, 333, 333, 584, 584, 584, 611, 975, 722, 722, 722, 722, 667, 611, 778, 722, 278, 556, 722, 611, 833, 722, 778, 667, 778, 722, 667, 611, 722, 667, 944, 667, 667, 611, 333, 278, 333, 584, 556, 278, 556, 611, 556, 611, 556, 333, 611, 611, 278, 278, 556, 278, 889, 611, 611, 611, 611, 389, 556, 333, 611, 556, 778, 556, 556, 500, 389, 280, 389, 584, 333, 556, 556, 167, 556, 556, 556, 556, 238, 500, 556, 333, 333, 611, 611, 556, 556, 556, 278, 556, 350, 278, 500, 500, 556, 1000, 1000, 611, 333, 333, 333, 333, 333, 333, 333, 333, 333, 333, 333, 333, 333, 1000, 1000, 370, 611, 778, 1000, 365, 889, 278, 278, 611, 944, 611,
+		},
+	},
+	Descriptor: Dictionary{
+		M: map[string]interface{}{
+			"Type":     "/FontDescriptor",
+			"FontName": "/Helvetica-Bold",
+			"Flags":    0b00000000000000000000000000000010,
+			"FontBBox": Array{
+				Items: []interface{}{
+					-170, -228, 1003, 962,
 				},
 			},
 			"ItalicAngle": 0,

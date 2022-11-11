@@ -3,6 +3,7 @@ package spec
 import (
 	"bytes"
 	"fmt"
+	"sort"
 )
 
 type Dictionary struct {
@@ -35,15 +36,13 @@ func (d *Dictionary) Bytes() []byte {
 		return buf.Bytes()
 	}
 	buf.WriteString("<<")
-	for k, s2 := range d.M {
-		var value string
-		switch s2.(type) {
-		case fmt.Stringer:
-			value = s2.(fmt.Stringer).String()
-		default:
-			value = fmt.Sprintf("%v", s2)
-		}
-		buf.WriteString(fmt.Sprintf("\n/%s %s", k, value))
+	resKeys := make([]string, 0)
+	for k := range d.M {
+		resKeys = append(resKeys, k)
+	}
+	sort.Strings(resKeys)
+	for _, key := range resKeys {
+		buf.WriteString(fmt.Sprintf("\n/%s %v", key, d.M[key]))
 	}
 	buf.WriteString(">>\n")
 	return buf.Bytes()

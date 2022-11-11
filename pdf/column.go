@@ -18,7 +18,7 @@ func NewColumn(width, maxHeight, x, y float64) *Column {
 	c := Column{Width: width, MaxHeight: maxHeight, Pos: [2]float64{x, y}, StreamObject: spec.NewStreamObject(), bottom: y}
 
 	if globals.DBG {
-		r := Rect{H: c.MaxHeight}
+		r := spec.Rect{H: c.MaxHeight}
 		r.Process(c.Width)
 		r.SetPos(c.Pos[0], c.Pos[1])
 		var rA spec.Addable = &r

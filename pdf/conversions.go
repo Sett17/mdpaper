@@ -13,7 +13,7 @@ func ConvertHeading(h *ast.Heading) *spec.Addable {
 	buf.Write(h.Text(globals.File))
 	seg := spec.Segment{
 		Content: buf.String(),
-		Font:    &spec.TimesBold,
+		Font:    &spec.HelveticaBold,
 	}
 	fs := globals.Cfg.FontSize
 	if h.Level <= 2 {

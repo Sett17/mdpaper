@@ -48,6 +48,9 @@ func FromAst(md ast.Node) *spec.PDF {
 		case ast.KindParagraph:
 			p := ConvertParagraph(n.(*ast.Paragraph))
 			paper.Add(p)
+		case ast.KindList:
+			l := ConvertList(n.(*ast.List))
+			paper.Add(l)
 		}
 	}
 	headings := make([]*Heading, 0)

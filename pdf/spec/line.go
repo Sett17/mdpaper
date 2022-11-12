@@ -5,14 +5,14 @@ import (
 	"fmt"
 )
 
-type Line struct {
+type GraphicLine struct {
 	PosA      [2]float64
 	PosB      [2]float64
 	Thickness float64
 	Dotted    bool
 }
 
-func (l *Line) Bytes() []byte {
+func (l *GraphicLine) Bytes() []byte {
 	buf := bytes.Buffer{}
 	buf.WriteString("q\n")
 	buf.WriteString(fmt.Sprintf("%f w\n", l.Thickness))
@@ -25,13 +25,13 @@ func (l *Line) Bytes() []byte {
 	return buf.Bytes()
 }
 
-func (l *Line) SetPos(x, y float64) {
+func (l *GraphicLine) SetPos(x, y float64) {
 	l.PosA = [2]float64{x, y}
 }
 
-func (l *Line) Height() float64 {
+func (l *GraphicLine) Height() float64 {
 	return l.Thickness
 }
 
-func (l *Line) Process(_ float64) {
+func (l *GraphicLine) Process(_ float64) {
 }

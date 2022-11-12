@@ -1,7 +1,5 @@
 package globals
 
-import "mdpaper/pdf/spec"
-
 type Config struct {
 	FontSize      int
 	LineHeight    float64
@@ -11,17 +9,19 @@ type Config struct {
 	ToCLineHeight float64
 	Title         string
 	Authors       []string
+	Debug         bool
 }
 
 var DefaultConfig = Config{
 	FontSize:      11,
 	LineHeight:    1.2,
-	Margin:        spec.MmToPt(15),
+	Margin:        MmToPt(15),
 	Columns:       2,
 	ToC:           true,
 	ToCLineHeight: 1.3,
 	Title:         "Paper",
 	Authors:       []string{"Anonymous"},
+	Debug:         false,
 }
 
 var Cfg Config
@@ -49,9 +49,9 @@ func FromMap(m map[string]interface{}) Config {
 		case "margin":
 			switch v.(type) {
 			case int:
-				c.Margin = spec.MmToPt(float64(v.(int)))
+				c.Margin = MmToPt(float64(v.(int)))
 			case float64:
-				c.Margin = spec.MmToPt(v.(float64))
+				c.Margin = MmToPt(v.(float64))
 			}
 		case "columns":
 			c.Columns = v.(int)
@@ -62,7 +62,7 @@ func FromMap(m map[string]interface{}) Config {
 			}
 		case "toc":
 			c.ToC = v.(bool)
-		case "tocStretch":
+		case "tocLineHeight":
 			switch v.(type) {
 			case int:
 				c.ToCLineHeight = float64(v.(int))
@@ -83,6 +83,8 @@ func FromMap(m map[string]interface{}) Config {
 			case string:
 				c.Authors = []string{v.(string)}
 			}
+		case "dbg":
+			c.Debug = v.(bool)
 		}
 	}
 	return c

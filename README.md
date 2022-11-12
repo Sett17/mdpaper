@@ -19,7 +19,7 @@ go install github.com/sett17/mdpaper
 - [x] Paragraph
   - Just text, fallback for everything else
 - [x] Generate TOC from headings
-  - + pdf outline
+  - & pdf outline
 - [ ] Generate title page
 - [x] bold, italic, inline code inside of paragraph
   - `**bold**`, `*italic*`, \`inline code\`
@@ -27,8 +27,9 @@ go install github.com/sett17/mdpaper
   - fills the remaining space in the column with whitespace
 - [ ] Image
   - `![Text subtitle](path/to/img.png){options}`
-- [ ] Unordered list
+- [x] Unordered list
   - `- item`
+  - nested lists are not currently supported
 - [ ] Ordered list
   - `1. item`
 - [ ] Checkboxes
@@ -46,15 +47,21 @@ mdpaper my_paper.md
 
 ### Options
 
-| Option     |                            Description                            | Default     |
-|------------|:-----------------------------------------------------------------:|:------------|
-| title      |                        Title of the paper                         | `Paper`     |
-| fontSize   |                   The font size to any integer                    | `11`        |
-| lineHeight |            The relative space between line beginnings             | `1.2`       |
-| margin     | The left/right margin in mm (top and bottom are 1.5x this number) | `15.0`      |
-| columns    |             The number of columns in the page (max 2)             | `2`         |
-| authors    |             List of strings that are the Author names             | `Anonymous` |
+| Option        |                            Description                            | Default     |
+|---------------|:-----------------------------------------------------------------:|:------------|
+| title         |                        Title of the paper                         | `Paper`     |
+| fontSize      |                   The font size to any integer                    | `11`        |
+| lineHeight    |            The relative space between line beginnings             | `1.2`       |
+| margin        | The left/right margin in mm (top and bottom are 1.5x this number) | `15.0`      |
+| columns       |             The number of columns in the page (max 2)             | `2`         |
+| authors       |             List of strings that are the Author names             | `Anonymous` |
+| toc           |           Weather to generate a Table of Contents page            | 'true'      |
+| tocLineHeight |             The line height used for the ToC entries              | '1.3'       |
+| dbg           |                 Weather to draw debug rectangles                  | 'false'     |
 
-# Acknowledgements
+# Acknowledgements & Known Issues
 
 - [goldmark](https://github.com/yuin/goldmark) for the *blazingly fast* markdown parser
+
+- Paragraphs that are split in the beginning may be out of order
+  - use '\fill' in the meantime to force a column break and avoid the splitting

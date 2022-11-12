@@ -4,9 +4,10 @@ startNumber: 1
 margin: 15
 columns: 2
 lineHeight: 1.2
+dbg: true
 ---
 
-# Practical Phase at scVenus
+# Practical Phase at scVenus aka my third phase which was the best so far i guess
 
 ## Introduction
 
@@ -14,13 +15,18 @@ At Atos, we have the possibility to choose the department in which we want to pe
 
 The overarching project I worked in, is called PeekabooAV. This is an Anti-Virus software, which can receive a file, for example from an email client, and pass it through its own rule engine, which intern may use other programs, such as behavioral analysis, to determine the risk of the file.
 
-### Motivation
+### Motivation, which is a funny word because i do not know how i got mine
 
 PeekabooAV is written to have a high degree of configurability and extendability. A major problem with this approach is that it is not trivial for a user to try out PeekabooAV in an efficient manner.
 
 Imagine this scenario:
 
 You are a System Administrator, with an on-premise email service. You are looking through GitHub, or searching articles for better Anti-Virus, to cut down the manual work you have to do. You stumble upon PeekabooAV, which sounds promising to you. But to know if it is the right fit for your needs, you would need to set up a whole test environment, with at least spam filtering and an email service. This process is cumbersome, and would likely stop you from even testing out PeekabooAV.
+
+- This project is open source
+- The code is available on GitHub
+- The project is licensed under the MIT license, means you can use it for free, and modify it as you wish
+- The project is hosted on Docker Hub
 
 Although it is possible to test out PeekabooAV on its own, there is the definite need to test it with a full environment. This hurdle of setting up an environment, to test a software, is a major problem for adoption.
 
@@ -33,8 +39,6 @@ My specific task was to containerize the bleeding-edge version of PeekabooAV, to
 ### Workflow
 
 Throughout the phase, my workflow was predominantly guided by a meeting twice a week. In these meetings, I presented the current state of my work, and discussed the next steps with my two colleagues in this project. My workday changed a lot during the duration of my involvement in the project. This is due to the fact that I had to make myself comfortable with the new tools and the already quite mature codebase of PeekabooAV. After I acquainted myself with the Docker tools and the overall structure of the PeekabooAV codebase, I incrementally created each part of the pipeline. This process started with PeekabooAV itself, and culminated with the 3 other services together with their respective containers.
-
-[//]: # (![This is a really nice image!]&#40;test.png&#41;)
 
 ### Open Source
 
@@ -245,8 +249,6 @@ The assignment was fully functionally completed at the end of my phase. Although
 
 There was some more work done after my phase, which mostly includes streamlining health-checks and some configurations, and cleaning up what is logged and what is suppressed, to improve the overall quality of the showcase.
 
-\fill
-
 ## Conclusion
 
 ### Yoda
@@ -269,8 +271,7 @@ Before I started working on my technical tasks, I was given a presentation and r
 
 ### Motivation
 
-For any modern technology focuced company, it is important to use modern systems and stay up to date in performance and security. Especially in the german energy market, which regularly has mandatory adjustments regarding communication.
-As SAP, which is used in a lot of industry markets, released an updated software package called SAP S/4HANA, there is a lot of work going into migrating current operations to the new system.
+For any modern technology focuced company, it is important to use modern systems and stay up to date in performance and security. Especially in the german energy market, which regularly has mandatory adjustments regarding communication. As SAP, which is used in a lot of industry markets, released an updated software package called SAP S/4HANA, there is a lot of work going into migrating current operations to the new system.
 
 ### Assignment
 
@@ -286,15 +287,13 @@ My seconds task was to migrate the customer facing parts of the E4U Toolbox. The
 
 As SAP Technology is used in a wide field of industry for different tasks, we will only discuss the needed basics of SAP I used in my phase. This includes programming with ABAP and using the corresponding SAP tools.
 
-ABAP is the programming language used when developing for SAP systems. It is a high level language that can be described as a melting pot of different language features and influences, because it is almost 40 years old at the time of writing.
-There are many differences from other languages that a developer needs to be aware of, for example:
+ABAP is the programming language used when developing for SAP systems. It is a high level language that can be described as a melting pot of different language features and influences, because it is almost 40 years old at the time of writing. There are many differences from other languages that a developer needs to be aware of, for example:
 
 - Keywords are case-insensitive, meaning that `WRITE` and `WrItE` are effectively the same.
 - Lines are concluded with a period, instead of a semicolon or a newline.
 - It is whitespace sensitive, such that a = b+c(d) and a = b + c( d ) are not the same.
 
-Many of the differences and unusual features are coming from the fact that ABAP is old and was made for a specific purpose. As languages like C or Java are made to be all-purpose languages, ABAP was made to solve complex business problems and work closely together with database tables.
-The way one can use databases in ABAP is with the OpenSQL dialect. This dialect was developed by SAP especially to be used in ABAP, because an SAP system can use a variety of different databases which all have their own dialect supporting different features. OpenSQL statements are _translated_ by an SQL Parser which creates, what SAP calls, Native SQL statements that are specific to the database that is used.
+Many of the differences and unusual features are coming from the fact that ABAP is old and was made for a specific purpose. As languages like C or Java are made to be all-purpose languages, ABAP was made to solve complex business problems and work closely together with database tables. The way one can use databases in ABAP is with the OpenSQL dialect. This dialect was developed by SAP especially to be used in ABAP, because an SAP system can use a variety of different databases which all have their own dialect supporting different features. OpenSQL statements are _translated_ by an SQL Parser which creates, what SAP calls, Native SQL statements that are specific to the database that is used.
 
 To actualize an ABAP program, one needs a way to input the code. There are two mayor ways to do this:
 
@@ -312,13 +311,11 @@ As visible in figure @fig:adt, the main way to interact with the connected ABAP 
 
 In figure @fig:pe, one can see an example of how packages can be used to organize programs together with other elements they depend on.
 
-Other than the interface, and how the developer starts the process of creating an ABAP program, there is not much of difference in using the SAP GUI and ADT.
-Trivially, the code is the exact same with both tools, and the three steps discussed above are still needed to execute a program. One quality of life improvement is that the code checking is done automatically while you type. This means that you know effectively instantly if you have made a mistake, for example in a `WHERE` clause in an OpenSQL statement. Subsequently, the developer must only activate and execute the program, which can be done by pressing the corresponding buttons in a toolbar similiar to the one found in the SAP GUI, or by using shortcuts.
+Other than the interface, and how the developer starts the process of creating an ABAP program, there is not much of difference in using the SAP GUI and ADT. Trivially, the code is the exact same with both tools, and the three steps discussed above are still needed to execute a program. One quality of life improvement is that the code checking is done automatically while you type. This means that you know effectively instantly if you have made a mistake, for example in a `WHERE` clause in an OpenSQL statement. Subsequently, the developer must only activate and execute the program, which can be done by pressing the corresponding buttons in a toolbar similiar to the one found in the SAP GUI, or by using shortcuts.
 
 There is no dramatic difference in the development process between the two discussed tools. Choosing one or the other is mostly a matter of preference, and what your specific tasks entails. If, for example, you need to create a lot of other elements with your program, and maybe even fill out database tables, it makes sense to use the SAP GUI to limit your context changes when working. If, on the other hand, you mostly write code and are well accustomed to Eclipse or similiar IDEs, it makes sense to use ADT. From talking to colleagues throughout my phase, many where of the opinion that the programming workflow, and programming specific tooling are better in ADT.
 
 Other more specific parts of the SAP system will be discussed where necessary in the following sections.
-
 
 ## Bruteforce Table Finder
 
@@ -332,8 +329,7 @@ Figure @fig:input shows the input screen for the report. Here one can see anothe
 
 ![Screenshot of output table for search terms `CHECK` and `CASE`](images/output.png){ #fig:output width=65% }
 
-In figure @fig:output, one can see the output table that is filled by the report. This exact table is the result from using the search terms `CHECK` and `CASE`, which one can see in the headline of the output screen. The table is composed of four columns, the tabname field contains the name of the table/structure, and three boolean columns that indicate whether the table/structure contains at least on of the search terms in the name, description, or columns.
-As this result table uses AVL (ABAP List Viewer), the user has the ability to sort or filter the table through the SAP GUI, and even export it directly to an Excel file for further work.
+In figure @fig:output, one can see the output table that is filled by the report. This exact table is the result from using the search terms `CHECK` and `CASE`, which one can see in the headline of the output screen. The table is composed of four columns, the tabname field contains the name of the table/structure, and three boolean columns that indicate whether the table/structure contains at least on of the search terms in the name, description, or columns. As this result table uses AVL (ABAP List Viewer), the user has the ability to sort or filter the table through the SAP GUI, and even export it directly to an Excel file for further work.
 
 One problem that has arisen, is that there is no straightforward way to set the header of the three boolean columns. As visible in the code snippet below, the type of the `in*` columns are `abap_bool`, which is a date element supplied with SAP.
 
@@ -344,7 +340,6 @@ Solving this problem was trivial, as it is a common operation to create data ele
 ### Results
 
 As stated in the assigment, it is important to have a tool that can help a developer to find needed tables in a new system. This feature is well achieved by my report. Assuredly, there are more features that could be added to this report, that vary in usefulness. For example, letting the user decide where exactly the report looks for the search terms, or finding more useful places to find the information, increasing the search space. However, these features would mostly add to the quality of life when using the report, or increase the functionality slightly. No specific statement can be made to the real-world usefullness of this report, since the migration has only slowly started yet, and there is no usage feedback available to me, at the time of writing.
-
 
 ## Toolbox migration
 

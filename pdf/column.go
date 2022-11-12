@@ -17,10 +17,13 @@ type Column struct {
 func NewColumn(width, maxHeight, x, y float64) *Column {
 	c := Column{Width: width, MaxHeight: maxHeight, Pos: [2]float64{x, y}, StreamObject: spec.NewStreamObject(), bottom: y}
 
-	if globals.DBG {
-		r := spec.Rect{H: c.MaxHeight}
-		r.Process(c.Width)
-		r.SetPos(c.Pos[0], c.Pos[1])
+	if globals.Cfg.Debug {
+		r := spec.GraphicRect{
+			Pos:   [2]float64{c.Pos[0], c.Pos[1]},
+			W:     c.Width,
+			H:     c.MaxHeight,
+			Color: [3]float64{0, 0, 0},
+		}
 		var rA spec.Addable = &r
 		c.Add(&rA)
 	}

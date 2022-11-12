@@ -40,8 +40,7 @@ func (h *Heading) Numbering() string {
 }
 
 func (h *Heading) SetPos(x float64, y float64) {
-	//h.Text.SetPos(x+spec.MmToPt(0+1.5*float64(h.Level)), y-h.Height()/4)
-	h.Text.SetPos(x+spec.MmToPt(0+1.5*float64(h.Level)), y+h.Height()/4)
+	h.Text.SetPos(x, y+h.Height()/4)
 }
 
 func (h *Heading) Bytes() []byte {
@@ -50,3 +49,7 @@ func (h *Heading) Bytes() []byte {
 	}
 	return h.Text.Bytes()
 }
+
+//func (h *Heading) Process(width float64) {
+//	h.Text.Process(width * .9)
+//}

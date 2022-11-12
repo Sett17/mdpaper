@@ -23,7 +23,7 @@ func ConvertHeading(h *ast.Heading) *spec.Addable {
 		Text: spec.Text{
 			FontSize:   fs,
 			LineHeight: globals.Cfg.LineHeight * 1.5,
-			SingleLine: true,
+			Offset:     globals.MmToPt(0 + 1.5*float64(h.Level)),
 		},
 		Level: h.Level,
 	}
@@ -56,6 +56,7 @@ func ConvertParagraph(p *ast.Paragraph) *spec.Addable {
 		case ast.KindEmphasis:
 			seg := ConvertEmphasis(n.(*ast.Emphasis))
 			para.Add(&seg)
+
 		default:
 			continue
 			//case ast.KindImage:
@@ -110,4 +111,32 @@ func ConvertEmphasis(span *ast.Emphasis) spec.Segment {
 		t.Font = &spec.TimesBold
 	}
 	return t
+}
+
+func ConvertList(list *ast.List) *spec.Addable {
+	para := List{
+		Text: spec.Text{
+			FontSize:   globals.Cfg.FontSize,
+			LineHeight: globals.Cfg.LineHeight * 1.5,
+			Offset:     float64(globals.Cfg.FontSize),
+		},
+	}
+	for n := list.FirstChild(); n != nil; n = n.NextSibling() {
+		// do not support nested lists for now
+		switch n.Kind() {
+		case ast.KindListItem:
+			seg := ConvertListItem(n.(*ast.ListItem))
+			para.Add(&seg)
+		}
+	}
+	var a spec.Addable = &para
+	return &a
+}
+
+func ConvertListItem(item *ast.ListItem) spec.Segment {
+	seg := spec.Segment{
+		Content: "- " + string(item.Text(globals.File)),
+		Font:    &spec.TimesRegular,
+	}
+	return seg
 }

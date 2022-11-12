@@ -1,6 +1,6 @@
 # mdpaper
 
-Highly opinionated markdown to pdf 1.5 converter aimed at writing *scientific* papers, e.g. in University.
+Blazingly fast highly opinionated markdown to pdf 1.5 converter aimed at writing scientific papers, e.g. in University.
 
 ## Getting started
 
@@ -12,7 +12,7 @@ Either download the latest release from the releases page or install with go:
 go install github.com/sett17/mdpaper
 ```
 
-## Supported elements
+## Supported features
 
 - [x] Headings
   - 1-6 `#`
@@ -46,6 +46,22 @@ mdpaper my_paper.md
 ```
 
 ### Options
+
+Options regarding the generation of the PDF can be set in the YAML frontmatter of the markdown file.
+For example
+```yaml
+---
+title: "My paper"
+author:
+  - "John Doe"
+margin: 10.0
+dbg: true
+---
+
+# My paper
+
+the rest of the paper...
+```
 
 | Option        |                            Description                            | Default     |
 |---------------|:-----------------------------------------------------------------:|:------------|

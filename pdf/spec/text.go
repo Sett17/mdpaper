@@ -121,6 +121,7 @@ func (p *Text) Height() float64 {
 
 func (p *Text) Process(maxWidth float64) {
 	p.Processed = make([]TextLine, 0)
+
 	//if len(p.Segments) == 1 {
 	//	if p.Segments[0].Font.WordWidth(p.Segments[0].Content, p.FontSize) <= maxWidth {
 	//		p.SingleLine = true
@@ -168,7 +169,9 @@ func (p *Text) Process(maxWidth float64) {
 				l.Add(w+suffix, s.Font)
 				j++
 			} else {
-				l.Words[len(l.Words)-1] = strings.TrimRight(l.Words[len(l.Words)-1], " ")
+				if l.Width != 0 {
+					l.Words[len(l.Words)-1] = strings.TrimRight(l.Words[len(l.Words)-1], " ")
+				}
 				l.CalculateSpacing(maxWidth)
 				p.Processed = append(p.Processed, l)
 				l = TextLine{WordSpacing: 1.0}

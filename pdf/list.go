@@ -9,7 +9,12 @@ type List struct {
 	spec.Text
 }
 
+//func (p *List) Split(percent float64) (spec.Addable, spec.Addable) {
+//
+//}
+
 func (p *List) Process(maxWidth float64) {
+	p.Processed = make([]spec.TextLine, 0)
 	maxWidth -= p.Offset
 	l := spec.TextLine{WordSpacing: 1.0}
 	for _, s := range p.Segments {

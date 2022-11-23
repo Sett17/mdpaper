@@ -16,6 +16,7 @@ type List struct {
 func (p *List) Process(maxWidth float64) {
 	p.Processed = make([]spec.TextLine, 0)
 	maxWidth -= p.Offset
+	p.Width = maxWidth
 	l := spec.TextLine{WordSpacing: 1.0}
 	for _, s := range p.Segments {
 		if len(s.Content) == 0 {

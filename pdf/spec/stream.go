@@ -2,8 +2,8 @@ package spec
 
 import (
 	"bytes"
-	"compress/flate"
 	"fmt"
+	"io"
 )
 
 type Stream struct {
@@ -27,19 +27,20 @@ func (s *Stream) Write(b []byte) {
 }
 
 func (s *Stream) Deflate() {
-	var b bytes.Buffer
-	fl, _ := flate.NewWriter(&b, flate.NoCompression)
-	//fl := zlib.NewWriter(&b)
-	fl.Write(s.RawData.Bytes())
-	fl.Close()
-	s.RawData = b
+	r, err := ascii85Decode.Encode(ascii85Decode{}, &s.RawData)
+	//r, err := flate.Encode(flate{}, &s.RawData)
+	if err != nil {
+		panic(err)
+	}
+	b, _ := io.ReadAll(r)
+	s.RawData = *bytes.NewBuffer(b)
 }
 
 func (s *Stream) Bytes() []byte {
 	buf := bytes.Buffer{}
 	buf.WriteString("stream\n")
 	buf.Write(s.RawData.Bytes())
-	buf.WriteString("\nendstream\n")
+	buf.WriteString("endstream\n")
 	return buf.Bytes()
 }
 
@@ -72,10 +73,12 @@ func (s *StreamObject) Bytes() []byte {
 	}
 	if s.Deflate {
 		stream.Deflate()
-		s.Dictionary.Set("Filter", "FlateDecode")
+		//s.Dictionary.Set("Filter", "FlateDecode")
+		s.Dictionary.Set("Filter", "ASCII85Decode")
 		s.Dictionary.Set("Length", stream.Len())
 	} else {
-		s.Dictionary.Set("Size", stream.Len())
+		//s.Dictionary.Set("Length", stream.Len())
+		s.Dictionary.Set("Length", stream.Len()-1)
 	}
 	buf.Write(s.Dictionary.Bytes())
 	buf.Write(stream.Bytes())

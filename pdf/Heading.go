@@ -49,7 +49,3 @@ func (h *Heading) Bytes() []byte {
 	}
 	return h.Text.Bytes()
 }
-
-//func (h *Heading) Process(width float64) {
-//	h.Text.Process(width * .9)
-//}

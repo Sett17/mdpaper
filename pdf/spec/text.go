@@ -72,7 +72,7 @@ func (p *Text) String() string {
 	return str.String()
 }
 
-func (p *Text) Split(percent float64) (Addable, Addable) {
+func (p *Text) SplitDelegate(percent float64) (Addable, Addable) {
 	procCutoff := int(math.Floor(float64(len(p.Processed)) * percent))
 	cutoffText := strings.Join(p.Processed[procCutoff].Words, "")
 	var segsAfter []*Segment
@@ -81,8 +81,8 @@ func (p *Text) Split(percent float64) (Addable, Addable) {
 		if strings.Contains(segment.Content, cutoffText) {
 			// Split the segment
 			split := strings.Split(segment.Content, cutoffText)
-			split[1] = strings.TrimLeft(split[1], " ")
-			p.Segments[i].Content = split[0] + cutoffText
+			split[1] = cutoffText + split[1]
+			p.Segments[i].Content = split[0]
 			segsAfter = p.Segments[i+1:]
 			p.Segments = p.Segments[:i+1]
 			leftoverSegs = append(leftoverSegs, &Segment{Content: split[1], Font: segment.Font})
@@ -226,14 +226,18 @@ func (p *Text) Bytes() []byte {
 		}
 	}
 
+	buf.WriteString("ET\n")
 	if globals.Cfg.Debug {
-		buf.WriteString("ET\n")
 		rect := GraphicRect{
 			Pos:   [2]float64{p.Pos[0] + p.Offset, p.Pos[1]},
 			W:     p.Width,
 			H:     p.Height(),
 			Color: [3]float64{0.5, 0.5, 0.0},
 		}
+		if rect.W == 0 {
+			fmt.Println("dikka")
+		}
+		buf.WriteString("\n")
 		buf.Write(rect.Bytes())
 	}
 	return buf.Bytes()

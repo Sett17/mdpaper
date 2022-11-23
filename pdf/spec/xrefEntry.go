@@ -22,7 +22,7 @@ func objZeroXRef() xRefEntry {
 func (x xRefEntry) Bytes() []byte {
 	buf := bytes.Buffer{}
 
-	buf.WriteString(fmt.Sprintf("%010d %05d %c\n", x.Offset, x.Generation, x.Kind))
+	buf.WriteString(fmt.Sprintf("%010d %05d %c \n", x.Offset, x.Generation, x.Kind))
 
 	return buf.Bytes()
 }

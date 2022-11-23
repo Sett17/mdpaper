@@ -4,7 +4,7 @@ startNumber: 1
 margin: 15
 columns: 2
 lineHeight: 1.2
-dbg: true
+dbg: false
 ---
 
 # Practical Phase at scVenus aka my third phase which was the best so far i guess
@@ -92,8 +92,7 @@ I will cover more specific features Docker and docker compose offer, where neede
 
 ### MTA
 
-Generally, MTA is an abbreviation for **M**essage **T**ransfer **A**gent, but for our use case the **M** stands for **
-M**ail. The name is reasonably self-explanatory, this software can either **t**ransfer emails to another MTA or to an MDA, **M**ail **D**elivery **A**gent. Or it can reject or block the email for a number of reasons.
+Generally, MTA is an abbreviation for **M**essage **T**ransfer **A**gent, but for our use case the **M** stands for **M**ail. The name is reasonably self-explanatory, this software can either **t**ransfer emails to another MTA or to an MDA, **M**ail **D**elivery **A**gent. Or it can reject or block the email for a number of reasons.
 
 The process of rejecting an email is the important part to this project. An email can be rejected for a variety of reasons, for example by a connected spam filtering system, as described in the next section. When an email is rejected, it is not forwared to the next MTA/MDA, but a notification of the rejection is sent back to the sender. The sender can then decide what to do next. In most cases the sender is also an MTA, and it puts the email back in its queue, so it can be sent again when the queue is flushed.
 
@@ -193,8 +192,6 @@ Furthermore, we do not set the environment variables directly inside the compose
 We also use this file in other services, such as MariaDB. Which is an industry standard small-mid scale SQL database that is used by PeekabooAV. Both PeekabooAV and MariaDB are configured with environment variables, and some variables, for example the database password, need to be the same in both services. Due to this it is logical to put these settings in a singular file.
 
 The service definition for MariaDB does not include any new components, as the only important parts are the env_file, which also points to the compose.env file. The other important bit is another healthcheck, to know when MariaDB is fully running.
-
-\fill
 
 #### Behavioural Analysis - Cortex
 

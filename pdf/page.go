@@ -2,7 +2,6 @@ package pdf
 
 import (
 	"fmt"
-	"math"
 	"mdpaper/globals"
 	"mdpaper/pdf/spec"
 )
@@ -46,8 +45,8 @@ func NewEmptyPage(displayNumber int, realnumber int) *Page {
 	return p
 }
 
-func (p *Page) AddToPdf(pdf *spec.PDF, res spec.Dictionary, catalog string, pages *spec.Array) {
-	p.Set("Parent", catalog)
+func (p *Page) AddToPdf(pdf *spec.PDF, res spec.Dictionary, pagesRef string, pages *spec.Array) {
+	p.Set("Parent", pagesRef)
 	p.Set("Resources", res)
 	annotsArray := spec.NewArray()
 	for _, a := range p.Annots {
@@ -62,6 +61,7 @@ func (p *Page) AddToPdf(pdf *spec.PDF, res spec.Dictionary, catalog string, page
 	}
 	if p.DisplayNumber > 0 {
 		pN := spec.NewStreamObject()
+		//pN.Deflate = true
 		seg := spec.Segment{
 			Content: fmt.Sprintf("%d", p.DisplayNumber),
 			Font:    &spec.HelveticaRegular,
@@ -72,7 +72,7 @@ func (p *Page) AddToPdf(pdf *spec.PDF, res spec.Dictionary, catalog string, page
 		}
 		para.Add(&seg)
 		para.SetPos(globals.A4Width/2.0-seg.Font.WordWidth(seg.Content, para.FontSize)/2.0, globals.Cfg.Margin/2)
-		para.Process(math.MaxFloat64)
+		para.Process(seg.Font.WordWidth(seg.Content, para.FontSize))
 		var a spec.Addable = &para
 		pN.Add(&a)
 		pdf.AddObject(pN.Pointer())

@@ -117,7 +117,7 @@ func ConvertList(list *ast.List) *spec.Addable {
 	para := List{
 		Text: spec.Text{
 			FontSize:   globals.Cfg.FontSize,
-			LineHeight: globals.Cfg.LineHeight * 1.5,
+			LineHeight: globals.Cfg.LineHeight * 1.4,
 			Offset:     float64(globals.Cfg.FontSize),
 		},
 	}

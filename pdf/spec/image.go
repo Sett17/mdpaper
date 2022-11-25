@@ -2,7 +2,6 @@ package spec
 
 import (
 	"bytes"
-	"fmt"
 	"image"
 	_ "image/jpeg"
 	_ "image/png"
@@ -48,33 +47,24 @@ func NewImage(path string) Image {
 }
 
 type ImageObject struct {
-	id   int
+	GenericObject
 	Name string
 	Image
 }
 
 func NewImageObject() ImageObject {
 	LastId++
-	return ImageObject{
-		id: LastId,
-	}
+	return ImageObject{GenericObject: GenericObject{id: LastId}}
 }
 
 func (i *ImageObject) Bytes() []byte {
 	buf := bytes.Buffer{}
-	buf.WriteString(fmt.Sprintf("%d 0 obj\n", i.id))
+	beg, end := i.ByteParts()
+	buf.Write(beg)
 	buf.Write(i.Dictionary.Bytes())
 	buf.Write(i.Stream.Bytes())
-	buf.WriteString("endobj\n")
+	buf.Write(end)
 	return buf.Bytes()
-}
-
-func (i *ImageObject) ID() int {
-	return i.id
-}
-
-func (i *ImageObject) Reference() string {
-	return fmt.Sprintf("%d 0 R", i.id)
 }
 
 func (i *ImageObject) Pointer() *Object {

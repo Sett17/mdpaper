@@ -38,7 +38,7 @@ func NewPage(paper *Paper, displayNumber int, realNumber int) *Page {
 
 func NewEmptyPage(displayNumber int, realnumber int) *Page {
 	p := &Page{DisplayNumber: displayNumber, RealNumber: realnumber, DictionaryObject: spec.NewDictObject()}
-	p.Set("Type", "Page")
+	p.Set("Type", "/Page")
 	mediaBox := spec.NewArray()
 	mediaBox.Add(0, 0, globals.A4Width, globals.A4Height)
 	p.Set("MediaBox", string(mediaBox.Bytes()))

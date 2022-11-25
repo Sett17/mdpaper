@@ -2,7 +2,6 @@ package spec
 
 import (
 	"bytes"
-	"fmt"
 	"io"
 )
 
@@ -45,7 +44,7 @@ func (s *Stream) Bytes() []byte {
 }
 
 type StreamObject struct {
-	id      int
+	GenericObject
 	Deflate bool
 	Content []*Addable
 	Dictionary
@@ -60,13 +59,10 @@ func (s *StreamObject) Pointer() *Object {
 	return &z
 }
 
-func (s *StreamObject) ID() int {
-	return s.id
-}
-
 func (s *StreamObject) Bytes() []byte {
 	buf := bytes.Buffer{}
-	buf.WriteString(fmt.Sprintf("%d 0 obj\n", s.id))
+	beg, end := s.ByteParts()
+	buf.Write(beg)
 	stream := Stream{}
 	for _, c := range s.Content {
 		stream.Write((*c).Bytes())
@@ -82,15 +78,11 @@ func (s *StreamObject) Bytes() []byte {
 	}
 	buf.Write(s.Dictionary.Bytes())
 	buf.Write(stream.Bytes())
-	buf.WriteString("endobj\n")
+	buf.Write(end)
 	return buf.Bytes()
-}
-
-func (s *StreamObject) Reference() string {
-	return fmt.Sprintf("%d 0 R", s.id)
 }
 
 func NewStreamObject() StreamObject {
 	LastId++
-	return StreamObject{id: LastId}
+	return StreamObject{GenericObject: GenericObject{id: LastId}}
 }

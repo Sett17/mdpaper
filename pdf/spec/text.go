@@ -214,6 +214,7 @@ func (p *Text) Bytes() []byte {
 					lineBuffer.Reset()
 				}
 				buf.WriteString(fmt.Sprintf("/%s %d Tf\n", l.Fonts[j].Name, p.FontSize))
+				//buf.WriteString(fmt.Sprintf("/%s %d Tf\n", "Times-Roman", p.FontSize))
 				currFont = l.Fonts[j]
 			}
 			lineBuffer.WriteString(l.Words[j])

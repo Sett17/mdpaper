@@ -44,34 +44,22 @@ func (d *Dictionary) Bytes() []byte {
 	for _, key := range resKeys {
 		buf.WriteString(fmt.Sprintf("\n/%s %v", key, d.M[key]))
 	}
-	buf.WriteString(">>\n")
+	buf.WriteString("\n>>\n")
 	return buf.Bytes()
 }
 
 type DictionaryObject struct {
-	id int
+	GenericObject
 	Dictionary
 }
 
-func (d *DictionaryObject) ID() int {
-	return d.id
-}
-
 func (d *DictionaryObject) Bytes() []byte {
-	buf := bytes.Buffer{}
-	buf.WriteString(fmt.Sprintf("%d 0 obj\n", d.id))
-	buf.Write(d.Dictionary.Bytes())
-	buf.WriteString("endobj\n")
-	return buf.Bytes()
-}
-
-func (d *DictionaryObject) Reference() string {
-	return fmt.Sprintf("%d 0 R", d.id)
+	return d.GenericObject.Bytes(&d.Dictionary)
 }
 
 func NewDictObject() DictionaryObject {
 	LastId++
-	return DictionaryObject{id: LastId}
+	return DictionaryObject{GenericObject{id: LastId}, NewDict()}
 }
 
 func (d *DictionaryObject) Pointer() *Object {

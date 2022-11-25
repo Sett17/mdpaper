@@ -35,32 +35,20 @@ func (a *Array) Bytes() []byte {
 }
 
 type ArrayObject struct {
-	id int
+	GenericObject
 	Array
 }
 
 func NewArrayObject() ArrayObject {
 	LastId++
-	return ArrayObject{id: LastId}
-}
-
-func (a *ArrayObject) Pointer() *Object {
-	var z Object = a
-	return &z
-}
-
-func (a *ArrayObject) ID() int {
-	return a.id
+	return ArrayObject{GenericObject{id: LastId}, NewArray()}
 }
 
 func (a *ArrayObject) Bytes() []byte {
-	buf := bytes.Buffer{}
-	buf.WriteString(fmt.Sprintf("%d 0 obj\n", a.id))
-	buf.Write(a.Array.Bytes())
-	buf.WriteString("\nendobj\n")
-	return buf.Bytes()
+	return a.GenericObject.Bytes(&a.Array)
 }
 
-func (a *ArrayObject) Reference() string {
-	return fmt.Sprintf("%d 0 R", a.id)
+func (a *ArrayObject) Pointer() *Object {
+	var o Object = a
+	return &o
 }

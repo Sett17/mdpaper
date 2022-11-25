@@ -71,7 +71,7 @@ func FromMap(m map[string]interface{}) Config {
 			}
 		case "title":
 			c.Title = v.(string)
-		case "authors":
+		case "authors", "author":
 			c.Authors = []string{}
 			switch v.(type) {
 			case []string:

@@ -9,6 +9,7 @@ import (
 	"mdpaper/globals"
 	"mdpaper/pdf"
 	"os"
+	"strings"
 	"time"
 )
 
@@ -34,8 +35,10 @@ func main() {
 	fmt.Printf("Parsed in %v\n", time.Since(start))
 	frontmatter := ast.OwnerDocument().Meta()
 	globals.Cfg = globals.FromMap(frontmatter)
+	fmt.Printf("%#v\n", frontmatter)
 	pp := pdf.FromAst(ast)
-	outp, err := os.Create(globals.Cfg.Title + ".pdf")
+	outName := strings.ReplaceAll(globals.Cfg.Title, " ", "_") + ".pdf"
+	outp, err := os.Create(outName)
 	if err != nil {
 		panic(err)
 	}
@@ -43,7 +46,7 @@ func main() {
 	fmt.Printf("Done in %v\n", time.Since(start))
 	fi, err := outp.Stat()
 	if err == nil {
-		fmt.Printf("File '%s' size: %s\n", globals.Cfg.Title+".pdf", humanize.Bytes(uint64(fi.Size())))
+		fmt.Printf("File '%s' size: %s\n", outName, humanize.Bytes(uint64(fi.Size())))
 	}
 	dbgOut, err := os.Create("debug.txt")
 	if err != nil {

@@ -30,7 +30,11 @@ func (g *GenericObject) Bytes(b Bytable) []byte {
 	buf := bytes.Buffer{}
 	beg, end := g.ByteParts()
 	buf.Write(beg)
-	buf.Write(b.Bytes())
+	byt := b.Bytes()
+	buf.Write(byt)
+	if byt[len(byt)-1] != '\n' {
+		buf.WriteString("\n")
+	}
 	buf.Write(end)
 	return buf.Bytes()
 }

@@ -5,6 +5,8 @@ margin: 15
 columns: 2
 lineHeight: 1.2
 dbg: false
+author: 
+ - Sett
 ---
 
 # Practical Phase at scVenus aka my third phase which was the best so far i guess

@@ -44,7 +44,7 @@ func (d *Dictionary) Bytes() []byte {
 	for _, key := range resKeys {
 		buf.WriteString(fmt.Sprintf("\n/%s %v", key, d.M[key]))
 	}
-	buf.WriteString("\n>>\n")
+	buf.WriteString("\n>>")
 	return buf.Bytes()
 }
 

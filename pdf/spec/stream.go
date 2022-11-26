@@ -46,12 +46,21 @@ func (s *Stream) Bytes() []byte {
 type StreamObject struct {
 	GenericObject
 	Deflate bool
-	Content []*Addable
+	Content []*Bytable
 	Dictionary
 }
 
 func (s *StreamObject) Add(add *Addable) {
+	var b Bytable = *add
+	s.Content = append(s.Content, &b)
+}
+func (s *StreamObject) AddBytable(add *Bytable) {
 	s.Content = append(s.Content, add)
+}
+
+func (s *StreamObject) AddBytes(buf []byte) {
+	var b Bytable = &GenericBytable{dat: &buf}
+	s.Content = append(s.Content, &b)
 }
 
 func (s *StreamObject) Pointer() *Object {

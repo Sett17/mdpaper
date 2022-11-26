@@ -24,6 +24,8 @@ func NewColumn(width, maxHeight, x, y float64) *Column {
 			W:     c.Width,
 			H:     c.MaxHeight,
 			Color: [3]float64{0, 0, 0},
+			//Filled: true,
+			Rounded: true,
 		}
 		var rA spec.Addable = &r
 		c.Add(&rA)

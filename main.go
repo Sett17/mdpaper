@@ -42,7 +42,7 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	pp.WriteTo(outp)
+	pp.WriteFile(outp)
 	fmt.Printf("Done in %v\n", time.Since(start))
 	fi, err := outp.Stat()
 	if err == nil {
@@ -52,8 +52,11 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	pp.WriteTo(dbgOut)
-
+	pp.WriteDebug(dbgOut)
+	fi, err = dbgOut.Stat()
+	if err == nil {
+		fmt.Printf("Debug written without stream size: %s\n", humanize.Bytes(uint64(fi.Size())))
+	}
 	//doc := parser.FromFile(inp)
 	//global.Log("Parsed markdown file")
 	//

@@ -26,25 +26,21 @@ func FromAst(md ast.Node) *spec.PDF {
 	pdf.Info = info.Reference()
 
 	//region add fonts to pdf
-	timesRef, timesName := spec.TimesRegular.AddToPDF(&pdf)
-	boldRef, boldName := spec.TimesBold.AddToPDF(&pdf)
-	italicRef, italicName := spec.TimesItalic.AddToPDF(&pdf)
-	boldItalicRef, boldItalicName := spec.TimesBoldItalic.AddToPDF(&pdf)
-	courierRef, courierName := spec.CourierMono.AddToPDF(&pdf)
-	helveticaRef, helveticaName := spec.HelveticaRegular.AddToPDF(&pdf)
-	helveticaBoldRef, helveticaBoldName := spec.HelveticaBold.AddToPDF(&pdf)
-	timesMonoRef, timesMonoName := spec.TimesMono.AddToPDF(&pdf)
+	tinoRegRef, tinoRegName := spec.TinosRegular.AddToPDF(&pdf)
+	tinoBoldRef, tinoBoldName := spec.TinosBold.AddToPDF(&pdf)
+	tinoItalicRef, tinoItalicName := spec.TinosItalic.AddToPDF(&pdf)
+	latoRegRef, latoRegName := spec.LatoRegular.AddToPDF(&pdf)
+	latoBoldRef, latoBoldName := spec.LatoBold.AddToPDF(&pdf)
+	scpRef, scpName := spec.SourceCodeProRegular.AddToPDF(&pdf)
 
 	pageResources := spec.NewDict()
 	fonts := spec.NewDict()
-	fonts.Set(timesName, timesRef)
-	fonts.Set(boldName, boldRef)
-	fonts.Set(italicName, italicRef)
-	fonts.Set(boldItalicName, boldItalicRef)
-	fonts.Set(courierName, courierRef)
-	fonts.Set(helveticaName, helveticaRef)
-	fonts.Set(helveticaBoldName, helveticaBoldRef)
-	fonts.Set(timesMonoName, timesMonoRef)
+	fonts.Set(tinoRegName, tinoRegRef)
+	fonts.Set(tinoBoldName, tinoBoldRef)
+	fonts.Set(tinoItalicName, tinoItalicRef)
+	fonts.Set(latoRegName, latoRegRef)
+	fonts.Set(latoBoldName, latoBoldRef)
+	fonts.Set(scpName, scpRef)
 	pageResources.Set("Font", fonts)
 	//endregion
 
@@ -91,7 +87,7 @@ func FromAst(md ast.Node) *spec.PDF {
 		tocPage = NewEmptyPage(0, realPageNumber)
 	}
 	for !paper.Finished() {
-		//displayPageNumber++
+		displayPageNumber++
 		realPageNumber++
 		page := NewPage(&paper, displayPageNumber, realPageNumber)
 		page.AddToPdf(&pdf, pageResources, pages.Reference(), &pagesArray)

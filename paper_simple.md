@@ -5,11 +5,12 @@ margin: 15
 columns: 2
 lineHeight: 1.2
 dbg: false
+toc: true
 author: 
  - Sett
 ---
 
-# Practical Phase at scVenus aka my third phase which was the best so far i guess
+# Practical Phase at scVenus
 
 ## Introduction
 
@@ -17,7 +18,7 @@ At Atos, we have the possibility to choose the department in which we want to pe
 
 The overarching project I worked in, is called PeekabooAV. This is an Anti-Virus software, which can receive a file, for example from an email client, and pass it through its own rule engine, which intern may use other programs, such as behavioral analysis, to determine the risk of the file.
 
-### Motivation, which is a funny word because i do not know how i got mine
+### Motivation
 
 PeekabooAV is written to have a high degree of configurability and extendability. A major problem with this approach is that it is not trivial for a user to try out PeekabooAV in an efficient manner.
 

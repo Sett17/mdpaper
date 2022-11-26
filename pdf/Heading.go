@@ -40,7 +40,11 @@ func (h *Heading) Numbering() string {
 }
 
 func (h *Heading) SetPos(x float64, y float64) {
-	h.Text.SetPos(x, y+h.Height()/4)
+	h.Text.SetPos(x, y-h.Height()/2) //maybe 4 to center heading
+}
+
+func (h *Heading) Height() float64 {
+	return h.Text.Height() + h.Text.LineHeight*float64(h.Text.FontSize)
 }
 
 func (h *Heading) Bytes() []byte {

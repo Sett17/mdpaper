@@ -13,7 +13,7 @@ func ConvertHeading(h *ast.Heading) *spec.Addable {
 	buf.Write(h.Text(globals.File))
 	seg := spec.Segment{
 		Content: buf.String(),
-		Font:    &spec.HelveticaBold,
+		Font:    spec.LatoBold,
 	}
 	fs := globals.Cfg.FontSize
 	if h.Level <= 2 {
@@ -21,8 +21,9 @@ func ConvertHeading(h *ast.Heading) *spec.Addable {
 	}
 	para := Heading{
 		Text: spec.Text{
-			FontSize:   fs,
-			LineHeight: globals.Cfg.LineHeight * 1.5,
+			FontSize: fs,
+			//LineHeight: globals.Cfg.LineHeight * 1.5,
+			LineHeight: 1.0,
 			Offset:     globals.MmToPt(0 + 1.5*float64(h.Level)),
 		},
 		Level: h.Level,
@@ -34,8 +35,7 @@ func ConvertHeading(h *ast.Heading) *spec.Addable {
 
 func ConvertParagraph(p *ast.Paragraph) *spec.Addable {
 	if string(p.Text(globals.File)) == "\\fill" {
-		var a spec.Addable
-		a = &Filler{}
+		var a spec.Addable = &Filler{}
 		return &a
 	}
 	para := Paragraph{
@@ -68,15 +68,14 @@ func ConvertParagraph(p *ast.Paragraph) *spec.Addable {
 		//	first = false
 		//}
 	}
-	var a spec.Addable
-	a = &para
+	var a spec.Addable = &para
 	return &a
 }
 
 func ConvertText(text *ast.Text) spec.Segment {
 	return spec.Segment{
 		Content: string(text.Text(globals.File)),
-		Font:    &spec.TimesRegular,
+		Font:    spec.TinosRegular,
 	}
 }
 
@@ -89,7 +88,7 @@ func ConvertCodeSpan(span *ast.CodeSpan) spec.Segment {
 	}
 	return spec.Segment{
 		Content: buf.String(),
-		Font:    &spec.CourierMono,
+		Font:    spec.SourceCodeProRegular,
 	}
 }
 
@@ -106,9 +105,9 @@ func ConvertEmphasis(span *ast.Emphasis) spec.Segment {
 	}
 	switch span.Level {
 	case 1:
-		t.Font = &spec.TimesItalic
+		t.Font = spec.TinosItalic
 	case 2:
-		t.Font = &spec.TimesBold
+		t.Font = spec.TinosBold
 	}
 	return t
 }
@@ -136,7 +135,7 @@ func ConvertList(list *ast.List) *spec.Addable {
 func ConvertListItem(item *ast.ListItem) spec.Segment {
 	seg := spec.Segment{
 		Content: "- " + string(item.Text(globals.File)),
-		Font:    &spec.TimesRegular,
+		Font:    spec.TinosRegular,
 	}
 	return seg
 }

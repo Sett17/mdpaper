@@ -64,7 +64,7 @@ func (p *Page) AddToPdf(pdf *spec.PDF, res spec.Dictionary, pagesRef string, pag
 		//pN.Deflate = true
 		seg := spec.Segment{
 			Content: fmt.Sprintf("%d", p.DisplayNumber),
-			Font:    &spec.HelveticaRegular,
+			Font:    spec.LatoRegular,
 		}
 		para := spec.Text{
 			FontSize:   10,

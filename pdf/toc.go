@@ -13,7 +13,7 @@ func GenerateTOC(tree *ChapterTree) Toc {
 	col := NewColumn(globals.A4Width-3*m, globals.A4Height-m, 1.5*m, globals.A4Height-.5*m)
 	headSeg := spec.Segment{
 		Content: "Table of Contents",
-		Font:    &spec.HelveticaBold,
+		Font:    spec.LatoBold,
 	}
 	head := Heading{
 		Text: spec.Text{
@@ -30,7 +30,7 @@ func GenerateTOC(tree *ChapterTree) Toc {
 	for _, e := range *tree {
 		te := tocEntry{
 			Head:   e.Heading,
-			Font:   &spec.TimesRegular,
+			Font:   spec.LatoRegular,
 			Offset: globals.MmToPt(float64((e.Heading.Level - 1) * 10)),
 		}
 		ret = append(ret, &te)
@@ -54,7 +54,7 @@ func (t Toc) GenerateColumn() *Column {
 	col := NewColumn(globals.A4Width-3*m, globals.A4Height-m, 1.5*m, globals.A4Height-.5*m)
 	headSeg := spec.Segment{
 		Content: "Table of Contents",
-		Font:    &spec.HelveticaBold,
+		Font:    spec.LatoBold,
 	}
 	head := Heading{
 		Text: spec.Text{
@@ -78,7 +78,6 @@ type tocEntry struct {
 	Pos          [2]float64
 	Offset       float64
 	numberOffset float64
-	dots         int
 	Font         *spec.Font
 	processed    string
 	line         spec.GraphicLine
@@ -94,7 +93,7 @@ func (t *tocEntry) Bytes() []byte {
 	buf.WriteString(fmt.Sprintf("/%s %d Tf\n", t.Font.Name, 12))
 	buf.WriteString(fmt.Sprintf("(%s) Tj\n", t.processed))
 	buf.WriteString(fmt.Sprintf("%f %f TD\n", t.numberOffset-t.Offset, 0.0))
-	buf.WriteString(fmt.Sprintf("/%s %d Tf\n", spec.TimesMono.Name, 12))
+	buf.WriteString(fmt.Sprintf("/%s %d Tf\n", t.Font.Name, 12))
 	buf.WriteString(fmt.Sprintf("(%s) Tj\n", fmt.Sprintf("%3d", t.Head.Page-1)))
 
 	buf.WriteString("ET\n")
@@ -132,7 +131,7 @@ func (t *tocEntry) GenerateLink() *spec.DictionaryObject {
 func (t *tocEntry) Process(width float64) {
 	t.processed = fmt.Sprintf("%s %s", t.Head.Numbering(), t.Head.String())
 	wordsEnd := t.Font.WordWidth(strings.TrimSpace(t.processed), 12) + t.Offset
-	t.numberOffset = width - spec.TimesMono.WordWidth(" 999", 12)
+	t.numberOffset = width - t.Font.WordWidth(" 999", 12)
 	t.line = spec.GraphicLine{
 		PosA:   [2]float64{wordsEnd + t.Pos[0] + globals.MmToPt(1), t.Pos[1]},
 		PosB:   [2]float64{t.numberOffset + t.Pos[0] - globals.MmToPt(1), t.Pos[1]},

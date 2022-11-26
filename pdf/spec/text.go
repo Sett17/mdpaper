@@ -236,7 +236,7 @@ func (p *Text) Bytes() []byte {
 			Color: [3]float64{0.5, 0.5, 0.0},
 		}
 		if rect.W == 0 {
-			fmt.Println("dikka")
+			//fmt.Println("dikka")
 		}
 		buf.WriteString("\n")
 		buf.Write(rect.Bytes())

@@ -13,7 +13,7 @@ func ConvertHeading(h *ast.Heading) *spec.Addable {
 	buf.Write(h.Text(globals.File))
 	seg := spec.Segment{
 		Content: buf.String(),
-		Font:    spec.LatoBold,
+		Font:    spec.SansBold,
 	}
 	fs := globals.Cfg.FontSize
 	if h.Level <= 2 {
@@ -75,7 +75,7 @@ func ConvertParagraph(p *ast.Paragraph) *spec.Addable {
 func ConvertText(text *ast.Text) spec.Segment {
 	return spec.Segment{
 		Content: string(text.Text(globals.File)),
-		Font:    spec.TinosRegular,
+		Font:    spec.SerifRegular,
 	}
 }
 
@@ -88,7 +88,7 @@ func ConvertCodeSpan(span *ast.CodeSpan) spec.Segment {
 	}
 	return spec.Segment{
 		Content: buf.String(),
-		Font:    spec.SourceCodeProRegular,
+		Font:    spec.Monospace,
 	}
 }
 
@@ -105,9 +105,9 @@ func ConvertEmphasis(span *ast.Emphasis) spec.Segment {
 	}
 	switch span.Level {
 	case 1:
-		t.Font = spec.TinosItalic
+		t.Font = spec.SerifItalic
 	case 2:
-		t.Font = spec.TinosBold
+		t.Font = spec.SerifBold
 	}
 	return t
 }
@@ -135,7 +135,7 @@ func ConvertList(list *ast.List) *spec.Addable {
 func ConvertListItem(item *ast.ListItem) spec.Segment {
 	seg := spec.Segment{
 		Content: "- " + string(item.Text(globals.File)),
-		Font:    spec.TinosRegular,
+		Font:    spec.SerifRegular,
 	}
 	return seg
 }

@@ -26,12 +26,12 @@ func FromAst(md ast.Node) *spec.PDF {
 	pdf.Info = info.Reference()
 
 	//region add fonts to pdf
-	tinoRegRef, tinoRegName := spec.TinosRegular.AddToPDF(&pdf)
-	tinoBoldRef, tinoBoldName := spec.TinosBold.AddToPDF(&pdf)
-	tinoItalicRef, tinoItalicName := spec.TinosItalic.AddToPDF(&pdf)
-	latoRegRef, latoRegName := spec.LatoRegular.AddToPDF(&pdf)
-	latoBoldRef, latoBoldName := spec.LatoBold.AddToPDF(&pdf)
-	scpRef, scpName := spec.SourceCodeProRegular.AddToPDF(&pdf)
+	tinoRegRef, tinoRegName := spec.SerifRegular.AddToPDF(&pdf)
+	tinoBoldRef, tinoBoldName := spec.SerifBold.AddToPDF(&pdf)
+	tinoItalicRef, tinoItalicName := spec.SerifItalic.AddToPDF(&pdf)
+	latoRegRef, latoRegName := spec.SansRegular.AddToPDF(&pdf)
+	latoBoldRef, latoBoldName := spec.SansBold.AddToPDF(&pdf)
+	scpRef, scpName := spec.Monospace.AddToPDF(&pdf)
 
 	pageResources := spec.NewDict()
 	fonts := spec.NewDict()

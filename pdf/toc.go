@@ -13,7 +13,7 @@ func GenerateTOC(tree *ChapterTree) Toc {
 	col := NewColumn(globals.A4Width-3*m, globals.A4Height-m, 1.5*m, globals.A4Height-.5*m)
 	headSeg := spec.Segment{
 		Content: "Table of Contents",
-		Font:    spec.LatoBold,
+		Font:    spec.SansBold,
 	}
 	head := Heading{
 		Text: spec.Text{
@@ -30,7 +30,7 @@ func GenerateTOC(tree *ChapterTree) Toc {
 	for _, e := range *tree {
 		te := tocEntry{
 			Head:   e.Heading,
-			Font:   spec.LatoRegular,
+			Font:   spec.SansRegular,
 			Offset: globals.MmToPt(float64((e.Heading.Level - 1) * 10)),
 		}
 		ret = append(ret, &te)
@@ -54,7 +54,7 @@ func (t Toc) GenerateColumn() *Column {
 	col := NewColumn(globals.A4Width-3*m, globals.A4Height-m, 1.5*m, globals.A4Height-.5*m)
 	headSeg := spec.Segment{
 		Content: "Table of Contents",
-		Font:    spec.LatoBold,
+		Font:    spec.SansBold,
 	}
 	head := Heading{
 		Text: spec.Text{
@@ -98,13 +98,13 @@ func (t *tocEntry) Bytes() []byte {
 
 	buf.WriteString("ET\n")
 	if globals.Cfg.Debug {
-		rect := spec.GraphicRect{
-			Pos:   [2]float64{t.Pos[0], t.Pos[1]},
-			H:     -t.Height(),
-			W:     t.numberOffset,
-			Color: [3]float64{0.0, 0.5, 0.5},
-		}
-		buf.Write(rect.Bytes())
+		//rect := spec.GraphicRect{
+		//	Pos:   [2]float64{t.Pos[0], t.Pos[1]},
+		//	H:     -t.Height(),
+		//	W:     t.numberOffset,
+		//	Color: [3]float64{0.0, 0.5, 0.5},
+		//}
+		//buf.Write(rect.Bytes())
 	}
 	buf.Write(t.line.Bytes())
 	return buf.Bytes()
@@ -123,7 +123,8 @@ func (t *tocEntry) GenerateLink() *spec.DictionaryObject {
 	d := spec.NewDictObject()
 	d.Set("Type", "/Annot")
 	d.Set("Subtype", "/Link")
-	d.Set("GraphicRect", fmt.Sprintf("[%f %f %f %f]", t.Pos[0], t.Pos[1]+t.Height(), t.numberOffset+t.Pos[0], t.Pos[1]))
+	d.Set("Rect", fmt.Sprintf("[%f %f %f %f]", t.Pos[0], t.Pos[1]+t.Height(), t.numberOffset+t.Pos[0], t.Pos[1]))
+	d.Set("Border", "[0 0 0]")
 	d.Set("Dest", t.Head.Destination())
 	return &d
 }

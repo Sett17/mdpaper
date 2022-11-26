@@ -64,14 +64,14 @@ func (p *Page) AddToPdf(pdf *spec.PDF, res spec.Dictionary, pagesRef string, pag
 		//pN.Deflate = true
 		seg := spec.Segment{
 			Content: fmt.Sprintf("%d", p.DisplayNumber),
-			Font:    spec.LatoRegular,
+			Font:    spec.SansRegular,
 		}
 		para := spec.Text{
 			FontSize:   10,
 			LineHeight: 1,
 		}
 		para.Add(&seg)
-		para.SetPos(globals.A4Width/2.0-seg.Font.WordWidth(seg.Content, para.FontSize)/2.0, globals.Cfg.Margin/2)
+		para.SetPos(globals.A4Width/2.0-seg.Font.WordWidth(seg.Content, para.FontSize)/2.0, globals.Cfg.Margin)
 		para.Process(seg.Font.WordWidth(seg.Content, para.FontSize))
 		var a spec.Addable = &para
 		pN.Add(&a)

@@ -43,7 +43,7 @@ func main() {
 		panic(err)
 	}
 	pp.WriteFile(outp)
-	fmt.Printf("Done in %v\n", time.Since(start))
+	fmt.Printf("\nDone in %v\n", time.Since(start))
 	fi, err := outp.Stat()
 	if err == nil {
 		fmt.Printf("File '%s' size: %s\n", outName, humanize.Bytes(uint64(fi.Size())))

@@ -80,7 +80,7 @@ func (s *StreamObject) Bytes() []byte {
 		s.Dictionary.Set("Length", stream.Len()-1)
 	} else {
 		stream.Deflate()
-		s.Dictionary.Set("Filter", "[/FlateDecode]")
+		s.Dictionary.Set("Filter", "/FlateDecode")
 		s.Dictionary.Set("Length", stream.Len())
 	}
 	buf.Write(s.Dictionary.Bytes())

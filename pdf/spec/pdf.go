@@ -150,8 +150,10 @@ func (p *PDF) WriteDebug(f *os.File) {
 
 	filtered := make([]*Object, 0, len(p.objects))
 	for _, s := range p.objects {
-		if _, ok := (*s).(*StreamObject); ok {
-			continue
+		if so, ok := (*s).(*StreamObject); ok {
+			if so.M["Length1"] != nil { //exclude fonts
+				continue
+			}
 		}
 		filtered = append(filtered, s)
 	}
@@ -184,12 +186,12 @@ func (p *PDF) WriteDebug(f *os.File) {
 	trailerDict := NewDict()
 	trailerDict.Set("Size", LastId+1)
 	trailerDict.Set("Root", p.Root)
-	//trailerDict.Set("Info", p.Info)
+	trailerDict.Set("Info", p.Info)
 	//calculate ID
 	ID := fmt.Sprintf("<%X>", md5.Sum([]byte(fmt.Sprintf("%s%s%d", time.Now(), globals.Cfg.Authors, LastId))))
 	trailerDict.Set("ID", Array{Items: []interface{}{ID, ID}})
 	d.Write(trailerDict.Bytes())
-	d.WriteString("startxref\n")
+	d.WriteString("\nstartxref\n")
 	d.WriteString(fmt.Sprintf("%d\n", xrefOffset))
 	d.WriteString("%%EOF\n")
 }

@@ -229,17 +229,17 @@ func (p *Text) Bytes() []byte {
 
 	buf.WriteString("ET\n")
 	if globals.Cfg.Debug {
-		rect := GraphicRect{
-			Pos:   [2]float64{p.Pos[0] + p.Offset, p.Pos[1]},
-			W:     p.Width,
-			H:     p.Height(),
-			Color: [3]float64{0.5, 0.5, 0.0},
-		}
-		if rect.W == 0 {
-			//fmt.Println("dikka")
-		}
-		buf.WriteString("\n")
-		buf.Write(rect.Bytes())
+		//rect := GraphicRect{
+		//	Pos:   [2]float64{p.Pos[0] + p.Offset, p.Pos[1]},
+		//	W:     p.Width,
+		//	H:     p.Height(),
+		//	Color: [3]float64{0.5, 0.5, 0.0},
+		//}
+		//if rect.W == 0 {
+		//	//fmt.Println("dikka")
+		//}
+		//buf.WriteString("\n")
+		//buf.Write(rect.Bytes())
 	}
 	return buf.Bytes()
 }

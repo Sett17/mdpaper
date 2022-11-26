@@ -52,6 +52,7 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+	globals.Cfg.Debug = true
 	pp.WriteDebug(dbgOut)
 	fi, err = dbgOut.Stat()
 	if err == nil {

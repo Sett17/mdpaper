@@ -3,6 +3,7 @@ package spec
 import (
 	"bytes"
 	"io"
+	"mdpaper/globals"
 )
 
 type Stream struct {
@@ -26,18 +27,18 @@ func (s *Stream) Write(b []byte) {
 }
 
 func (s *Stream) Deflate() {
-	r, err := ascii85Decode.Encode(ascii85Decode{}, &s.RawData)
-	//r, err := flate.Encode(flate{}, &s.RawData)
+	r, err := flate.Encode(flate{}, &s.RawData)
 	if err != nil {
 		panic(err)
 	}
 	b, _ := io.ReadAll(r)
 	s.RawData = *bytes.NewBuffer(b)
+	s.RawData.WriteByte(0x0a)
 }
 
 func (s *Stream) Bytes() []byte {
 	buf := bytes.Buffer{}
-	buf.WriteString("stream\n")
+	buf.WriteString("\nstream\n")
 	buf.Write(s.RawData.Bytes())
 	buf.WriteString("endstream\n")
 	return buf.Bytes()
@@ -45,7 +46,6 @@ func (s *Stream) Bytes() []byte {
 
 type StreamObject struct {
 	GenericObject
-	Deflate bool
 	Content []*Bytable
 	Dictionary
 }
@@ -76,14 +76,12 @@ func (s *StreamObject) Bytes() []byte {
 	for _, c := range s.Content {
 		stream.Write((*c).Bytes())
 	}
-	if s.Deflate {
-		stream.Deflate()
-		//s.Dictionary.Set("Filter", "FlateDecode")
-		s.Dictionary.Set("Filter", "ASCII85Decode")
-		s.Dictionary.Set("Length", stream.Len())
-	} else {
-		//s.Dictionary.Set("Length", stream.Len())
+	if globals.Cfg.Debug {
 		s.Dictionary.Set("Length", stream.Len()-1)
+	} else {
+		stream.Deflate()
+		s.Dictionary.Set("Filter", "[/FlateDecode]")
+		s.Dictionary.Set("Length", stream.Len())
 	}
 	buf.Write(s.Dictionary.Bytes())
 	buf.Write(stream.Bytes())

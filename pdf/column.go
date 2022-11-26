@@ -19,16 +19,16 @@ func NewColumn(width, maxHeight, x, y float64) *Column {
 	//c.Deflate = true
 
 	if globals.Cfg.Debug {
-		r := spec.GraphicRect{
-			Pos:   [2]float64{c.Pos[0], c.Pos[1]},
-			W:     c.Width,
-			H:     c.MaxHeight,
-			Color: [3]float64{0, 0, 0},
-			//Filled: true,
-			Rounded: true,
-		}
-		var rA spec.Addable = &r
-		c.Add(&rA)
+		//r := spec.GraphicRect{
+		//	Pos:   [2]float64{c.Pos[0], c.Pos[1]},
+		//	W:     c.Width,
+		//	H:     c.MaxHeight,
+		//	Color: [3]float64{0, 0, 0},
+		//	//Filled: true,
+		//	Rounded: true,
+		//}
+		//var rA spec.Addable = &r
+		//c.Add(&rA)
 	}
 
 	return &c

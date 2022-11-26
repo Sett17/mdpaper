@@ -9,7 +9,9 @@ require (
 )
 
 require (
+	github.com/beta/freetype v0.0.1 // indirect
 	github.com/sergi/go-diff v1.2.0 // indirect
+	golang.org/x/image v0.1.0 // indirect
 	golang.org/x/xerrors v0.0.0-20220907171357-04be3eba64a2 // indirect
 	gopkg.in/yaml.v2 v2.3.0 // indirect
 	oss.terrastruct.com/diff v1.0.2-0.20221116222035-8bf4dd3ab541 // indirect

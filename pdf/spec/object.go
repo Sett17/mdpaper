@@ -18,6 +18,14 @@ type Bytable interface {
 	Bytes() []byte
 }
 
+type GenericBytable struct {
+	dat *[]byte
+}
+
+func (g *GenericBytable) Bytes() []byte {
+	return *g.dat
+}
+
 type GenericObject struct {
 	id int
 }

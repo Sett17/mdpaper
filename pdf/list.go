@@ -9,6 +9,7 @@ type List struct {
 	spec.Text
 }
 
+//TODO make splittable
 //func (p *List) Split(percent float64) (spec.Addable, spec.Addable) {
 //
 //}

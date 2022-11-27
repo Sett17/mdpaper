@@ -51,7 +51,10 @@ func NewFont(filePath string, flags int) (f *Font) {
 	f = &Font{}
 	fontFileBuf, err := os.ReadFile(filePath)
 	if err != nil {
-		panic(err)
+		fontFileBuf, err = globals.Fonts.ReadFile(filePath) // look in embedded fonts if not found
+		if err != nil {
+			panic(err)
+		}
 	}
 	fontFile, err := truetype.Parse(fontFileBuf)
 	if err != nil {

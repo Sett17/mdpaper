@@ -13,6 +13,8 @@ import (
 	"time"
 )
 
+//TODO custom errors
+
 func main() {
 	file := "paper_simple.md"
 	if len(os.Args) > 1 {
@@ -35,7 +37,6 @@ func main() {
 	fmt.Printf("Parsed in %v\n", time.Since(start))
 	frontmatter := ast.OwnerDocument().Meta()
 	globals.Cfg = globals.FromMap(frontmatter)
-	fmt.Printf("%#v\n", frontmatter)
 	pp := pdf.FromAst(ast)
 	outName := strings.ReplaceAll(globals.Cfg.Title, " ", "_") + ".pdf"
 	outp, err := os.Create(outName)

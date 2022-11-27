@@ -28,6 +28,7 @@ type TextLine struct {
 	Fonts       []*Font
 	WordSpacing float64
 	Width       float64
+	Offset      float64
 }
 
 func (l *TextLine) Add(str string, font *Font) {
@@ -54,12 +55,18 @@ func (l *TextLine) CalculateSpacing(maxWidth float64) {
 	l.WordSpacing = diff / spaces
 }
 
+func (l *TextLine) Center(fullWidth float64) {
+	l.WordSpacing = 0
+	diff := fullWidth - l.Width
+	l.Offset = diff / 2
+}
+
 type Text struct {
 	Segments   []*Segment
 	Pos        [2]float64
 	FontSize   int
 	LineHeight float64
-	Processed  []TextLine
+	Processed  []*TextLine
 	Offset     float64
 	Width      float64
 }
@@ -102,7 +109,7 @@ func (p *Text) SplitDelegate(percent float64) (Addable, Addable) {
 		Segments:   leftoverSegs,
 		FontSize:   p.FontSize,
 		LineHeight: p.LineHeight,
-		Processed:  []TextLine{},
+		Processed:  make([]*TextLine, 0),
 		Offset:     p.Offset,
 	}
 	return a1, a2
@@ -113,40 +120,18 @@ func (p *Text) SetPos(x, y float64) {
 }
 
 func (p *Text) Height() float64 {
-	if len(p.Processed) == 1 {
+	if len(p.Processed) == 1 && p.Processed[0].Offset == 0 {
 		return float64(p.FontSize) * p.LineHeight
 	}
 	return (float64(len(p.Processed)) + .5) * p.LineHeight * float64(p.FontSize)
 }
 
 func (p *Text) Process(maxWidth float64) {
-	p.Processed = make([]TextLine, 0)
+	p.Processed = make([]*TextLine, 0)
 
-	//if len(p.Segments) == 1 {
-	//	if p.Segments[0].Font.WordWidth(p.Segments[0].Content, p.FontSize) <= maxWidth {
-	//		p.SingleLine = true
-	//	}
-	//}
-	//if p.SingleLine {
-	//	l := line{WordSpacing: 1.0}
-	//	for _, s := range p.Segments {
-	//		for i, w := range strings.Split(s.Content, " ") {
-	//			if i != 0 {
-	//				l.Add(" ", s.Font)
-	//			}
-	//			l.Add(w, s.Font)
-	//		}
-	//		p.Processed = append(p.Processed, l)
-	//		l = line{WordSpacing: 1.0}
-	//	}
-	//	return
-	//}
-
-	//for _, s := range p.Segments {
-	//for {
 	maxWidth -= p.Offset
 	p.Width = maxWidth
-	l := TextLine{WordSpacing: 1.0}
+	l := &TextLine{WordSpacing: 1.0}
 	for i := 0; i < len(p.Segments); {
 		s := p.Segments[i]
 		if len(s.Content) == 0 {
@@ -174,7 +159,7 @@ func (p *Text) Process(maxWidth float64) {
 				}
 				l.CalculateSpacing(maxWidth)
 				p.Processed = append(p.Processed, l)
-				l = TextLine{WordSpacing: 1.0}
+				l = &TextLine{WordSpacing: 1.0}
 			}
 		}
 		i++
@@ -183,6 +168,7 @@ func (p *Text) Process(maxWidth float64) {
 		return
 	}
 	l.Words[len(l.Words)-1] = strings.TrimRight(l.Words[len(l.Words)-1], " ")
+	//l.Center(maxWidth)
 	//l.CalculateSpacing(maxWidth)
 	p.Processed = append(p.Processed, l)
 	//}
@@ -206,6 +192,9 @@ func (p *Text) Bytes() []byte {
 	var currFont *Font = nil
 	for i, l := range p.Processed {
 		lineBuffer := strings.Builder{}
+		if l.Offset != 0 {
+			buf.WriteString(fmt.Sprintf("%f 0 Td\n", l.Offset))
+		}
 		buf.WriteString(fmt.Sprintf("%f Tw\n", l.WordSpacing))
 		for j := 0; j < len(l.Words); j++ {
 			if l.Fonts[j] != currFont {
@@ -224,6 +213,9 @@ func (p *Text) Bytes() []byte {
 		}
 		if i != len(p.Processed)-1 {
 			buf.WriteString("T* ")
+		}
+		if l.Offset != 0 {
+			buf.WriteString(fmt.Sprintf("%f 0 Td\n", -l.Offset))
 		}
 	}
 

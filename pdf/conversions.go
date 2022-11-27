@@ -139,11 +139,26 @@ func ConvertListItem(item *ast.ListItem) spec.Segment {
 	return seg
 }
 
-func ConvertImage(image *ast.Image, node ast.Node) (*spec.XObject, *spec.Addable) {
+func ConvertImage(image *ast.Image, node ast.Node) (retO *spec.XObject, retA *spec.Addable, retP *spec.Addable) {
 	mul := .95
 	if node.ChildCount() == 2 {
 		mul, _ = strconv.ParseFloat(strings.TrimSpace(string(node.FirstChild().NextSibling().Text(globals.File))), 64)
 	}
-	io, a := spec.NewImageObject(string(image.Destination), mul)
-	return &io, &a
+	io, ia := spec.NewImageObject(string(image.Destination), mul)
+	retO = &io
+	retA = &ia
+	para := Paragraph{
+		Text: spec.Text{
+			FontSize:   globals.Cfg.FontSize - 1,
+			LineHeight: 1.0,
+		},
+		Centered: true,
+	}
+	para.Add(&spec.Segment{
+		Content: string(image.Text(globals.File)),
+		Font:    spec.SerifRegular,
+	})
+	var a spec.Addable = &para
+	retP = &a
+	return
 }

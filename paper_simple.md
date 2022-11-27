@@ -1,8 +1,13 @@
 ---
-fontSize: 10 startNumber: 1 margin: 15 columns: 2 lineHeight: 1.2 dbg: false toc: true author:
-
-- Sett
-
+fontSize: 10
+startNumber: 1
+margin: 15
+columns: 2
+lineHeight: 1.2
+dbg: true
+toc: true
+author:
+  - Sett
 ---
 
 # Practical Phase at scVenus
@@ -58,7 +63,7 @@ Above is how GitHub describes itself. For this paper, we will concentrate on the
 
 The open source workflow for GitHub starts by forking a repository you want to contribute to. This essentially creates your own copy of the repository, which you can then modify. The next concept are branches.
 
-![Example diagram of a git branch, rendered with gitgraph.js [@carlonicoespeongitgraph2022]](images/branch-example.png){#fig:branchExample width=75%}
+![Example diagram of a git branch, rendered *nicely* with gitgraph.js](images/branch-example.png)
 
 Branches are used to diverge from the main branch, or trunk, in order to not affect the work of other developers. With the use of branching, we also gain the possibility to make a pull request. Pull requests (often abbreviated as PR) are a way to propose to merge your own branch into another one, often the main branch.
 

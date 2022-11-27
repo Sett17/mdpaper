@@ -15,10 +15,10 @@ type List struct {
 //}
 
 func (p *List) Process(maxWidth float64) {
-	p.Processed = make([]spec.TextLine, 0)
+	p.Processed = make([]*spec.TextLine, 0)
 	maxWidth -= p.Offset
 	p.Width = maxWidth
-	l := spec.TextLine{WordSpacing: 1.0}
+	l := &spec.TextLine{WordSpacing: 1.0}
 	for _, s := range p.Segments {
 		if len(s.Content) == 0 {
 			continue
@@ -42,10 +42,10 @@ func (p *List) Process(maxWidth float64) {
 				l.Words[len(l.Words)-1] = strings.TrimRight(l.Words[len(l.Words)-1], " ")
 				l.CalculateSpacing(maxWidth)
 				p.Processed = append(p.Processed, l)
-				l = spec.TextLine{WordSpacing: 1.0}
+				l = &spec.TextLine{WordSpacing: 1.0}
 			}
 		}
 		p.Processed = append(p.Processed, l)
-		l = spec.TextLine{WordSpacing: 1.0}
+		l = &spec.TextLine{WordSpacing: 1.0}
 	}
 }

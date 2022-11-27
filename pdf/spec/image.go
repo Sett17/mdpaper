@@ -33,7 +33,6 @@ func NewImageObject(path string, mul float64) (XObject, Addable) {
 		}
 	}
 	defer iFile.Close()
-	fmt.Printf("Image %s %s\n", iName, iData.Bounds())
 	x := NewXObject(iName)
 	x.Dictionary.Set("Type", "/XObject")
 	x.Dictionary.Set("Subtype", "/Image")
@@ -85,11 +84,11 @@ func (i *ImageAddable) Bytes() []byte {
 }
 
 func (i *ImageAddable) SetPos(x, y float64) {
-	i.Pos = [2]float64{x, y - globals.MmToPt(2.5)}
+	i.Pos = [2]float64{x, y - globals.MmToPt(3)}
 }
 
 func (i *ImageAddable) Height() float64 {
-	return i.H + globals.MmToPt(5)
+	return i.H + globals.MmToPt(3.5)
 }
 
 func (i *ImageAddable) Process(width float64) {

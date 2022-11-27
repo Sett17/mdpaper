@@ -51,9 +51,10 @@ func FromAst(md ast.Node) *spec.PDF {
 			paper.Add(h)
 		case ast.KindParagraph:
 			if n.(*ast.Paragraph).ChildCount() <= 2 && n.FirstChild().Kind() == ast.KindImage {
-				xo, i := ConvertImage(n.FirstChild().(*ast.Image), n)
+				xo, i, p := ConvertImage(n.FirstChild().(*ast.Image), n)
 				paper.Add(i)
 				paper.AddXObject(xo)
+				paper.Add(p)
 			} else {
 				p := ConvertParagraph(n.(*ast.Paragraph))
 				paper.Add(p)

@@ -54,3 +54,20 @@ func (r *GraphicRect) Height() float64 {
 func (r *GraphicRect) Process(width float64) {
 	r.W = width
 }
+
+type FillingRect struct {
+	GraphicRect
+	Ratio float64
+}
+
+func (f *FillingRect) Height() float64 {
+	return f.H
+}
+
+func (f *FillingRect) Process(width float64) {
+	if f.Ratio == 0 {
+		f.Ratio = 2
+	}
+	f.W = width
+	f.H = width / f.Ratio
+}

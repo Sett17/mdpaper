@@ -1,13 +1,8 @@
 ---
-fontSize: 10
-startNumber: 1
-margin: 15
-columns: 2
-lineHeight: 1.2
-dbg: false
-toc: true
-author: 
- - Sett
+fontSize: 10 startNumber: 1 margin: 15 columns: 2 lineHeight: 1.2 dbg: false toc: true author:
+
+- Sett
+
 ---
 
 # Practical Phase at scVenus
@@ -21,6 +16,8 @@ The overarching project I worked in, is called PeekabooAV. This is an Anti-Virus
 ### Motivation
 
 PeekabooAV is written to have a high degree of configurability and extendability. A major problem with this approach is that it is not trivial for a user to try out PeekabooAV in an efficient manner.
+
+![This is a really nice image!](pdf.png) .3
 
 Imagine this scenario:
 
@@ -38,6 +35,8 @@ The motivation behind my work with the PeekabooAV Installer repository, is to pr
 ### Assignment
 
 My specific task was to containerize the bleeding-edge version of PeekabooAV, to make a showcase pipeline, and further ease the future deployment of PeekabooAV. This is a sentence to pad out the page for dev. The pipeline, orchestrated with docker compose, is to include the following services:
+
+![Tripyyyyyy](test.png)
 
 ### Workflow
 
@@ -59,11 +58,9 @@ Above is how GitHub describes itself. For this paper, we will concentrate on the
 
 The open source workflow for GitHub starts by forking a repository you want to contribute to. This essentially creates your own copy of the repository, which you can then modify. The next concept are branches.
 
-[//]: # (![Example diagram of a git branch, rendered with gitgraph.js [@carlonicoespeongitgraph2022]]&#40;images/branch-example.png&#41;{#fig:branchExample width=75%})
+![Example diagram of a git branch, rendered with gitgraph.js [@carlonicoespeongitgraph2022]](images/branch-example.png){#fig:branchExample width=75%}
 
 Branches are used to diverge from the main branch, or trunk, in order to not affect the work of other developers. With the use of branching, we also gain the possibility to make a pull request. Pull requests (often abbreviated as PR) are a way to propose to merge your own branch into another one, often the main branch.
-
-[//]: # (![This is a really nice image!]&#40;test.png&#41;)
 
 As pull requests are the primary way that new code is contributed to open source software on GitHub, we wanted to have the results of my work in a pull request at the end of the phase. That includes the branching workflow, and also the review process once a pull request has been opened. In summary, a review is done by another developer, who looks over all your changes. They then either suggest changes, or approve your changes by closing the review. This process has the benefit of being transparent, and also allows for multiple reviewers. When a reviewer proposes changes, they can do so in form of a conversation directly on top of the code. In these conversations, anybody can discuss the proposal and the conversation can be marked as resolved.
 
@@ -307,7 +304,7 @@ ADT (ABAP Development Tools) are a set of plugins for the Eclipse IDE, that adap
 
 As visible in figure @fig:adt, the main way to interact with the connected ABAP system is the `Project Explorer` on the left-hand side. It is a panel showing all packages on the systems, where one can also add packages to their favorites. Packages are the way SAP elements, such as data elements, programs, etc., are organized. They can also be used recursively, meaning a package can be insider another package.
 
-![Screenshot of Project Explorer with some packages](images/pe.png){ #fig:pe width=90% }
+[//]: # (![Screenshot of Project Explorer with some packages]&#40;images/pe.png&#41;{ #fig:pe width=90% })
 
 In figure @fig:pe, one can see an example of how packages can be used to organize programs together with other elements they depend on.
 
@@ -323,11 +320,11 @@ As explained briefly in the Assignment section, knowledge of the new system in c
 
 Above figure illustrates the flow of data in the report. The `WHERE` clause, mentioned multiple times, is an important element of this report. At the of writing, there are about 900 thousand entries in the `dd03t` table, and the `WHERE` clause is used to limit the search space by filtering the names beforehand. If the user, for example knows with high probability that what they are looking for includes the work `EMMA` they can input `%EMMA%` into the `WHERE` clause, to limit the search space to just above 100 entries. Guessing a substring of the table the user is looking for is not complete solution to limit the search space, although it is likely better to use a search space of around 100 entries first, and if needed, use a search space that is several magnitudes larger.
 
-![Screenshot of input screen for the report](images/input.png){ #fig:input width=95% }
+[//]: # (![Screenshot of input screen for the report]&#40;images/input.png&#41;{ #fig:input width=95% })
 
 Figure @fig:input shows the input screen for the report. Here one can see another input field that was not discussed previously. The `Row Limit` field is used to limit the number of rows that are selected from the `dd03t` table. This is not useful in most use cases, as it uses the `UP TO x ROWS` statement, which arbitrarily ends the select after the specified number of rows. It still can be useful if, for example, the `WHERE` clause produces a large search space that the user wants to limit even more, with the chance of randomly cutting out a part of the search space. It was also usesful while developing the report, and it does not culminate in a problem as the field is optional.
 
-![Screenshot of output table for search terms `CHECK` and `CASE`](images/output.png){ #fig:output width=65% }
+[//]: # (![Screenshot of output table for search terms `CHECK` and `CASE`]&#40;images/output.png&#41;{ #fig:output width=65% })
 
 In figure @fig:output, one can see the output table that is filled by the report. This exact table is the result from using the search terms `CHECK` and `CASE`, which one can see in the headline of the output screen. The table is composed of four columns, the tabname field contains the name of the table/structure, and three boolean columns that indicate whether the table/structure contains at least on of the search terms in the name, description, or columns. As this result table uses AVL (ABAP List Viewer), the user has the ability to sort or filter the table through the SAP GUI, and even export it directly to an Excel file for further work.
 

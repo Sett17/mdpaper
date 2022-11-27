@@ -1,7 +1,6 @@
 package pdf
 
 import (
-	"fmt"
 	"github.com/yuin/goldmark/ast"
 	"mdpaper/globals"
 	"mdpaper/pdf/spec"
@@ -51,8 +50,14 @@ func FromAst(md ast.Node) *spec.PDF {
 			h := ConvertHeading(n.(*ast.Heading))
 			paper.Add(h)
 		case ast.KindParagraph:
-			p := ConvertParagraph(n.(*ast.Paragraph))
-			paper.Add(p)
+			if n.(*ast.Paragraph).ChildCount() <= 2 && n.FirstChild().Kind() == ast.KindImage {
+				xo, i := ConvertImage(n.FirstChild().(*ast.Image), n)
+				paper.Add(i)
+				paper.AddXObject(xo)
+			} else {
+				p := ConvertParagraph(n.(*ast.Paragraph))
+				paper.Add(p)
+			}
 		case ast.KindList:
 			l := ConvertList(n.(*ast.List))
 			paper.Add(l)
@@ -70,6 +75,15 @@ func FromAst(md ast.Node) *spec.PDF {
 		c.Heading.Prefix = [6]int{i + 1}
 		chapters.GenerateNumbering(c)
 	}
+	//endregion
+
+	//region xobjects
+	xobjs := spec.NewDict()
+	for _, xo := range paper.XObjects {
+		xobjs.Set(xo.Name, xo.Reference())
+		pdf.AddObject(xo.Pointer())
+	}
+	pageResources.Set("XObject", xobjs)
 	//endregion
 
 	//region generate pages and add to pdf
@@ -116,7 +130,7 @@ func FromAst(md ast.Node) *spec.PDF {
 	}
 	//endregion
 
-	fmt.Println(chapters.String())
+	//fmt.Println(chapters.String())
 
 	return &pdf
 }

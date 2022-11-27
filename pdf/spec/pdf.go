@@ -150,20 +150,18 @@ func (p *PDF) WriteDebug(f *os.File) {
 
 	filtered := make([]*Object, 0, len(p.objects))
 	for _, s := range p.objects {
-		if so, ok := (*s).(*StreamObject); ok {
-			if so.M["Length1"] != nil { //exclude fonts
+		switch v := (*s).(type) {
+		case *StreamObject:
+			if v.M["Length1"] != nil { //exclude fonts
 				continue
 			}
+		case *XObject:
+			continue
 		}
 		filtered = append(filtered, s)
 	}
 
 	sort.SliceStable(filtered, func(i, j int) bool {
-		//if so, ok := (*filtered[i]).(*StreamObject); ok {
-		//	if so.M["Type"] == "XObject" {
-		//		return false
-		//	}
-		//}
 		return (*filtered[i]).ID() < (*filtered[j]).ID()
 	})
 	for _, s := range filtered {

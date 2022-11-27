@@ -7,22 +7,15 @@ import (
 
 type Paper struct {
 	Elements []*spec.Addable
+	XObjects []*spec.XObject
 }
-
-//func (p *Paper) String() string {
-//	buf := bytes.Buffer{}
-//
-//	for _, e := range p.Elements {
-//		if t, ok := (*e).(*spec.Text); ok {
-//			buf.WriteString(fmt.Sprintf("Text: len: %d, font: %s\n", len(t.Content), t.Font.FontName))
-//		}
-//	}
-//
-//	return buf.String()
-//}
 
 func (p *Paper) Add(add ...*spec.Addable) {
 	p.Elements = append(p.Elements, add...)
+}
+
+func (p *Paper) AddXObject(x ...*spec.XObject) {
+	p.XObjects = append(p.XObjects, x...)
 }
 
 func (p *Paper) Finished() bool {

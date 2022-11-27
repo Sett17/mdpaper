@@ -5,6 +5,7 @@ import (
 	"github.com/yuin/goldmark/ast"
 	"mdpaper/globals"
 	"mdpaper/pdf/spec"
+	"strconv"
 	"strings"
 )
 
@@ -56,12 +57,10 @@ func ConvertParagraph(p *ast.Paragraph) *spec.Addable {
 		case ast.KindEmphasis:
 			seg := ConvertEmphasis(n.(*ast.Emphasis))
 			para.Add(&seg)
-
+		case ast.KindImage:
+			//TODO support images
 		default:
 			continue
-			//case ast.KindImage:
-			//	//TODO support images
-			//	//i = ConvertImage(n.(*ast.Image))
 		}
 		//if first {
 		//	t.NewParagraph = true
@@ -138,4 +137,13 @@ func ConvertListItem(item *ast.ListItem) spec.Segment {
 		Font:    spec.SerifRegular,
 	}
 	return seg
+}
+
+func ConvertImage(image *ast.Image, node ast.Node) (*spec.XObject, *spec.Addable) {
+	mul := .95
+	if node.ChildCount() == 2 {
+		mul, _ = strconv.ParseFloat(strings.TrimSpace(string(node.FirstChild().NextSibling().Text(globals.File))), 64)
+	}
+	io, a := spec.NewImageObject(string(image.Destination), mul)
+	return &io, &a
 }

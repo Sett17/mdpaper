@@ -32,6 +32,8 @@ func NewXObject(name string) XObject {
 	name = strings.ReplaceAll(name, " ", "_")
 	name = strings.ReplaceAll(name, ".", "_")
 	name = strings.ReplaceAll(name, ":", "_")
+	name = strings.ReplaceAll(name, "/", "_")
+	name = strings.ReplaceAll(name, "\\", "_")
 	name = strings.ToLower(name)
 	return XObject{GenericObject: GenericObject{id: LastId}, Name: name}
 }

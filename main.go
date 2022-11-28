@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"github.com/dustin/go-humanize"
 	"github.com/yuin/goldmark"
-	meta "github.com/yuin/goldmark-meta"
 	"github.com/yuin/goldmark/text"
+	"gopkg.in/yaml.v2"
 	"mdpaper/globals"
 	"mdpaper/pdf"
 	"os"
@@ -17,6 +17,7 @@ import (
 
 func main() {
 	file := "paper_simple.md"
+	configFile := "config.yaml"
 	if len(os.Args) > 1 {
 		file = os.Args[1]
 	}
@@ -28,17 +29,36 @@ func main() {
 	globals.File = inp
 	start := time.Now()
 	p := goldmark.New(
-		goldmark.WithExtensions(meta.New(
-			meta.WithStoresInDocument(),
-		)),
+		//goldmark.WithExtensions(meta.New(
+		//	meta.WithStoresInDocument(),
+		//)),
 		goldmark.WithParserOptions()).Parser()
 	ast := p.Parse(text.NewReader(inp))
 	//ast.Dump(inp, 0)
 	fmt.Printf("Parsed in %v\n", time.Since(start))
-	frontmatter := ast.OwnerDocument().Meta()
-	globals.Cfg = globals.FromMap(frontmatter)
+	cfgFile, err := os.ReadFile(configFile)
+	if err == nil {
+		err = yaml.Unmarshal(cfgFile, &globals.Cfg)
+		if err != nil {
+			panic(err)
+		}
+		fmt.Printf("Loaded config from %s\n", configFile)
+	} else {
+		if os.IsNotExist(err) {
+			//create cfg file
+			out, err := yaml.Marshal(globals.Cfg)
+			if err != nil {
+				panic(err)
+			}
+			err = os.WriteFile(configFile, out, 0644)
+			if err != nil {
+				panic(err)
+			}
+			fmt.Printf("Created config file %s\n", configFile)
+		}
+	}
 	pp := pdf.FromAst(ast)
-	outName := strings.ReplaceAll(globals.Cfg.Title, " ", "_") + ".pdf"
+	outName := strings.ReplaceAll(globals.Cfg.Paper.Title, " ", "_") + ".pdf"
 	outp, err := os.Create(outName)
 	if err != nil {
 		panic(err)
@@ -54,7 +74,7 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	globals.Cfg.Debug = true
+	globals.Cfg.Paper.Debug = true
 	pp.WriteDebug(dbgOut)
 	fi, err = dbgOut.Stat()
 	if err == nil {

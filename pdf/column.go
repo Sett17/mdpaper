@@ -1,7 +1,6 @@
 package pdf
 
 import (
-	"mdpaper/globals"
 	"mdpaper/pdf/spec"
 )
 
@@ -18,18 +17,18 @@ func NewColumn(width, maxHeight, x, y float64) *Column {
 	c := Column{Width: width, MaxHeight: maxHeight, Pos: [2]float64{x, y}, StreamObject: spec.NewStreamObject(), bottom: y}
 	//c.Deflate = true
 
-	if globals.Cfg.Debug {
-		//r := spec.GraphicRect{
-		//	Pos:   [2]float64{c.Pos[0], c.Pos[1]},
-		//	W:     c.Width,
-		//	H:     c.MaxHeight,
-		//	Color: [3]float64{0, 0, 0},
-		//	//Filled: true,
-		//	Rounded: true,
-		//}
-		//var rA spec.Addable = &r
-		//c.Add(&rA)
-	}
+	//if globals.Cfg.Paper.Debug {
+	//r := spec.GraphicRect{
+	//	Pos:   [2]float64{c.Pos[0], c.Pos[1]},
+	//	W:     c.Width,
+	//	H:     c.MaxHeight,
+	//	Color: [3]float64{0, 0, 0},
+	//	//Filled: true,
+	//	Rounded: true,
+	//}
+	//var rA spec.Addable = &r
+	//c.Add(&rA)
+	//}
 
 	return &c
 }

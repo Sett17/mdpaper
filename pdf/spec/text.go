@@ -123,7 +123,7 @@ func (p *Text) Height() float64 {
 	if len(p.Processed) == 1 && p.Processed[0].Offset == 0 {
 		return float64(p.FontSize) * p.LineHeight
 	}
-	return (float64(len(p.Processed)) + .5) * p.LineHeight * float64(p.FontSize)
+	return (float64(len(p.Processed)))*p.LineHeight*float64(p.FontSize) + globals.MmToPt(globals.Cfg.Spaces.Paragraph)
 }
 
 func (p *Text) Process(maxWidth float64) {
@@ -220,18 +220,16 @@ func (p *Text) Bytes() []byte {
 	}
 
 	buf.WriteString("ET\n")
-	if globals.Cfg.Debug {
-		//rect := GraphicRect{
-		//	Pos:   [2]float64{p.Pos[0] + p.Offset, p.Pos[1]},
-		//	W:     p.Width,
-		//	H:     p.Height(),
-		//	Color: [3]float64{0.5, 0.5, 0.0},
-		//}
-		//if rect.W == 0 {
-		//	//fmt.Println("dikka")
-		//}
-		//buf.WriteString("\n")
-		//buf.Write(rect.Bytes())
-	}
+	//rect := GraphicRect{
+	//	Pos:   [2]float64{p.Pos[0] + p.Offset, p.Pos[1]},
+	//	W:     p.Width,
+	//	H:     p.Height(),
+	//	Color: [3]float64{0.5, 0.5, 0.0},
+	//}
+	//if rect.W == 0 {
+	//	//fmt.Println("dikka")
+	//}
+	//buf.WriteString("\n")
+	//buf.Write(rect.Bytes())
 	return buf.Bytes()
 }

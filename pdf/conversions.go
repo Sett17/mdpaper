@@ -16,7 +16,7 @@ func ConvertHeading(h *ast.Heading) *spec.Addable {
 		Content: buf.String(),
 		Font:    spec.SansBold,
 	}
-	fs := globals.Cfg.FontSize
+	fs := globals.Cfg.Text.FontSize
 	if h.Level <= 2 {
 		fs = int(float64(fs) * 1.2)
 	}
@@ -34,16 +34,17 @@ func ConvertHeading(h *ast.Heading) *spec.Addable {
 	return &out
 }
 
-func ConvertParagraph(p *ast.Paragraph) *spec.Addable {
+func ConvertParagraph(p *ast.Paragraph, centered bool) *spec.Addable {
 	if string(p.Text(globals.File)) == "\\fill" {
 		var a spec.Addable = &Filler{}
 		return &a
 	}
 	para := Paragraph{
 		Text: spec.Text{
-			FontSize:   globals.Cfg.FontSize,
-			LineHeight: globals.Cfg.LineHeight,
+			FontSize:   globals.Cfg.Text.FontSize,
+			LineHeight: globals.Cfg.Text.LineHeight,
 		},
+		Centered: centered,
 	}
 	for n := p.FirstChild(); n != nil; n = n.NextSibling() {
 		//var i spec.ImageObject
@@ -114,10 +115,10 @@ func ConvertEmphasis(span *ast.Emphasis) spec.Segment {
 func ConvertList(list *ast.List) *spec.Addable {
 	para := List{
 		Text: spec.Text{
-			FontSize: globals.Cfg.FontSize,
+			FontSize: globals.Cfg.Text.FontSize,
 			//LineHeight: globals.Cfg.LineHeight * 1.4,
-			LineHeight: 1.1,
-			Offset:     float64(globals.Cfg.FontSize),
+			LineHeight: globals.Cfg.Text.ListLineHeight,
+			Offset:     float64(globals.Cfg.Text.FontSize),
 		},
 	}
 	i := 1
@@ -156,7 +157,7 @@ func ConvertImage(image *ast.Image, node ast.Node) (retO *spec.XObject, retA *sp
 	retA = &ia
 	para := Paragraph{
 		Text: spec.Text{
-			FontSize:   globals.Cfg.FontSize - 1,
+			FontSize:   globals.Cfg.Text.FontSize - 1,
 			LineHeight: 1.0,
 		},
 		Centered: true,
@@ -167,5 +168,15 @@ func ConvertImage(image *ast.Image, node ast.Node) (retO *spec.XObject, retA *sp
 	})
 	var a spec.Addable = &para
 	retP = &a
+	return
+}
+
+func ConvertBlockquote(bq *ast.Blockquote) (ret []*spec.Addable) {
+	for c := bq.FirstChild(); c != nil; c = c.NextSibling() {
+		switch c.Kind() {
+		case ast.KindParagraph:
+			ret = append(ret, ConvertParagraph(c.(*ast.Paragraph), true))
+		}
+	}
 	return
 }

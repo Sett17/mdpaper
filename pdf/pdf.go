@@ -19,8 +19,8 @@ func FromAst(md ast.Node) *spec.PDF {
 	info := spec.NewDictObject()
 	info.Set("Producer", "mdpaper")
 	info.Set("CreationDate", time.Now().Format("20060102150405-07"))
-	info.Set("Title", globals.Cfg.Title)
-	info.Set("Author", globals.Cfg.Authors[0])
+	info.Set("Title", globals.Cfg.Paper.Title)
+	info.Set("Author", globals.Cfg.Paper.Author)
 	pdf.AddObject(info.Pointer())
 	pdf.Info = info.Reference()
 
@@ -56,12 +56,15 @@ func FromAst(md ast.Node) *spec.PDF {
 				paper.AddXObject(xo)
 				paper.Add(p)
 			} else {
-				p := ConvertParagraph(n.(*ast.Paragraph))
+				p := ConvertParagraph(n.(*ast.Paragraph), false)
 				paper.Add(p)
 			}
 		case ast.KindList:
 			l := ConvertList(n.(*ast.List))
 			paper.Add(l)
+		case ast.KindBlockquote:
+			b := ConvertBlockquote(n.(*ast.Blockquote))
+			paper.Add(b...)
 		}
 	}
 	headings := make([]*Heading, 0)
@@ -93,11 +96,11 @@ func FromAst(md ast.Node) *spec.PDF {
 	pdf.AddObject(pages.Pointer())
 	catalog.Set("Pages", pages.Reference())
 
-	displayPageNumber := 0
+	displayPageNumber := globals.Cfg.Page.StartPageNumber - 1
 	realPageNumber := 0
 	pagesArray := spec.NewArray()
 	var tocPage *Page
-	if globals.Cfg.ToC {
+	if globals.Cfg.Toc.Enabled {
 		realPageNumber++
 		tocPage = NewEmptyPage(0, realPageNumber)
 	}
@@ -107,7 +110,7 @@ func FromAst(md ast.Node) *spec.PDF {
 		page := NewPage(&paper, displayPageNumber, realPageNumber)
 		page.AddToPdf(&pdf, pageResources, pages.Reference(), &pagesArray)
 	}
-	if globals.Cfg.ToC {
+	if globals.Cfg.Toc.Enabled {
 		toc := GenerateTOC(&chapters)
 		tocPage.Columns = append(tocPage.Columns, toc.GenerateColumn())
 		links := toc.GenerateLinks()

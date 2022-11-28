@@ -24,21 +24,30 @@ func (p *Paper) Finished() bool {
 
 func (p *Paper) SingleColumn() *Column {
 	return p.nextColumn(
-		globals.A4Width-2*globals.Cfg.Margin,
-		globals.A4Height-2*globals.Cfg.Margin,
-		globals.Cfg.Margin,
-		globals.A4Height-globals.Cfg.Margin,
+		globals.A4Width-(globals.MmToPt(globals.Cfg.Page.MarginHori)*2),
+		globals.A4Height-(globals.MmToPt(globals.Cfg.Page.MarginTop)+globals.MmToPt(globals.Cfg.Page.MarginBottom)),
+		globals.MmToPt(globals.Cfg.Page.MarginHori),
+		globals.A4Height-globals.MmToPt(globals.Cfg.Page.MarginTop),
 	)
 }
 
 func (p *Paper) DoubleColumn() (c1, c2 *Column) {
-	width := globals.A4Width/2 - 1.25*globals.Cfg.Margin
-	height := globals.A4Height - 3*globals.Cfg.Margin
+	width := globals.A4Width/2 - globals.MmToPt(globals.Cfg.Page.MarginHori+globals.Cfg.Page.ColumnGap/2)
+	height := globals.A4Height - globals.MmToPt(globals.Cfg.Page.MarginTop+globals.Cfg.Page.MarginBottom)
 
-	top := globals.A4Height - globals.Cfg.Margin*1.5
-
-	c1 = p.nextColumn(width, height, globals.Cfg.Margin, top)
-	c2 = p.nextColumn(width, height, globals.A4Width/2+globals.Cfg.Margin/4, top)
+	top := globals.A4Height - globals.MmToPt(globals.Cfg.Page.MarginTop)
+	c1 = p.nextColumn(
+		width,
+		height,
+		globals.MmToPt(globals.Cfg.Page.MarginHori),
+		top,
+	)
+	c2 = p.nextColumn(
+		width,
+		height,
+		globals.A4Width/2+globals.MmToPt(globals.Cfg.Page.ColumnGap/2),
+		top,
+	)
 
 	return
 }

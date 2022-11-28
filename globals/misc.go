@@ -12,3 +12,5 @@ func MmToPt(Mm float64) float64 {
 
 //go:embed fonts/*
 var Fonts embed.FS
+
+var File []byte

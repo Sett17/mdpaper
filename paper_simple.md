@@ -1,15 +1,3 @@
----
-fontSize: 10
-startNumber: 1
-margin: 15
-columns: 2
-lineHeight: 1.2
-dbg: false
-toc: true
-author:
-  - Sett
----
-
 # Practical Phase at scVenus
 
 ## Introduction

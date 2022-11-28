@@ -79,7 +79,7 @@ func (s *StreamObject) Bytes() []byte {
 	beg, end := s.ByteParts()
 	buf.Write(beg)
 	s.Stream.Commit()
-	if globals.Cfg.Debug && !s.AlwaysDeflate {
+	if globals.Cfg.Paper.Debug && !s.AlwaysDeflate {
 		s.Dictionary.Set("Length", s.Stream.Len()-1)
 	} else {
 		s.Stream.Deflate()

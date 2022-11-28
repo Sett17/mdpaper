@@ -20,9 +20,9 @@ func NewPage(paper *Paper, displayNumber int, realNumber int) *Page {
 	mediaBox := spec.NewArray()
 	mediaBox.Add(0, 0, globals.A4Width, globals.A4Height)
 	p.Set("MediaBox", mediaBox)
-	if globals.Cfg.Columns == 1 {
+	if globals.Cfg.Page.Columns == 1 {
 		p.Columns = append(p.Columns, paper.SingleColumn())
-	} else if globals.Cfg.Columns == 2 {
+	} else if globals.Cfg.Page.Columns >= 2 {
 		c1, c2 := paper.DoubleColumn()
 		p.Columns = append(p.Columns, c1, c2)
 	}
@@ -30,6 +30,7 @@ func NewPage(paper *Paper, displayNumber int, realNumber int) *Page {
 		for _, a := range col.Content {
 			if h, ok := (*a).(*Heading); ok {
 				h.Page = realNumber
+				h.DisplayPage = displayNumber
 			}
 		}
 	}
@@ -59,7 +60,7 @@ func (p *Page) AddToPdf(pdf *spec.PDF, res spec.Dictionary, pagesRef string, pag
 		pdf.AddObject(col.Pointer())
 		c.Add(col.Reference())
 	}
-	if p.DisplayNumber > 0 {
+	if p.DisplayNumber > 0 && globals.Cfg.Page.PageNumbers {
 		pN := spec.NewStreamObject()
 		//pN.Deflate = true
 		seg := spec.Segment{
@@ -71,7 +72,7 @@ func (p *Page) AddToPdf(pdf *spec.PDF, res spec.Dictionary, pagesRef string, pag
 			LineHeight: 1,
 		}
 		para.Add(&seg)
-		para.SetPos(globals.A4Width/2.0-seg.Font.WordWidth(seg.Content, para.FontSize)/2.0, globals.Cfg.Margin)
+		para.SetPos(globals.A4Width/2.0-seg.Font.WordWidth(seg.Content, para.FontSize)/2.0, globals.Cfg.Page.MarginBottom*1.5)
 		para.Process(seg.Font.WordWidth(seg.Content, para.FontSize))
 		var a spec.Addable = &para
 		pN.Add(&a)

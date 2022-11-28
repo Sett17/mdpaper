@@ -9,9 +9,10 @@ import (
 
 type Heading struct {
 	spec.Text
-	Level  int
-	Page   int
-	Prefix [6]int
+	Level       int
+	Page        int
+	DisplayPage int
+	Prefix      [6]int
 }
 
 func (h *Heading) Destination() string {
@@ -40,11 +41,11 @@ func (h *Heading) Numbering() string {
 }
 
 func (h *Heading) SetPos(x float64, y float64) {
-	h.Text.SetPos(x, y-h.Height()/2) //maybe 4 to center heading
+	h.Text.SetPos(x, y-globals.MmToPt(globals.Cfg.Spaces.Heading)/1.5) //bit below center off whitespace
 }
 
 func (h *Heading) Height() float64 {
-	return h.Text.Height() + h.Text.LineHeight*float64(h.Text.FontSize)
+	return h.Text.Height() + globals.MmToPt(globals.Cfg.Spaces.Heading)
 }
 
 func (h *Heading) Bytes() []byte {

@@ -63,7 +63,7 @@ func NewFont(filePath string, flags int) (f *Font) {
 	f.Name = strings.ToLower(strings.ReplaceAll(fontFile.Name(truetype.NameIDPostscriptName), " ", "_"))
 	f.Font = fontFile
 	f.Face = truetype.NewFace(fontFile, &truetype.Options{
-		Size: float64(globals.Cfg.FontSize),
+		Size: float64(globals.Cfg.Text.FontSize),
 	})
 
 	ttfStream := NewStreamObject()

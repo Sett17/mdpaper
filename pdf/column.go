@@ -9,7 +9,6 @@ type Column struct {
 	Width     float64
 	MaxHeight float64
 	Pos       [2]float64
-	Full      bool
 	bottom    float64
 }
 
@@ -33,15 +32,14 @@ func NewColumn(width, maxHeight, x, y float64) *Column {
 	return &c
 }
 
-func (c *Column) Add(a *spec.Addable) (leftover *spec.Addable) {
+func (c *Column) Add(a *spec.Addable) (leftover *spec.Addable, full bool) {
 	if a == nil {
-		return nil
+		return nil, false
 	}
 	A := *a
 	if _, ok := A.(*Filler); ok {
 		c.bottom = c.Pos[1] - c.MaxHeight
-		c.Full = true
-		return nil
+		return nil, true
 	}
 	A.SetPos(c.Pos[0], c.bottom)
 	A.Process(c.Width)
@@ -52,14 +50,12 @@ func (c *Column) Add(a *spec.Addable) (leftover *spec.Addable) {
 			fitting, leftoverS := s.Split(availSpace / h)
 			//fitting.Process(c.Width)
 			c.StreamObject.Add(&fitting)
-			c.Full = true
-			return &leftoverS
+			return &leftoverS, true
 		} else {
-			c.Full = true
-			return a
+			return a, true
 		}
 	}
 	c.StreamObject.Add(a)
 	c.bottom -= h
-	return nil
+	return nil, false
 }

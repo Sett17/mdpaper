@@ -58,7 +58,7 @@ func (p *Paper) nextColumn(width, height, x, y float64) (c *Column) {
 	//for i, e := range p.Elements {
 	for i := 0; i < len(p.Elements); {
 		e := p.Elements[i]
-		if spill := c.Add(e); spill != nil {
+		if spill, full := c.Add(e); spill != nil || full {
 			p.Elements = p.Elements[i+1:]
 			z := p.Elements
 			p.Elements = make([]*spec.Addable, 0)

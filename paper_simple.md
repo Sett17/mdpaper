@@ -254,6 +254,8 @@ Always pass on what you have learned. Death is a natural part of life. Rejoice f
 
 \fill
 
+\fill
+
 # Practical Phase at Energy4U
 
 ## Introduction

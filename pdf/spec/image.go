@@ -34,6 +34,7 @@ func NewImageObject(path string, mul float64) (XObject, Addable) {
 	}
 	defer iFile.Close()
 	x := NewXObject(iName)
+	x.AlwaysDeflate = true
 	x.Dictionary.Set("Type", "/XObject")
 	x.Dictionary.Set("Subtype", "/Image")
 	pixelMul := 1
@@ -42,8 +43,6 @@ func NewImageObject(path string, mul float64) (XObject, Addable) {
 	}
 	x.Dictionary.Set("Width", iData.Bounds().Dx()/pixelMul)
 	x.Dictionary.Set("Height", iData.Bounds().Dy()/pixelMul)
-	//x.Dictionary.Width = iData.Bounds().Dx()
-	//x.Dictionary.Height = iData.Bounds().Dy()
 	x.Dictionary.Set("ColorSpace", "/DeviceRGB")
 	x.Dictionary.Set("BitsPerComponent", 8)
 	for j := 0; j < iData.Bounds().Dy()/pixelMul; j++ {

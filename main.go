@@ -49,6 +49,7 @@ func main() {
 	if err == nil {
 		fmt.Printf("File '%s' size: %s\n", outName, humanize.Bytes(uint64(fi.Size())))
 	}
+
 	dbgOut, err := os.Create("debug.txt")
 	if err != nil {
 		panic(err)
@@ -59,21 +60,5 @@ func main() {
 	if err == nil {
 		fmt.Printf("Debug written without stream size: %s\n", humanize.Bytes(uint64(fi.Size())))
 	}
-	//doc := parser.FromFile(inp)
-	//global.Log("Parsed markdown file")
-	//
-	//p := pdf.FromMd(&doc)
-	//
-	//f1, err := os.Create(parser.FrontMatter.Title + ".pdf")
-	//if err != nil {
-	//	panic(err)
-	//}
-	//p.WriteTo(f1)
-	//global.Log("Done")
-	//f2, err := os.Create(parser.FrontMatter.Title + ".txt")
-	//if err != nil {
-	//	panic(err)
-	//}
-	//p.WriteTo(f2)
-	//fmt.Printf("%#v\n", doc)
+
 }

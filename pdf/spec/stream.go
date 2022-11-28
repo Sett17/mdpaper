@@ -66,6 +66,7 @@ type StreamObject struct {
 	GenericObject
 	Stream
 	Dictionary
+	AlwaysDeflate bool
 }
 
 func (s *StreamObject) Pointer() *Object {
@@ -78,7 +79,7 @@ func (s *StreamObject) Bytes() []byte {
 	beg, end := s.ByteParts()
 	buf.Write(beg)
 	s.Stream.Commit()
-	if globals.Cfg.Debug {
+	if globals.Cfg.Debug && !s.AlwaysDeflate {
 		s.Dictionary.Set("Length", s.Stream.Len()-1)
 	} else {
 		s.Stream.Deflate()

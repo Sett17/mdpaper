@@ -67,7 +67,7 @@ func NewFont(filePath string, flags int) (f *Font) {
 	})
 
 	ttfStream := NewStreamObject()
-	//ttfStream.Deflate = true
+	ttfStream.AlwaysDeflate = true
 	ttfStream.Set("Length1", len(fontFileBuf))
 	ttfStream.Write(fontFileBuf)
 	f.Data = &ttfStream

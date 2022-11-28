@@ -69,7 +69,7 @@ func NewFont(filePath string, flags int) (f *Font) {
 	ttfStream := NewStreamObject()
 	//ttfStream.Deflate = true
 	ttfStream.Set("Length1", len(fontFileBuf))
-	ttfStream.AddBytes(fontFileBuf)
+	ttfStream.Write(fontFileBuf)
 	f.Data = &ttfStream
 
 	desc := generateDescriptor(f, flags)

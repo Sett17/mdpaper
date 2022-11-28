@@ -7,60 +7,65 @@ import (
 )
 
 type Stream struct {
-	RawData bytes.Buffer
+	data    bytes.Buffer
+	Content []*Bytable
+}
+
+func (s *Stream) Add(add *Addable) {
+	var b Bytable = *add
+	s.Content = append(s.Content, &b)
+}
+func (s *Stream) AddBytable(add *Bytable) {
+	s.Content = append(s.Content, add)
 }
 
 func (s *Stream) Len() int {
-	return s.RawData.Len()
+	return s.data.Len()
 }
 
 func (s *Stream) isZero() bool {
-	return s.RawData.Len() == 0
+	return s.data.Len() == 0
 }
 
 func (s *Stream) WriteString(str string) {
-	s.RawData.WriteString(str)
+	var b Bytable = &GenericBytable{dat: []byte(str)}
+	s.Content = append(s.Content, &b)
 }
 
-func (s *Stream) Write(b []byte) {
-	s.RawData.Write(b)
+func (s *Stream) Write(buf []byte) {
+	var b Bytable = &GenericBytable{dat: buf}
+	s.Content = append(s.Content, &b)
+}
+
+func (s *Stream) Commit() {
+	s.data.Reset()
+	for _, b := range s.Content {
+		s.data.Write((*b).Bytes())
+	}
 }
 
 func (s *Stream) Deflate() {
-	r, err := flate.Encode(flate{}, &s.RawData)
+	r, err := flate.Encode(flate{}, &s.data)
 	if err != nil {
 		panic(err)
 	}
 	b, _ := io.ReadAll(r)
-	s.RawData = *bytes.NewBuffer(b)
-	s.RawData.WriteByte(0x0a)
+	s.data = *bytes.NewBuffer(b)
+	s.data.WriteByte(0x0a)
 }
 
 func (s *Stream) Bytes() []byte {
 	buf := bytes.Buffer{}
 	buf.WriteString("\nstream\n")
-	buf.Write(s.RawData.Bytes())
+	buf.Write(s.data.Bytes())
 	buf.WriteString("endstream\n")
 	return buf.Bytes()
 }
 
 type StreamObject struct {
 	GenericObject
-	Content []*Bytable
+	Stream
 	Dictionary
-}
-
-func (s *StreamObject) Add(add *Addable) {
-	var b Bytable = *add
-	s.Content = append(s.Content, &b)
-}
-func (s *StreamObject) AddBytable(add *Bytable) {
-	s.Content = append(s.Content, add)
-}
-
-func (s *StreamObject) AddBytes(buf []byte) {
-	var b Bytable = &GenericBytable{dat: &buf}
-	s.Content = append(s.Content, &b)
 }
 
 func (s *StreamObject) Pointer() *Object {
@@ -72,19 +77,16 @@ func (s *StreamObject) Bytes() []byte {
 	buf := bytes.Buffer{}
 	beg, end := s.ByteParts()
 	buf.Write(beg)
-	stream := Stream{}
-	for _, c := range s.Content {
-		stream.Write((*c).Bytes())
-	}
+	s.Stream.Commit()
 	if globals.Cfg.Debug {
-		s.Dictionary.Set("Length", stream.Len()-1)
+		s.Dictionary.Set("Length", s.Stream.Len()-1)
 	} else {
-		stream.Deflate()
+		s.Stream.Deflate()
 		s.Dictionary.Set("Filter", "/FlateDecode")
-		s.Dictionary.Set("Length", stream.Len())
+		s.Dictionary.Set("Length", s.Stream.Len())
 	}
 	buf.Write(s.Dictionary.Bytes())
-	buf.Write(stream.Bytes())
+	buf.Write(s.Stream.Bytes())
 	buf.Write(end)
 	return buf.Bytes()
 }

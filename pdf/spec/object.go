@@ -19,11 +19,11 @@ type Bytable interface {
 }
 
 type GenericBytable struct {
-	dat *[]byte
+	dat []byte
 }
 
 func (g *GenericBytable) Bytes() []byte {
-	return *g.dat
+	return g.dat
 }
 
 type GenericObject struct {

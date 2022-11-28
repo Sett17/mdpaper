@@ -23,8 +23,6 @@ type Config struct {
 	Spaces struct {
 		Paragraph float64 `yaml:"paragraph"`
 		Heading   float64 `yaml:"heading"`
-		listItem  float64 `yaml:"listItem"`
-		Image     float64 `yaml:"image"`
 	}
 	Paper struct {
 		Title  string `yaml:"title"`
@@ -72,13 +70,9 @@ var Default = Config{
 	Spaces: struct {
 		Paragraph float64 `yaml:"paragraph"`
 		Heading   float64 `yaml:"heading"`
-		listItem  float64 `yaml:"listItem"`
-		Image     float64 `yaml:"image"`
 	}{
 		Paragraph: 1.0,
 		Heading:   1.0,
-		listItem:  0,
-		Image:     3.0,
 	},
 	Paper: struct {
 		Title  string `yaml:"title"`

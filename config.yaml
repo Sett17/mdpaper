@@ -1,7 +1,7 @@
 text:
   fontSize: 11
   lineHeight: 1.2
-  listLineHeight: 1.0
+  listLineHeight: 1
 page:
   marginTop: 20
   marginBottom: 20
@@ -17,7 +17,6 @@ toc:
 spaces:
   paragraph: 1
   heading: 1
-  image: 3
 paper:
   title: Paper
   authors: Anonymous

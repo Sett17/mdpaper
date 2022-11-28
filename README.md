@@ -47,33 +47,33 @@ mdpaper my_paper.md
 
 ### Options
 
-Options regarding the generation of the PDF can be set in the YAML frontmatter of the markdown file.
-For example
+Options regarding the generation of the PDF can be set in a `config.yaml` file. If this file does not exist, it will be created with default values.
+
 ```yaml
----
-title: "My paper"
-author:
-  - "John Doe"
-margin: 10.0
-dbg: true
----
-
-# My paper
-
-the rest of the paper...
+text:
+  fontSize: 11         # fontsize in pt for regular text
+  lineHeight: 1.2      # line height for regular text
+  listLineHeight: 1.0  # line height for list entries
+page:
+  marginTop: 20        # whitespace in mm at the top of the page
+  marginBottom: 20     # whitespace in mm at the bottom of the page
+  marginHori: 15       # whitespace in mm at the left and right of the page
+  columnGap: 7         # whitespace in mm between the columns
+  columns: 2           # number of columns (1 or 2)
+  pageNumbers: true    # whether to show page numbers
+  startPageNumber: 1   # page number to start with
+toc:
+  enabled: true        # whether to generate a table of contents
+  lineHeight: 1.3      # line height for toc entries
+  fontSize: 11         # fontsize in pt for toc entries
+spaces:
+  paragraph: 1         # mm of whitespace after a paragraph
+  heading: 1           # mm of whitespace after a heading
+paper:
+  title: Paper         # title of the paper (also name of pdf file)
+  authors: Anonymous   # author of the paper
+  debug: false         # whether to enable debug mode (no compression)
 ```
-
-| Option        |                            Description                            | Default     |
-|---------------|:-----------------------------------------------------------------:|:------------|
-| title         |                        Title of the paper                         | `Paper`     |
-| fontSize      |                   The font size to any integer                    | `11`        |
-| lineHeight    |            The relative space between line beginnings             | `1.2`       |
-| margin        | The left/right margin in mm (top and bottom are 1.5x this number) | `15.0`      |
-| columns       |             The number of columns in the page (max 2)             | `2`         |
-| authors       |             List of strings that are the Author names             | `Anonymous` |
-| toc           |           Weather to generate a Table of Contents page            | 'true'      |
-| tocLineHeight |             The line height used for the ToC entries              | '1.3'       |
-| dbg           |                 Weather to draw debug rectangles                  | 'false'     |
 
 # Acknowledgements & Known Issues
 

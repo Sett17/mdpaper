@@ -22,16 +22,16 @@ The overarching project I worked in, is called PeekabooAV. This is an Anti-Virus
 
 PeekabooAV is written to have a high degree of configurability and extendability. A major problem with this approach is that it is not trivial for a user to try out PeekabooAV in an efficient manner.
 
-![This is a really nice image!](pdf.png) .3
+<!-- ![This is a really nice image!](pdf.png) .3 -->
 
 Imagine this scenario:
 
 You are a System Administrator, with an on-premise email service. You are looking through GitHub, or searching articles for better Anti-Virus, to cut down the manual work you have to do. You stumble upon PeekabooAV, which sounds promising to you. But to know if it is the right fit for your needs, you would need to set up a whole test environment, with at least spam filtering and an email service. This process is cumbersome, and would likely stop you from even testing out PeekabooAV.
 
-- This project is open source
-- The code is available on GitHub
-- The project is licensed under the MIT license, means you can use it for free, and modify it as you wish
-- The project is hosted on Docker Hub
+1. This project is open source
+2. The code is available on GitHub
+3. The project is licensed under the MIT license, means you can use it for free, and modify it as you wish
+4. The project is hosted on Docker Hub
 
 Although it is possible to test out PeekabooAV on its own, there is the definite need to test it with a full environment. This hurdle of setting up an environment, to test a software, is a major problem for adoption.
 
@@ -40,6 +40,13 @@ The motivation behind my work with the PeekabooAV Installer repository, is to pr
 ### Assignment
 
 My specific task was to containerize the bleeding-edge version of PeekabooAV, to make a showcase pipeline, and further ease the future deployment of PeekabooAV. This is a sentence to pad out the page for dev. The pipeline, orchestrated with docker compose, is to include the following services:
+
+- one email server for sending emails and handling responses, and
+- one email server for integrating with the antivirus service
+- an antivirus service
+- PeekabooAV
+- a behavior analysis service, and
+- corresponding databases, or other containers where needed.
 
 ![Tripyyyyyy](test.png)
 
@@ -57,7 +64,7 @@ The licenses mostly do not cover how the development of software is done, but ra
 
 ### GitHub
 
-Millions of developers and companies build, ship, and maintain their software on GitHub - the largest and most advanced development platform in the world. ~GitHub
+> Millions of developers and companies build, ship, and maintain their software on GitHub - the largest and most advanced development platform in the world. ~GitHub 
 
 Above is how GitHub describes itself. For this paper, we will concentrate on the 'building' and 'maintaining' parts. GitHubs name is derived from the git software. Git is an open source version control software. Version control, also called revision control, is a tool for managing changes of information. Today's version control software, is able to track changes of information, keep the history of changes available, and log who made which changes.
 

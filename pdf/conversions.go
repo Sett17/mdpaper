@@ -114,16 +114,23 @@ func ConvertEmphasis(span *ast.Emphasis) spec.Segment {
 func ConvertList(list *ast.List) *spec.Addable {
 	para := List{
 		Text: spec.Text{
-			FontSize:   globals.Cfg.FontSize,
-			LineHeight: globals.Cfg.LineHeight * 1.4,
+			FontSize: globals.Cfg.FontSize,
+			//LineHeight: globals.Cfg.LineHeight * 1.4,
+			LineHeight: 1.1,
 			Offset:     float64(globals.Cfg.FontSize),
 		},
 	}
+	i := 1
 	for n := list.FirstChild(); n != nil; n = n.NextSibling() {
 		// do not support nested lists for now
 		switch n.Kind() {
 		case ast.KindListItem:
-			seg := ConvertListItem(n.(*ast.ListItem))
+			prefix := ""
+			if list.IsOrdered() {
+				prefix = strconv.Itoa(i)
+				i++
+			}
+			seg := ConvertListItem(n.(*ast.ListItem), prefix, string(list.Marker))
 			para.Add(&seg)
 		}
 	}
@@ -131,9 +138,9 @@ func ConvertList(list *ast.List) *spec.Addable {
 	return &a
 }
 
-func ConvertListItem(item *ast.ListItem) spec.Segment {
+func ConvertListItem(item *ast.ListItem, prefix string, marker string) spec.Segment {
 	seg := spec.Segment{
-		Content: "- " + string(item.Text(globals.File)),
+		Content: prefix + marker + " " + string(item.Text(globals.File)),
 		Font:    spec.SerifRegular,
 	}
 	return seg

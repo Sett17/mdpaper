@@ -30,7 +30,7 @@ go install github.com/sett17/mdpaper
 - [x] Unordered list
   - `- item`
   - nested lists are not currently supported
-- [ ] Ordered list
+- [x] Ordered list
   - `1. item`
 - [ ] Checkboxes
   - `- [x] item`

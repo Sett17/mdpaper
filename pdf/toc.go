@@ -9,8 +9,12 @@ import (
 )
 
 func GenerateTOC(tree *ChapterTree) Toc {
-	m := globals.MmToPt(15)
-	col := NewColumn(globals.A4Width-3*m, globals.A4Height-m, 1.5*m, globals.A4Height-.5*m)
+	col := NewColumn(
+		globals.A4Width-(globals.Cfg.Page.MarginHori*2),
+		globals.A4Height-(globals.Cfg.Page.MarginTop+globals.Cfg.Page.MarginBottom),
+		globals.Cfg.Page.MarginHori,
+		globals.A4Height-globals.Cfg.Page.MarginTop,
+	)
 	headSeg := spec.Segment{
 		Content: "Table of Contents",
 		Font:    spec.SansBold,

@@ -3,11 +3,11 @@ package main
 import (
 	"fmt"
 	"github.com/dustin/go-humanize"
+	"github.com/sett17/mdpaper/globals"
+	"github.com/sett17/mdpaper/pdf"
 	"github.com/yuin/goldmark"
 	"github.com/yuin/goldmark/text"
 	"gopkg.in/yaml.v2"
-	"mdpaper/globals"
-	"mdpaper/pdf"
 	"os"
 	"strings"
 	"time"

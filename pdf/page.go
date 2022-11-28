@@ -2,8 +2,8 @@ package pdf
 
 import (
 	"fmt"
-	"mdpaper/globals"
-	"mdpaper/pdf/spec"
+	"github.com/sett17/mdpaper/globals"
+	"github.com/sett17/mdpaper/pdf/spec"
 )
 
 type Page struct {

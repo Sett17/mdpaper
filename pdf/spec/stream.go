@@ -2,8 +2,8 @@ package spec
 
 import (
 	"bytes"
+	"github.com/sett17/mdpaper/globals"
 	"io"
-	"mdpaper/globals"
 )
 
 type Stream struct {

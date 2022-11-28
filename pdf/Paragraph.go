@@ -1,6 +1,6 @@
 package pdf
 
-import "mdpaper/pdf/spec"
+import "github.com/sett17/mdpaper/pdf/spec"
 
 type Paragraph struct {
 	spec.Text

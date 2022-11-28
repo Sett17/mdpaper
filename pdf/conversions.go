@@ -2,9 +2,9 @@ package pdf
 
 import (
 	"bytes"
+	"github.com/sett17/mdpaper/globals"
+	"github.com/sett17/mdpaper/pdf/spec"
 	"github.com/yuin/goldmark/ast"
-	"mdpaper/globals"
-	"mdpaper/pdf/spec"
 	"strconv"
 	"strings"
 )

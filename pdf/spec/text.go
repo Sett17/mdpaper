@@ -3,8 +3,8 @@ package spec
 import (
 	"bytes"
 	"fmt"
+	"github.com/sett17/mdpaper/globals"
 	"math"
-	"mdpaper/globals"
 	"strings"
 )
 

@@ -3,8 +3,8 @@ package pdf
 import (
 	"bytes"
 	"fmt"
-	"mdpaper/globals"
-	"mdpaper/pdf/spec"
+	"github.com/sett17/mdpaper/globals"
+	"github.com/sett17/mdpaper/pdf/spec"
 	"strings"
 )
 

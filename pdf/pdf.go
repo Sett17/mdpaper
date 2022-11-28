@@ -1,9 +1,9 @@
 package pdf
 
 import (
+	"github.com/sett17/mdpaper/globals"
+	"github.com/sett17/mdpaper/pdf/spec"
 	"github.com/yuin/goldmark/ast"
-	"mdpaper/globals"
-	"mdpaper/pdf/spec"
 	"time"
 )
 
@@ -53,7 +53,9 @@ func FromAst(md ast.Node) *spec.PDF {
 			if n.(*ast.Paragraph).ChildCount() <= 2 && n.FirstChild().Kind() == ast.KindImage {
 				xo, i, p := ConvertImage(n.FirstChild().(*ast.Image), n)
 				paper.Add(i)
-				paper.AddXObject(xo)
+				if xo != nil {
+					paper.AddXObject(xo)
+				}
 				paper.Add(p)
 			} else {
 				p := ConvertParagraph(n.(*ast.Paragraph), false)

@@ -71,8 +71,8 @@ var Default = Config{
 		Paragraph float64 `yaml:"paragraph"`
 		Heading   float64 `yaml:"heading"`
 	}{
-		Paragraph: 1.0,
-		Heading:   1.0,
+		Paragraph: 2.0,
+		Heading:   2.0,
 	},
 	Paper: struct {
 		Title  string `yaml:"title"`

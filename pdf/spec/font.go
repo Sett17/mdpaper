@@ -2,8 +2,8 @@ package spec
 
 import (
 	"github.com/beta/freetype/truetype"
+	"github.com/sett17/mdpaper/globals"
 	"golang.org/x/image/font"
-	"mdpaper/globals"
 	"os"
 	"strings"
 )

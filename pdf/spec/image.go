@@ -3,10 +3,10 @@ package spec
 import (
 	"bytes"
 	"fmt"
+	"github.com/sett17/mdpaper/globals"
 	"image"
 	_ "image/jpeg"
 	_ "image/png"
-	"mdpaper/globals"
 	"os"
 )
 
@@ -23,6 +23,8 @@ func NewImageObject(path string, mul float64) (XObject, Addable) {
 			GraphicRect: GraphicRect{
 				Pos: [2]float64{},
 			},
+			Ratio: 1.5,
+			Mul:   mul,
 		}
 		return XObject{}, &r
 	} else {

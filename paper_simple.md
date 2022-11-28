@@ -52,7 +52,7 @@ The licenses mostly do not cover how the development of software is done, but ra
 
 ### GitHub
 
-> Millions of developers and companies build, ship, and maintain their software on GitHub - the largest and most advanced development platform in the world. ~GitHub 
+> Millions of developers and companies build, ship, and maintain their software on GitHub - the largest and most advanced development platform in the world ~GitHub 
 
 Above is how GitHub describes itself. For this paper, we will concentrate on the 'building' and 'maintaining' parts. GitHubs name is derived from the git software. Git is an open source version control software. Version control, also called revision control, is a tool for managing changes of information. Today's version control software, is able to track changes of information, keep the history of changes available, and log who made which changes.
 

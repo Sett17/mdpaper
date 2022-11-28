@@ -1,7 +1,7 @@
 package pdf
 
 import (
-	"mdpaper/pdf/spec"
+	"github.com/sett17/mdpaper/pdf/spec"
 	"strings"
 )
 

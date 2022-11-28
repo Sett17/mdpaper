@@ -58,6 +58,7 @@ func (r *GraphicRect) Process(width float64) {
 type FillingRect struct {
 	GraphicRect
 	Ratio float64
+	Mul   float64
 }
 
 func (f *FillingRect) Height() float64 {

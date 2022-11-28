@@ -15,8 +15,8 @@ toc:
   lineHeight: 1.3
   fontSize: 11
 spaces:
-  paragraph: 1
-  heading: 1
+  paragraph: 2.0
+  heading: 3.0
 paper:
   title: Paper
   authors: Anonymous

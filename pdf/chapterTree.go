@@ -3,8 +3,8 @@ package pdf
 import (
 	"bytes"
 	"fmt"
+	"github.com/sett17/mdpaper/pdf/spec"
 	"io"
-	"mdpaper/pdf/spec"
 )
 
 const (

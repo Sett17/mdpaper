@@ -3,7 +3,7 @@ package spec
 import (
 	"crypto/md5"
 	"fmt"
-	"mdpaper/globals"
+	"github.com/sett17/mdpaper/globals"
 	"os"
 	"sort"
 	"time"

@@ -25,8 +25,8 @@ go install github.com/sett17/mdpaper
   - `**bold**`, `*italic*`, \`inline code\`
 - [x] `\fill` sequence
   - fills the remaining space in the column with whitespace
-- [ ] Image
-  - `![Text subtitle](path/to/img.png){options}`
+- [x] Image
+  - `![Text subtitle](path/to/img.png) sizeMultplier`
 - [x] Unordered list
   - `- item`
   - nested lists are not currently supported

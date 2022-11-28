@@ -4,7 +4,7 @@ startNumber: 1
 margin: 15
 columns: 2
 lineHeight: 1.2
-dbg: true
+dbg: false
 toc: true
 author:
   - Sett
@@ -156,7 +156,7 @@ The last part if this excerpt sets the service dependencies. By specifying the `
 
 #### Spam Filtering System - rspamd
 
-As explained above, we need a spam filtering system that communicates with PeekabooAV and acts as a milter for postfix. For this we chose rspamd, which is a widely used open source spam filtering system. An important feature of rspamd is the comprehensive Lua API, which allows us to write scripts to extend the functionality of the system. [@RspamdRspamd2022] We use this API to create a module that uses PeekabooAV to filter. Similar to the postfix containers, we created our own Dockerfile.
+As explained above, we need a spam filtering system that communicates with PeekabooAV and acts as a milter for postfix. For this we chose rspamd, which is a widely used open source spam filtering system. An important feature of rspamd is the comprehensive Lua API, which allows us to write scripts to extend the functionality of the system.  We use this API to create a module that uses PeekabooAV to filter. Similar to the postfix containers, we created our own Dockerfile.
 
 The structure of this Dockerfile is very similar to postfixes Dockerfile. We start from the same version of alpine linux and then install needed packages. The block of `COPY` commands copy over some configuration files and the custom Lua module that utilizes PeekabooAV.
 
@@ -181,7 +181,7 @@ As you can see, even if the filename is included in the same header, the quotati
 
 The Dockerfile for PeekabooAV has to be more complex than the previous Dockerfiles. This is primarily due to PeekabooAV not being available for installation with a package manager like apt. Instead, we need to build the application from source, and still keep the final image size small.
 
-To achieve this we used a special Dockerfile feature called multi-stage builds. [@UseMultistageBuilds2022]
+To achieve this we used a special Dockerfile feature called multi-stage builds. 
 With this feature we can define a regular Docker image that includes all the needed tools to build an application, and afterwards we define the actual application image, where we can include specific files or directories from the previous stage. This feature is useful to keep the image size small, because a lot of tools that are needed for building an application are not needed for running it.
 
 This excerpt is the first stage of the PeekabooAV Dockerfile, which is named `build`. The build stage installs all the needed dependencies and fully sets up PeekabooAV inside the `/opt/peekaboo` directory. This closely follows the installation instructions found in the PeekabooAV documentation, by installing some development tools, configuring a python environment, and creating needed configuration files.
@@ -208,7 +208,7 @@ A malicious file similiar to this is a common attack vector targeting Windows sy
 
 With a behaviour analysis engine, we can analyze this file with different analyzers. Some analyzers might try to detect the mime-type of the file to specify it as malicious or not. Others try to execute the file in a sandbox and keep track of all changes to the filesystem. The latter could detect that the supposed `cat.png` is actually downloading an executable file. There are more than 100 analyzers that come Cortex, these also include well known tools such as VirusTotal and Google Safe Browsing. Although for this showcase, we only enabled a single analyzer called FileInfo.
 
-The service definition for Cortex has no fundamental differences to the previous ones. Two notable things are the use of a premade image by The Hive Project, and the `docker.sock` volume. Internally Cortex uses docker to run each analyzer, in our use case this would mean running a docker instance inside another docker container. While this is possible, it is not recommended as it does not conform with the linux securiry model, and different issues regarding file systems can arise. [@UsingDockerinDockerYour] To solve this, Cortex can use any docker socket we pass to it. This essentially gives a container the ability to start another container alongside it on the same host machine, nullifying above mentioned problems. One limitation to this approach is that the host supposedly needs to be a linux machine, as Docker running on Windows via Hyper-V does not have a `docker.sock`.
+The service definition for Cortex has no fundamental differences to the previous ones. Two notable things are the use of a premade image by The Hive Project, and the `docker.sock` volume. Internally Cortex uses docker to run each analyzer, in our use case this would mean running a docker instance inside another docker container. While this is possible, it is not recommended as it does not conform with the linux securiry model, and different issues regarding file systems can arise.  To solve this, Cortex can use any docker socket we pass to it. This essentially gives a container the ability to start another container alongside it on the same host machine, nullifying above mentioned problems. One limitation to this approach is that the host supposedly needs to be a linux machine, as Docker running on Windows via Hyper-V does not have a `docker.sock`.
 
 Furthermore, Cortex is not set up to use directly from the docker image. As Cortex is controlled via web interface one would normally go through these steps on the first startup:
 
@@ -305,11 +305,11 @@ There are some more unusal tasks in ABAP Programming which the developers have t
 
 ADT (ABAP Development Tools) are a set of plugins for the Eclipse IDE, that adapt Eclipse for use with SAP ABAP programming. When installed you can use the connections you have defined in SAP GUI or define new ones, and connect to SAP Systems.
 
-<!-- ![Screenshot of Eclipse with ABAP view active](images/adt.png){ #fig:adt width=65% } -->
+<!-- ![Screenshot of Eclipse with ABAP view active](images/adt.png) 0.65 -->
 
 As visible in figure @fig:adt, the main way to interact with the connected ABAP system is the `Project Explorer` on the left-hand side. It is a panel showing all packages on the systems, where one can also add packages to their favorites. Packages are the way SAP elements, such as data elements, programs, etc., are organized. They can also be used recursively, meaning a package can be insider another package.
 
-[//]: # (![Screenshot of Project Explorer with some packages]&#40;images/pe.png&#41;{ #fig:pe width=90% })
+[//]: # (![Screenshot of Project Explorer with some packages]&#40;images/pe.png&#41; 0.90)
 
 In figure @fig:pe, one can see an example of how packages can be used to organize programs together with other elements they depend on.
 
@@ -325,11 +325,11 @@ As explained briefly in the Assignment section, knowledge of the new system in c
 
 Above figure illustrates the flow of data in the report. The `WHERE` clause, mentioned multiple times, is an important element of this report. At the of writing, there are about 900 thousand entries in the `dd03t` table, and the `WHERE` clause is used to limit the search space by filtering the names beforehand. If the user, for example knows with high probability that what they are looking for includes the work `EMMA` they can input `%EMMA%` into the `WHERE` clause, to limit the search space to just above 100 entries. Guessing a substring of the table the user is looking for is not complete solution to limit the search space, although it is likely better to use a search space of around 100 entries first, and if needed, use a search space that is several magnitudes larger.
 
-[//]: # (![Screenshot of input screen for the report]&#40;images/input.png&#41;{ #fig:input width=95% })
+[//]: # (![Screenshot of input screen for the report]&#40;images/input.png&#41; 0.95)
 
 Figure @fig:input shows the input screen for the report. Here one can see another input field that was not discussed previously. The `Row Limit` field is used to limit the number of rows that are selected from the `dd03t` table. This is not useful in most use cases, as it uses the `UP TO x ROWS` statement, which arbitrarily ends the select after the specified number of rows. It still can be useful if, for example, the `WHERE` clause produces a large search space that the user wants to limit even more, with the chance of randomly cutting out a part of the search space. It was also usesful while developing the report, and it does not culminate in a problem as the field is optional.
 
-[//]: # (![Screenshot of output table for search terms `CHECK` and `CASE`]&#40;images/output.png&#41;{ #fig:output width=65% })
+[//]: # (![Screenshot of output table for search terms `CHECK` and `CASE`]&#40;images/output.png&#41; 0.65)
 
 In figure @fig:output, one can see the output table that is filled by the report. This exact table is the result from using the search terms `CHECK` and `CASE`, which one can see in the headline of the output screen. The table is composed of four columns, the tabname field contains the name of the table/structure, and three boolean columns that indicate whether the table/structure contains at least on of the search terms in the name, description, or columns. As this result table uses AVL (ABAP List Viewer), the user has the ability to sort or filter the table through the SAP GUI, and even export it directly to an Excel file for further work.
 
@@ -347,7 +347,7 @@ As stated in the assigment, it is important to have a tool that can help a devel
 
 As briefly mentioned in the assignments, the toolbox is a program that is used by customers to more easily navigate and manage all the tools delivered by Energy4U.
 
-<!-- ![Screenshot of the toolbox](images/explorer.png){ #fig:toolbox width=95% } -->
+<!-- ![Screenshot of the toolbox](images/explorer.png) 0.95 -->
 
 The specific programs inside the toolbox are not of importance for my task, as I was only tasked to create the toolbox overview report itself.
 

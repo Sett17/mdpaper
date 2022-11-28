@@ -37,8 +37,8 @@ func NewImageObject(path string, mul float64) (XObject, Addable) {
 	x.Dictionary.Set("Type", "/XObject")
 	x.Dictionary.Set("Subtype", "/Image")
 	pixelMul := 1
-	if float64(iData.Bounds().Dx()) > 800 {
-		//pixelMul = 2
+	if float64(iData.Bounds().Dx()) > 1080 {
+		pixelMul = 2
 	}
 	x.Dictionary.Set("Width", iData.Bounds().Dx()/pixelMul)
 	x.Dictionary.Set("Height", iData.Bounds().Dy()/pixelMul)

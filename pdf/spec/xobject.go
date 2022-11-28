@@ -1,25 +1,12 @@
 package spec
 
 import (
-	"bytes"
 	"strings"
 )
 
 type XObject struct {
-	GenericObject
-	Dictionary
-	Stream
+	StreamObject
 	Name string
-}
-
-func (x *XObject) Bytes() []byte {
-	buf := bytes.Buffer{}
-	beg, end := x.ByteParts()
-	buf.Write(beg)
-	buf.Write(x.Dictionary.Bytes())
-	buf.Write(x.Stream.Bytes())
-	buf.Write(end)
-	return buf.Bytes()
 }
 
 func (x *XObject) Pointer() *Object {
@@ -35,5 +22,5 @@ func NewXObject(name string) XObject {
 	name = strings.ReplaceAll(name, "/", "_")
 	name = strings.ReplaceAll(name, "\\", "_")
 	name = strings.ToLower(name)
-	return XObject{GenericObject: GenericObject{id: LastId}, Name: name}
+	return XObject{StreamObject{GenericObject: GenericObject{id: LastId}}, name}
 }

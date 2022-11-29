@@ -4,7 +4,7 @@
 
 At Atos, we have the possibility to choose the department in which we want to perform our practical phase. For this purpose, a lot of departments introduce themselves and what they do, to the students. That is how I found my department, science+computing, and more specific scVenus.
 
-The overarching project I worked in, is called PeekabooAV. This is an Anti-Virus software, which can receive a file, for example from an email client, and pass it through its own rule engine, which intern may use other programs, such as behavioral analysis, to determine the risk of the file.
+The overarching project I worked in, is called PeekabooAV. This is an Anti-Virus software, which can receive a file, for example from an email client, and pass it through its own rule engine, which intern may use other programs, such as behavioral analysis, to determine the risk of the file. [@AtosWorldgridCompany]
 
 ### Motivation
 
@@ -40,7 +40,7 @@ My specific task was to containerize the bleeding-edge version of PeekabooAV, to
 
 ### Workflow
 
-Throughout the phase, my workflow was predominantly guided by a meeting twice a week. In these meetings, I presented the current state of my work, and discussed the next steps with my two colleagues in this project. My workday changed a lot during the duration of my involvement in the project. This is due to the fact that I had to make myself comfortable with the new tools and the already quite mature codebase of PeekabooAV. After I acquainted myself with the Docker tools and the overall structure of the PeekabooAV codebase, I incrementally created each part of the pipeline. This process started with PeekabooAV itself, and culminated with the 3 other services together with their respective containers.
+Throughout the phase, my workflow was predominantly guided by a meeting twice a week. In these meetings, I presented the current state of my work, and discussed the next steps with my two colleagues in this project. My workday changed a lot during the duration of my involvement in the project. This is due to the fact that I had to make myself comfortable with the new tools and the already quite mature codebase of PeekabooAV. After I acquainted myself with the Docker tools and the overall structure of the PeekabooAV codebase, I incrementally created each part of the pipeline. This process started with PeekabooAV itself, and culminated with the 3 other services together with their respective containers. [@Chooseopen] [@AtosWorldgridCompany] [@Curl]
 
 ### Open Source
 

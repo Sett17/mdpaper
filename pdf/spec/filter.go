@@ -69,8 +69,6 @@ type flate struct {
 // Encode implements encoding for a Flate filter.
 func (f flate) Encode(r io.Reader) (io.Reader, error) {
 
-	// TODO Optional decode parameters may need predictor preprocessing.
-
 	var b bytes.Buffer
 	w := zlib.NewWriter(&b)
 	defer w.Close()

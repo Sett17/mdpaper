@@ -21,7 +21,6 @@ type Font struct {
 }
 
 func (f *Font) AddToPDF(p *PDF) (ref string, name string) {
-	//TODO gen font object
 	fontObj := NewDictObject()
 	fontObj.Set("Type", "/Font")
 	fontObj.Set("Subtype", "/TrueType")
@@ -100,7 +99,7 @@ func generateDescriptor(f *Font, flags int) Dictionary {
 		angle = int(float64(slope.X) / float64(slope.Y))
 	}
 	d.Set("ItalicAngle", angle)
-	d.Set("StemV", 80) //TODO ?
+	d.Set("StemV", 80)
 	d.Set("CapHeight", int(f.Face.Metrics().CapHeight))
 	return d
 }

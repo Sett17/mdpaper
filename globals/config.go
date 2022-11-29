@@ -29,6 +29,10 @@ type Config struct {
 		Author string `yaml:"authors"`
 		Debug  bool   `yaml:"debug"`
 	}
+	Citation struct {
+		Enabled bool   `yaml:"enabled"`
+		File    string `yaml:"file"`
+	}
 }
 
 var Default = Config{
@@ -82,6 +86,13 @@ var Default = Config{
 		Title:  "Paper",
 		Author: "Anonymous",
 		Debug:  false,
+	},
+	Citation: struct {
+		Enabled bool   `yaml:"enabled"`
+		File    string `yaml:"file"`
+	}{
+		Enabled: true,
+		File:    "citations.bib",
 	},
 }
 

@@ -21,3 +21,6 @@ paper:
   title: Paper
   authors: Anonymous
   debug: false
+citation:
+  enabled: true
+  file: citations.bib

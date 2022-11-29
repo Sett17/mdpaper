@@ -69,13 +69,54 @@ func FromAst(md ast.Node) *spec.PDF {
 			paper.Add(b...)
 		}
 	}
+
+	// add elements for citations stuff
+	//if globals.Cfg.Citation.Enabled {
+	//	seg := spec.Segment{
+	//		Content: "Citations",
+	//		Font:    spec.SansBold,
+	//	}
+	//	head := Heading{
+	//		Text: spec.Text{
+	//			FontSize: int(float64(globals.Cfg.Text.FontSize) * 1.2),
+	//			//LineHeight: globals.Cfg.LineHeight * 1.5,
+	//			LineHeight: 1.0,
+	//			Offset:     0.0,
+	//		},
+	//		Level: 0,
+	//	}
+	//	head.Add(&seg)
+	//	var out spec.Addable = &head
+	//	paper.Add(&out)
+	//	para := List{
+	//		Text: spec.Text{
+	//			FontSize: globals.Cfg.Text.FontSize,
+	//			//LineHeight: globals.Cfg.LineHeight * 1.4,
+	//			LineHeight: globals.Cfg.Text.ListLineHeight,
+	//			Offset:     float64(globals.Cfg.Text.FontSize),
+	//		},
+	//	}
+	//	for key, idx := range globals.BibIndices {
+	//		seg := spec.Segment{
+	//			Content: fmt.Sprintf("[%d] %s", idx, globals.IEEE(globals.Bibs[key])),
+	//			Font:    spec.SerifRegular,
+	//		}
+	//		para.Add(&seg)
+	//	}
+	//	var a spec.Addable = &para
+	//	paper.Add(&a)
+	//}
+
 	headings := make([]*Heading, 0)
 	for _, e := range paper.Elements {
 		if h, ok := (*e).(*Heading); ok {
 			headings = append(headings, h)
 		}
 	}
-	//GenerateChapterTree(headings)
+	if globals.Cfg.Citation.Enabled {
+		headings = append(headings, CitationHeading)
+	}
+	GenerateChapterTree(headings)
 	chapters := GenerateChapterTree(headings)
 	for i, c := range chapters.Roots() {
 		c.Heading.Prefix = [6]int{i + 1}
@@ -109,8 +150,20 @@ func FromAst(md ast.Node) *spec.PDF {
 	for !paper.Finished() {
 		displayPageNumber++
 		realPageNumber++
-		page := NewPage(&paper, displayPageNumber, realPageNumber)
+		page := NewPage(&paper, displayPageNumber, realPageNumber, globals.Cfg.Page.Columns)
 		page.AddToPdf(&pdf, pageResources, pages.Reference(), &pagesArray)
+	}
+	if globals.Cfg.Citation.Enabled {
+		cits := Paper{}
+		var a spec.Addable = CitationHeading
+		cits.Add(&a)
+		cits.Add(citationList())
+		for !cits.Finished() {
+			displayPageNumber++
+			realPageNumber++
+			page := NewPage(&cits, displayPageNumber, realPageNumber, 1)
+			page.AddToPdf(&pdf, pageResources, pages.Reference(), &pagesArray)
+		}
 	}
 	if globals.Cfg.Toc.Enabled {
 		toc := GenerateTOC(&chapters)

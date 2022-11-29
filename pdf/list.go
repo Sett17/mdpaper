@@ -39,7 +39,9 @@ func (p *List) Process(maxWidth float64) {
 				l.Add(w+suffix, s.Font)
 				j++
 			} else {
-				l.Words[len(l.Words)-1] = strings.TrimRight(l.Words[len(l.Words)-1], " ")
+				if l.Width != 0 {
+					l.Words[len(l.Words)-1] = strings.TrimRight(l.Words[len(l.Words)-1], " ")
+				}
 				l.CalculateSpacing(maxWidth)
 				p.Processed = append(p.Processed, l)
 				l = &spec.TextLine{WordSpacing: 1.0}

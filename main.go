@@ -3,11 +3,13 @@ package main
 import (
 	"fmt"
 	"github.com/dustin/go-humanize"
+	"github.com/nickng/bibtex"
 	"github.com/sett17/mdpaper/globals"
+	goldmark_citeproc "github.com/sett17/mdpaper/goldmark-citeproc"
 	"github.com/sett17/mdpaper/pdf"
 	"github.com/yuin/goldmark"
 	"github.com/yuin/goldmark/text"
-	"gopkg.in/yaml.v2"
+	"gopkg.in/yaml.v3"
 	"os"
 	"strings"
 	"time"
@@ -27,22 +29,26 @@ func main() {
 		panic(err)
 	}
 	globals.File = inp
+
 	start := time.Now()
+
 	p := goldmark.New(
-		//goldmark.WithExtensions(meta.New(
-		//	meta.WithStoresInDocument(),
-		//)),
+		goldmark.WithExtensions(
+			&goldmark_citeproc.Extender{Indices: &globals.BibIndices},
+		),
 		goldmark.WithParserOptions()).Parser()
 	ast := p.Parse(text.NewReader(inp))
 	//ast.Dump(inp, 0)
+
 	fmt.Printf("Parsed in %v\n", time.Since(start))
+
 	cfgFile, err := os.ReadFile(configFile)
 	if err == nil {
 		err = yaml.Unmarshal(cfgFile, &globals.Cfg)
 		if err != nil {
 			panic(err)
 		}
-		fmt.Printf("Loaded config from %s\n", configFile)
+		fmt.Printf("Loaded config from %s in %v\n", configFile, time.Since(start))
 	} else {
 		if os.IsNotExist(err) {
 			//create cfg file
@@ -57,7 +63,22 @@ func main() {
 			fmt.Printf("Created config file %s\n", configFile)
 		}
 	}
+
+	if globals.Cfg.Citation.Enabled {
+		bibFile, err := os.OpenFile(globals.Cfg.Citation.File, os.O_RDONLY, 0644)
+		if err == nil {
+			bt, err := bibtex.Parse(bibFile)
+			if err != nil {
+				panic(err)
+			}
+			for _, v := range bt.Entries {
+				globals.Bibs[v.CiteName] = v
+			}
+		}
+	}
+
 	pp := pdf.FromAst(ast)
+
 	outName := strings.ReplaceAll(globals.Cfg.Paper.Title, " ", "_") + ".pdf"
 	outp, err := os.Create(outName)
 	if err != nil {
@@ -65,6 +86,7 @@ func main() {
 	}
 	pp.WriteFile(outp)
 	fmt.Printf("\nDone in %v\n", time.Since(start))
+
 	fi, err := outp.Stat()
 	if err == nil {
 		fmt.Printf("File '%s' size: %s\n", outName, humanize.Bytes(uint64(fi.Size())))

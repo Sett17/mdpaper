@@ -14,15 +14,15 @@ type Page struct {
 	Annots        []*spec.DictionaryObject
 }
 
-func NewPage(paper *Paper, displayNumber int, realNumber int) *Page {
+func NewPage(paper *Paper, displayNumber, realNumber, columns int) *Page {
 	p := &Page{DisplayNumber: displayNumber, RealNumber: realNumber, DictionaryObject: spec.NewDictObject()}
 	p.Set("Type", "/Page")
 	mediaBox := spec.NewArray()
 	mediaBox.Add(0, 0, globals.A4Width, globals.A4Height)
 	p.Set("MediaBox", mediaBox)
-	if globals.Cfg.Page.Columns == 1 {
+	if columns == 1 {
 		p.Columns = append(p.Columns, paper.SingleColumn())
-	} else if globals.Cfg.Page.Columns >= 2 {
+	} else if columns >= 2 {
 		c1, c2 := paper.DoubleColumn()
 		p.Columns = append(p.Columns, c1, c2)
 	}

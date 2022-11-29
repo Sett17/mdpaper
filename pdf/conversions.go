@@ -2,7 +2,9 @@ package pdf
 
 import (
 	"bytes"
+	"fmt"
 	"github.com/sett17/mdpaper/globals"
+	citeproc "github.com/sett17/mdpaper/goldmark-citeproc"
 	"github.com/sett17/mdpaper/pdf/spec"
 	"github.com/yuin/goldmark/ast"
 	"strconv"
@@ -58,8 +60,9 @@ func ConvertParagraph(p *ast.Paragraph, centered bool) *spec.Addable {
 		case ast.KindEmphasis:
 			seg := ConvertEmphasis(n.(*ast.Emphasis))
 			para.Add(&seg)
-		case ast.KindImage:
-			//TODO support images
+		case citeproc.Kind:
+			seg := ConvertCiteProc(n.(*citeproc.Node))
+			para.Add(&seg)
 		default:
 			continue
 		}
@@ -110,6 +113,13 @@ func ConvertEmphasis(span *ast.Emphasis) spec.Segment {
 		t.Font = spec.SerifBold
 	}
 	return t
+}
+
+func ConvertCiteProc(cite *citeproc.Node) spec.Segment {
+	return spec.Segment{
+		Content: fmt.Sprintf("[%d]", globals.BibIndices[cite.Key]),
+		Font:    spec.SerifRegular,
+	}
 }
 
 func ConvertList(list *ast.List) *spec.Addable {

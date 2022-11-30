@@ -95,7 +95,9 @@ func (t *tocEntry) Bytes() []byte {
 	buf.WriteString(fmt.Sprintf("%f TL\n 0 Tw\n", globals.Cfg.Toc.LineHeight*float64(globals.Cfg.Toc.FontSize)))
 
 	buf.WriteString(fmt.Sprintf("/%s %d Tf\n", t.Font.Name, globals.Cfg.Toc.FontSize))
-	buf.WriteString(fmt.Sprintf("(%s) Tj\n", t.processed))
+	buf.WriteString(fmt.Sprintf("("))
+	buf.Write(globals.PDFEncode(t.processed))
+	buf.WriteString(fmt.Sprintf(") Tj\n"))
 	buf.WriteString(fmt.Sprintf("%f %f TD\n", t.numberOffset-t.Offset, 0.0))
 	buf.WriteString(fmt.Sprintf("/%s %d Tf\n", t.Font.Name, globals.Cfg.Toc.FontSize))
 	buf.WriteString(fmt.Sprintf("(%s) Tj\n", fmt.Sprintf("%3d", t.Head.DisplayPage)))

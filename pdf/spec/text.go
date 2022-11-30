@@ -36,6 +36,7 @@ func (l *TextLine) Add(str string, font *Font) {
 	s := strings.ReplaceAll(str, "\\", "\\\\")
 	s = strings.ReplaceAll(s, "(", "\\(")
 	s = strings.ReplaceAll(s, ")", "\\)")
+
 	l.Words = append(l.Words, s)
 	//l.Words = append(l.Words, str)
 	l.Fonts = append(l.Fonts, font)
@@ -199,7 +200,9 @@ func (p *Text) Bytes() []byte {
 		for j := 0; j < len(l.Words); j++ {
 			if l.Fonts[j] != currFont {
 				if lineBuffer.Len() > 0 {
-					buf.WriteString(fmt.Sprintf("(%s) Tj\n", lineBuffer.String()))
+					buf.WriteString(fmt.Sprintf("("))
+					buf.Write(globals.PDFEncode(lineBuffer.String()))
+					buf.WriteString(fmt.Sprintf(") Tj\n"))
 					lineBuffer.Reset()
 				}
 				buf.WriteString(fmt.Sprintf("/%s %d Tf\n", l.Fonts[j].Name, p.FontSize))
@@ -209,7 +212,10 @@ func (p *Text) Bytes() []byte {
 			lineBuffer.WriteString(l.Words[j])
 		}
 		if lineBuffer.Len() > 0 {
-			buf.WriteString(fmt.Sprintf("(%s) Tj\n", lineBuffer.String()))
+			//buf.WriteString(fmt.Sprintf("(%s) Tj\n", u))
+			buf.WriteString(fmt.Sprintf("("))
+			buf.Write(globals.PDFEncode(lineBuffer.String()))
+			buf.WriteString(fmt.Sprintf(") Tj\n"))
 		}
 		if i != len(p.Processed)-1 {
 			buf.WriteString("T* ")

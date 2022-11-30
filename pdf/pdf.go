@@ -70,43 +70,6 @@ func FromAst(md ast.Node) *spec.PDF {
 		}
 	}
 
-	// add elements for citations stuff
-	//if globals.Cfg.Citation.Enabled {
-	//	seg := spec.Segment{
-	//		Content: "Citations",
-	//		Font:    spec.SansBold,
-	//	}
-	//	head := Heading{
-	//		Text: spec.Text{
-	//			FontSize: int(float64(globals.Cfg.Text.FontSize) * 1.2),
-	//			//LineHeight: globals.Cfg.LineHeight * 1.5,
-	//			LineHeight: 1.0,
-	//			Offset:     0.0,
-	//		},
-	//		Level: 0,
-	//	}
-	//	head.Add(&seg)
-	//	var out spec.Addable = &head
-	//	paper.Add(&out)
-	//	para := List{
-	//		Text: spec.Text{
-	//			FontSize: globals.Cfg.Text.FontSize,
-	//			//LineHeight: globals.Cfg.LineHeight * 1.4,
-	//			LineHeight: globals.Cfg.Text.ListLineHeight,
-	//			Offset:     float64(globals.Cfg.Text.FontSize),
-	//		},
-	//	}
-	//	for key, idx := range globals.BibIndices {
-	//		seg := spec.Segment{
-	//			Content: fmt.Sprintf("[%d] %s", idx, globals.IEEE(globals.Bibs[key])),
-	//			Font:    spec.SerifRegular,
-	//		}
-	//		para.Add(&seg)
-	//	}
-	//	var a spec.Addable = &para
-	//	paper.Add(&a)
-	//}
-
 	headings := make([]*Heading, 0)
 	for _, e := range paper.Elements {
 		if h, ok := (*e).(*Heading); ok {
@@ -172,7 +135,7 @@ func FromAst(md ast.Node) *spec.PDF {
 		tocPage.Annots = append(tocPage.Annots, links...)
 		tocPage.AddToPdf(&pdf, pageResources, pages.Reference(), &pagesArray)
 	}
-
+	
 	pages.Set("Kids", pagesArray)
 	pages.Set("Count", len(pagesArray.Items))
 	//endregion

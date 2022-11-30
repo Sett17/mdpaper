@@ -30,9 +30,17 @@ func citationList() *spec.Addable {
 			LineHeight: 1.4,
 		},
 	}
+
+	bibs := make([]string, len(globals.BibIndices)+1)
 	for key, idx := range globals.BibIndices {
+		bibs[idx] = fmt.Sprintf("[%d] %s", idx, globals.IEEE(globals.Bibs[key]))
+	}
+	for _, bib := range bibs {
+		//if bib == "" {
+		//	continue
+		//}
 		seg := spec.Segment{
-			Content: fmt.Sprintf("[%d] %s", idx, globals.IEEE(globals.Bibs[key])),
+			Content: bib,
 			Font:    spec.SerifRegular,
 		}
 		l.Add(&seg)

@@ -40,15 +40,17 @@ func main() {
 	ast := p.Parse(text.NewReader(inp))
 	//ast.Dump(inp, 0)
 
-	fmt.Printf("Parsed in %v\n", time.Since(start))
+	parsed := time.Now()
+	fmt.Printf("Parsed in %v\n", parsed.Sub(start))
 
 	cfgFile, err := os.ReadFile(configFile)
+	configT := time.Now()
 	if err == nil {
 		err = yaml.Unmarshal(cfgFile, &globals.Cfg)
 		if err != nil {
 			panic(err)
 		}
-		fmt.Printf("Loaded config from %s in %v\n", configFile, time.Since(start))
+		fmt.Printf("Loaded config from %s in %v\n", configFile, configT.Sub(parsed))
 	} else {
 		if os.IsNotExist(err) {
 			//create cfg file
@@ -75,22 +77,26 @@ func main() {
 				globals.Bibs[v.CiteName] = v
 			}
 		}
+		citT := time.Now()
+		fmt.Printf("Bibtex loaded in %v\n\n", citT.Sub(configT))
 	}
 
 	pp := pdf.FromAst(ast)
+
+	ppT := time.Now()
+	fmt.Printf("PDF generated in %v\n", ppT.Sub(parsed))
 
 	outName := strings.ReplaceAll(globals.Cfg.Paper.Title, " ", "_") + ".pdf"
 	outp, err := os.Create(outName)
 	if err != nil {
 		panic(err)
 	}
+	beforeWrite := time.Now()
 	pp.WriteFile(outp)
-	fmt.Printf("\nDone in %v\n", time.Since(start))
+	doneWrite := time.Now()
 
 	fi, err := outp.Stat()
-	if err == nil {
-		fmt.Printf("File '%s' size: %s\n", outName, humanize.Bytes(uint64(fi.Size())))
-	}
+	fmt.Printf("%s of PDF put into %s, in %v\n", humanize.Bytes(uint64(fi.Size())), outName, doneWrite.Sub(beforeWrite))
 
 	dbgOut, err := os.Create("debug.txt")
 	if err != nil {

@@ -2,6 +2,7 @@ package pdf
 
 import (
 	"github.com/sett17/mdpaper/pdf/spec"
+	"math"
 	"strings"
 )
 
@@ -9,10 +10,30 @@ type List struct {
 	spec.Text
 }
 
-//TODO make splittable
-//func (p *List) Split(percent float64) (spec.Addable, spec.Addable) {
-//
-//}
+// TODO make splittable
+func (p *List) Split(percent float64) (spec.Addable, spec.Addable) {
+	segCutoff := int(math.Max(float64(len(p.Segments))*percent, 1))
+	segsAfter := p.Segments[segCutoff-1:]
+	a1 := &List{
+		Text: spec.Text{
+			Segments:   p.Segments[:segCutoff-1],
+			Pos:        p.Pos,
+			FontSize:   p.FontSize,
+			LineHeight: p.LineHeight,
+			Processed:  make([]*spec.TextLine, 0),
+			Offset:     p.Offset},
+	}
+	a1.Process(p.Width)
+	a2 := &List{
+		Text: spec.Text{
+			Segments:   segsAfter,
+			FontSize:   p.FontSize,
+			LineHeight: p.LineHeight,
+			Processed:  make([]*spec.TextLine, 0),
+			Offset:     p.Offset},
+	}
+	return a1, a2
+}
 
 func (p *List) Process(maxWidth float64) {
 	p.Processed = make([]*spec.TextLine, 0)
@@ -23,7 +44,13 @@ func (p *List) Process(maxWidth float64) {
 		if len(s.Content) == 0 {
 			continue
 		}
-		split := strings.Split(s.Content, " ")
+		splitSmall := strings.Split(s.Content, " ")
+		split := make([]string, 0)
+		for _, s := range splitSmall {
+			if len(s) > 0 {
+				split = append(split, strings.SplitAfter(s, "/")...)
+			}
+		}
 		for j := 0; j < len(split); {
 			w := split[j]
 			if j != 0 && strings.TrimSpace(w) == "" {
@@ -32,7 +59,7 @@ func (p *List) Process(maxWidth float64) {
 			}
 			if s.Font.WordWidth(w, p.FontSize)+l.Width <= maxWidth {
 				suffix := ""
-				if j != len(split)-1 {
+				if j != len(split)-1 && !strings.HasSuffix(w, "/") {
 					suffix = " "
 				}
 				l.Width += s.Font.WordWidth(w+suffix, p.FontSize)
@@ -42,7 +69,7 @@ func (p *List) Process(maxWidth float64) {
 				if l.Width != 0 {
 					l.Words[len(l.Words)-1] = strings.TrimRight(l.Words[len(l.Words)-1], " ")
 				}
-				l.CalculateSpacing(maxWidth)
+				//l.CalculateSpacing(maxWidth)
 				p.Processed = append(p.Processed, l)
 				l = &spec.TextLine{WordSpacing: 1.0}
 			}

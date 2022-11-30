@@ -23,5 +23,21 @@ var Bibs = make(map[string]*bibtex.BibEntry)
 var BibIndices = make(map[string]int)
 
 func IEEE(entry *bibtex.BibEntry) string {
-	return fmt.Sprintf(" \"%s\" %s, %s", entry.Fields["title"], entry.Fields["url"], entry.Fields["urldate"])
+	if entry == nil {
+		return ""
+	}
+	title := strings.ReplaceAll(entry.Fields["title"].String(), "{", "")
+	title = strings.ReplaceAll(title, "}", "")
+	url := ""
+	if entry.Fields["url"] != nil {
+		url = entry.Fields["url"].String()
+	}
+	date := ""
+	if entry.Fields["urldate"] != nil {
+		date = entry.Fields["urldate"].String()
+	}
+
+	return fmt.Sprintf(" \"%s\" %s, %s", title, url, date)
+}
+
 }

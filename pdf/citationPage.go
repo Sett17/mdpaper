@@ -6,7 +6,7 @@ import (
 	"github.com/sett17/mdpaper/pdf/spec"
 )
 
-var CitationHeading = citationHeading()
+var CitationHeading *Heading
 
 func citationHeading() *Heading {
 	h := Heading{
@@ -16,7 +16,7 @@ func citationHeading() *Heading {
 			Offset:     0.0,
 		}, Level: 1}
 	seg := spec.Segment{
-		Content: "Citations",
+		Content: globals.Cfg.Citation.Heading,
 		Font:    spec.SansBold,
 	}
 	h.Add(&seg)
@@ -36,9 +36,6 @@ func citationList() *spec.Addable {
 		bibs[idx] = fmt.Sprintf("[%d] %s", idx, globals.IEEE(globals.Bibs[key]))
 	}
 	for _, bib := range bibs {
-		//if bib == "" {
-		//	continue
-		//}
 		seg := spec.Segment{
 			Content: bib,
 			Font:    spec.SerifRegular,

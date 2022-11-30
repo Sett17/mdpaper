@@ -9,27 +9,6 @@ import (
 )
 
 func GenerateTOC(tree *ChapterTree) Toc {
-	col := NewColumn(
-		globals.A4Width-(globals.Cfg.Page.MarginHori*2),
-		globals.A4Height-(globals.Cfg.Page.MarginTop+globals.Cfg.Page.MarginBottom),
-		globals.Cfg.Page.MarginHori,
-		globals.A4Height-globals.Cfg.Page.MarginTop,
-	)
-	headSeg := spec.Segment{
-		Content: "Table of Contents",
-		Font:    spec.SansBold,
-	}
-	head := Heading{
-		Text: spec.Text{
-			FontSize:   24,
-			LineHeight: 1.5,
-		},
-		Level: 0,
-	}
-	head.Add(&headSeg)
-	var h spec.Addable = &head
-	col.Add(&h)
-
 	ret := make([]*tocEntry, 0)
 	for _, e := range *tree {
 		te := tocEntry{
@@ -54,10 +33,14 @@ func (t Toc) GenerateLinks() []*spec.DictionaryObject {
 }
 
 func (t Toc) GenerateColumn() *Column {
-	m := globals.MmToPt(15)
-	col := NewColumn(globals.A4Width-3*m, globals.A4Height-m, 1.5*m, globals.A4Height-.5*m)
+	col := NewColumn(
+		globals.A4Width-(globals.MmToPt(globals.Cfg.Page.MarginHori)*2),
+		globals.A4Height-(globals.MmToPt(globals.Cfg.Page.MarginTop)+globals.MmToPt(globals.Cfg.Page.MarginBottom)),
+		globals.MmToPt(globals.Cfg.Page.MarginHori),
+		globals.A4Height-globals.MmToPt(globals.Cfg.Page.MarginTop),
+	)
 	headSeg := spec.Segment{
-		Content: "Table of Contents",
+		Content: globals.Cfg.Toc.Heading,
 		Font:    spec.SansBold,
 	}
 	head := Heading{

@@ -19,6 +19,7 @@ type Config struct {
 		Enabled    bool    `yaml:"enabled"`
 		LineHeight float64 `yaml:"lineHeight"`
 		FontSize   int     `yaml:"fontSize"`
+		Heading    string  `yaml:"heading"`
 	} `yaml:"toc"`
 	Spaces struct {
 		Paragraph float64 `yaml:"paragraph"`
@@ -32,6 +33,7 @@ type Config struct {
 	Citation struct {
 		Enabled bool   `yaml:"enabled"`
 		File    string `yaml:"file"`
+		Heading string `yaml:"heading"`
 	}
 }
 
@@ -66,10 +68,12 @@ var Default = Config{
 		Enabled    bool    `yaml:"enabled"`
 		LineHeight float64 `yaml:"lineHeight"`
 		FontSize   int     `yaml:"fontSize"`
+		Heading    string  `yaml:"heading"`
 	}{
 		Enabled:    true,
 		LineHeight: 1.3,
 		FontSize:   11,
+		Heading:    "Table of Contents",
 	},
 	Spaces: struct {
 		Paragraph float64 `yaml:"paragraph"`
@@ -90,9 +94,11 @@ var Default = Config{
 	Citation: struct {
 		Enabled bool   `yaml:"enabled"`
 		File    string `yaml:"file"`
+		Heading string `yaml:"heading"`
 	}{
 		Enabled: true,
 		File:    "citations.bib",
+		Heading: "References",
 	},
 }
 

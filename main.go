@@ -47,13 +47,13 @@ func main() {
 	configT := time.Now()
 	if err == nil {
 		err = yaml.Unmarshal(cfgFile, &globals.Cfg)
+		configT = time.Now()
 		if err != nil {
 			panic(err)
 		}
 		fmt.Printf("Loaded config from %s in %v\n", configFile, configT.Sub(parsed))
 	} else {
 		if os.IsNotExist(err) {
-			//create cfg file
 			out, err := yaml.Marshal(globals.Cfg)
 			if err != nil {
 				panic(err)
@@ -62,6 +62,7 @@ func main() {
 			if err != nil {
 				panic(err)
 			}
+			configT = time.Now()
 			fmt.Printf("Created config file %s\n", configFile)
 		}
 	}
@@ -106,7 +107,7 @@ func main() {
 	pp.WriteDebug(dbgOut)
 	fi, err = dbgOut.Stat()
 	if err == nil {
-		fmt.Printf("Debug written without stream size: %s\n", humanize.Bytes(uint64(fi.Size())))
+		fmt.Printf("Debug written without stream: %s\n", humanize.Bytes(uint64(fi.Size())))
 	}
 
 }

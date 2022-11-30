@@ -77,6 +77,7 @@ func FromAst(md ast.Node) *spec.PDF {
 		}
 	}
 	if globals.Cfg.Citation.Enabled {
+		CitationHeading = citationHeading()
 		headings = append(headings, CitationHeading)
 	}
 	GenerateChapterTree(headings)
@@ -135,7 +136,7 @@ func FromAst(md ast.Node) *spec.PDF {
 		tocPage.Annots = append(tocPage.Annots, links...)
 		tocPage.AddToPdf(&pdf, pageResources, pages.Reference(), &pagesArray)
 	}
-	
+
 	pages.Set("Kids", pagesArray)
 	pages.Set("Count", len(pagesArray.Items))
 	//endregion

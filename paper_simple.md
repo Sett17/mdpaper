@@ -19,7 +19,7 @@ Imagine this scenario:
 
 Although it is possible to test out PeekabooAV on its own, there is the definite need to test it with a full environment. This hurdle of setting up an environment, to test a software, is a major problem for adoption.
 
-The motiviation behind my work with the PeekabooAV Installer repository, is to provide a faster way to get a full pipeline environment, to foster the adoption of PeekabooAV. [@PeekabooAV2022] [@PeekabooAVInstaller2022a] [@ConversationsOtherTeam]
+The motivation behind my work with the PeekabooAV Installer repository, is to provide a faster way to get a full pipeline environment, to foster the adoption of PeekabooAV. [@PeekabooAV2022] [@PeekabooAVInstaller2022a] [@ConversationsOtherTeam]
 
 ### Assignment
 

@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"fmt"
 	"github.com/sett17/mdpaper/globals"
-	citeproc "github.com/sett17/mdpaper/goldmark-citeproc"
+	"github.com/sett17/mdpaper/goldmark-cite"
 	"github.com/sett17/mdpaper/pdf/spec"
 	"github.com/yuin/goldmark/ast"
 	"strconv"
@@ -60,8 +60,8 @@ func ConvertParagraph(p *ast.Paragraph, centered bool) *spec.Addable {
 		case ast.KindEmphasis:
 			seg := ConvertEmphasis(n.(*ast.Emphasis))
 			para.Add(&seg)
-		case citeproc.Kind:
-			seg := ConvertCiteProc(n.(*citeproc.Node))
+		case goldmark_cite.Kind:
+			seg := ConvertCiteProc(n.(*goldmark_cite.Node))
 			para.Add(&seg)
 		default:
 			continue
@@ -115,7 +115,7 @@ func ConvertEmphasis(span *ast.Emphasis) spec.Segment {
 	return t
 }
 
-func ConvertCiteProc(cite *citeproc.Node) spec.Segment {
+func ConvertCiteProc(cite *goldmark_cite.Node) spec.Segment {
 	return spec.Segment{
 		Content: fmt.Sprintf("[%d]", globals.BibIndices[cite.Key]),
 		Font:    spec.SerifRegular,

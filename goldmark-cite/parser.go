@@ -1,4 +1,4 @@
-package goldmark_citeproc
+package goldmark_cite
 
 import (
 	"bytes"
@@ -8,16 +8,6 @@ import (
 	"github.com/yuin/goldmark/text"
 )
 
-// Parser parses wikilinks.
-//
-// Install it on your goldmark Markdown object with Extender, or install it
-// directly on your goldmark Parser by using the WithInlineParsers option.
-//
-//	wikilinkParser := util.Prioritized(&wikilink.Parser{...}, 199)
-//	goldmarkParser.AddOptions(parser.WithInlineParsers(wikilinkParser))
-//
-// Note that the priority for the wikilink parser must 199 or lower to take
-// precednce over the plain Markdown link parser which has a priority of 200.
 type Parser struct {
 	Indices *map[string]int
 }

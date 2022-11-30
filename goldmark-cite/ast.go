@@ -1,4 +1,4 @@
-package goldmark_citeproc
+package goldmark_cite
 
 import (
 	"github.com/yuin/goldmark/ast"

@@ -5,7 +5,7 @@ import (
 	"github.com/dustin/go-humanize"
 	"github.com/nickng/bibtex"
 	"github.com/sett17/mdpaper/globals"
-	goldmark_citeproc "github.com/sett17/mdpaper/goldmark-citeproc"
+	"github.com/sett17/mdpaper/goldmark-cite"
 	"github.com/sett17/mdpaper/pdf"
 	"github.com/yuin/goldmark"
 	"github.com/yuin/goldmark/text"
@@ -34,7 +34,7 @@ func main() {
 
 	p := goldmark.New(
 		goldmark.WithExtensions(
-			&goldmark_citeproc.Extender{Indices: &globals.BibIndices},
+			&goldmark_cite.Extender{Indices: &globals.BibIndices},
 		),
 		goldmark.WithParserOptions()).Parser()
 	ast := p.Parse(text.NewReader(inp))

@@ -10,31 +10,8 @@ import (
 	"os"
 )
 
-func NewImageObject(path string, mul float64) (XObject, Addable) {
+func NewImageObject(iData image.Image, iName string, mul float64) (XObject, Addable) {
 	LastId++
-	iName := ""
-	var iData image.Image
-	iFile, err := os.Open(path)
-	//if err != nil {
-	//	panic(err)
-	//}
-	if err != nil {
-		r := FillingRect{
-			GraphicRect: GraphicRect{
-				Pos: [2]float64{},
-			},
-			Ratio: 1.5,
-			Mul:   mul,
-		}
-		return XObject{}, &r
-	} else {
-		iData, _, err = image.Decode(iFile)
-		iName = iFile.Name()
-		if err != nil {
-			panic(err)
-		}
-	}
-	defer iFile.Close()
 	x := NewXObject(iName)
 	x.AlwaysDeflate = true
 	x.Dictionary.Set("Type", "/XObject")
@@ -63,6 +40,33 @@ func NewImageObject(path string, mul float64) (XObject, Addable) {
 		Mul:       mul,
 	}
 	return x, &ia
+}
+
+func NewImageObjectFromFile(path string, mul float64) (XObject, Addable) {
+	iName := ""
+	var iData image.Image
+	iFile, err := os.Open(path)
+	//if err != nil {
+	//	panic(err)
+	//}
+	if err != nil {
+		r := FillingRect{
+			GraphicRect: GraphicRect{
+				Pos: [2]float64{},
+			},
+			Ratio: 1.5,
+			Mul:   mul,
+		}
+		return XObject{}, &r
+	} else {
+		iData, _, err = image.Decode(iFile)
+		iName = iFile.Name()
+		if err != nil {
+			panic(err)
+		}
+	}
+	defer iFile.Close()
+	return NewImageObject(iData, iName, mul)
 }
 
 type ImageAddable struct {

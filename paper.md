@@ -172,6 +172,8 @@ One notable aspect of these RFC is that they are not concrete standards that are
 
 I experienced this first hand, while working on this project. The problematic feature was how the meta information of an attachment is stored in the Email. To not go into specifics in this chapter, this problem,and the solution to it, will be discussed in the rspamd chapter under Services.
 
+\fill
+
 ## Pipeline
 
 ### Services
@@ -649,7 +651,7 @@ The function `check_last_command` is run after each step, it checks if the last 
 
 There is essentially a chain of dependencies between the services.
 
-<!-- ```{.mermaid with=1200 caption="Pipeline architecture"}
+```mermaid
 flowchart LR
   tx(postifx_tx)
   rx(postifx_rx)
@@ -665,7 +667,7 @@ flowchart LR
   p -.-> cs
   rx -.-> r
   r -.-> p
-``` -->
+```
 
 In the figure above you can see the dependencies between the services. Those dependencies have the effect that the startup of the showcase can take a lot of time as postfix_rx, which is used to send a test email, has a long dependency chain. The upside to this is that you can not use the pipeline if it is not set up properly, possibly eliminating confusion.
 
@@ -751,41 +753,24 @@ Other more specific parts of the SAP system will be discussed where necessary in
 
 As explained briefly in the Assignment section, knowledge of the new system in compulsory for a successful migration. For this reason, and to accustom myself with SAP and ABAP, I created a report that can find tables from simple search terms. More specifically, a user can input any number of simple search terms comprised of one or multiple words. The report will then search every table and structure found in the `dd02t` database table. This table is a standard table that contains the name and description of all other tables and structures delivered by SAP.
 
-[//]: # (```{.mermaid caption="Flowchart of the report"})
-
-[//]: # (graph TD)
-
-[//]: # (  input&#40;user input search terms and where clause&#41;)
-
-[//]: # (  filter&#40;filtered names&#41;)
-
-[//]: # (  searchName&#40;look for at least one<br/>search term in name&#41;)
-
-[//]: # (  searchDesc&#40;look for at least one<br/>search term in description&#41;)
-
-[//]: # (  searchKeys&#40;look for at least one<br/>search term in columns&#41;)
-
-[//]: # (  output&#40;Output table&#41;)
-
-[//]: # (  display&#40;&#40;display result<br/>table to user&#41;&#41;)
-
-[//]: # (  input -->|select `ddo3t` column `tabname` with supplied where clause| filter)
-
-[//]: # (  filter --> searchDesc)
-
-[//]: # (  filter --> searchName)
-
-[//]: # (  filter --> searchKeys)
-
-[//]: # (  searchDesc -->|add result to output| output)
-
-[//]: # (  searchName -->|add result to output| output)
-
-[//]: # (  searchKeys -->|add result to output| output)
-
-[//]: # (  output --> display)
-
-[//]: # (```)
+```mermaid
+graph TD
+  input(user input search terms and where clause)
+  f(filtered names)
+  searchName(look for at least one<br/>search term in name)
+  searchDesc(look for at least one<br/>search term in description)
+  searchKeys(look for at least one<br/>search term in columns)
+  output(Output table)
+  display((display result<br/>table to user))
+  input -->|select `ddo3t` column `tabname` with supplied where clause| f
+  f --> searchDesc
+  f --> searchName
+  f --> searchKeys
+  searchDesc -->|add result to output | output
+  searchName -->|add result to output| output
+  searchKeys -->|add result to output | output
+  output --> display
+```
 
 Above figure illustrates the flow of data in the report. The `WHERE` clause, mentioned multiple times, is an important element of this report. At the of writing, there are about 900 thousand entries in the `dd03t` table, and the `WHERE` clause is used to limit the search space by filtering the names beforehand. If the user, for example knows with high probability that what they are looking for includes the work `EMMA` they can input `%EMMA%` into the `WHERE` clause, to limit the search space to just above 100 entries. Guessing a substring of the table the user is looking for is not complete solution to limit the search space, although it is likely better to use a search space of around 100 entries first, and if needed, use a search space that is several magnitudes larger.
 
@@ -818,51 +803,29 @@ The specific programs inside the toolbox are not of importance for my task, as I
 
 Before I could get started with the report, I needed to find and understand the structure of the toolbox program, which is very divided into singular parts.
 
-[//]: # (```{.mermaid caption="Surrounding structure of the toolbox program"})
-
-[//]: # (graph TD)
-
-[//]: # (  core[[Toolbox core]])
-
-[//]: # (  docu[[Toolbox documentation]])
-
-[//]: # (  html[[Toolbox HTML]])
-
-[//]: # (  auth[[Toolbox authority]])
-
-[//]: # (  subgraph "Toolbox package")
-
-[//]: # (    explorer&#40;Toolbox Explorer program&#41;)
-
-[//]: # (    docu-.->html)
-
-[//]: # (    core-->explorer)
-
-[//]: # (    explorer-.->docu)
-
-[//]: # (    explorer-.->auth)
-
-[//]: # (    auth---authEx&#40;[program and SAP<br/>elements to<br/>check authrity]&#41;)
-
-[//]: # (    html---htmlEx&#40;[needed elements<br/>to facilitate HTML<br/>representation in SAP]&#41;)
-
-[//]: # (    docu---docuEx&#40;[needed elements<br/>to facilitate display of<br/>program documentation]&#41;)
-
-[//]: # (  end)
-
-[//]: # (  subgraph "Base GUI Package")
-
-[//]: # (    tree&#40;[classes to<br/>facilitate tree<br/>component]&#41;)
-
-[//]: # (    dynpro&#40;[SAP function<br/>-group for<br/>dynpros]&#41;)
-
-[//]: # (    explorer-.->tree)
-
-[//]: # (    dynpro-.-explorer)
-
-[//]: # (  end)
-
-[//]: # (```)
+```mermaid
+graph TD
+    core[[Toolbox core]]
+    docu[[Toolbox documentation]]
+    html[[Toolbox HTML]]
+    auth[[Toolbox authority]]
+    subgraph "Toolbox package"
+        explorer(Toolbox Explorer program)
+        docu-.->html
+        core-->explorer
+        explorer-.->docu
+        explorer-.->auth
+        auth---authEx([program and SAP<br/>elements to<br/>check authority])
+        html---htmlEx([needed elements<br/>to facilitate HTML<br/>representation in SAP])
+        docu---docuEx([needed elements<br/>to facilitate display of<br/>program documentation])
+    end
+    subgraph "Base GUI Package"
+        tree([classes to<br/>facilitate tree<br/>component])
+        dynpro([SAP function<br/>-group for<br/>dynpros])
+        explorer-.->tree
+        dynpro-.-explorer
+    end
+```
 
 As one can see in above figure, the program `Toolbox Explorer` is the main program, that is executed when opening the toolbox. Not every class and program is displayed in the figure, rather explanations are given in the round nodes. As most of this task was the tedious process of copying SAP elements into the new system, there were some uncommon problems, that likely only arise in a similar situation. There were multiple instances where the dependencies between the elements were circular in nature. This is not a problem in the execution of a program, and not while developing either, as classes are likely to be developed step by step und activated in chunks instead of whole. One example of such a dependecy loop is in the Toolbox HTML package, where the class `CL_HTML_ELEMENT` being activated was depending on the table type `TT_HTML_ELEMENTS` being active, which intern was depending on the structure `S_HTML_ELEMENT` also begin active. The loop is created as the aforementioned structure is dependent on the cited class. To solve this I edited the `S_HTML_ELEMENT` structure to not contain a field of the class. This breaks the chain, and allows all 3 elements to be activated. After this, I added the field back into the structure, and activated it again.
 

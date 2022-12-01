@@ -2,6 +2,8 @@
 *.md
 config.yaml
 *.txt
+*.bib
+images/**
 **/mdpaper
 **/mdpaper.exe
 !demo/**

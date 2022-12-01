@@ -209,7 +209,7 @@ func ConvertMermaid(fcb *ast.FencedCodeBlock) (retO *spec.XObject, retA *spec.Ad
 		panic(err)
 	}
 	inputFile.Close()
-	err = exec.Command("mmdc", "-i", inputFile.Name(), "-o", inputFile.Name()+".png").Run()
+	err = exec.Command("mmdc", "-i", inputFile.Name(), "-o", inputFile.Name()+".png", "-w", "1000").Run()
 	//if err != nil {
 	//	panic(err)
 	//}

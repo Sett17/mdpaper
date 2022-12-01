@@ -26,9 +26,10 @@ type Config struct {
 		Heading   float64 `yaml:"heading"`
 	}
 	Paper struct {
-		Title  string `yaml:"title"`
-		Author string `yaml:"authors"`
-		Debug  bool   `yaml:"debug"`
+		Title   string `yaml:"title"`
+		Author  string `yaml:"authors"`
+		Debug   bool   `yaml:"debug"`
+		Mermaid bool   `yaml:"mermaid"`
 	}
 	Citation struct {
 		Enabled bool   `yaml:"enabled"`
@@ -83,13 +84,15 @@ var Default = Config{
 		Heading:   2.0,
 	},
 	Paper: struct {
-		Title  string `yaml:"title"`
-		Author string `yaml:"authors"`
-		Debug  bool   `yaml:"debug"`
+		Title   string `yaml:"title"`
+		Author  string `yaml:"authors"`
+		Debug   bool   `yaml:"debug"`
+		Mermaid bool   `yaml:"mermaid"`
 	}{
-		Title:  "Paper",
-		Author: "Anonymous",
-		Debug:  false,
+		Title:   "Paper",
+		Author:  "Anonymous",
+		Debug:   false,
+		Mermaid: false,
 	},
 	Citation: struct {
 		Enabled bool   `yaml:"enabled"`

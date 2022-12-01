@@ -1,6 +1,7 @@
 package pdf
 
 import (
+	"fmt"
 	"github.com/sett17/mdpaper/globals"
 	"github.com/sett17/mdpaper/pdf/spec"
 	"github.com/yuin/goldmark/ast"
@@ -44,6 +45,8 @@ func FromAst(md ast.Node) *spec.PDF {
 	//endregion
 
 	//region convert all nodes to objects and accumulate in paper
+	fmt.Printf("Addding Elements\n")
+	i := 0
 	for n := md.FirstChild(); n != nil; n = n.NextSibling() {
 		switch n.Kind() {
 		case ast.KindHeading:
@@ -67,8 +70,25 @@ func FromAst(md ast.Node) *spec.PDF {
 		case ast.KindBlockquote:
 			b := ConvertBlockquote(n.(*ast.Blockquote))
 			paper.Add(b...)
+		case ast.KindFencedCodeBlock:
+			lang := string(n.(*ast.FencedCodeBlock).Language(globals.File))
+			if globals.Cfg.Paper.Mermaid && lang == "mermaid" {
+				xo, i := ConvertMermaid(n.(*ast.FencedCodeBlock))
+				paper.Add(i)
+				if xo != nil {
+					paper.AddXObject(xo)
+				}
+				continue
+			}
+		}
+		fmt.Printf(".")
+		i++
+		if i%80 == 0 {
+			fmt.Printf("\n")
 		}
 	}
+	fmt.Printf("\n")
+	fmt.Printf("Added %v elements\n", len(paper.Elements))
 
 	headings := make([]*Heading, 0)
 	for _, e := range paper.Elements {

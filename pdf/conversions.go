@@ -7,6 +7,8 @@ import (
 	"github.com/sett17/mdpaper/goldmark-cite"
 	"github.com/sett17/mdpaper/pdf/spec"
 	"github.com/yuin/goldmark/ast"
+	"os"
+	"os/exec"
 	"strconv"
 	"strings"
 )
@@ -162,7 +164,7 @@ func ConvertImage(image *ast.Image, node ast.Node) (retO *spec.XObject, retA *sp
 	if node.ChildCount() == 2 {
 		mul, _ = strconv.ParseFloat(strings.TrimSpace(string(node.FirstChild().NextSibling().Text(globals.File))), 64)
 	}
-	io, ia := spec.NewImageObject(string(image.Destination), mul)
+	io, ia := spec.NewImageObjectFromFile(string(image.Destination), mul)
 	retO = &io
 	retA = &ia
 	para := Paragraph{
@@ -188,5 +190,32 @@ func ConvertBlockquote(bq *ast.Blockquote) (ret []*spec.Addable) {
 			ret = append(ret, ConvertParagraph(c.(*ast.Paragraph), true))
 		}
 	}
+	return
+}
+
+func ConvertMermaid(fcb *ast.FencedCodeBlock) (retO *spec.XObject, retA *spec.Addable) {
+	inputFile, err := os.CreateTemp("", "mdpapermmd")
+	if err != nil {
+		panic(err)
+	}
+	defer os.Remove(inputFile.Name())
+	buf := bytes.Buffer{}
+	for i := 0; i < fcb.Lines().Len(); i++ {
+		at := fcb.Lines().At(i)
+		buf.Write(at.Value(globals.File))
+	}
+	_, err = inputFile.Write(buf.Bytes())
+	if err != nil {
+		panic(err)
+	}
+	inputFile.Close()
+	err = exec.Command("mmdc", "-i", inputFile.Name(), "-o", inputFile.Name()+".png").Run()
+	//if err != nil {
+	//	panic(err)
+	//}
+	io, ia := spec.NewImageObjectFromFile(inputFile.Name()+".png", 1.0)
+	retO = &io
+	retA = &ia
+	defer os.Remove(inputFile.Name() + ".png")
 	return
 }

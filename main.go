@@ -18,7 +18,7 @@ import (
 //TODO custom errors
 
 func main() {
-	file := "paper_simple.md"
+	file := "paper.md"
 	configFile := "config.yaml"
 	if len(os.Args) > 1 {
 		file = os.Args[1]
@@ -38,7 +38,9 @@ func main() {
 		),
 		goldmark.WithParserOptions()).Parser()
 	ast := p.Parse(text.NewReader(inp))
+
 	//ast.Dump(inp, 0)
+	//return
 
 	parsed := time.Now()
 	fmt.Printf("Parsed in %v\n", parsed.Sub(start))

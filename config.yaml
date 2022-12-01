@@ -22,6 +22,7 @@ paper:
     title: Paper
     authors: Anonymous
     debug: false
+    mermaid: false
 citation:
     enabled: true
     file: citations.bib

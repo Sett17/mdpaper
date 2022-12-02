@@ -72,7 +72,7 @@ func FromAst(md ast.Node) *spec.PDF {
 			paper.Add(b...)
 		case ast.KindFencedCodeBlock:
 			lang := string(n.(*ast.FencedCodeBlock).Language(globals.File))
-			if globals.Cfg.Paper.Mermaid && lang == "mermaid" {
+			if globals.Cfg.Code.Mermaid && lang == "mermaid" {
 				xo, i := ConvertMermaid(n.(*ast.FencedCodeBlock))
 				paper.Add(i)
 				if xo != nil {
@@ -80,6 +80,8 @@ func FromAst(md ast.Node) *spec.PDF {
 				}
 				continue
 			}
+			c := ConvertCode(n.(*ast.FencedCodeBlock))
+			paper.Add(c)
 		}
 		fmt.Printf(".")
 		i++

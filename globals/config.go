@@ -24,17 +24,24 @@ type Config struct {
 	Spaces struct {
 		Paragraph float64 `yaml:"paragraph"`
 		Heading   float64 `yaml:"heading"`
+		Code      float64 `yaml:"code"`
 	}
 	Paper struct {
-		Title   string `yaml:"title"`
-		Author  string `yaml:"authors"`
-		Debug   bool   `yaml:"debug"`
-		Mermaid bool   `yaml:"mermaid"`
+		Title  string `yaml:"title"`
+		Author string `yaml:"authors"`
+		Debug  bool   `yaml:"debug"`
 	}
 	Citation struct {
 		Enabled bool   `yaml:"enabled"`
 		File    string `yaml:"file"`
 		Heading string `yaml:"heading"`
+	}
+	Code struct {
+		Style            string  `yaml:"style"`
+		FontSize         int     `yaml:"fontSize"`
+		CharacterSpacing float64 `yaml:"characterSpacing"`
+		LineNumbers      bool    `yaml:"lineNumbers"`
+		Mermaid          bool    `yaml:"mermaid"`
 	}
 }
 
@@ -79,20 +86,20 @@ var Default = Config{
 	Spaces: struct {
 		Paragraph float64 `yaml:"paragraph"`
 		Heading   float64 `yaml:"heading"`
+		Code      float64 `yaml:"code"`
 	}{
 		Paragraph: 2.0,
 		Heading:   2.0,
+		Code:      2.0,
 	},
 	Paper: struct {
-		Title   string `yaml:"title"`
-		Author  string `yaml:"authors"`
-		Debug   bool   `yaml:"debug"`
-		Mermaid bool   `yaml:"mermaid"`
+		Title  string `yaml:"title"`
+		Author string `yaml:"authors"`
+		Debug  bool   `yaml:"debug"`
 	}{
-		Title:   "Paper",
-		Author:  "Anonymous",
-		Debug:   false,
-		Mermaid: false,
+		Title:  "Paper",
+		Author: "Anonymous",
+		Debug:  false,
 	},
 	Citation: struct {
 		Enabled bool   `yaml:"enabled"`
@@ -102,6 +109,19 @@ var Default = Config{
 		Enabled: true,
 		File:    "citations.bib",
 		Heading: "References",
+	},
+	Code: struct {
+		Style            string  `yaml:"style"`
+		FontSize         int     `yaml:"fontSize"`
+		CharacterSpacing float64 `yaml:"characterSpacing"`
+		LineNumbers      bool    `yaml:"lineNumbers"`
+		Mermaid          bool    `yaml:"mermaid"`
+	}{
+		Style:            "dracula",
+		FontSize:         10,
+		CharacterSpacing: -.75,
+		LineNumbers:      true,
+		Mermaid:          false,
 	},
 }
 

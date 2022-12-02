@@ -3,6 +3,9 @@ package pdf
 import (
 	"bytes"
 	"fmt"
+	"github.com/alecthomas/chroma"
+	"github.com/alecthomas/chroma/lexers"
+	"github.com/alecthomas/chroma/styles"
 	"github.com/sett17/mdpaper/globals"
 	"github.com/sett17/mdpaper/goldmark-cite"
 	"github.com/sett17/mdpaper/pdf/spec"
@@ -218,4 +221,30 @@ func ConvertMermaid(fcb *ast.FencedCodeBlock) (retO *spec.XObject, retA *spec.Ad
 	retA = &ia
 	defer os.Remove(inputFile.Name() + ".png")
 	return
+}
+
+func ConvertCode(fcb *ast.FencedCodeBlock) *spec.Addable {
+	lexer := lexers.Get(string(fcb.Language(globals.File)))
+	if lexer == nil {
+		lexer = lexers.Fallback
+	}
+	lexer = chroma.Coalesce(lexer)
+
+	text := bytes.Buffer{}
+	for i := 0; i < fcb.Lines().Len(); i++ {
+		at := fcb.Lines().At(i)
+		text.Write(at.Value(globals.File))
+	}
+	toks, err := lexer.Tokenise(nil, text.String())
+	if err != nil {
+		panic(err)
+	}
+
+	fc := FencedCode{
+		Tokens: toks,
+		Style:  styles.Get(globals.Cfg.Code.Style),
+	}
+
+	var a spec.Addable = &fc
+	return &a
 }

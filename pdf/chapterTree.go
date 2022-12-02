@@ -104,8 +104,9 @@ func GenerateChapterTree(headings []*Heading) ChapterTree {
 func (tree ChapterTree) GenerateNumbering(root *ChapterNode) {
 	for i, r := range root.ChildNodes {
 		h := r.Heading
-		h.Prefix = root.Heading.Prefix
-		h.Prefix[h.Level-1] = i + 1
+		p := root.Heading.Prefix
+		p[h.Level-1] = i + 1
+		h.SetPrefix(p)
 		tree.GenerateNumbering(r)
 	}
 }

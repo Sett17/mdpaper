@@ -101,6 +101,8 @@ func main() {
 	fi, err := outp.Stat()
 	fmt.Printf("%s of PDF put into %s, in %v\n", humanize.Bytes(uint64(fi.Size())), outName, doneWrite.Sub(beforeWrite))
 
+	fmt.Printf("Total time: %v\n", doneWrite.Sub(start))
+
 	dbgOut, err := os.Create("debug.txt")
 	if err != nil {
 		panic(err)
@@ -108,8 +110,8 @@ func main() {
 	globals.Cfg.Paper.Debug = true
 	pp.WriteDebug(dbgOut)
 	fi, err = dbgOut.Stat()
-	if err == nil {
-		fmt.Printf("Debug written without stream: %s\n", humanize.Bytes(uint64(fi.Size())))
-	}
+	//if err == nil {
+	//fmt.Printf("Debug written without stream: %s\n", humanize.Bytes(uint64(fi.Size())))
+	//}
 
 }

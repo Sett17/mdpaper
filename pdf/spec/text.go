@@ -62,6 +62,10 @@ func (l *TextLine) Center(fullWidth float64) {
 	l.Offset = diff / 2
 }
 
+func (l *TextLine) String() string {
+	return strings.Join(l.Words, " ")
+}
+
 type Text struct {
 	Segments   []*Segment
 	Pos        [2]float64
@@ -130,7 +134,7 @@ func (p *Text) Height() float64 {
 func (p *Text) Process(maxWidth float64) {
 	p.Processed = make([]*TextLine, 0)
 
-	maxWidth -= p.Offset
+	maxWidth -= p.Offset / 2
 	p.Width = maxWidth
 	l := &TextLine{WordSpacing: 1.0}
 	for i := 0; i < len(p.Segments); {
@@ -190,6 +194,7 @@ func (p *Text) Bytes() []byte {
 
 	buf.WriteString("T*\n")
 
+	//TODO refactor all the text byte stuff to some common place
 	var currFont *Font = nil
 	for i, l := range p.Processed {
 		lineBuffer := strings.Builder{}
@@ -226,16 +231,15 @@ func (p *Text) Bytes() []byte {
 	}
 
 	buf.WriteString("ET\n")
+
 	//rect := GraphicRect{
 	//	Pos:   [2]float64{p.Pos[0] + p.Offset, p.Pos[1]},
 	//	W:     p.Width,
 	//	H:     p.Height(),
 	//	Color: [3]float64{0.5, 0.5, 0.0},
 	//}
-	//if rect.W == 0 {
-	//	//fmt.Println("dikka")
-	//}
 	//buf.WriteString("\n")
 	//buf.Write(rect.Bytes())
+
 	return buf.Bytes()
 }

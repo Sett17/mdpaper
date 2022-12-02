@@ -1,5 +1,7 @@
 ***version*
 LAST_RELEASE=$(curl -s https://api.github.com/repos/sett17/dev/releases | jq -r 'first.tag_name')
 echo "${LAST_RELEASE}"
-***demoexe*
+***demo*
 go build -o ./demo/ .
+cd demo
+./mdpaper

@@ -12,7 +12,7 @@ endobj
 8 0 obj
 <<
 /Author University of Wisconsin–Madison
-/CreationDate 20221201193902+01
+/CreationDate 20221202111355+01
 /Producer mdpaper
 /Title Zebra Finch
 >>
@@ -234,7 +234,7 @@ endobj
 /tinos-regular 9 0 R
 >>
 /XObject <<
-/_tmp_mdpapermmd2168115778_png 30 0 R
+/_tmp_mdpapermmd2029927790_png 30 0 R
 /images_bird1_png 28 0 R
 /images_notbird_png 32 0 R
 >>
@@ -259,7 +259,7 @@ endobj
 /tinos-regular 9 0 R
 >>
 /XObject <<
-/_tmp_mdpapermmd2168115778_png 30 0 R
+/_tmp_mdpapermmd2029927790_png 30 0 R
 /images_bird1_png 28 0 R
 /images_notbird_png 32 0 R
 >>
@@ -271,19 +271,23 @@ endobj
 36 0 obj
 <<
 /Filter /FlateDecode
-/Length 3443
+/Length 3338
 >>
 stream
 BT
 46.771654 781.417323 TD
 13.000000 TL
 T*
-1.000000 Tw
+8.047310 Tw
 /lato-bold 13 Tf
-(1 1 Zebras are cool) Tj
+(1 Color Preferences for Nesting) Tj
+T* 15.451225 Tw
+(Material in the Zebra Finch) Tj
+T* 1.000000 Tw
+(\(Poephila guttata\)) Tj
 ET
 BT
-42.519685 766.527559 TD
+42.519685 734.858268 TD
 13.200000 TL
 T*
 0.068333 Tw
@@ -311,7 +315,7 @@ T* 1.000000 Tw
 (of material, males collect most of the nesting material.) Tj
 ET
 BT
-42.519685 642.058268 TD
+42.519685 610.388976 TD
 13.200000 TL
 T*
 0.945788 Tw
@@ -344,11 +348,11 @@ T* 1.000000 Tw
 (preference [1].) Tj
 ET
 q
-232.937008 0 0 155.533981 48.649606 340.351058 cm
+232.937008 0 0 155.533981 48.649606 308.681767 cm
 /images_bird1_png Do
 Q
 BT
-42.519685 338.933735 TD
+42.519685 307.264444 TD
 10.000000 TL
 T*
 53.514309 0 Td
@@ -358,7 +362,7 @@ T*
 -53.514309 0 Td
 ET
 BT
-42.519685 323.264444 TD
+42.519685 291.595153 TD
 13.200000 TL
 T*
 1.254026 Tw
@@ -376,15 +380,15 @@ T* 1.000000 Tw
 (with collection of orange being intermediate.) Tj
 ET
 BT
-51.023622 234.615625 TD
+51.023622 202.946334 TD
 13.000000 TL
 T*
 1.000000 Tw
 /lato-bold 13 Tf
-(1.1 1.1 Methods) Tj
+(1.1 Methods) Tj
 ET
 BT
-42.519685 219.725861 TD
+42.519685 188.056570 TD
 13.200000 TL
 T*
 2.535920 Tw
@@ -406,14 +410,6 @@ T* 0.015009 Tw
 (embroidery floss and white dog fur as nesting material) Tj
 T* 1.838874 Tw
 (previous to this study. The colonies were housed in) Tj
-T* 1.110979 Tw
-(separate rooms, each approximately ) Tj
-/cutivemono-regular 11 Tf
-(17m^3) Tj
-/tinos-regular 11 Tf
-( and each) Tj
-T* 2.558131 Tw
-(contained eight artificial nest boxes. All behavioral) Tj
 ET
 endstream
 endobj
@@ -421,21 +417,16 @@ endobj
 37 0 obj
 <<
 /Filter /FlateDecode
-/Length 3461
+/Length 3486
 >>
 stream
 BT
 307.559055 785.196850 TD
 13.200000 TL
 T*
-4.475241 Tw
-/tinos-regular 11 Tf
-(observations were made from outside the colony) Tj
-T* 1.000000 Tw
-(rooms through one-way mirrors.) Tj
 ET
 BT
-307.559055 753.127559 TD
+307.559055 779.527559 TD
 13.200000 TL
 T*
 3.258870 Tw
@@ -483,15 +474,15 @@ T* 1.000000 Tw
 (preference\).) Tj
 ET
 BT
-316.062992 545.678740 TD
+316.062992 572.078740 TD
 13.000000 TL
 T*
 1.000000 Tw
 /lato-bold 13 Tf
-(1.2 1.2 Results) Tj
+(1.2 Results) Tj
 ET
 BT
-307.559055 530.788976 TD
+307.559055 557.188976 TD
 13.200000 TL
 T*
 0.406636 Tw
@@ -534,19 +525,19 @@ T* 1.000000 Tw
 (\).) Tj
 ET
 q
-245.196850 0 0 170.128892 307.559055 201.286856 cm
-/_tmp_mdpapermmd2168115778_png Do
+245.196850 0 0 170.128892 307.559055 227.686856 cm
+/_tmp_mdpapermmd2029927790_png Do
 Q
 BT
-316.062992 196.090006 TD
+316.062992 222.490006 TD
 13.000000 TL
 T*
 1.000000 Tw
 /lato-bold 13 Tf
-(1.3 1.3 Discussion) Tj
+(1.3 Discussion) Tj
 ET
 BT
-307.559055 181.200242 TD
+307.559055 207.600242 TD
 13.200000 TL
 T*
 0.595802 Tw
@@ -568,9 +559,14 @@ T* 1.000000 Tw
 (weaver birds preferred green nesting material.) Tj
 ET
 BT
-307.559055 69.930951 TD
+307.559055 96.330951 TD
 13.200000 TL
 T*
+1.184297 Tw
+/tinos-regular 11 Tf
+(It is possible that zebra finches prefer green material) Tj
+T* 0.085450 Tw
+(to red, black and orange because green is more similar) Tj
 ET
 endstream
 endobj
@@ -608,7 +604,7 @@ endobj
 /tinos-regular 9 0 R
 >>
 /XObject <<
-/_tmp_mdpapermmd2168115778_png 30 0 R
+/_tmp_mdpapermmd2029927790_png 30 0 R
 /images_bird1_png 28 0 R
 /images_notbird_png 32 0 R
 >>
@@ -620,19 +616,15 @@ endobj
 40 0 obj
 <<
 /Filter /FlateDecode
-/Length 2162
+/Length 2011
 >>
 stream
 BT
 42.519685 785.196850 TD
 13.200000 TL
 T*
-1.184297 Tw
+0.944544 Tw
 /tinos-regular 11 Tf
-(It is possible that zebra finches prefer green material) Tj
-T* 0.085450 Tw
-(to red, black and orange because green is more similar) Tj
-T* 0.944544 Tw
 (to the color of the grasses commonly used as nesting) Tj
 T* 10.837410 Tw
 (material in their natural environment. This) Tj
@@ -642,11 +634,11 @@ T* 1.000000 Tw
 (preference for red and black materials over orange.) Tj
 ET
 q
-232.937008 0 0 155.897945 48.649606 535.925677 cm
+232.937008 0 0 155.897945 48.649606 562.325677 cm
 /images_notbird_png Do
 Q
 BT
-42.519685 534.508354 TD
+42.519685 560.908354 TD
 10.000000 TL
 T*
 88.125029 0 Td
@@ -656,7 +648,7 @@ T*
 -88.125029 0 Td
 ET
 BT
-42.519685 518.839063 TD
+42.519685 545.239063 TD
 13.200000 TL
 T*
 0.993824 Tw
@@ -744,7 +736,7 @@ endobj
 /tinos-regular 9 0 R
 >>
 /XObject <<
-/_tmp_mdpapermmd2168115778_png 30 0 R
+/_tmp_mdpapermmd2029927790_png 30 0 R
 /images_bird1_png 28 0 R
 /images_notbird_png 32 0 R
 >>
@@ -756,7 +748,7 @@ endobj
 44 0 obj
 <<
 /Filter /FlateDecode
-/Length 380
+/Length 378
 >>
 stream
 BT
@@ -765,7 +757,7 @@ BT
 T*
 1.000000 Tw
 /lato-bold 13 Tf
-(2 2 Origins of this Paper) Tj
+(2 Origins of this Paper) Tj
 ET
 BT
 42.519685 766.527559 TD
@@ -824,7 +816,7 @@ endobj
 /tinos-regular 9 0 R
 >>
 /XObject <<
-/_tmp_mdpapermmd2168115778_png 30 0 R
+/_tmp_mdpapermmd2029927790_png 30 0 R
 /images_bird1_png 28 0 R
 /images_notbird_png 32 0 R
 >>
@@ -836,7 +828,7 @@ endobj
 48 0 obj
 <<
 /Filter /FlateDecode
-/Length 783
+/Length 781
 >>
 stream
 BT
@@ -845,7 +837,7 @@ BT
 T*
 1.000000 Tw
 /lato-bold 20 Tf
-(3 3 References) Tj
+(3 References) Tj
 ET
 BT
 42.519685 759.527559 TD
@@ -892,7 +884,7 @@ endobj
 50 0 obj
 <<
 /Filter /FlateDecode
-/Length 1397
+/Length 1473
 >>
 stream
 BT
@@ -906,92 +898,87 @@ ET
 BT
 42.519685 715.181102 TD
 14.300000 TL
- 0 Tw
 /lato-regular 11 Tf
-(1 Zebras are cool) Tj
-485.489667 0.000000 TD
-/lato-regular 11 Tf
-(  1) Tj
-ET
-q
-0.000000 w
-[1 2] 0 d
-141.101600 715.181102 m 525.174707 715.181102 l S
-Q
-BT
-70.866142 700.881102 TD
-14.300000 TL
- 0 Tw
-/lato-regular 11 Tf
-(1.1 Methods) Tj
-457.143211 0.000000 TD
+(1  Color  Preferences  for  Nesting  Material  in  the  Zebra  Finch  \(Poephila) Tj T*
+(guttata\)) Tj T*
+485.489667 14.300000 TD
 /lato-regular 11 Tf
 (  1) Tj
 ET
 q
 0.000000 w
 [1 2] 0 d
-143.946177 700.881102 m 525.174707 700.881102 l S
+94.962657 700.881102 m 525.174707 700.881102 l S
 Q
 BT
 70.866142 686.581102 TD
 14.300000 TL
- 0 Tw
 /lato-regular 11 Tf
-(1.2 Results) Tj
-457.143211 0.000000 TD
+(1.1  Methods) Tj T*
+457.143211 14.300000 TD
 /lato-regular 11 Tf
 (  1) Tj
 ET
 q
 0.000000 w
 [1 2] 0 d
-134.971871 686.581102 m 525.174707 686.581102 l S
+146.416992 686.581102 m 525.174707 686.581102 l S
 Q
 BT
 70.866142 672.281102 TD
 14.300000 TL
- 0 Tw
 /lato-regular 11 Tf
-(1.3 Discussion) Tj
-457.143211 0.000000 TD
+(1.2  Results) Tj T*
+457.143211 14.300000 TD
 /lato-regular 11 Tf
 (  1) Tj
 ET
 q
 0.000000 w
 [1 2] 0 d
-153.931853 672.281102 m 525.174707 672.281102 l S
+137.442685 672.281102 m 525.174707 672.281102 l S
 Q
 BT
-42.519685 657.981102 TD
+70.866142 657.981102 TD
 14.300000 TL
- 0 Tw
 /lato-regular 11 Tf
-(2 Origins of this Paper) Tj
-485.489667 0.000000 TD
+(1.3  Discussion) Tj T*
+457.143211 14.300000 TD
+/lato-regular 11 Tf
+(  1) Tj
+ET
+q
+0.000000 w
+[1 2] 0 d
+156.402667 657.981102 m 525.174707 657.981102 l S
+Q
+BT
+42.519685 643.681102 TD
+14.300000 TL
+/lato-regular 11 Tf
+(2  Origins  of  this  Paper) Tj T*
+485.489667 14.300000 TD
 /lato-regular 11 Tf
 (  3) Tj
 ET
 q
 0.000000 w
 [1 2] 0 d
-169.215119 657.981102 m 525.174707 657.981102 l S
+179.098377 643.681102 m 525.174707 643.681102 l S
 Q
 BT
-42.519685 643.681102 TD
+42.519685 629.381102 TD
 14.300000 TL
- 0 Tw
 /lato-regular 11 Tf
-(3 References) Tj
-485.489667 0.000000 TD
+(3  References) Tj T*
+485.489667 14.300000 TD
 /lato-regular 11 Tf
 (  4) Tj
 ET
 q
 0.000000 w
 [1 2] 0 d
-118.454599 643.681102 m 525.174707 643.681102 l S
+120.925414 629.381102 m 525.174707 629.381102 l S
 Q
 endstream
 endobj
@@ -1000,7 +987,7 @@ endobj
 <<
 /Border [0 0 0]
 /Dest [1 /XYZ 0.000000 781.417323 0]
-/Rect [42.519685 729.481102 528.009352 715.181102]
+/Rect [42.519685 700.881102 528.009352 729.481102]
 /Subtype /Link
 /Type /Annot
 >>
@@ -1009,8 +996,8 @@ endobj
 52 0 obj
 <<
 /Border [0 0 0]
-/Dest [1 /XYZ 0.000000 234.615625 0]
-/Rect [42.519685 715.181102 528.009352 700.881102]
+/Dest [1 /XYZ 0.000000 202.946334 0]
+/Rect [70.866142 686.581102 528.009352 700.881102]
 /Subtype /Link
 /Type /Annot
 >>
@@ -1019,8 +1006,8 @@ endobj
 53 0 obj
 <<
 /Border [0 0 0]
-/Dest [1 /XYZ 297.637795 545.678740 0]
-/Rect [42.519685 700.881102 528.009352 686.581102]
+/Dest [1 /XYZ 297.637795 572.078740 0]
+/Rect [70.866142 672.281102 528.009352 686.581102]
 /Subtype /Link
 /Type /Annot
 >>
@@ -1029,8 +1016,8 @@ endobj
 54 0 obj
 <<
 /Border [0 0 0]
-/Dest [1 /XYZ 297.637795 196.090006 0]
-/Rect [42.519685 686.581102 528.009352 672.281102]
+/Dest [1 /XYZ 297.637795 222.490006 0]
+/Rect [70.866142 657.981102 528.009352 672.281102]
 /Subtype /Link
 /Type /Annot
 >>
@@ -1040,7 +1027,7 @@ endobj
 <<
 /Border [0 0 0]
 /Dest [3 /XYZ 0.000000 781.417323 0]
-/Rect [42.519685 672.281102 528.009352 657.981102]
+/Rect [42.519685 643.681102 528.009352 657.981102]
 /Subtype /Link
 /Type /Annot
 >>
@@ -1050,7 +1037,7 @@ endobj
 <<
 /Border [0 0 0]
 /Dest [4 /XYZ 0.000000 781.417323 0]
-/Rect [42.519685 657.981102 528.009352 643.681102]
+/Rect [42.519685 629.381102 528.009352 643.681102]
 /Subtype /Link
 /Type /Annot
 >>
@@ -1073,7 +1060,7 @@ endobj
 /Last 63 0 R
 /Next 59 0 R
 /Parent 57 0 R
-/Title (1 Zebras are cool)
+/Title (1 1 Color Preferences for Nesting Material in the Zebra Finch (Poephila guttata))
 >>
 endobj
 
@@ -1084,7 +1071,7 @@ endobj
 /Next 60 0 R
 /Parent 57 0 R
 /Prev 58 0 R
-/Title (2 Origins of this Paper)
+/Title (2 2 Origins of this Paper)
 >>
 endobj
 
@@ -1094,38 +1081,38 @@ endobj
 /Dest [4 /XYZ 0.000000 781.417323 0]
 /Parent 57 0 R
 /Prev 59 0 R
-/Title (3 References)
+/Title (3 3 References)
 >>
 endobj
 
 61 0 obj
 <<
 /Count 0
-/Dest [1 /XYZ 0.000000 234.615625 0]
+/Dest [1 /XYZ 0.000000 202.946334 0]
 /Next 62 0 R
 /Parent 58 0 R
-/Title (1.1 Methods)
+/Title (1.1 1.1 Methods)
 >>
 endobj
 
 62 0 obj
 <<
 /Count 0
-/Dest [1 /XYZ 297.637795 545.678740 0]
+/Dest [1 /XYZ 297.637795 572.078740 0]
 /Next 63 0 R
 /Parent 58 0 R
 /Prev 61 0 R
-/Title (1.2 Results)
+/Title (1.2 1.2 Results)
 >>
 endobj
 
 63 0 obj
 <<
 /Count 0
-/Dest [1 /XYZ 297.637795 196.090006 0]
+/Dest [1 /XYZ 297.637795 222.490006 0]
 /Parent 58 0 R
 /Prev 62 0 R
-/Title (1.3 Discussion)
+/Title (1.3 1.3 Discussion)
 >>
 endobj
 
@@ -1156,40 +1143,40 @@ xref
 0000007955 00000 n 
 0000008389 00000 n 
 0000008796 00000 n 
-0000012314 00000 n 
-0000015850 00000 n 
-0000016007 00000 n 
-0000016414 00000 n 
-0000018651 00000 n 
-0000018723 00000 n 
-0000018880 00000 n 
-0000019287 00000 n 
-0000019741 00000 n 
-0000019813 00000 n 
-0000019970 00000 n 
-0000020370 00000 n 
-0000021227 00000 n 
-0000021384 00000 n 
-0000022856 00000 n 
-0000023011 00000 n 
-0000023166 00000 n 
-0000023323 00000 n 
-0000023480 00000 n 
-0000023635 00000 n 
-0000023790 00000 n 
-0000023865 00000 n 
-0000024016 00000 n 
-0000024159 00000 n 
-0000024278 00000 n 
-0000024396 00000 n 
-0000024529 00000 n 
+0000012209 00000 n 
+0000015770 00000 n 
+0000015927 00000 n 
+0000016334 00000 n 
+0000018420 00000 n 
+0000018492 00000 n 
+0000018649 00000 n 
+0000019056 00000 n 
+0000019508 00000 n 
+0000019580 00000 n 
+0000019737 00000 n 
+0000020137 00000 n 
+0000020992 00000 n 
+0000021149 00000 n 
+0000022697 00000 n 
+0000022852 00000 n 
+0000023007 00000 n 
+0000023164 00000 n 
+0000023321 00000 n 
+0000023476 00000 n 
+0000023631 00000 n 
+0000023706 00000 n 
+0000023920 00000 n 
+0000024065 00000 n 
+0000024186 00000 n 
+0000024308 00000 n 
+0000024445 00000 n 
 trailer
 <<
-/ID [<633E9D24F23CE2A90A2DD7BF3C32300A> <633E9D24F23CE2A90A2DD7BF3C32300A>]
+/ID [<0B0E1D2DAC87916C539698062448276E> <0B0E1D2DAC87916C539698062448276E>]
 /Info 8 0 R
 /Root 7 0 R
 /Size 64
 >>
 startxref
-24652
+24572
 %%EOF

@@ -66,8 +66,9 @@ type tocEntry struct {
 	Offset       float64
 	numberOffset float64
 	Font         *spec.Font
-	processed    string
-	line         spec.GraphicLine
+	//processed    string
+	processed []*spec.TextLine
+	line      spec.GraphicLine
 }
 
 func (t *tocEntry) Bytes() []byte {
@@ -75,26 +76,28 @@ func (t *tocEntry) Bytes() []byte {
 	buf.WriteString("BT\n")
 
 	buf.WriteString(fmt.Sprintf("%f %f TD\n", t.Pos[0]+t.Offset, t.Pos[1]))
-	buf.WriteString(fmt.Sprintf("%f TL\n 0 Tw\n", globals.Cfg.Toc.LineHeight*float64(globals.Cfg.Toc.FontSize)))
+	buf.WriteString(fmt.Sprintf("%f TL\n", globals.Cfg.Toc.LineHeight*float64(globals.Cfg.Toc.FontSize)))
 
 	buf.WriteString(fmt.Sprintf("/%s %d Tf\n", t.Font.Name, globals.Cfg.Toc.FontSize))
-	buf.WriteString(fmt.Sprintf("("))
-	buf.Write(globals.PDFEncode(t.processed))
-	buf.WriteString(fmt.Sprintf(") Tj\n"))
-	buf.WriteString(fmt.Sprintf("%f %f TD\n", t.numberOffset-t.Offset, 0.0))
+	for _, l := range t.processed {
+		buf.WriteString(fmt.Sprintf("("))
+		buf.Write(globals.PDFEncode(l.String()))
+		buf.WriteString(fmt.Sprintf(") Tj T*\n"))
+	}
+	buf.WriteString(fmt.Sprintf("%f %f TD\n", t.numberOffset-t.Offset, t.Height()-t.HeightOffset()))
 	buf.WriteString(fmt.Sprintf("/%s %d Tf\n", t.Font.Name, globals.Cfg.Toc.FontSize))
 	buf.WriteString(fmt.Sprintf("(%s) Tj\n", fmt.Sprintf("%3d", t.Head.DisplayPage)))
 
 	buf.WriteString("ET\n")
-	if globals.Cfg.Paper.Debug {
-		//rect := spec.GraphicRect{
-		//	Pos:   [2]float64{t.Pos[0], t.Pos[1]},
-		//	H:     -t.Height(),
-		//	W:     t.numberOffset,
-		//	Color: [3]float64{0.0, 0.5, 0.5},
-		//}
-		//buf.Write(rect.Bytes())
-	}
+
+	//rect := spec.GraphicRect{
+	//	Pos:   [2]float64{t.Pos[0] + t.Offset, t.Pos[1] - t.HeightOffset()},
+	//	H:     -t.Height(),
+	//	W:     t.numberOffset - t.Offset,
+	//	Color: [3]float64{0.0, 0.5, 0.5},
+	//}
+	//buf.Write(rect.Bytes())
+
 	buf.Write(t.line.Bytes())
 	return buf.Bytes()
 }
@@ -105,26 +108,38 @@ func (t *tocEntry) SetPos(x, y float64) {
 }
 
 func (t *tocEntry) Height() float64 {
-	return globals.Cfg.Toc.LineHeight * float64(globals.Cfg.Toc.FontSize)
+	return globals.Cfg.Toc.LineHeight * float64(globals.Cfg.Toc.FontSize) * float64(len(t.processed))
+}
+
+func (t *tocEntry) HeightOffset() float64 {
+	return globals.Cfg.Toc.LineHeight * float64(globals.Cfg.Toc.FontSize) * float64(len(t.processed)-1)
 }
 
 func (t *tocEntry) GenerateLink() *spec.DictionaryObject {
 	d := spec.NewDictObject()
 	d.Set("Type", "/Annot")
 	d.Set("Subtype", "/Link")
-	d.Set("Rect", fmt.Sprintf("[%f %f %f %f]", t.Pos[0], t.Pos[1]+t.Height(), t.numberOffset+t.Pos[0], t.Pos[1]))
+	// [llx lly urx ury]
+	d.Set("Rect", fmt.Sprintf("[%f %f %f %f]", t.Pos[0]+t.Offset, t.Pos[1]-t.HeightOffset(), t.numberOffset+t.Pos[0], t.Pos[1]+t.Height()-t.HeightOffset()))
 	d.Set("Border", "[0 0 0]")
 	d.Set("Dest", t.Head.Destination())
 	return &d
 }
 
 func (t *tocEntry) Process(width float64) {
-	t.processed = fmt.Sprintf("%s %s", t.Head.Numbering(), t.Head.String())
-	wordsEnd := t.Font.WordWidth(strings.TrimSpace(t.processed), globals.Cfg.Toc.FontSize) + t.Offset
 	t.numberOffset = width - t.Font.WordWidth(" 999", globals.Cfg.Toc.FontSize)
+
+	// this is awful
+	prevWidth := t.Head.Text.Width
+	t.Head.Process(t.numberOffset - t.Offset - globals.MmToPt(2.5))
+	t.processed = t.Head.Processed
+	t.Head.Process(prevWidth)
+
+	wordsEnd := t.Font.WordWidth(strings.TrimSpace(t.processed[len(t.processed)-1].String()), globals.Cfg.Toc.FontSize) + t.Offset
+	lineY := globals.Cfg.Toc.LineHeight * float64(globals.Cfg.Toc.FontSize) * float64(len(t.processed)-1)
 	t.line = spec.GraphicLine{
-		PosA:   [2]float64{wordsEnd + t.Pos[0] + globals.MmToPt(1), t.Pos[1]},
-		PosB:   [2]float64{t.numberOffset + t.Pos[0] - globals.MmToPt(1), t.Pos[1]},
+		PosA:   [2]float64{wordsEnd + t.Pos[0] + globals.MmToPt(1), t.Pos[1] - lineY},
+		PosB:   [2]float64{t.numberOffset + t.Pos[0] - globals.MmToPt(1), t.Pos[1] - lineY},
 		Dotted: true,
 	}
 }

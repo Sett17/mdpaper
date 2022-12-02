@@ -1,4 +1,4 @@
-# Zebras are cool
+# Color Preferences for Nesting Material in the Zebra Finch (Poephila guttata)
 
 The _**zebra finch**_ (**Poephila guttata**) is a sexually dimorphic, social estrildid native to the grasslands of Australia. They are opportunistic, year-round breeders which nest in colonies of variable size. Zebra finches form permanent pair bonds and both sexes share the responsibilities of nest building, incubation and rearing of young [@importantReference]. Morris, however, reported that although both sexes pick up and nibble on fragments of material, males collect most of the nesting material.
 

@@ -103,7 +103,7 @@ func FromAst(md ast.Node) *spec.PDF {
 	GenerateChapterTree(headings)
 	chapters := GenerateChapterTree(headings)
 	for i, c := range chapters.Roots() {
-		c.Heading.Prefix = [6]int{i + 1}
+		c.Heading.SetPrefix([6]int{i + 1})
 		chapters.GenerateNumbering(c)
 	}
 	//endregion

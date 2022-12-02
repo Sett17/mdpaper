@@ -1,7 +1,8 @@
 package spec
 
 import (
-	"strings"
+	"crypto/md5"
+	"fmt"
 )
 
 type XObject struct {
@@ -16,11 +17,12 @@ func (x *XObject) Pointer() *Object {
 
 func NewXObject(name string) XObject {
 	LastId++
-	name = strings.ReplaceAll(name, " ", "_")
-	name = strings.ReplaceAll(name, ".", "_")
-	name = strings.ReplaceAll(name, ":", "_")
-	name = strings.ReplaceAll(name, "/", "_")
-	name = strings.ReplaceAll(name, "\\", "_")
-	name = strings.ToLower(name)
+	//name = strings.ReplaceAll(name, " ", "_")
+	//name = strings.ReplaceAll(name, ".", "_")
+	//name = strings.ReplaceAll(name, ":", "_")
+	//name = strings.ReplaceAll(name, "/", "_")
+	//name = strings.ReplaceAll(name, "\\", "_")
+	//name = strings.ToLower(name)
+	name = fmt.Sprintf("%x", md5.Sum([]byte(name)))
 	return XObject{StreamObject{GenericObject: GenericObject{id: LastId}}, name}
 }

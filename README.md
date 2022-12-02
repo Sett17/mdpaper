@@ -43,18 +43,32 @@ toc:
   fontSize: 11                # fontsize in pt for toc entries
   heading: Table of Contents  # string to use as heading for the toc
 spaces:
-  paragraph: 1                # whitespace in mm after a paragraph
-  heading: 1                  # whitespace in mm after a heading
+  paragraph: 2                # whitespace in mm after a paragraph
+  heading: 2                  # whitespace in mm after a heading
+  code: 2                     # whitespace in mm after a code block
 paper:
-  title: Paper                # title of the paper (also name of pdf file)
+  title: Paper                # title of the paper (will also be the file name)
   authors: Anonymous          # author of the paper
-  debug: false                # whether to enable debug mode (no compression)
-  mermaid: false              # whether to enable mermaid support (requires mermaid-cli on your machine)
+  debug: false                # whether enable debug mode (uncompressed pdf)
 citation:
   enabled: true               # whether to enable citation support
-  file: citations.bib         # path to the bibtex file
+  file: citations.bib         # path to the bib file
   heading: References         # string to use as heading for the references
+code:
+  style: dracula              # style to use for code blocks
+  fontSize: 10                # fontsize in pt for code blocks
+  characterSpacing: -0.75     # character spacing for code blocks
+  lineNumbers: true           # whether to show line numbers
+  mermaid: false              # whether to enable mermaid diagram support
 ```
+
+### Code
+
+Highlighting support for code blocks is provided by [chroma](https://github.com/alecthomas/chroma). So all the styles available there can be used here.
+
+
+###### Note:
+_Currently, text inside code blocks is only broken at linebreaks at the start or end of a token. In practice this mostly means that you have to look out that the code does not get too long to go out of the column._
 
 ### Mermaid
 
@@ -68,6 +82,10 @@ You need to install the [mermaid-cli](https://github.com/mermaid-js/mermaid-cli)
 ```bash
 npm install -g @mermaid-js/mermaid-cli
 ```
+
+###### Note:
+
+_I suggest that you try if the `mmdc` command words as expected. The mermaid-cli is, in relation to the rest of the tool, quite slow. (e.g. w/o mermaid support: ~350ms, w/ mermaid support: ~6.5s on my own paper). If this bothers you because you need to generate the PDF often, disable it when no working in that part 😉_
 
 ## Currently unsupported commonly used markdown features
 
@@ -84,6 +102,7 @@ Thanks to the people behind:
 - [goldmark](https://github.com/yuin/goldmark) for the markdown parser
 - [bibtex](https://github.com/nickng/bibtex) for the bibtex parser
 - [mermaid](https://github.com/mermaid-js/mermaid) for great looking diagrams
+- [chroma](https://github.com/alecthomas/chroma) for the code highlighting
 
 
 - Paragraphs that are split in the beginning may be out of order

@@ -8,6 +8,7 @@ import (
 	"github.com/sett17/mdpaper/goldmark-cite"
 	"github.com/sett17/mdpaper/pdf"
 	"github.com/yuin/goldmark"
+	meta "github.com/yuin/goldmark-meta"
 	"github.com/yuin/goldmark/text"
 	"gopkg.in/yaml.v3"
 	"os"
@@ -35,6 +36,7 @@ func main() {
 	p := goldmark.New(
 		goldmark.WithExtensions(
 			&goldmark_cite.Extender{Indices: &globals.BibIndices},
+			meta.Meta, // just to ignore frontmatter
 		),
 		goldmark.WithParserOptions()).Parser()
 	ast := p.Parse(text.NewReader(inp))

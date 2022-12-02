@@ -19,7 +19,7 @@ const radius = 8
 func (r *GraphicRect) Bytes() []byte {
 	buf := bytes.Buffer{}
 	buf.WriteString("q\n")
-	buf.WriteString(fmt.Sprintf("%f %f %f RG\n", r.Color[0], r.Color[1], r.Color[2]))
+	buf.WriteString(fmt.Sprintf("%f %f %f rg %f %f %f RG\n", r.Color[0], r.Color[1], r.Color[2], r.Color[0], r.Color[1], r.Color[2]))
 	if r.Rounded {
 		buf.WriteString(fmt.Sprintf("%f %f m ", r.Pos[0]+radius, r.Pos[1]))
 		buf.WriteString(fmt.Sprintf("%f %f l ", r.Pos[0]+r.W-radius, r.Pos[1]))

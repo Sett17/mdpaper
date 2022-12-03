@@ -10,7 +10,6 @@ type List struct {
 	spec.Text
 }
 
-// TODO make splittable
 func (p *List) Split(percent float64) (spec.Addable, spec.Addable) {
 	segCutoff := int(math.Max(float64(len(p.Segments))*percent, 1))
 	segsAfter := p.Segments[segCutoff-1:]

@@ -64,6 +64,8 @@ code:
 
 ### Code
 
+*As of 1.8.0 code is, more or less, supported. Meaning it should be seen as a beta feature. There are a lot of kinks to work out.*
+
 Highlighting support for code blocks is provided by [chroma](https://github.com/alecthomas/chroma). So all the styles available there can be used here.
 
 

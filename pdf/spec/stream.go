@@ -2,6 +2,7 @@ package spec
 
 import (
 	"bytes"
+	"github.com/sett17/mdpaper/cli"
 	"github.com/sett17/mdpaper/globals"
 	"io"
 )
@@ -47,7 +48,7 @@ func (s *Stream) Commit() {
 func (s *Stream) Deflate() {
 	r, err := flate.Encode(flate{}, &s.data)
 	if err != nil {
-		panic(err)
+		cli.Error(err, true)
 	}
 	b, _ := io.ReadAll(r)
 	s.data = *bytes.NewBuffer(b)

@@ -6,6 +6,7 @@ import (
 	"github.com/alecthomas/chroma"
 	"github.com/alecthomas/chroma/lexers"
 	"github.com/alecthomas/chroma/styles"
+	"github.com/sett17/mdpaper/cli"
 	"github.com/sett17/mdpaper/globals"
 	"github.com/sett17/mdpaper/goldmark-cite"
 	"github.com/sett17/mdpaper/pdf/spec"
@@ -213,9 +214,9 @@ func ConvertMermaid(fcb *ast.FencedCodeBlock) (retO *spec.XObject, retA *spec.Ad
 	}
 	inputFile.Close()
 	err = exec.Command("mmdc", "-i", inputFile.Name(), "-o", inputFile.Name()+".png", "-w", "1000").Run()
-	//if err != nil {
-	//	panic(err)
-	//}
+	if err != nil {
+		cli.Warning("mmdc failed")
+	}
 	io, ia := spec.NewImageObjectFromFile(inputFile.Name()+".png", 1.0)
 	retO = &io
 	retA = &ia
@@ -237,7 +238,7 @@ func ConvertCode(fcb *ast.FencedCodeBlock) *spec.Addable {
 	}
 	toks, err := lexer.Tokenise(nil, text.String())
 	if err != nil {
-		panic(err)
+		cli.Error(err, true)
 	}
 
 	fc := FencedCode{

@@ -1,7 +1,9 @@
 package spec
 
 import (
+	"fmt"
 	"github.com/beta/freetype/truetype"
+	"github.com/sett17/mdpaper/cli"
 	"github.com/sett17/mdpaper/globals"
 	"golang.org/x/image/font"
 	"os"
@@ -52,12 +54,12 @@ func NewFont(filePath string, flags int) (f *Font) {
 	if err != nil {
 		fontFileBuf, err = globals.Fonts.ReadFile(filePath) // look in embedded fonts if not found
 		if err != nil {
-			panic(err)
+			cli.Error(fmt.Errorf("could not read font file %s", filePath), true)
 		}
 	}
 	fontFile, err := truetype.Parse(fontFileBuf)
 	if err != nil {
-		panic(err)
+		cli.Error(fmt.Errorf("could not parse font file %s", filePath), true)
 	}
 	f.Name = strings.ToLower(strings.ReplaceAll(fontFile.Name(truetype.NameIDPostscriptName), " ", "_"))
 	f.Font = fontFile

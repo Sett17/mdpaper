@@ -1,6 +1,7 @@
 *.pdf
 *.md
 config.yaml
+*.yaml
 *.txt
 *.bib
 images/**

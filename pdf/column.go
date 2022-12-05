@@ -14,7 +14,6 @@ type Column struct {
 
 func NewColumn(width, maxHeight, x, y float64) *Column {
 	c := Column{Width: width, MaxHeight: maxHeight, Pos: [2]float64{x, y}, StreamObject: spec.NewStreamObject(), bottom: y}
-	//c.Deflate = true
 
 	//if globals.Cfg.Paper.Debug {
 	//r := spec.GraphicRect{

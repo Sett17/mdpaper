@@ -1,7 +1,7 @@
 package pdf
 
 import (
-	"fmt"
+	"github.com/sett17/mdpaper/cli"
 	"github.com/sett17/mdpaper/globals"
 	"github.com/sett17/mdpaper/pdf/spec"
 	"github.com/yuin/goldmark/ast"
@@ -45,7 +45,7 @@ func FromAst(md ast.Node) *spec.PDF {
 	//endregion
 
 	//region convert all nodes to objects and accumulate in paper
-	fmt.Printf("Addding Elements\n")
+	cli.Output("Addding Elements\n")
 	i := 0
 	for n := md.FirstChild(); n != nil; n = n.NextSibling() {
 		switch n.Kind() {
@@ -83,14 +83,14 @@ func FromAst(md ast.Node) *spec.PDF {
 			c := ConvertCode(n.(*ast.FencedCodeBlock))
 			paper.Add(c)
 		}
-		fmt.Printf(".")
+		cli.Other(".")
 		i++
 		if i%80 == 0 {
-			fmt.Printf("\n")
+			cli.Other("\n")
 		}
 	}
-	fmt.Printf("\n")
-	fmt.Printf("Added %v elements\n", len(paper.Elements))
+	cli.Other("\n")
+	cli.Other("Added %v elements\n", len(paper.Elements))
 
 	headings := make([]*Heading, 0)
 	for _, e := range paper.Elements {

@@ -3,6 +3,7 @@ package spec
 import (
 	"bytes"
 	"fmt"
+	"github.com/sett17/mdpaper/cli"
 	"github.com/sett17/mdpaper/globals"
 	"image"
 	_ "image/jpeg"
@@ -46,9 +47,9 @@ func NewImageObjectFromFile(path string, mul float64) (XObject, Addable) {
 	iName := ""
 	var iData image.Image
 	iFile, err := os.Open(path)
-	//if err != nil {
-	//	panic(err)
-	//}
+	if err != nil {
+		cli.Warning("Image %s not found", path)
+	}
 	if err != nil {
 		r := FillingRect{
 			GraphicRect: GraphicRect{

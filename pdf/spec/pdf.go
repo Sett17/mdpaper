@@ -3,6 +3,7 @@ package spec
 import (
 	"crypto/md5"
 	"fmt"
+	"github.com/sett17/mdpaper/cli"
 	"github.com/sett17/mdpaper/globals"
 	"os"
 	"sort"
@@ -76,7 +77,7 @@ type writeTracker struct {
 func (w *writeTracker) Write(b []byte) {
 	l, err := w.File.Write(b)
 	if err != nil {
-		panic(err)
+		cli.Error(err, true)
 	}
 	w.L += l
 }
@@ -84,7 +85,7 @@ func (w *writeTracker) Write(b []byte) {
 func (w *writeTracker) WriteString(s string) {
 	l, err := w.File.WriteString(s)
 	if err != nil {
-		panic(err)
+		cli.Error(err, true)
 	}
 	w.L += l
 }

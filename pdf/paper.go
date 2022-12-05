@@ -55,7 +55,6 @@ func (p *Paper) DoubleColumn() (c1, c2 *Column) {
 func (p *Paper) nextColumn(width, height, x, y float64) (c *Column) {
 	c = NewColumn(width, height, x, y)
 
-	//for i, e := range p.Elements {
 	for i := 0; i < len(p.Elements); {
 		e := p.Elements[i]
 		if spill, full := c.Add(e); spill != nil || full {

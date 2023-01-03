@@ -82,8 +82,12 @@ func ConvertParagraph(p *ast.Paragraph, centered bool) *spec.Addable {
 }
 
 func ConvertText(text *ast.Text) spec.Segment {
+	suffix := ""
+	if text.SoftLineBreak() {
+		suffix = " "
+	}
 	return spec.Segment{
-		Content: string(text.Text(globals.File)),
+		Content: string(text.Text(globals.File)) + suffix,
 		Font:    spec.SerifRegular,
 	}
 }

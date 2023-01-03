@@ -25,7 +25,7 @@ func FromAst(md ast.Node) *spec.PDF {
 	pdf.AddObject(info.Pointer())
 	pdf.Info = info.Reference()
 
-	//region add fonts to pdf
+	//region FONTS
 	tinoRegRef, tinoRegName := spec.SerifRegular.AddToPDF(&pdf)
 	tinoBoldRef, tinoBoldName := spec.SerifBold.AddToPDF(&pdf)
 	tinoItalicRef, tinoItalicName := spec.SerifItalic.AddToPDF(&pdf)
@@ -44,7 +44,7 @@ func FromAst(md ast.Node) *spec.PDF {
 	pageResources.Set("Font", fonts)
 	//endregion
 
-	//region convert all nodes to objects and accumulate in paper
+	//region CONVERSIONS
 	cli.Output("Addding Elements\n")
 	i := 0
 	for n := md.FirstChild(); n != nil; n = n.NextSibling() {
@@ -110,7 +110,7 @@ func FromAst(md ast.Node) *spec.PDF {
 	}
 	//endregion
 
-	//region xobjects
+	//region XOBJECTS
 	xobjs := spec.NewDict()
 	for _, xo := range paper.XObjects {
 		xobjs.Set(xo.Name, xo.Reference())
@@ -119,7 +119,7 @@ func FromAst(md ast.Node) *spec.PDF {
 	pageResources.Set("XObject", xobjs)
 	//endregion
 
-	//region generate pages and add to pdf
+	//region PAGES
 	pages := spec.NewDictObject()
 	pages.Set("Type", "/Pages")
 	pdf.AddObject(pages.Pointer())
@@ -163,7 +163,7 @@ func FromAst(md ast.Node) *spec.PDF {
 	pages.Set("Count", len(pagesArray.Items))
 	//endregion
 
-	//region generate outline
+	//region OUTLINE
 	outlines := spec.NewDictObject()
 	outlines.Set("Type", "/Outlines")
 	outlines.Set("Count", len(chapters))

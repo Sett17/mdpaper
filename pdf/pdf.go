@@ -128,6 +128,11 @@ func FromAst(md ast.Node) *spec.PDF {
 	displayPageNumber := globals.Cfg.Page.StartPageNumber - 1
 	realPageNumber := 0
 	pagesArray := spec.NewArray()
+	var coverPage *Page
+	if globals.Cfg.Cover.Enabled {
+		realPageNumber++
+		coverPage = NewEmptyPage(-1, realPageNumber)
+	}
 	var tocPage *Page
 	if globals.Cfg.Toc.Enabled {
 		realPageNumber++
@@ -150,6 +155,11 @@ func FromAst(md ast.Node) *spec.PDF {
 			page := NewPage(&cits, displayPageNumber, realPageNumber, 1)
 			page.AddToPdf(&pdf, pageResources, pages.Reference(), &pagesArray)
 		}
+	}
+	if globals.Cfg.Cover.Enabled {
+		cover := generateCover()
+		coverPage.Columns = append(coverPage.Columns, cover)
+		coverPage.AddToPdf(&pdf, pageResources, pages.Reference(), &pagesArray)
 	}
 	if globals.Cfg.Toc.Enabled {
 		toc := GenerateTOC(&chapters)

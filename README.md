@@ -9,7 +9,7 @@
 Either download the latest release from the releases page or install with go:
 
 ```bash
-go install github.com/sett17/mdpaper
+go install github.com/sett17/mdpaper@latest
 ```
 
 ## Usage

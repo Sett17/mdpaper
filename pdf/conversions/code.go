@@ -17,7 +17,7 @@ import (
 func Mermaid(fcb *ast.FencedCodeBlock) (retO *spec.XObject, retA *spec.Addable) {
 	inputFile, err := os.CreateTemp("", "mdpapermmd")
 	if err != nil {
-		panic(err)
+		cli.Error(err, true)
 	}
 	defer os.Remove(inputFile.Name())
 	buf := bytes.Buffer{}

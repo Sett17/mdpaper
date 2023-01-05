@@ -8,6 +8,7 @@ import (
 	"github.com/sett17/mdpaper/cli"
 	"github.com/sett17/mdpaper/globals"
 	"github.com/sett17/mdpaper/goldmark-cite"
+	goldmark_math "github.com/sett17/mdpaper/goldmark-math"
 	"github.com/sett17/mdpaper/pdf"
 	"github.com/yuin/goldmark"
 	meta "github.com/yuin/goldmark-meta"
@@ -48,6 +49,7 @@ func main() {
 	p := goldmark.New(
 		goldmark.WithExtensions(
 			&goldmark_cite.Extender{Indices: &globals.BibIndices},
+			&goldmark_math.Extender{},
 			meta.Meta, // just to ignore frontmatter
 		),
 		goldmark.WithParserOptions()).Parser()

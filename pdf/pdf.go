@@ -88,6 +88,12 @@ func FromAst(md ast.Node) *spec.PDF {
 			}
 			c := conversions.Code(n.(*ast.FencedCodeBlock))
 			paper.Add(c)
+		case goldmark_math.KindMathBlock:
+			xo, i := conversions.Math(n.(*goldmark_math.MathBlock))
+			paper.Add(i)
+			if xo != nil {
+				paper.AddXObject(xo)
+			}
 		}
 		cli.Other(".")
 		i++

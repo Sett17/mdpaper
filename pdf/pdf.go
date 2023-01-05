@@ -3,7 +3,9 @@ package pdf
 import (
 	"github.com/sett17/mdpaper/cli"
 	"github.com/sett17/mdpaper/globals"
+	goldmark_math "github.com/sett17/mdpaper/goldmark-math"
 	"github.com/sett17/mdpaper/pdf/abstracts"
+	"github.com/sett17/mdpaper/pdf/conversions"
 	"github.com/sett17/mdpaper/pdf/elements"
 	"github.com/sett17/mdpaper/pdf/references"
 	"github.com/sett17/mdpaper/pdf/spec"
@@ -54,37 +56,37 @@ func FromAst(md ast.Node) *spec.PDF {
 	for n := md.FirstChild(); n != nil; n = n.NextSibling() {
 		switch n.Kind() {
 		case ast.KindHeading:
-			h := ConvertHeading(n.(*ast.Heading))
+			h := conversions.Heading(n.(*ast.Heading))
 			paper.Add(h)
 		case ast.KindParagraph:
 			if n.(*ast.Paragraph).ChildCount() <= 2 && n.FirstChild().Kind() == ast.KindImage {
-				xo, i, p := ConvertImage(n.FirstChild().(*ast.Image), n)
+				xo, i, p := conversions.Image(n.FirstChild().(*ast.Image), n)
 				paper.Add(i)
 				if xo != nil {
 					paper.AddXObject(xo)
 				}
 				paper.Add(p)
 			} else {
-				p := ConvertParagraph(n.(*ast.Paragraph), false)
+				p := conversions.Paragraph(n.(*ast.Paragraph), false)
 				paper.Add(p)
 			}
 		case ast.KindList:
-			l := ConvertList(n.(*ast.List))
+			l := conversions.List(n.(*ast.List))
 			paper.Add(l)
 		case ast.KindBlockquote:
-			b := ConvertBlockquote(n.(*ast.Blockquote))
+			b := conversions.Blockquote(n.(*ast.Blockquote))
 			paper.Add(b...)
 		case ast.KindFencedCodeBlock:
 			lang := string(n.(*ast.FencedCodeBlock).Language(globals.File))
 			if globals.Cfg.Code.Mermaid && lang == "mermaid" {
-				xo, i := ConvertMermaid(n.(*ast.FencedCodeBlock))
+				xo, i := conversions.Mermaid(n.(*ast.FencedCodeBlock))
 				paper.Add(i)
 				if xo != nil {
 					paper.AddXObject(xo)
 				}
 				continue
 			}
-			c := ConvertCode(n.(*ast.FencedCodeBlock))
+			c := conversions.Code(n.(*ast.FencedCodeBlock))
 			paper.Add(c)
 		}
 		cli.Other(".")

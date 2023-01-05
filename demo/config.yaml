@@ -20,7 +20,7 @@ spaces:
     heading: 2
     code: 2
 paper:
-    title: Zebra Finch
+    title: Color Preferences for Nesting Material in the Zebra Finch (Poephila guttata)
     authors: University of Wisconsin-Madison
     debug: false
 citation:
@@ -33,3 +33,6 @@ code:
     characterSpacing: 0
     lineNumbers: true
     mermaid: true
+cover:
+    enabled: true
+    subtitle: Investigating the Role of Visual Cues in Nest Selection Behavior

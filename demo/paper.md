@@ -8,6 +8,10 @@ Studies on the effects of colored plastic leg bands on pair formation show that 
 
 The purpose of this study was to test whether or not this preference for certain colors of leg bands generalizes to preference for certain colors of nesting material. It was hypothesized that zebra finches would collect more red or black material than light green, with collection of orange being intermediate.
 
+$$
+X=5
+$$
+
 # Methods
 
 The zebra finches used in this study were in three colonies in the lab of Dr. J.R. Baylis at the University of Wisconsin, Madison. Each colony contained between thirty and forty individual birds of both sexes, a variety of ages and several plumage types. All animals wore colored leg bands for individual identification and all had been exposed to grass, green embroidery floss and white dog fur as nesting material previous to this study. The colonies were housed in separate rooms, each approximately `17m^3` and each contained eight artificial nest boxes. All behavioral observations were made from outside the colony rooms through one-way mirrors.
@@ -32,7 +36,24 @@ Red, black, orange and light green DMC four-ply cotton embroidery floss was cut 
 
 # Results
 
-More green material was removed by the finches than red, more red than black and more black than orange. The ratio between material of different colors used in nest construction differed significantly from the expected `1:1:1:1` (`X^2=63.44, df=3, p<.005`). When colors were compared in pairs, the difference between values for green and red were not significantly different (`X^2=117, df=1, p>.5`). However, the values for black and orange were significantly different (`X^2=36.38, df=1, p<.005`).
+More green material was removed by the finches than red, more red than black and more black than orange. The ratio between material of different colors used in nest construction differed significantly from the expected `1:1:1:1`.
+
+$$
+X^2=63.44, df=3, p<.005
+$$
+
+
+When colors were compared in pairs, the difference between values for green and red were not significantly different.
+
+$$
+X^2=117, df=1, p>.5
+$$
+
+However, the values for black and orange were significantly different).
+
+$$
+X^2=36.38, df=1, p<.005
+$$
 
 ```mermaid
 sequenceDiagram
@@ -50,6 +71,8 @@ sequenceDiagram
 # Discussion
 
 The results from these experiments suggest that zebra finches do in fact have color preferences with regard to nesting material. Contrary to the predictions made by generalizing Burley studies [@anotherImportantReference], however, the zebra finches used in this study preferred green, red or black nesting material to orange. These results are similar to those of Collias and Collias (1981) who showed that weaver birds preferred green nesting material.
+
+
 
 It is possible that zebra finches prefer green material to red, black and orange because green is more similar to the color of the grasses commonly used as nesting material in their natural environment. This interpretation, however, does not explain the preference for red and black materials over orange.
 

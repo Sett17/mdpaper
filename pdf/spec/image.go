@@ -9,6 +9,7 @@ import (
 	_ "image/jpeg"
 	_ "image/png"
 	"os"
+	"strings"
 )
 
 func NewImageObject(iData image.Image, iName string, mul float64) (XObject, Addable) {
@@ -63,7 +64,19 @@ func NewImageObjectFromFile(path string, mul float64) (XObject, Addable) {
 		iData, _, err = image.Decode(iFile)
 		iName = iFile.Name()
 		if err != nil {
-			panic(err)
+			if strings.Split(iName, ".")[len(strings.Split(iName, "."))-1] == "svg" {
+				cli.Warning("\nSVG currently not supported\n")
+				r := FillingRect{
+					GraphicRect: GraphicRect{
+						Pos: [2]float64{},
+					},
+					Ratio: 1.5,
+					Mul:   mul,
+				}
+				return XObject{}, &r
+			} else {
+				cli.Error(err, true)
+			}
 		}
 	}
 	defer func(iFile *os.File) {

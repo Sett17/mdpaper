@@ -1,11 +1,13 @@
-package pdf
+package abstracts
 
 import (
 	"github.com/sett17/mdpaper/globals"
+	"github.com/sett17/mdpaper/pdf/elements"
+	"github.com/sett17/mdpaper/pdf/spacing"
 	"github.com/sett17/mdpaper/pdf/spec"
 )
 
-func generateCover() *Column {
+func GenerateCover() *Column {
 	col := NewColumn(
 		globals.A4Width-(globals.MmToPt(globals.Cfg.Page.MarginHori)*2),
 		globals.A4Height-(globals.MmToPt(globals.Cfg.Page.MarginTop)+globals.MmToPt(globals.Cfg.Page.MarginBottom)),
@@ -13,13 +15,13 @@ func generateCover() *Column {
 		globals.A4Height-globals.MmToPt(globals.Cfg.Page.MarginTop),
 	)
 
-	spacer1 := spec.NewSpacer(globals.MmToPt(10))
+	spacer1 := spacing.NewSpacer(globals.MmToPt(10))
 
 	headSeg := spec.Segment{
 		Content: globals.Cfg.Paper.Title,
 		Font:    spec.SansBold,
 	}
-	head := Paragraph{
+	head := elements.Paragraph{
 		Text: spec.Text{
 			FontSize:   24,
 			LineHeight: 1.4,
@@ -33,7 +35,7 @@ func generateCover() *Column {
 		Content: globals.Cfg.Cover.Subtitle,
 		Font:    spec.SansRegular,
 	}
-	sub := Paragraph{
+	sub := elements.Paragraph{
 		Text: spec.Text{
 			FontSize:   16,
 			LineHeight: 1.3,
@@ -43,13 +45,13 @@ func generateCover() *Column {
 	sub.Add(&subSeg)
 	var s spec.Addable = &sub
 
-	spacer2 := spec.NewSpacer(globals.MmToPt(10))
+	spacer2 := spacing.NewSpacer(globals.MmToPt(10))
 
 	authorSeg := spec.Segment{
 		Content: globals.Cfg.Paper.Author,
 		Font:    spec.SansRegular,
 	}
-	author := Paragraph{
+	author := elements.Paragraph{
 		Text: spec.Text{
 			FontSize:   16,
 			LineHeight: 1.3,

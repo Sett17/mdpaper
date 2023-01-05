@@ -20,55 +20,6 @@ func (p *PDF) AddObject(obj ...*Object) {
 	p.objects = append(p.objects, obj...)
 }
 
-//func (p *PDF) Bytes() []byte {
-//	d := bytes.Buffer{}
-//	// Header
-//	d.Write([]byte("%PDF-1.5\n"))
-//
-//	d.Write([]byte{0x25, 0xe2, 0xe3, 0xcf, 0xd3, 0x0a}) // comment line with non ascii characters so other tools know this file contains binary data
-//
-//	// Content
-//	offsets := make(map[int]int)
-//
-//	sort.SliceStable(p.objects, func(i, j int) bool {
-//		if so, ok := (*p.objects[i]).(*StreamObject); ok {
-//			if so.M["Type"] == "XObject" {
-//				return false
-//			}
-//		}
-//		return (*p.objects[i]).ID() < (*p.objects[j]).ID()
-//	})
-//	for _, s := range p.objects {
-//		offsets[(*s).ID()] = d.Len()
-//		d.Write((*s).Bytes())
-//	}
-//
-//	// Cross-reference table
-//	xrefOffset := d.Len()
-//	d.WriteString("xref\n")
-//	d.WriteString(fmt.Sprintf("0 %d\n", LastId+1))
-//	d.Write(objZeroXRef().Bytes())
-//
-//	for _, s := range p.objects {
-//		d.Write(xRefEntry{uint32(offsets[(*s).ID()]), 0, 'n'}.Bytes())
-//	}
-//
-//	//Trailer
-//	d.WriteString("trailer\n")
-//	trailerDict := NewDict()
-//	trailerDict.Set("Size", LastId+1)
-//	trailerDict.Set("Root", p.Root)
-//	//trailerDict.Set("Info", p.Info)
-//	//calculate ID
-//	ID := fmt.Sprintf("<%X>", md5.Sum([]byte(fmt.Sprintf("%s%s%d", time.Now(), globals.Cfg.Authors, LastId))))
-//	trailerDict.Set("ID", Array{Items: []interface{}{ID, ID}})
-//	d.Write(trailerDict.Bytes())
-//	d.WriteString("startxref\n")
-//	d.WriteString(fmt.Sprintf("%d\n", xrefOffset))
-//	d.WriteString("%%EOF\n")
-//	return d.Bytes()
-//}
-
 type writeTracker struct {
 	*os.File
 	L int
@@ -92,12 +43,13 @@ func (w *writeTracker) WriteString(s string) {
 
 func (p *PDF) WriteFile(f *os.File) {
 	d := &writeTracker{File: f}
-	// Header
+	//region HEADER
 	d.Write([]byte("%PDF-1.5\n"))
 
 	d.Write([]byte{0x25, 0xe2, 0xe3, 0xcf, 0xd3, 0x0a}) // comment line with non ascii characters so other tools know this file contains binary data
+	//endregion
 
-	// Content
+	//region CONTENT
 	offsets := make(map[int]int)
 
 	sort.SliceStable(p.objects, func(i, j int) bool {
@@ -112,8 +64,9 @@ func (p *PDF) WriteFile(f *os.File) {
 		offsets[(*s).ID()] = d.L
 		d.Write((*s).Bytes())
 	}
+	//endregion
 
-	// Cross-reference table
+	//region XREF
 	xrefOffset := d.L
 	d.WriteString("xref\n")
 	d.WriteString(fmt.Sprintf("0 %d\n", LastId+1))
@@ -122,8 +75,9 @@ func (p *PDF) WriteFile(f *os.File) {
 	for _, s := range p.objects {
 		d.Write(xRefEntry{uint32(offsets[(*s).ID()]), 0, 'n'}.Bytes())
 	}
+	//endregion
 
-	//Trailer
+	//region TRAILER
 	d.WriteString("trailer\n")
 	trailerDict := NewDict()
 	trailerDict.Set("Size", LastId+1)
@@ -136,16 +90,18 @@ func (p *PDF) WriteFile(f *os.File) {
 	d.WriteString("startxref\n")
 	d.WriteString(fmt.Sprintf("%d\n", xrefOffset))
 	d.WriteString("%%EOF\n")
+	//endregion
 }
 
 func (p *PDF) WriteDebug(f *os.File) {
 	d := &writeTracker{File: f}
-	// Header
+	//region HEADER DBG
 	d.Write([]byte("%PDF-1.5\n"))
 
 	d.Write([]byte{0x25, 0xe2, 0xe3, 0xcf, 0xd3, 0x0a}) // comment line with non ascii characters so other tools know this file contains binary data
+	//endregion
 
-	// Content
+	//region CONTENT DBG
 	offsets := make(map[int]int)
 
 	filtered := make([]*Object, 0, len(p.objects))
@@ -168,8 +124,9 @@ func (p *PDF) WriteDebug(f *os.File) {
 		offsets[(*s).ID()] = d.L
 		d.Write((*s).Bytes())
 	}
+	//endregion
 
-	// Cross-reference table
+	//region XREF DBG
 	xrefOffset := d.L
 	d.WriteString("xref\n")
 	d.WriteString(fmt.Sprintf("0 %d\n", LastId+1))
@@ -178,8 +135,9 @@ func (p *PDF) WriteDebug(f *os.File) {
 	for _, s := range filtered {
 		d.Write(xRefEntry{uint32(offsets[(*s).ID()]), 0, 'n'}.Bytes())
 	}
+	//endregion
 
-	//Trailer
+	//region TRAILER DBG
 	d.WriteString("trailer\n")
 	trailerDict := NewDict()
 	trailerDict.Set("Size", LastId+1)
@@ -192,4 +150,5 @@ func (p *PDF) WriteDebug(f *os.File) {
 	d.WriteString("\nstartxref\n")
 	d.WriteString(fmt.Sprintf("%d\n", xrefOffset))
 	d.WriteString("%%EOF\n")
+	//endregion
 }

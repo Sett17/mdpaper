@@ -9,6 +9,8 @@ import (
 	"github.com/sett17/mdpaper/cli"
 	"github.com/sett17/mdpaper/globals"
 	"github.com/sett17/mdpaper/goldmark-cite"
+	"github.com/sett17/mdpaper/pdf/elements"
+	"github.com/sett17/mdpaper/pdf/spacing"
 	"github.com/sett17/mdpaper/pdf/spec"
 	"github.com/yuin/goldmark/ast"
 	"os"
@@ -28,7 +30,7 @@ func ConvertHeading(h *ast.Heading) *spec.Addable {
 	if h.Level <= 2 {
 		fs = int(float64(fs) * 1.2)
 	}
-	para := Heading{
+	para := elements.Heading{
 		Text: spec.Text{
 			FontSize: fs,
 			//LineHeight: globals.Cfg.LineHeight * 1.5,
@@ -44,10 +46,10 @@ func ConvertHeading(h *ast.Heading) *spec.Addable {
 
 func ConvertParagraph(p *ast.Paragraph, centered bool) *spec.Addable {
 	if string(p.Text(globals.File)) == "\\fill" {
-		var a spec.Addable = &Filler{}
+		var a spec.Addable = &spacing.Filler{}
 		return &a
 	}
-	para := Paragraph{
+	para := elements.Paragraph{
 		Text: spec.Text{
 			FontSize:   globals.Cfg.Text.FontSize,
 			LineHeight: globals.Cfg.Text.LineHeight,
@@ -133,7 +135,7 @@ func ConvertCiteProc(cite *goldmark_cite.Node) spec.Segment {
 }
 
 func ConvertList(list *ast.List) *spec.Addable {
-	para := List{
+	para := elements.List{
 		Text: spec.Text{
 			FontSize: globals.Cfg.Text.FontSize,
 			//LineHeight: globals.Cfg.LineHeight * 1.4,
@@ -175,7 +177,7 @@ func ConvertImage(image *ast.Image, node ast.Node) (retO *spec.XObject, retA *sp
 	io, ia := spec.NewImageObjectFromFile(string(image.Destination), mul)
 	retO = &io
 	retA = &ia
-	para := Paragraph{
+	para := elements.Paragraph{
 		Text: spec.Text{
 			FontSize:   globals.Cfg.Text.FontSize - 1,
 			LineHeight: 1.0,
@@ -245,7 +247,7 @@ func ConvertCode(fcb *ast.FencedCodeBlock) *spec.Addable {
 		cli.Error(err, true)
 	}
 
-	fc := FencedCode{
+	fc := elements.FencedCode{
 		Tokens: toks,
 		Style:  styles.Get(globals.Cfg.Code.Style),
 	}

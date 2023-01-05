@@ -1,9 +1,11 @@
-package pdf
+package toc
 
 import (
 	"bytes"
 	"fmt"
 	"github.com/sett17/mdpaper/globals"
+	"github.com/sett17/mdpaper/pdf/abstracts"
+	"github.com/sett17/mdpaper/pdf/elements"
 	"github.com/sett17/mdpaper/pdf/spec"
 	"strings"
 )
@@ -32,8 +34,8 @@ func (t Toc) GenerateLinks() []*spec.DictionaryObject {
 	return ret
 }
 
-func (t Toc) GenerateColumn() *Column {
-	col := NewColumn(
+func (t Toc) GenerateColumn() *abstracts.Column {
+	col := abstracts.NewColumn(
 		globals.A4Width-(globals.MmToPt(globals.Cfg.Page.MarginHori)*2),
 		globals.A4Height-(globals.MmToPt(globals.Cfg.Page.MarginTop)+globals.MmToPt(globals.Cfg.Page.MarginBottom)),
 		globals.MmToPt(globals.Cfg.Page.MarginHori),
@@ -43,7 +45,7 @@ func (t Toc) GenerateColumn() *Column {
 		Content: globals.Cfg.Toc.Heading,
 		Font:    spec.SansBold,
 	}
-	head := Heading{
+	head := elements.Heading{
 		Text: spec.Text{
 			FontSize:   24,
 			LineHeight: 1.5,
@@ -61,7 +63,7 @@ func (t Toc) GenerateColumn() *Column {
 }
 
 type tocEntry struct {
-	Head         *Heading
+	Head         *elements.Heading
 	Pos          [2]float64
 	Offset       float64
 	numberOffset float64

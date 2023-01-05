@@ -25,15 +25,15 @@ var HelpProgArg = ProgArg{
 	Short: "h",
 	Long:  "help",
 	Func: func(_ string) {
-		cfmt.Printf(`
+		_, _ = cfmt.Printf(`
 {{Usage:}}::underline mdpaper [OPTIONS] MARKDOWN_FILE
 {{If multiple files are specified, only the last one will be used}}::gray`)
 		fmt.Println(Logo)
 		for _, arg := range ProgArgs {
-			cfmt.Printf("  {{-%s}}::purple, {{--%s}}::purple\t{{%s}}::gray\n", arg.Short, arg.Long, arg.Help)
+			_, _ = cfmt.Printf("  {{-%s}}::purple, {{--%s}}::purple\t{{%s}}::gray\n", arg.Short, arg.Long, arg.Help)
 		}
-		cfmt.Printf("\n  {{-%s}}::purple, {{--%s}}::purple\t{{%s}}::gray\n", "h", "help", "Show this help message")
-		cfmt.Printf("  {{-%s}}::purple, {{--%s}}::purple\t{{%s}}::gray\n", VersionProgArg.Short, VersionProgArg.Long, VersionProgArg.Help)
+		_, _ = cfmt.Printf("\n  {{-%s}}::purple, {{--%s}}::purple\t{{%s}}::gray\n", "h", "help", "Show this help message")
+		_, _ = cfmt.Printf("  {{-%s}}::purple, {{--%s}}::purple\t{{%s}}::gray\n", VersionProgArg.Short, VersionProgArg.Long, VersionProgArg.Help)
 		os.Exit(0)
 	},
 }
@@ -44,7 +44,7 @@ var VersionProgArg = ProgArg{
 	Long:  "version",
 	Help:  "Show the version of this program",
 	Func: func(_ string) {
-		cfmt.Printf("mdpaper version %s\n", globals.Version)
+		_, _ = cfmt.Printf("mdpaper version %s\n", globals.Version)
 		os.Exit(0)
 	},
 }

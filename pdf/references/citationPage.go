@@ -1,15 +1,16 @@
-package pdf
+package references
 
 import (
 	"fmt"
 	"github.com/sett17/mdpaper/globals"
+	"github.com/sett17/mdpaper/pdf/elements"
 	"github.com/sett17/mdpaper/pdf/spec"
 )
 
-var CitationHeading *Heading
+var CitationHeading *elements.Heading
 
-func citationHeading() *Heading {
-	h := Heading{
+func GenerateCitationHeading() {
+	h := elements.Heading{
 		Text: spec.Text{
 			FontSize:   20.0,
 			LineHeight: 1.0,
@@ -20,11 +21,11 @@ func citationHeading() *Heading {
 		Font:    spec.SansBold,
 	}
 	h.Add(&seg)
-	return &h
+	CitationHeading = &h
 }
 
-func citationList() *spec.Addable {
-	l := List{
+func CitationList() *spec.Addable {
+	l := elements.List{
 		Text: spec.Text{
 			FontSize:   14.0,
 			LineHeight: 1.4,

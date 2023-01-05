@@ -8,16 +8,6 @@ import (
 	"strings"
 )
 
-//type line struct {
-//	Text        string
-//	WordSpacing float64
-//	width       float64
-//}
-//
-//func (l *line) escape() {
-//	l.Text = strings.NewReplacer("(", "\\(", ")", "\\)", "\\", "\\\\").Replace(l.Text)
-//}
-
 type Segment struct {
 	Content string
 	Font    *Font
@@ -38,7 +28,6 @@ func (l *TextLine) Add(str string, font *Font) {
 	s = strings.ReplaceAll(s, ")", "\\)")
 
 	l.Words = append(l.Words, s)
-	//l.Words = append(l.Words, str)
 	l.Fonts = append(l.Fonts, font)
 }
 

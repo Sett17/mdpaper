@@ -3,14 +3,18 @@ package pdf
 import (
 	"github.com/sett17/mdpaper/cli"
 	"github.com/sett17/mdpaper/globals"
+	"github.com/sett17/mdpaper/pdf/abstracts"
+	"github.com/sett17/mdpaper/pdf/elements"
+	"github.com/sett17/mdpaper/pdf/references"
 	"github.com/sett17/mdpaper/pdf/spec"
+	"github.com/sett17/mdpaper/pdf/toc"
 	"github.com/yuin/goldmark/ast"
 	"time"
 )
 
 func FromAst(md ast.Node) *spec.PDF {
 	pdf := spec.PDF{}
-	paper := Paper{}
+	paper := abstracts.Paper{}
 
 	catalog := spec.NewDictObject()
 	catalog.Set("Type", "/Catalog")
@@ -92,18 +96,18 @@ func FromAst(md ast.Node) *spec.PDF {
 	cli.Other("\n")
 	cli.Other("Added %v elements\n", len(paper.Elements))
 
-	headings := make([]*Heading, 0)
+	headings := make([]*elements.Heading, 0)
 	for _, e := range paper.Elements {
-		if h, ok := (*e).(*Heading); ok {
+		if h, ok := (*e).(*elements.Heading); ok {
 			headings = append(headings, h)
 		}
 	}
 	if globals.Cfg.Citation.Enabled {
-		CitationHeading = citationHeading()
-		headings = append(headings, CitationHeading)
+		references.GenerateCitationHeading()
+		headings = append(headings, references.CitationHeading)
 	}
-	GenerateChapterTree(headings)
-	chapters := GenerateChapterTree(headings)
+	toc.GenerateChapterTree(headings)
+	chapters := toc.GenerateChapterTree(headings)
 	for i, c := range chapters.Roots() {
 		c.Heading.SetPrefix([6]int{i + 1})
 		chapters.GenerateNumbering(c)
@@ -128,43 +132,43 @@ func FromAst(md ast.Node) *spec.PDF {
 	displayPageNumber := globals.Cfg.Page.StartPageNumber - 1
 	realPageNumber := 0
 	pagesArray := spec.NewArray()
-	var coverPage *Page
+	var coverPage *abstracts.Page
 	if globals.Cfg.Cover.Enabled {
 		realPageNumber++
-		coverPage = NewEmptyPage(-1, realPageNumber)
+		coverPage = abstracts.NewEmptyPage(-1, realPageNumber)
 	}
-	var tocPage *Page
+	var tocPage *abstracts.Page
 	if globals.Cfg.Toc.Enabled {
 		realPageNumber++
-		tocPage = NewEmptyPage(0, realPageNumber)
+		tocPage = abstracts.NewEmptyPage(0, realPageNumber)
 	}
 	for !paper.Finished() {
 		displayPageNumber++
 		realPageNumber++
-		page := NewPage(&paper, displayPageNumber, realPageNumber, globals.Cfg.Page.Columns)
+		page := abstracts.NewPage(&paper, displayPageNumber, realPageNumber, globals.Cfg.Page.Columns)
 		page.AddToPdf(&pdf, pageResources, pages.Reference(), &pagesArray)
 	}
 	if globals.Cfg.Citation.Enabled {
-		cits := Paper{}
-		var a spec.Addable = CitationHeading
+		cits := abstracts.Paper{}
+		var a spec.Addable = references.CitationHeading
 		cits.Add(&a)
-		cits.Add(citationList())
+		cits.Add(references.CitationList())
 		for !cits.Finished() {
 			displayPageNumber++
 			realPageNumber++
-			page := NewPage(&cits, displayPageNumber, realPageNumber, 1)
+			page := abstracts.NewPage(&cits, displayPageNumber, realPageNumber, 1)
 			page.AddToPdf(&pdf, pageResources, pages.Reference(), &pagesArray)
 		}
 	}
 	if globals.Cfg.Cover.Enabled {
-		cover := generateCover()
+		cover := abstracts.GenerateCover()
 		coverPage.Columns = append(coverPage.Columns, cover)
 		coverPage.AddToPdf(&pdf, pageResources, pages.Reference(), &pagesArray)
 	}
 	if globals.Cfg.Toc.Enabled {
-		toc := GenerateTOC(&chapters)
-		tocPage.Columns = append(tocPage.Columns, toc.GenerateColumn())
-		links := toc.GenerateLinks()
+		tableOfContents := toc.GenerateTOC(&chapters)
+		tocPage.Columns = append(tocPage.Columns, tableOfContents.GenerateColumn())
+		links := tableOfContents.GenerateLinks()
 		tocPage.Annots = append(tocPage.Annots, links...)
 		tocPage.AddToPdf(&pdf, pageResources, pages.Reference(), &pagesArray)
 	}
@@ -179,7 +183,7 @@ func FromAst(md ast.Node) *spec.PDF {
 	outlines.Set("Count", len(chapters))
 	pdf.AddObject(outlines.Pointer())
 	catalog.Set("Outlines", outlines.Reference())
-	outlineItems := chapters.GenerateOutline(&outlines, &pdf)
+	outlineItems := chapters.GenerateOutline(&outlines)
 	for _, item := range outlineItems {
 		pdf.AddObject(item.Pointer())
 	}

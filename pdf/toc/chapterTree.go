@@ -1,8 +1,9 @@
-package pdf
+package toc
 
 import (
 	"bytes"
 	"fmt"
+	"github.com/sett17/mdpaper/pdf/elements"
 	"github.com/sett17/mdpaper/pdf/spec"
 	"io"
 )
@@ -15,7 +16,7 @@ const (
 )
 
 type ChapterNode struct {
-	Heading    *Heading
+	Heading    *elements.Heading
 	Parent     *ChapterNode
 	ChildNodes []*ChapterNode
 }
@@ -77,7 +78,7 @@ func (tree ChapterTree) String() string {
 	return buffer.String()
 }
 
-func GenerateChapterTree(headings []*Heading) ChapterTree {
+func GenerateChapterTree(headings []*elements.Heading) ChapterTree {
 	t := make(ChapterTree, 0)
 	for _, h := range headings {
 		if h.Level == 1 {
@@ -111,7 +112,7 @@ func (tree ChapterTree) GenerateNumbering(root *ChapterNode) {
 	}
 }
 
-func (tree ChapterTree) GenerateOutline(outlines *spec.DictionaryObject, pdf *spec.PDF) []*spec.DictionaryObject {
+func (tree ChapterTree) GenerateOutline(outlines *spec.DictionaryObject) []*spec.DictionaryObject {
 	items := make(map[*ChapterNode]*spec.DictionaryObject)
 	roots := tree.Roots()
 	for i, n := range roots {

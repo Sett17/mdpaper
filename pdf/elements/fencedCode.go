@@ -1,4 +1,4 @@
-package pdf
+package elements
 
 import (
 	"bytes"
@@ -115,16 +115,16 @@ func (f *FencedCode) Process(width float64) {
 		tokens = tokens[:len(tokens)-1]
 	}
 
-	linebuffer := &codeLine{}
+	lineBuffer := &codeLine{}
 	for _, t := range tokens {
 		if t.Value == "\n" {
-			f.Processed = append(f.Processed, linebuffer)
-			linebuffer = &codeLine{}
+			f.Processed = append(f.Processed, lineBuffer)
+			lineBuffer = &codeLine{}
 			continue
 		}
-		linebuffer.Add(t.Value, t.Color)
+		lineBuffer.Add(t.Value, t.Color)
 	}
-	if len(linebuffer.Words) > 0 {
-		f.Processed = append(f.Processed, linebuffer)
+	if len(lineBuffer.Words) > 0 {
+		f.Processed = append(f.Processed, lineBuffer)
 	}
 }

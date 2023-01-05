@@ -66,7 +66,12 @@ func NewImageObjectFromFile(path string, mul float64) (XObject, Addable) {
 			panic(err)
 		}
 	}
-	defer iFile.Close()
+	defer func(iFile *os.File) {
+		err := iFile.Close()
+		if err != nil {
+			cli.Error(err, false)
+		}
+	}(iFile)
 	return NewImageObject(iData, iName, mul)
 }
 

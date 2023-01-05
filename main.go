@@ -59,27 +59,6 @@ func main() {
 	parsed := time.Now()
 	cli.Output("Parsed in %v\n", parsed.Sub(start))
 
-	//cfgFile, err := os.ReadFile(configFile)
-	//configT := time.Now()
-	//if err == nil {
-	//	err = yaml.Unmarshal(cfgFile, &globals.Cfg)
-	//	configT = time.Now()
-	//	if err != nil {
-	//		panic(err)
-	//	}
-	//	fmt.Printf("Loaded config from %s in %v\n", configFile, configT.Sub(parsed))
-	//}
-	//out, err := yaml.Marshal(globals.Cfg)
-	//if err != nil {
-	//	panic(err)
-	//}
-	//err = os.WriteFile(configFile, out, 0644)
-	//if err != nil {
-	//	panic(err)
-	//}
-	//configT = time.Now()
-	//fmt.Printf("Created config file %s\n", configFile)
-
 	if globals.Cfg.Citation.Enabled {
 		bibFile, err := os.OpenFile(globals.Cfg.Citation.File, os.O_RDONLY, 0644)
 		if err == nil {
@@ -121,7 +100,8 @@ func main() {
 	outName = strings.ReplaceAll(outName, "/", "")
 	outName = strings.ReplaceAll(outName, ":", "")
 	outName = strings.ReplaceAll(outName, "@", "")
-	outName = strings.ReplaceAll(outName, " ", "_") + ".pdf"
+	outName = strings.ReplaceAll(outName, " ", "_")
+	outName += ".pdf"
 	outp, err := os.Create(outName)
 	if err != nil {
 		cli.Error(err, true)

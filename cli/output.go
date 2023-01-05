@@ -13,31 +13,31 @@ func printPrefix() {
 
 func Info(format string, a ...any) {
 	printPrefix()
-	cfmt.Printf("{{%s}}::lightBlue", fmt.Sprintf(format, a...))
+	_, _ = cfmt.Printf("{{%s}}::lightBlue", fmt.Sprintf(format, a...))
 }
 
 func Output(format string, a ...any) {
 	printPrefix()
-	cfmt.Printf("{{%s}}::white", fmt.Sprintf(format, a...))
+	_, _ = cfmt.Printf("{{%s}}::white", fmt.Sprintf(format, a...))
 }
 
 func Other(format string, a ...any) {
 	printPrefix()
-	cfmt.Printf("{{%s}}::gray", fmt.Sprintf(format, a...))
+	_, _ = cfmt.Printf("{{%s}}::gray", fmt.Sprintf(format, a...))
 }
 
 func Warning(format string, a ...any) {
 	printPrefix()
-	cfmt.Printf("{{%s}}::bgYellow|black", fmt.Sprintf(format, a...))
+	_, _ = cfmt.Printf("{{%s}}::bgYellow|black", fmt.Sprintf(format, a...))
 }
 
 func Error(err error, exit bool) {
-	cfmt.Printf("{{ERROR:}}::bgRed\n{{%s}}::red\n", err.Error())
+	_, _ = cfmt.Printf("{{ERROR:}}::bgRed\n{{%s}}::red\n", err.Error())
 	if exit {
 		os.Exit(1)
 	}
 }
 
 func Separator() {
-	cfmt.Printf("{{%s}}::gray\n", strings.Repeat("─", 80))
+	_, _ = cfmt.Printf("{{%s}}::gray\n", strings.Repeat("─", 80))
 }

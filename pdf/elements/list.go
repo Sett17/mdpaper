@@ -1,4 +1,4 @@
-package pdf
+package elements
 
 import (
 	"github.com/sett17/mdpaper/pdf/spec"

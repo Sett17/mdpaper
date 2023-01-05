@@ -1,4 +1,4 @@
-package pdf
+package abstracts
 
 import (
 	"github.com/sett17/mdpaper/globals"

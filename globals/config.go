@@ -136,6 +136,6 @@ var Default = Config{
 	},
 }
 
-var Cfg Config = Default
+var Cfg = Default
 
 var DidConfig = false

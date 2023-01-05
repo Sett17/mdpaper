@@ -5,3 +5,8 @@ echo "${LAST_RELEASE}"
 go build -o ./demo/ .
 cd demo
 ./mdpaper
+
+***open*+FILE*
+PATH=$(wslpath -w $DEV_FILE)
+echo $PATH
+/mnt/c/Program\ Files/Google/Chrome/Application/chrome.exe --new-window $PATH

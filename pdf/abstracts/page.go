@@ -1,8 +1,9 @@
-package pdf
+package abstracts
 
 import (
 	"fmt"
 	"github.com/sett17/mdpaper/globals"
+	"github.com/sett17/mdpaper/pdf/elements"
 	"github.com/sett17/mdpaper/pdf/spec"
 )
 
@@ -28,7 +29,7 @@ func NewPage(paper *Paper, displayNumber, realNumber, columns int) *Page {
 	}
 	for _, col := range p.Columns {
 		for _, a := range col.Content {
-			if h, ok := (*a).(*Heading); ok {
+			if h, ok := (*a).(*elements.Heading); ok {
 				h.Page = realNumber
 				h.DisplayPage = displayNumber
 			}
@@ -37,8 +38,8 @@ func NewPage(paper *Paper, displayNumber, realNumber, columns int) *Page {
 	return p
 }
 
-func NewEmptyPage(displayNumber int, realnumber int) *Page {
-	p := &Page{DisplayNumber: displayNumber, RealNumber: realnumber, DictionaryObject: spec.NewDictObject()}
+func NewEmptyPage(displayNumber int, realNumber int) *Page {
+	p := &Page{DisplayNumber: displayNumber, RealNumber: realNumber, DictionaryObject: spec.NewDictObject()}
 	p.Set("Type", "/Page")
 	mediaBox := spec.NewArray()
 	mediaBox.Add(0, 0, globals.A4Width, globals.A4Height)

@@ -1,4 +1,4 @@
-package spec
+package spacing
 
 type Spacer struct {
 	Pos [2]float64
@@ -23,6 +23,5 @@ func (s *Spacer) Height() float64 {
 	return s.H
 }
 
-func (s *Spacer) Process(width float64) {
-	// nothing to do
+func (s *Spacer) Process(_ float64) {
 }

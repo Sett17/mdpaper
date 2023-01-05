@@ -115,12 +115,6 @@ func (f *Font) WordWidth(w string, fs int) float64 {
 }
 
 func (f *Font) CharWidth(r rune) float64 {
-	//if adv, ok := f.Face.GlyphAdvance(r); ok {
-	//	return float64(adv) / 64
-	//}
-	//adv, _ := f.Face.GlyphAdvance(' ')
-	//return float64(adv) / 64
-
 	regularMul := 1.3
 	if f.Mono {
 		regularMul = .75

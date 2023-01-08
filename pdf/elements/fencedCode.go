@@ -34,14 +34,20 @@ type FencedCode struct {
 func (f *FencedCode) Bytes() []byte {
 	buf := bytes.Buffer{}
 
-	col := f.Style.Get(chroma.Text).Background
+	backcol := f.Style.Get(chroma.Text).Background
+	rectColor := [3]float64{math.Min(float64(backcol.Red())/255, 1), math.Min(float64(backcol.Green())/255, 1), math.Min(float64(backcol.Blue())/255, 1)}
+	borderColor := rectColor
+	if backcol.Brightness() > .9 {
+		borderColor = [3]float64{math.Abs(rectColor[0] - 1), math.Abs(rectColor[1] - 1), math.Abs(rectColor[2] - 1)}
+	}
 	r := spec.GraphicRect{
-		Pos:     [2]float64{f.Pos[0], f.Pos[1] - globals.MmToPt(2)},
-		W:       f.w,
-		H:       f.Height() - globals.Cfg.Spaces.Code,
-		Color:   [3]float64{math.Min(float64(col.Red())/255, 1), math.Min(float64(col.Green())/255, 1), math.Min(float64(col.Blue())/255, 1)},
-		Filled:  true,
-		Rounded: true,
+		Pos:         [2]float64{f.Pos[0], f.Pos[1] - globals.MmToPt(2)},
+		W:           f.w,
+		H:           f.Height() - globals.Cfg.Spaces.Code,
+		Color:       rectColor,
+		BorderColor: borderColor,
+		Filled:      true,
+		Rounded:     true,
 	}
 	buf.Write(r.Bytes())
 

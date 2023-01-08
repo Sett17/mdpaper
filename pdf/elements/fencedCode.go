@@ -24,11 +24,13 @@ func (l *codeLine) Add(str string, color [3]float64) {
 }
 
 type FencedCode struct {
-	Pos       [2]float64
-	Tokens    chroma.Iterator
-	Processed []*codeLine
-	w         float64
-	Style     *chroma.Style
+	Pos         [2]float64
+	Tokens      chroma.Iterator
+	Processed   []*codeLine
+	w           float64
+	Style       *chroma.Style
+	LineNumbers bool
+	FontSize    int
 }
 
 func (f *FencedCode) Bytes() []byte {
@@ -53,18 +55,17 @@ func (f *FencedCode) Bytes() []byte {
 
 	buf.WriteString("BT\n")
 	buf.WriteString("q\n")
-	buf.WriteString(fmt.Sprintf("%f %f Td\n", f.Pos[0]+globals.MmToPt(1), f.Pos[1]-float64(globals.Cfg.Code.FontSize)-globals.MmToPt(2+1)))
-	buf.WriteString(fmt.Sprintf("%f TL\n", float64(globals.Cfg.Code.FontSize)))
+	buf.WriteString(fmt.Sprintf("%f %f Td\n", f.Pos[0]+globals.MmToPt(1), f.Pos[1]-float64(f.FontSize)-globals.MmToPt(2+1)))
+	buf.WriteString(fmt.Sprintf("%f TL\n", float64(f.FontSize)))
 	buf.WriteString(fmt.Sprintf("%f Tc\n", globals.Cfg.Code.CharacterSpacing))
-	buf.WriteString(fmt.Sprintf("/%s %d Tf\n", spec.Monospace.Name, globals.Cfg.Code.FontSize))
+	buf.WriteString(fmt.Sprintf("/%s %d Tf\n", spec.Monospace.Name, f.FontSize))
 
-	lineNumberFmt := ""
-	if globals.Cfg.Code.LineNumbers {
-		lineNumberFmt = fmt.Sprintf("(%%%dd ) Tj\n", len(fmt.Sprintf("%d", len(f.Processed))))
-	}
+	lineNumberLength := len(fmt.Sprintf("%d", len(f.Processed)))
 	for k, line := range f.Processed {
 		buf.WriteString(".5 .5 .5 rg\n")
-		buf.WriteString(fmt.Sprintf(lineNumberFmt, k+1))
+		if f.LineNumbers {
+			buf.WriteString(fmt.Sprintf("(%*d ) Tj\n", lineNumberLength, k+1))
+		}
 		for i := 0; i < len(line.Words); i++ {
 			buf.WriteString(fmt.Sprintf("%f %f %f rg\n", line.Colors[i][0], line.Colors[i][1], line.Colors[i][2]))
 			buf.WriteString(fmt.Sprintf("("))
@@ -85,7 +86,7 @@ func (f *FencedCode) SetPos(x, y float64) {
 }
 
 func (f *FencedCode) Height() float64 {
-	return float64(len(f.Processed))*float64(globals.Cfg.Code.FontSize) + globals.MmToPt(4) + globals.Cfg.Spaces.Code
+	return float64(len(f.Processed))*float64(f.FontSize) + globals.MmToPt(4) + globals.Cfg.Spaces.Code
 }
 
 type token struct {
@@ -93,29 +94,41 @@ type token struct {
 	Color [3]float64
 }
 
+func processSingleToken(t chroma.Token, style *chroma.Style) (tokens []token) {
+	if strings.HasPrefix(t.Value, "\n") {
+		tokens = append(tokens, token{Value: "\n", Color: [3]float64{0, 0, 0}})
+		if strings.TrimPrefix(t.Value, "\n") != "" {
+			col := style.Get(t.Type).Colour
+			tokens = append(tokens, token{Value: strings.TrimPrefix(t.Value, "\n"), Color: [3]float64{math.Min(float64(col.Red())/255, 1), math.Min(float64(col.Green())/255, 1), math.Min(float64(col.Blue())/255, 1)}})
+		}
+		return
+	}
+	if strings.HasSuffix(t.Value, "\n") {
+		if strings.TrimSuffix(t.Value, "\n") != "" {
+			col := style.Get(t.Type).Colour
+			tokens = append(tokens, token{Value: strings.TrimSuffix(t.Value, "\n"), Color: [3]float64{math.Min(float64(col.Red())/255, 1), math.Min(float64(col.Green())/255, 1), math.Min(float64(col.Blue())/255, 1)}})
+		}
+		tokens = append(tokens, token{Value: "\n", Color: [3]float64{0, 0, 0}})
+		return
+	}
+	if t.Value == "" {
+		return
+	}
+	col := style.Get(t.Type).Colour
+	tokens = append(tokens, token{Value: t.Value, Color: [3]float64{math.Min(float64(col.Red())/255, 1), math.Min(float64(col.Green())/255, 1), math.Min(float64(col.Blue())/255, 1)}})
+	return
+}
+
 func (f *FencedCode) Process(width float64) {
 	f.w = width
 	tokens := make([]token, 0)
 	for t := f.Tokens(); t != chroma.EOF; t = f.Tokens() {
-		if strings.HasPrefix(t.Value, "\n") {
-			tokens = append(tokens, token{Value: "\n", Color: [3]float64{0, 0, 0}})
-			if strings.TrimPrefix(t.Value, "\n") != "" {
-				tokens = append(tokens, token{Value: strings.TrimPrefix(t.Value, "\n"), Color: [3]float64{0, 0, 0}})
-			}
-			continue
+
+		split := strings.SplitAfter(t.Value, "\n")
+		for _, s := range split {
+			tokens = append(tokens, processSingleToken(chroma.Token{Value: s, Type: t.Type}, f.Style)...)
 		}
-		if strings.HasSuffix(t.Value, "\n") {
-			if strings.TrimSuffix(t.Value, "\n") != "" {
-				tokens = append(tokens, token{Value: strings.TrimSuffix(t.Value, "\n"), Color: [3]float64{0, 0, 0}})
-			}
-			tokens = append(tokens, token{Value: "\n", Color: [3]float64{0, 0, 0}})
-			continue
-		}
-		if t.Value == "" {
-			continue
-		}
-		col := f.Style.Get(t.Type).Colour + 1
-		tokens = append(tokens, token{Value: t.Value, Color: [3]float64{math.Min(float64(col.Red())/255, 1), math.Min(float64(col.Green())/255, 1), math.Min(float64(col.Blue())/255, 1)}})
+
 	}
 	if len(tokens) > 0 && tokens[len(tokens)-1].Value == "\n" {
 		tokens = tokens[:len(tokens)-1]

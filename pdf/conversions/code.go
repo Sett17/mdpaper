@@ -2,19 +2,29 @@ package conversions
 
 import (
 	"bytes"
+	"fmt"
 	"github.com/alecthomas/chroma"
 	"github.com/alecthomas/chroma/lexers"
 	"github.com/alecthomas/chroma/styles"
 	"github.com/sett17/mdpaper/cli"
 	"github.com/sett17/mdpaper/globals"
+	"github.com/sett17/mdpaper/pdf/conversions/options"
 	"github.com/sett17/mdpaper/pdf/elements"
 	"github.com/sett17/mdpaper/pdf/spec"
 	"github.com/yuin/goldmark/ast"
 	"os"
 	"os/exec"
+	"strings"
 )
 
 func Mermaid(fcb *ast.FencedCodeBlock) (retO *spec.XObject, retA *spec.Addable) {
+	optionString := strings.TrimPrefix(string(fcb.Info.Text(globals.File)), "mermaid ")
+	opts, err := options.Parse(optionString)
+	if err != nil {
+		cli.Error(fmt.Errorf("error parsing mermaid options: %w", err), false)
+		cli.Warning(optionString)
+	}
+
 	inputFile, err := os.CreateTemp("", "mdpapermmd")
 	if err != nil {
 		cli.Error(err, true)
@@ -34,7 +44,11 @@ func Mermaid(fcb *ast.FencedCodeBlock) (retO *spec.XObject, retA *spec.Addable) 
 	if err != nil {
 		cli.Warning("mmdc failed")
 	}
-	io, ia := spec.NewImageObjectFromFile(inputFile.Name()+".png", 1.0)
+	mul := 1.0
+	if f, ok := opts.GetFloat("width"); ok {
+		mul = f
+	}
+	io, ia := spec.NewImageObjectFromFile(inputFile.Name()+".png", mul)
 	retO = &io
 	retA = &ia
 	defer os.Remove(inputFile.Name() + ".png")
@@ -42,6 +56,16 @@ func Mermaid(fcb *ast.FencedCodeBlock) (retO *spec.XObject, retA *spec.Addable) 
 }
 
 func Code(fcb *ast.FencedCodeBlock) *spec.Addable {
+	optionString := ""
+	if fcb.Info != nil {
+		optionString = options.Extract(string(fcb.Info.Text(globals.File)))
+	}
+
+	opts, err := options.Parse(optionString)
+	if err != nil {
+		cli.Error(fmt.Errorf("error parsing code options: %w", err), false)
+	}
+
 	lexer := lexers.Get(string(fcb.Language(globals.File)))
 	if lexer == nil {
 		lexer = lexers.Fallback
@@ -58,9 +82,27 @@ func Code(fcb *ast.FencedCodeBlock) *spec.Addable {
 		cli.Error(err, true)
 	}
 
+	ln := globals.Cfg.Code.LineNumbers
+	if b, ok := opts.GetBool("lineNumbers"); ok {
+		ln = b
+	} else if b, ok := opts.GetBool("linenumbers"); ok {
+		ln = b
+	} else if b, ok := opts.GetBool("ln"); ok {
+		ln = b
+	}
+	fs := globals.Cfg.Code.FontSize
+	if f, ok := opts.GetInt("fontSize"); ok {
+		fs = f
+	} else if f, ok := opts.GetInt("fontsize"); ok {
+		fs = f
+	} else if f, ok := opts.GetInt("fs"); ok {
+		fs = f
+	}
 	fc := elements.FencedCode{
-		Tokens: toks,
-		Style:  styles.Get(globals.Cfg.Code.Style),
+		Tokens:      toks,
+		Style:       styles.Get(globals.Cfg.Code.Style),
+		LineNumbers: ln,
+		FontSize:    fs,
 	}
 
 	var a spec.Addable = &fc

@@ -9,3 +9,5 @@ images/**
 **/mdpaper.exe
 !demo/**
 demo/mdpaper
+.idea/dbnavigator.xml
+!REFERENCE.md

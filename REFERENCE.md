@@ -258,6 +258,7 @@ This will include the image `image.png` in the document, with the `image title` 
 Code blocks are used to highlight and format code snippets in your document. To create a code block, use three backticks (\`\`\`) followed by the language identifier, a newline, and the code itself. The code block will end with another line containing three backticks.
 Here is an example of a code block in Go:
 
+````markdown
 ```golang
 package main
 
@@ -267,6 +268,7 @@ func main() {
 	fmt.Println("Hello, World!")
 }
 ```
+````
 
 This will create a code block with the language identifier `golang`. The code will be highlighted according to the style specified in the configuration file or the default style.
 
@@ -393,12 +395,12 @@ This will set the width of the image to 60% of the column width and display the 
 There are two specific block options that can be applied to code blocks to customize their appearance and behavior.
 To specify block options for code blocks, they should be included in the square brackets (`[]`) after the language and a space.
 
-### `linenumber` (also written as `lineNumber` or `ln`)
+### `linenumbers` (also written as `lineNumbers` or `ln`)
 
-The `linenumber` option specifies whether line numbers should be displayed next to the code. The value should be a boolean (`true` or `false`). For example:
+The `linenumbers` option specifies whether line numbers should be displayed next to the code. The value should be a boolean (`true` or `false`). For example:
 
 ````markdown
-```python [linenumber=false]
+```python [linenumbers=false]
 def foo():
 print("Hello, World!")
 ```
@@ -411,7 +413,7 @@ This will disable the display of line numbers next to the code.
 The `fontsize` option specifies the font size of the code. The value should be an integer. For example:
 
 ````markdown
-```python [linenumber=false fontsize=12]
+```python [linenumbers=false fontsize=12]
 def foo():
 print("Hello, World!")
 ```
@@ -423,6 +425,6 @@ This will set the font size of the code to 12 points and disable the display of 
 
 Mermaid code blocks are code blocks that contain diagram definitions in the [Mermaid](https://mermaid-js.github.io/) language. They can be rendered as diagrams in the generated PDF.
 
-If mermaid is disabled, mermaid code blocks behave the same as regular code blocks and have the same options available (`linenumber` and `fontsize`).
+If mermaid is disabled, mermaid code blocks behave the same as regular code blocks and have the same options available (`linenumbers` and `fontsize`).
 
 If mermaid is enabled, the same options as for images are also available for mermaid code blocks: `width`. These options can be used to customize the appearance and behavior of the rendered diagrams.

@@ -16,12 +16,6 @@ func Math(m *goldmark_math.MathBlock) (retO *spec.XObject, retA *spec.Addable) {
 		cli.Error(err, false)
 		return nil, nil
 	}
-	defer func(name string) {
-		err := os.Remove(name)
-		if err != nil {
-			cli.Error(err, false)
-		}
-	}(inputFile.Name())
 
 	_, err = inputFile.WriteString(`\documentclass{article}
 \pagenumbering{gobble}
@@ -43,6 +37,8 @@ $\displaystyle `)
 		cli.Error(err, false)
 		return nil, nil
 	}
+
+	inputFile.Close()
 
 	latexCommand := exec.Command("latex", "-output-format=dvi", "-interaction=nonstopmode", fmt.Sprintf("%s", inputFile.Name()))
 	latexCommand.Dir = os.TempDir()
@@ -82,9 +78,11 @@ $\displaystyle `)
 
 	retO = &io
 	retA = &ia
+	defer os.Remove(inputFile.Name())
 	defer os.Remove(inputFile.Name() + ".png")
 	defer os.Remove(inputFile.Name() + ".dvi")
 	defer os.Remove(inputFile.Name() + ".aux")
 	defer os.Remove(inputFile.Name() + ".log")
+
 	return
 }

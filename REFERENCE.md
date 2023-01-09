@@ -272,7 +272,9 @@ func main() {
 
 This will create a code block with the language identifier `golang`. The code will be highlighted according to the style specified in the configuration file or the default style.
 
-Mdpaper uses the [chroma](https://github.com/alecthomas/chroma) library to highlight code blocks, which supports a wide range of languages. If line numbers are not disabled, they will be included at the start of each line of the code block.
+Mdpaper uses the [chroma](https://github.com/alecthomas/chroma) library to highlight code blocks, which supports a wide range of languages.
+
+If line numbers are not disabled, they will be included at the start of each line of the code block.
 
 Code blocks can also contain options, which can be set between square brackets (`[]`) after the language identifier. For example:
 
@@ -421,10 +423,23 @@ print("Hello, World!")
 
 This will set the font size of the code to 12 points and disable the display of line numbers next to the code.
 
+### `startnumber` (also written as `startNumber` or `sn`)
+
+The `startnumber` option specifies the line number at which to start numbering lines. The value should be an integer. For example:
+
+````markdown
+```python [linenumbers=true startnumber=5]
+def foo():
+  print("Hello, World!")
+```
+````
+
+This will set the first line number to 5 and count up from there. This option das not change the `linenumbers` option.
+
 ## Specific Options for Mermaid Code Blocks
 
 Mermaid code blocks are code blocks that contain diagram definitions in the [Mermaid](https://mermaid-js.github.io/) language. They can be rendered as diagrams in the generated PDF.
 
-If mermaid is disabled, mermaid code blocks behave the same as regular code blocks and have the same options available (`linenumbers` and `fontsize`).
+If mermaid is disabled, mermaid code blocks behave the same as regular code blocks and have the same options available (`linenumbers`, and `fontsize`, and `startnumber`).
 
 If mermaid is enabled, the same options as for images are also available for mermaid code blocks: `width`. These options can be used to customize the appearance and behavior of the rendered diagrams.

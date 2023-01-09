@@ -98,11 +98,20 @@ func Code(fcb *ast.FencedCodeBlock) *spec.Addable {
 	} else if f, ok := opts.GetInt("fs"); ok {
 		fs = f
 	}
+	sn := 0
+	if i, ok := opts.GetInt("startNumber"); ok {
+		sn = i - 1
+	} else if i, ok := opts.GetInt("startnumber"); ok {
+		sn = i - 1
+	} else if i, ok := opts.GetInt("sn"); ok {
+		sn = i - 1
+	}
 	fc := elements.FencedCode{
 		Tokens:      toks,
 		Style:       styles.Get(globals.Cfg.Code.Style),
 		LineNumbers: ln,
 		FontSize:    fs,
+		StartNumber: sn,
 	}
 
 	var a spec.Addable = &fc

@@ -30,6 +30,7 @@ type FencedCode struct {
 	w           float64
 	Style       *chroma.Style
 	LineNumbers bool
+	StartNumber int
 	FontSize    int
 }
 
@@ -64,7 +65,7 @@ func (f *FencedCode) Bytes() []byte {
 	for k, line := range f.Processed {
 		buf.WriteString(".5 .5 .5 rg\n")
 		if f.LineNumbers {
-			buf.WriteString(fmt.Sprintf("(%*d ) Tj\n", lineNumberLength, k+1))
+			buf.WriteString(fmt.Sprintf("(%*d ) Tj\n", lineNumberLength, f.StartNumber+k+1))
 		}
 		for i := 0; i < len(line.Words); i++ {
 			buf.WriteString(fmt.Sprintf("%f %f %f rg\n", line.Colors[i][0], line.Colors[i][1], line.Colors[i][2]))

@@ -5,12 +5,20 @@ import (
 	"github.com/sett17/mdpaper/cli"
 	"github.com/sett17/mdpaper/globals"
 	"github.com/sett17/mdpaper/goldmark-math"
+	"github.com/sett17/mdpaper/pdf/conversions/options"
 	"github.com/sett17/mdpaper/pdf/spec"
 	"os"
 	"os/exec"
 )
 
 func Math(m *goldmark_math.MathBlock) (retO *spec.XObject, retA *spec.Addable) {
+	optionString := options.Extract(m.Options)
+	opts, err := options.Parse(optionString)
+	if err != nil {
+		cli.Error(fmt.Errorf("error parsing mermaid options: %w", err), false)
+		cli.Warning(optionString)
+	}
+
 	inputFile, err := os.CreateTemp("", "mdpapermath")
 	if err != nil {
 		cli.Error(err, false)
@@ -63,18 +71,11 @@ $\displaystyle `)
 		return nil, nil
 	}
 
-	io, ia := spec.NewImageObjectFromFile(inputFile.Name()+".png", .9)
-	if a, ok := ia.(*spec.ImageAddable); ok {
-		a.Process(300)
-		maxH := 12.0
-		ratio := a.W / a.H
-		if a.H > maxH {
-			newH := maxH
-			wantedW := newH * ratio
-			newMul := wantedW / a.W
-			a.Mul = newMul
-		}
+	w := .65
+	if i, ok := opts.GetFloat("width"); ok {
+		w = i
 	}
+	io, ia := spec.NewImageObjectFromFile(inputFile.Name()+".png", w)
 
 	retO = &io
 	retA = &ia

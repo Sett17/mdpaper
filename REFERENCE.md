@@ -316,17 +316,18 @@ Mdpaper supports the inclusion of mathematical formulas in documents using LaTeX
 To include a math block, use two dollar signs (`$$`) followed by the LaTeX code, and end the block with another pair of dollar signs. For example:
 
 ```markdown
+Younglings, younglings gather ’round.
+
 $$
 \int_a^b f(x) dx
 $$
+
+The Force will be with you, always.
 ```
 
 This will create a math block with the LaTeX code `\int_a^b f(x) dx`, which will be rendered as an integral.
 
 Math support in mdpaper requires a LaTeX installation with the `latex` and `dvipng` programs. These programs are typically included in most LaTeX installations, but if you are new to LaTeX, we recommend installing [TeX Live](https://www.tug.org/texlive/).
-
-**Note:
-** Math support is currently in alpha, and some features may not work as expected. We are working to improve and stabilize math support in future releases of mdpaper.
 
 ## Fills
 
@@ -391,6 +392,23 @@ This will set the width of the image to 60% of the column width.
 ````
 
 This will set the width of the image to 60% of the column width and display the caption "Nice image" below the image.
+
+## Specific Options for Math blocks
+
+The only available block option for math blocks is `width`.
+
+### `width`
+
+The `width` option specifies the percentage width of the column that the math block should occupy. The value should be a float between 0 and 1.
+To specify the `width` option, it should be included in the start line of the math block, like this:
+
+````markdown
+$$ [width=.9]
+\int_a^b f(x) dx
+$$
+````
+
+By default, it is set to `.65`.
 
 ## Specific Options for Code Blocks
 

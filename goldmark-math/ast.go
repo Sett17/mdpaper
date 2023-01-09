@@ -7,9 +7,10 @@ import (
 
 type MathBlock struct {
 	ast.BaseBlock
+	Options string
 }
 
-var KindMathBlock = ast.NewNodeKind("MathBLock")
+var KindMathBlock = ast.NewNodeKind("MathBlock")
 
 func NewMathBlock() *MathBlock {
 	return &MathBlock{}
@@ -17,6 +18,9 @@ func NewMathBlock() *MathBlock {
 
 func (n *MathBlock) Dump(source []byte, level int) {
 	m := map[string]string{}
+	if n.Options != "" {
+		m["options"] = n.Options
+	}
 	ast.DumpHelper(n, source, level, m, nil)
 }
 

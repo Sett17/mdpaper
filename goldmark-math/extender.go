@@ -11,6 +11,6 @@ type Extender struct {
 
 func (e *Extender) Extend(m goldmark.Markdown) {
 	m.Parser().AddOptions(parser.WithBlockParsers(
-		util.Prioritized(NewMathJaxBlockParser(), 701),
+		util.Prioritized(NewMathBlockParser(), 701),
 	))
 }

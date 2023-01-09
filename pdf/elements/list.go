@@ -46,9 +46,9 @@ func (p *List) Process(maxWidth float64) {
 		splitSmall := strings.Split(s.Content, " ")
 		split := make([]string, 0)
 		for _, s := range splitSmall {
-			if len(s) > 0 {
-				split = append(split, strings.SplitAfter(s, "/")...)
-			}
+			//if len(s) > 0 {
+			split = append(split, strings.SplitAfter(s, "/")...)
+			//}
 		}
 		for j := 0; j < len(split); {
 			w := split[j]

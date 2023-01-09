@@ -3,8 +3,10 @@ package spec
 import (
 	"bytes"
 	"fmt"
+	"github.com/sett17/mdpaper/cli"
 	"github.com/sett17/mdpaper/globals"
 	"math"
+	"sort"
 	"strings"
 )
 
@@ -73,24 +75,98 @@ func (p *Text) String() string {
 	return str.String()
 }
 
-func (p *Text) SplitDelegate(percent float64) (Addable, Addable) {
-	procCutoff := int(math.Floor(float64(len(p.Processed)) * percent))
-	cutoffText := strings.Join(p.Processed[procCutoff].Words, "")
-	var segsAfter []*Segment
-	var leftoverSegs []*Segment
-	for i, segment := range p.Segments {
-		if strings.Contains(segment.Content, cutoffText) {
-			// Split the segment
-			split := strings.Split(segment.Content, cutoffText)
-			split[1] = cutoffText + split[1]
-			p.Segments[i].Content = split[0]
-			segsAfter = p.Segments[i+1:]
-			p.Segments = p.Segments[:i+1]
-			leftoverSegs = append(leftoverSegs, &Segment{Content: split[1], Font: segment.Font})
-			leftoverSegs = append(leftoverSegs, segsAfter...)
-			break
+type segmentFit struct {
+	segmentIdx int
+	wordCount  int
+}
+
+func findCutoffSegment(segments []*Segment, cutoffText string) (int, int) {
+	if segments == nil {
+		return -1, -1
+	}
+	fit := make([]segmentFit, len(segments))
+	cuttoffSplitDirty := strings.Split(cutoffText, " ")
+	cutoffSplit := make([]string, 0)
+	for _, s := range cuttoffSplitDirty {
+		if s != "" {
+			cutoffSplit = append(cutoffSplit, s)
 		}
 	}
+
+	for i, segment := range segments {
+		for j := len(cutoffSplit); j > 0; j-- {
+			search := strings.Join(cutoffSplit[:j], " ")
+			if strings.Contains(segment.Content, search) {
+				fit[i] = segmentFit{i, j}
+				break
+			}
+		}
+	}
+
+	sort.Slice(fit, func(i, j int) bool {
+		return fit[i].wordCount > fit[j].wordCount
+	})
+
+	for _, f := range fit {
+		if checkCorrectCutoff(segments, f.segmentIdx, f, cutoffSplit) {
+			cutoffFromThisSegment := strings.Join(cutoffSplit[:f.wordCount], " ")
+			cutoffLocation := strings.Index(segments[f.segmentIdx].Content, cutoffFromThisSegment)
+			return f.segmentIdx, cutoffLocation
+		}
+	}
+
+	return -1, -1
+}
+
+func checkCorrectCutoff(segments []*Segment, segmentIdx int, fit segmentFit, cutoffSplit []string) bool {
+	wordCount := fit.wordCount
+	cutoffPartInSegment := strings.Join(cutoffSplit[:wordCount], " ")
+	if cutoffPartInSegment == strings.Join(cutoffSplit, " ") {
+		return true
+	}
+
+	remainingCutoff := cutoffSplit[wordCount:]
+	nextSegContent := strings.TrimSpace(segments[segmentIdx+1].Content)
+	nextSegContentWordCount := len(strings.Split(nextSegContent, " "))
+
+	nextCutoff := remainingCutoff
+	if nextSegContentWordCount < len(remainingCutoff) {
+		nextCutoff = remainingCutoff[:nextSegContentWordCount]
+	}
+
+	return strings.HasPrefix(nextSegContent, strings.Join(nextCutoff, " "))
+}
+
+func (p *Text) SplitDelegate(percent float64) (Addable, Addable) {
+	procCutoff := int(math.Floor(float64(len(p.Processed)) * percent))
+	cutoffText := p.Processed[procCutoff].String()
+	var leftoverSegs []*Segment
+
+	cutOffSeg, cutoffLocation := findCutoffSegment(p.Segments, cutoffText)
+	if cutOffSeg == -1 {
+		cli.Error(fmt.Errorf("could not find cutoff segment"), true)
+	}
+
+	splitSegment := p.Segments[cutOffSeg]
+	splitSegment.Content = splitSegment.Content[cutoffLocation:]
+
+	leftoverSegs = append(leftoverSegs, splitSegment)
+	leftoverSegs = append(leftoverSegs, p.Segments[cutOffSeg+1:]...)
+
+	//for i, segment := range p.Segments {
+	//	if strings.Contains(segment.Content, cutoffText) {
+	//		// Split the segment
+	//		split := strings.Split(segment.Content, cutoffText)
+	//		split[1] = cutoffText + split[1]
+	//		p.Segments[i].Content = split[0]
+	//		segsAfter = p.Segments[i+1:]
+	//		p.Segments = p.Segments[:i+1]
+	//		leftoverSegs = append(leftoverSegs, &Segment{Content: split[1], Font: segment.Font})
+	//		leftoverSegs = append(leftoverSegs, segsAfter...)
+	//		break
+	//	}
+	//}
+
 	a1 := &Text{
 		Segments:   p.Segments,
 		Pos:        p.Pos,
@@ -136,9 +212,9 @@ func (p *Text) Process(maxWidth float64) {
 		splitSmall := strings.Split(s.Content, " ")
 		split := make([]string, 0)
 		for _, s := range splitSmall {
-			if len(s) > 0 {
-				split = append(split, strings.SplitAfter(s, "/")...)
-			}
+			//if len(s) > 0 {
+			split = append(split, strings.SplitAfter(s, "/")...)
+			//}
 		}
 		for j := 0; j < len(split); {
 			w := split[j]

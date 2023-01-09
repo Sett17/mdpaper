@@ -2,7 +2,8 @@
 
 This reference guide serves as a comprehensive resource for users of the mdpaper tool. It explains the various components and settings of mdpaper and provides examples of how they can be used to generate scientifically formatted PDFs from markdown files. Whether you are new to mdpaper or an experienced user, this guide will help you understand and make the most of the tool's capabilities.
 
-Please note that this reference guide is **not necessarily up-to-date** with the latest version of the mdpaper tool. It currently corresponds to version `v1.10.2`, and some features or functionality may have changed in later versions. If you are using a different version of mdpaper, some information in this guide may not apply.
+Please note that this reference guide is **not necessarily up-to-date
+** with the latest version of the mdpaper tool. It currently corresponds to version `v1.10.2`, and some features or functionality may have changed in later versions. If you are using a different version of mdpaper, some information in this guide may not apply.
 
 # What is mdpaper?
 
@@ -84,9 +85,9 @@ spaces:
   code: 2.0
 ```
 
-* `paragraph`: This option determines the distance before paragraphs in the generated PDF. The default value is `2.0`.
-* `heading`: This option determines the distance before headings in the generated PDF. The default value is `2.0`.
-* `code`: This option determines the distance before code blocks in the generated PDF. The default value is `2.0`.
+* `paragraph`: This option determines the space above and below a paragraph in mm in the generated PDF. The default value is `2.0`.
+* `heading`: This option determines the space above and below a heading in mm in the generated PDF. The default value is `2.0`.
+* `code`: This option determines the space above and below a code block in mm in the generated PDF. The default value is `2.0`.
 
 ## General options
 

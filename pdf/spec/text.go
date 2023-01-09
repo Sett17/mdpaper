@@ -139,6 +139,9 @@ func checkCorrectCutoff(segments []*Segment, segmentIdx int, fit segmentFit, cut
 
 func (p *Text) SplitDelegate(percent float64) (Addable, Addable) {
 	procCutoff := int(math.Floor(float64(len(p.Processed)) * percent))
+	if procCutoff == 0 {
+		return nil, p
+	}
 	cutoffText := p.Processed[procCutoff].String()
 	var leftoverSegs []*Segment
 

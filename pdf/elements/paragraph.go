@@ -7,14 +7,18 @@ type Paragraph struct {
 	Centered bool
 }
 
-func (p *Paragraph) Split(percent float64) (spec.Addable, spec.Addable) {
+func (p *Paragraph) Split(percent float64) (r1 spec.Addable, r2 spec.Addable) {
 	if len(p.Processed) == 1 {
 		return nil, p
 	}
 	a1, a2 := p.Text.SplitDelegate(percent)
-	var r1 = Paragraph{Text: *a1.(*spec.Text)}
-	var r2 = Paragraph{Text: *a2.(*spec.Text)}
-	return &r1, &r2
+	if a1 != nil {
+		r1 = &Paragraph{Text: *a1.(*spec.Text)}
+	}
+	if a2 != nil {
+		r2 = &Paragraph{Text: *a2.(*spec.Text)}
+	}
+	return
 }
 
 func (p *Paragraph) Process(width float64) {

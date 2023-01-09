@@ -34,7 +34,7 @@ func (c *Column) Add(a *spec.Addable) (leftover *spec.Addable, full bool) {
 		availSpace := c.bottom - (c.Pos[1] - c.MaxHeight)
 		if s, ok := A.(spec.Splittable); ok {
 			fitting, leftoverS := s.Split(availSpace / h)
-			//fitting.Process(c.Width)
+			
 			if fitting != nil {
 				c.StreamObject.Add(&fitting)
 			}

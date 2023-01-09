@@ -190,9 +190,6 @@ func (p *Text) SetPos(x, y float64) {
 }
 
 func (p *Text) Height() float64 {
-	if len(p.Processed) == 1 && p.Processed[0].Offset == 0 {
-		return float64(p.FontSize) * p.LineHeight
-	}
 	return (float64(len(p.Processed)))*p.LineHeight*float64(p.FontSize) + globals.MmToPt(globals.Cfg.Spaces.Paragraph)
 }
 

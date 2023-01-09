@@ -8,6 +8,9 @@ type Paragraph struct {
 }
 
 func (p *Paragraph) Split(percent float64) (spec.Addable, spec.Addable) {
+	if len(p.Processed) == 1 {
+		return nil, p
+	}
 	a1, a2 := p.Text.SplitDelegate(percent)
 	var r1 = Paragraph{Text: *a1.(*spec.Text)}
 	var r2 = Paragraph{Text: *a2.(*spec.Text)}

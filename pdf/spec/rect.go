@@ -6,13 +6,14 @@ import (
 )
 
 type GraphicRect struct {
-	Pos         [2]float64
-	W           float64
-	H           float64
-	Color       [3]float64
-	BorderColor [3]float64
-	Filled      bool
-	Rounded     bool
+	Pos           [2]float64
+	W             float64
+	H             float64
+	Color         [3]float64
+	BorderColor   [3]float64
+	Filled        bool
+	RoundedTop    bool
+	RoundedBottom bool
 }
 
 const radius = 8
@@ -20,7 +21,7 @@ const radius = 8
 func (r *GraphicRect) Bytes() []byte {
 	buf := bytes.Buffer{}
 	buf.WriteString("q\n")
-	if r.Rounded {
+	if r.RoundedTop && r.RoundedBottom {
 		buf.WriteString(fmt.Sprintf("%f %f m ", r.Pos[0]+radius, r.Pos[1]))
 		buf.WriteString(fmt.Sprintf("%f %f l ", r.Pos[0]+r.W-radius, r.Pos[1]))
 		buf.WriteString(fmt.Sprintf("%f %f %f %f %f %f c ", r.Pos[0]+r.W, r.Pos[1], r.Pos[0]+r.W, r.Pos[1], r.Pos[0]+r.W, r.Pos[1]-radius))
@@ -30,6 +31,22 @@ func (r *GraphicRect) Bytes() []byte {
 		buf.WriteString(fmt.Sprintf("%f %f %f %f %f %f c ", r.Pos[0], r.Pos[1]-r.H, r.Pos[0], r.Pos[1]-r.H, r.Pos[0], r.Pos[1]-r.H+radius))
 		buf.WriteString(fmt.Sprintf("%f %f l ", r.Pos[0], r.Pos[1]-radius))
 		buf.WriteString(fmt.Sprintf("%f %f %f %f %f %f c\n", r.Pos[0], r.Pos[1], r.Pos[0], r.Pos[1], r.Pos[0]+radius, r.Pos[1]))
+	} else if r.RoundedTop {
+		buf.WriteString(fmt.Sprintf("%f %f m ", r.Pos[0]+radius, r.Pos[1]))
+		buf.WriteString(fmt.Sprintf("%f %f l ", r.Pos[0]+r.W-radius, r.Pos[1]))
+		buf.WriteString(fmt.Sprintf("%f %f %f %f %f %f c ", r.Pos[0]+r.W, r.Pos[1], r.Pos[0]+r.W, r.Pos[1], r.Pos[0]+r.W, r.Pos[1]-radius))
+		buf.WriteString(fmt.Sprintf("%f %f l ", r.Pos[0]+r.W, r.Pos[1]-r.H))
+		buf.WriteString(fmt.Sprintf("%f %f l ", r.Pos[0], r.Pos[1]-r.H))
+		buf.WriteString(fmt.Sprintf("%f %f l ", r.Pos[0], r.Pos[1]-radius))
+		buf.WriteString(fmt.Sprintf("%f %f %f %f %f %f c\n", r.Pos[0], r.Pos[1], r.Pos[0], r.Pos[1], r.Pos[0]+radius, r.Pos[1]))
+	} else if r.RoundedBottom {
+		buf.WriteString(fmt.Sprintf("%f %f m ", r.Pos[0]+radius, r.Pos[1]))
+		buf.WriteString(fmt.Sprintf("%f %f l ", r.Pos[0]+r.W, r.Pos[1]))
+		buf.WriteString(fmt.Sprintf("%f %f l ", r.Pos[0]+r.W, r.Pos[1]-r.H+radius))
+		buf.WriteString(fmt.Sprintf("%f %f %f %f %f %f c ", r.Pos[0]+r.W, r.Pos[1]-r.H, r.Pos[0]+r.W, r.Pos[1]-r.H, r.Pos[0]+r.W-radius, r.Pos[1]-r.H))
+		buf.WriteString(fmt.Sprintf("%f %f l ", r.Pos[0]+radius, r.Pos[1]-r.H))
+		buf.WriteString(fmt.Sprintf("%f %f %f %f %f %f c ", r.Pos[0], r.Pos[1]-r.H, r.Pos[0], r.Pos[1]-r.H, r.Pos[0], r.Pos[1]-r.H+radius))
+		buf.WriteString(fmt.Sprintf("%f %f l ", r.Pos[0], r.Pos[1]))
 	} else {
 		buf.WriteString(fmt.Sprintf("%f %f %f %f re\n", r.Pos[0], r.Pos[1], r.W, -r.H))
 	}

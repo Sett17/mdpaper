@@ -32,6 +32,29 @@ type FencedCode struct {
 	LineNumbers bool
 	StartNumber int
 	FontSize    int
+	FlatTop     bool
+	FlatBottom  bool
+}
+
+func (f *FencedCode) Split(percent float64) (spec.Addable, spec.Addable) {
+	cutoffLine := int(math.Round(float64(len(f.Processed)) * percent))
+
+	cutoffBlockLines := f.Processed[cutoffLine:]
+	cutoffBlock := FencedCode{
+		Processed:   cutoffBlockLines,
+		w:           f.w,
+		Style:       f.Style,
+		LineNumbers: f.LineNumbers,
+		StartNumber: cutoffLine + f.StartNumber,
+		FontSize:    f.FontSize,
+		FlatTop:     true,
+		FlatBottom:  f.FlatBottom,
+	}
+
+	f.Processed = f.Processed[:cutoffLine]
+	f.FlatBottom = true
+
+	return f, &cutoffBlock
 }
 
 func (f *FencedCode) Bytes() []byte {
@@ -44,13 +67,14 @@ func (f *FencedCode) Bytes() []byte {
 		borderColor = [3]float64{math.Abs(rectColor[0] - 1), math.Abs(rectColor[1] - 1), math.Abs(rectColor[2] - 1)}
 	}
 	r := spec.GraphicRect{
-		Pos:         [2]float64{f.Pos[0], f.Pos[1] - globals.MmToPt(2)},
-		W:           f.w,
-		H:           f.Height() - globals.Cfg.Spaces.Code,
-		Color:       rectColor,
-		BorderColor: borderColor,
-		Filled:      true,
-		Rounded:     true,
+		Pos:           [2]float64{f.Pos[0], f.Pos[1] - globals.MmToPt(2)},
+		W:             f.w,
+		H:             f.Height() - globals.Cfg.Spaces.Code,
+		Color:         rectColor,
+		BorderColor:   borderColor,
+		Filled:        true,
+		RoundedTop:    !f.FlatTop,
+		RoundedBottom: !f.FlatBottom,
 	}
 	buf.Write(r.Bytes())
 
@@ -121,6 +145,11 @@ func processSingleToken(t chroma.Token, style *chroma.Style) (tokens []token) {
 }
 
 func (f *FencedCode) Process(width float64) {
+	//disable processing multiple times
+	if f.Processed != nil {
+		return
+	}
+
 	f.w = width
 	tokens := make([]token, 0)
 	for t := f.Tokens(); t != chroma.EOF; t = f.Tokens() {

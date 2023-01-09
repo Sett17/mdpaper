@@ -85,9 +85,9 @@ func findCutoffSegment(segments []*Segment, cutoffText string) (int, int) {
 		return -1, -1
 	}
 	fit := make([]segmentFit, len(segments))
-	cuttoffSplitDirty := strings.Split(cutoffText, " ")
+	cutoffSplitDirty := strings.Split(cutoffText, " ")
 	cutoffSplit := make([]string, 0)
-	for _, s := range cuttoffSplitDirty {
+	for _, s := range cutoffSplitDirty {
 		if s != "" {
 			cutoffSplit = append(cutoffSplit, s)
 		}

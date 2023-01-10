@@ -1,6 +1,9 @@
 package elements
 
-import "github.com/sett17/mdpaper/pdf/spec"
+import (
+	"github.com/sett17/mdpaper/globals"
+	"github.com/sett17/mdpaper/pdf/spec"
+)
 
 type Paragraph struct {
 	spec.Text
@@ -30,4 +33,8 @@ func (p *Paragraph) Process(width float64) {
 	} else {
 		p.Text.Process(width)
 	}
+}
+
+func (p *Paragraph) Height() float64 {
+	return (float64(len(p.Processed)))*p.LineHeight*float64(p.FontSize) + globals.MmToPt(globals.Cfg.Spaces.Paragraph)
 }

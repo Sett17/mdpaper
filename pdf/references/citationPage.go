@@ -24,25 +24,23 @@ func GenerateCitationHeading() {
 	CitationHeading = &h
 }
 
-func CitationList() *spec.Addable {
-	l := elements.List{
-		Text: spec.Text{
-			FontSize:   14.0,
-			LineHeight: 1.4,
-		},
-	}
-
+func Citations() (ret []*spec.Addable) {
 	bibs := make([]string, len(globals.BibIndices)+1)
 	for key, idx := range globals.BibIndices {
 		bibs[idx] = fmt.Sprintf("[%d] %s", idx, globals.IEEE(globals.Bibs[key]))
 	}
 	for _, bib := range bibs {
+		block := spec.Text{
+			FontSize:   14,
+			LineHeight: 1.4,
+		}
 		seg := spec.Segment{
 			Content: bib,
 			Font:    spec.SerifRegular,
 		}
-		l.Add(&seg)
+		block.Add(&seg)
+		var a spec.Addable = &block
+		ret = append(ret, &a)
 	}
-	var a spec.Addable = &l
-	return &a
+	return
 }

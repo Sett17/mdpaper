@@ -8,37 +8,44 @@ import (
 	"strconv"
 )
 
-func List(list *ast.List) *spec.Addable {
-	para := elements.List{
-		Text: spec.Text{
-			FontSize: globals.Cfg.Text.FontSize,
-			//LineHeight: globals.Cfg.LineHeight * 1.4,
-			LineHeight: globals.Cfg.Text.ListLineHeight,
-			Offset:     float64(globals.Cfg.Text.FontSize),
-		},
-	}
+func List(list *ast.List) (adds []*spec.Addable) {
 	i := 1
 	for n := list.FirstChild(); n != nil; n = n.NextSibling() {
 		// do not support nested lists for now
 		switch n.Kind() {
 		case ast.KindListItem:
-			prefix := ""
+			number := -1
 			if list.IsOrdered() {
-				prefix = strconv.Itoa(i)
-				i++
+				number = i
 			}
-			seg := ListItem(n.(*ast.ListItem), prefix, string(list.Marker))
-			para.Add(&seg)
+			adds = append(adds, ListItem(n.(*ast.ListItem), number, string(list.Marker)))
 		}
 	}
-	var a spec.Addable = &para
-	return &a
+	return
 }
 
-func ListItem(item *ast.ListItem, prefix string, marker string) spec.Segment {
-	seg := spec.Segment{
-		Content: prefix + marker + " " + string(item.Text(globals.File)),
-		Font:    spec.SerifRegular,
+func ListItem(item *ast.ListItem, number int, marker string) *spec.Addable {
+	prefix := marker + " "
+	if number >= 0 {
+		prefix = strconv.Itoa(number) + prefix
 	}
-	return seg
+	ret := elements.ListItem{
+		Text: spec.Text{
+			FontSize:   globals.Cfg.Text.FontSize,
+			LineHeight: globals.Cfg.Text.ListLineHeight,
+			Offset:     spec.SerifRegular.WordWidth(prefix, globals.Cfg.Text.FontSize) * 1.2,
+			Margin:     (globals.Cfg.Text.ListLineHeight - 1) * float64(globals.Cfg.Text.FontSize) * .2,
+		},
+		Prefix: prefix,
+	}
+	child := item.FirstChild()
+	var txt *spec.Addable
+	if block, ok := child.(*ast.TextBlock); ok {
+		txt = TextBlock(block)
+	}
+	if txt != nil {
+		ret.Add((*txt).(*spec.Text).Segments...)
+	}
+	var a spec.Addable = &ret
+	return &a
 }

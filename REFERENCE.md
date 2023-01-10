@@ -2,8 +2,7 @@
 
 This reference guide serves as a comprehensive resource for users of the mdpaper tool. It explains the various components and settings of mdpaper and provides examples of how they can be used to generate scientifically formatted PDFs from markdown files. Whether you are new to mdpaper or an experienced user, this guide will help you understand and make the most of the tool's capabilities.
 
-Please note that this reference guide is **not necessarily up-to-date
-** with the latest version of the mdpaper tool. It currently corresponds to version `v1.10.2`, and some features or functionality may have changed in later versions. If you are using a different version of mdpaper, some information in this guide may not apply.
+Please note that this reference guide is **not necessarily up-to-date** with the latest version of the mdpaper tool. It currently corresponds to version `v1.10.2`, and some features or functionality may have changed in later versions. If you are using a different version of mdpaper, some information in this guide may not apply.
 
 # What is mdpaper?
 
@@ -36,9 +35,9 @@ text:
   listLineHeight: 1.0
 ```
 
-* `fontSize`: This option determines the size of the font used in the generated PDF, measured in points (pt). The default value is 11.
-* `lineHeight`: This option determines the distance between lines of text in the generated PDF. The default value is 1.2.
-* `listLineHeight`: This option determines the distance between lines of text in lists in the generated PDF. The default value is 1.0.
+- `fontSize`: This option determines the size of the font used in the generated PDF, measured in points (pt). The default value is 11.
+- `lineHeight`: This option determines the distance between lines of text in the generated PDF. The default value is 1.2.
+- `listLineHeight`: This option determines the distance between lines of text in lists in the generated PDF. The default value is 1.0.
 
 ## Page options
 
@@ -53,13 +52,13 @@ page:
   startPageNumber: 1
 ```
 
-* `marginTop`: This option determines the size of the top margin in the generated PDF, measured in millimeters (mm). The default value is `20`.
-* `marginBottom`: This option determines the size of the bottom margin in the generated PDF, measured in millimeters (mm). The default value is `20`.
-* `marginHori`: This option determines the size of the horizontal margins (left and right) in the generated PDF, measured in millimeters (mm). The default value is `15`.
-* `columnGap`: This option determines the size of the gap between columns in the generated PDF, measured in millimeters (mm). The default value is `7`. This option has no effect if the columns option is set to `1`.
-* `columns`: This option determines the number of columns per page in the generated PDF. The default value is `2`. This option can only be set to `1` or `2`.
-* `pageNumbers`: This option determines whether page numbers should be included in the generated PDF. The default value is `true`.
-* `startPageNumber`: This option determines the number of the first page in the generated PDF. The default value is `1`. This option can also accept negative numbers, which will cause the numbering to start later in the PDF.
+- `marginTop`: This option determines the size of the top margin in the generated PDF, measured in millimeters (mm). The default value is `20`.
+- `marginBottom`: This option determines the size of the bottom margin in the generated PDF, measured in millimeters (mm). The default value is `20`.
+- `marginHori`: This option determines the size of the horizontal margins (left and right) in the generated PDF, measured in millimeters (mm). The default value is `15`.
+- `columnGap`: This option determines the size of the gap between columns in the generated PDF, measured in millimeters (mm). The default value is `7`. This option has no effect if the columns option is set to `1`.
+- `columns`: This option determines the number of columns per page in the generated PDF. The default value is `2`. This option can only be set to `1` or `2`.
+- `pageNumbers`: This option determines whether page numbers should be included in the generated PDF. The default value is `true`.
+- `startPageNumber`: This option determines the number of the first page in the generated PDF. The default value is `1`. This option can also accept negative numbers, which will cause the numbering to start later in the PDF.
 
 ## Table of contents options
 
@@ -71,10 +70,10 @@ toc:
   heading: Table of Contents
 ```
 
-* `enabled`: This option determines whether a table of contents should be included in the generated PDF. The default value is `true`.
-* `lineHeight`: This option determines the distance between lines of text in the table of contents in the generated PDF. The default value is `1.3`.
-* `fontSize`: This option determines the size of the font used in the table of contents in the generated PDF, measured in points (pt). The default value is `11`.
-* `heading`: This option determines the heading text for the table of contents in the generated PDF. The default value is `Table of Contents`.
+- `enabled`: This option determines whether a table of contents should be included in the generated PDF. The default value is `true`.
+- `lineHeight`: This option determines the distance between lines of text in the table of contents in the generated PDF. The default value is `1.3`.
+- `fontSize`: This option determines the size of the font used in the table of contents in the generated PDF, measured in points (pt). The default value is `11`.
+- `heading`: This option determines the heading text for the table of contents in the generated PDF. The default value is `Table of Contents`.
 
 ## Spacing options
 
@@ -85,9 +84,9 @@ spaces:
   code: 2.0
 ```
 
-* `paragraph`: This option determines the space above and below a paragraph in mm in the generated PDF. The default value is `2.0`.
-* `heading`: This option determines the space above and below a heading in mm in the generated PDF. The default value is `2.0`.
-* `code`: This option determines the space above and below a code block in mm in the generated PDF. The default value is `2.0`.
+- `paragraph`: This option determines the space above and below a paragraph in mm in the generated PDF. The default value is `2.0`.
+- `heading`: This option determines the space above and below a heading in mm in the generated PDF. The default value is `2.0`.
+- `code`: This option determines the space above and below a code block in mm in the generated PDF. The default value is `2.0`.
 
 ## General options
 
@@ -98,9 +97,9 @@ paper:
   debug: false
 ```
 
-* `title`: This setting determines the title of the paper, which is used as the file name of the generated PDF and is displayed on the cover page. The default value is `Paper`.
-* `authors`: This setting determines the authors of the paper, which are displayed on the cover page and included in the meta information of the generated PDF. The default value is `Anonymous`.
-* `debug`: This setting enables or disables debug mode, which generates a debug.txt file and disables compression for regular streams. The default value is `false`. Debug mode can be useful for technical troubleshooting and debugging purposes.
+- `title`: This setting determines the title of the paper, which is used as the file name of the generated PDF and is displayed on the cover page. The default value is `Paper`.
+- `authors`: This setting determines the authors of the paper, which are displayed on the cover page and included in the meta information of the generated PDF. The default value is `Anonymous`.
+- `debug`: This setting enables or disables debug mode, which generates a debug.txt file and disables compression for regular streams. The default value is `false`. Debug mode can be useful for technical troubleshooting and debugging purposes.
 
 ## Citation options
 
@@ -111,9 +110,9 @@ citation:
   heading: References
 ```
 
-* `enabled`: This setting enables or disables citations in the generated PDF. The default value is `true`.
-* `file`: This setting determines the file path of the BibTeX file containing the citations. The file path is relative to the directory of the config and markdown files. The default value is `citations.bib`.
-* `heading`: This setting determines the heading of the references section in the generated PDF. The default value is `References`.
+- `enabled`: This setting enables or disables citations in the generated PDF. The default value is `true`.
+- `file`: This setting determines the file path of the BibTeX file containing the citations. The file path is relative to the directory of the config and markdown files. The default value is `citations.bib`.
+- `heading`: This setting determines the heading of the references section in the generated PDF. The default value is `References`.
 
 **Note
 **: Citations are currently in a kind of beta, and only online citations work properly at the moment. The IEEE citation style is used.
@@ -129,11 +128,11 @@ code:
   mermaid: false
 ```
 
-* `style`: This setting determines the color style of the code blocks in the generated PDF. The default value is `dracula`. Possible styles are visible in the [chroma](https://github.com/alecthomas/chroma) repository.
-* `fontSize`: This setting determines the font size of the code blocks in the generated PDF. The default value is `10`. This setting can also be overridden for individual code blocks.
-* `characterSpacing`: This setting determines the character spacing of the code blocks in the generated PDF. The default value is `-0.75`. This setting can be used to adjust the spacing between characters to improve readability.
-* `lineNumbers`: This setting determines whether line numbers should be included in the code blocks in the generated PDF. The default value is true. This setting can also be overridden for individual code blocks.
-* `mermaid`: This setting enables or disables the rendering of Mermaid diagrams in the generated PDF. The default value is `false`. This feature requires the installation of the `mmdc` command line tool from the [mermaid-cli](https://github.com/mermaid-js/mermaid-cli) repo.
+- `style`: This setting determines the color style of the code blocks in the generated PDF. The default value is `dracula`. Possible styles are visible in the [chroma](https://github.com/alecthomas/chroma) repository.
+- `fontSize`: This setting determines the font size of the code blocks in the generated PDF. The default value is `10`. This setting can also be overridden for individual code blocks.
+- `characterSpacing`: This setting determines the character spacing of the code blocks in the generated PDF. The default value is `-0.75`. This setting can be used to adjust the spacing between characters to improve readability.
+- `lineNumbers`: This setting determines whether line numbers should be included in the code blocks in the generated PDF. The default value is true. This setting can also be overridden for individual code blocks.
+- `mermaid`: This setting enables or disables the rendering of Mermaid diagrams in the generated PDF. The default value is `false`. This feature requires the installation of the `mmdc` command line tool from the [mermaid-cli](https://github.com/mermaid-js/mermaid-cli) repo.
 
 ## Cover page options
 
@@ -143,8 +142,8 @@ cover:
   subtitle: generated by mdpaper
 ```
 
-* enabled: This setting enables or disables the generation of a cover page in the generated PDF. The default value is `true`.
-* subtitle: This setting determines the subtitle of the cover page in the generated PDF. The default value is `generated by mdpaper`. The subtitle is displayed below the title of the paper and above the names of the authors.
+- enabled: This setting enables or disables the generation of a cover page in the generated PDF. The default value is `true`.
+- subtitle: This setting determines the subtitle of the cover page in the generated PDF. The default value is `generated by mdpaper`. The subtitle is displayed below the title of the paper and above the names of the authors.
 
 # Supported Markdown Features
 
@@ -165,11 +164,11 @@ This is a paragraph. It can contain any number of words and lines, as long as it
 
 Mdpaper supports several inline styling options, which can be used to add emphasis or highlight certain parts of your text. The following inline styles are supported:
 
-+ Bold: To create bold text, enclose the text in double asterisks (**). For example: **This text is bold.**
-+ Italic: To create italic text, enclose the text in underscores (*). For example: *This text is italic.*
-+ Bold Italic: To create bold italic text, enclose the text in triple underscores (***). For example:
+- Bold: To create bold text, enclose the text in double asterisks (**). For example: **This text is bold.**
+- Italic: To create italic text, enclose the text in underscores (*). For example: *This text is italic.*
+- Bold Italic: To create bold italic text, enclose the text in triple underscores (***). For example:
   ***This text is bold italic.***
-+ Code Spans: To create a code span, enclose the text in backticks (\`). For example: `This text is a code span.`
+- Code Spans: To create a code span, enclose the text in backticks (\`). For example: `This text is a code span.`
 
 ```markdown
 This paragraph contains some **bold**, _italic_, ___bold italic___, and `code span` text.
@@ -198,6 +197,7 @@ You can also use inline styling in headings, just like in regular paragraphs. Fo
 ## Lists
 
 Lists are a convenient way to organize and present information in a structured way. Mdpaper supports both unordered lists (bulleted lists) and ordered lists (numbered lists).
+The Text inside a list-item supports inline styling.
 
 ### Unordered Lists
 

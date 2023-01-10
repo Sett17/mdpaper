@@ -72,7 +72,7 @@ func FromAst(md ast.Node) *spec.PDF {
 			}
 		case ast.KindList:
 			l := conversions.List(n.(*ast.List))
-			paper.Add(l)
+			paper.Add(l...)
 		case ast.KindBlockquote:
 			b := conversions.Blockquote(n.(*ast.Blockquote))
 			paper.Add(b...)
@@ -160,7 +160,7 @@ func FromAst(md ast.Node) *spec.PDF {
 		cits := abstracts.Paper{}
 		var a spec.Addable = references.CitationHeading
 		cits.Add(&a)
-		cits.Add(references.CitationList())
+		cits.Add(references.Citations()...)
 		for !cits.Finished() {
 			displayPageNumber++
 			realPageNumber++

@@ -11,7 +11,7 @@ page:
     pageNumbers: true
     startPageNumber: 1
 toc:
-    enabled: false
+    enabled: true
     lineHeight: 1.3
     fontSize: 11
     heading: Table of Contents

@@ -117,7 +117,7 @@ func (tree ChapterTree) GenerateOutline(outlines *spec.DictionaryObject) []*spec
 	roots := tree.Roots()
 	for i, n := range roots {
 		d := spec.NewDictObject()
-		d.Set("Title", "("+n.Heading.Numbering()+" "+n.Heading.String()+")")
+		d.Set("Title", "("+n.Heading.String()+")")
 		d.Set("Parent", outlines.Reference())
 		d.Set("Count", n.recChildCount())
 		d.Set("Dest", n.Heading.Destination())

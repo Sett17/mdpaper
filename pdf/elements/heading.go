@@ -30,9 +30,7 @@ func (h *Heading) String() string {
 func (h *Heading) SetPrefix(prefix [6]int) {
 	h.Prefix = prefix
 	if h.Prefix != [6]int{} {
-		//h.Text.Processed[0].Words[0] = h.Numbering() + " " + h.Text.Processed[0].Words[0]
 		h.Text.Segments[0].Content = h.Numbering() + " " + h.Text.Segments[0].Content
-		//h.Process(h.Width)
 	}
 }
 
@@ -55,11 +53,4 @@ func (h *Heading) SetPos(x float64, y float64) {
 
 func (h *Heading) Height() float64 {
 	return h.Text.Height() + globals.MmToPt(globals.Cfg.Spaces.Heading)
-}
-func (h *Heading) Process(w float64) {
-	h.Text.Process(w)
-}
-
-func (h *Heading) Bytes() []byte {
-	return h.Text.Bytes()
 }

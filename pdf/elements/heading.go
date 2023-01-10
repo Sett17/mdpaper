@@ -48,9 +48,9 @@ func (h *Heading) Numbering() string {
 }
 
 func (h *Heading) SetPos(x float64, y float64) {
-	h.Text.SetPos(x, y-globals.MmToPt(globals.Cfg.Spaces.Heading)/1.5) //bit below center off whitespace
+	h.Text.SetPos(x, y-globals.MmToPt(globals.Cfg.Margins.HeadingTop))
 }
 
 func (h *Heading) Height() float64 {
-	return h.Text.Height() + globals.MmToPt(globals.Cfg.Spaces.Heading)
+	return h.Text.Height() + globals.MmToPt(globals.Cfg.Margins.HeadingTop+globals.Cfg.Margins.HeadingBottom)
 }

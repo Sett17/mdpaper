@@ -25,16 +25,18 @@ func (p *Paragraph) Split(percent float64) (r1 spec.Addable, r2 spec.Addable) {
 }
 
 func (p *Paragraph) Process(width float64) {
+	p.Text.Process(width)
 	if p.Centered {
-		p.Text.Process(width)
 		for _, l := range p.Text.Processed {
 			l.Center(width)
 		}
-	} else {
-		p.Text.Process(width)
 	}
 }
 
+func (p *Paragraph) SetPos(x, y float64) {
+	p.Pos = [2]float64{x, y - globals.MmToPt(globals.Cfg.Margins.Paragraph)}
+}
+
 func (p *Paragraph) Height() float64 {
-	return (float64(len(p.Processed)))*p.LineHeight*float64(p.FontSize) + globals.MmToPt(globals.Cfg.Spaces.Paragraph)
+	return (float64(len(p.Processed)))*p.LineHeight*float64(p.FontSize) + globals.MmToPt(globals.Cfg.Margins.Paragraph*2)
 }

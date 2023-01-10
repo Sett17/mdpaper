@@ -19,7 +19,7 @@ func NewColumn(width, maxHeight, x, y float64) *Column {
 }
 
 func (c *Column) Add(a *spec.Addable) (leftover *spec.Addable, full bool) {
-	if a == nil {
+	if a == nil || (*a) == nil {
 		return nil, false
 	}
 	A := *a
@@ -34,7 +34,7 @@ func (c *Column) Add(a *spec.Addable) (leftover *spec.Addable, full bool) {
 		availSpace := c.bottom - (c.Pos[1] - c.MaxHeight)
 		if s, ok := A.(spec.Splittable); ok {
 			fitting, leftoverS := s.Split(availSpace / h)
-			
+
 			if fitting != nil {
 				c.StreamObject.Add(&fitting)
 			}

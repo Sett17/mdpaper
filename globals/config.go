@@ -21,11 +21,14 @@ type Config struct {
 		FontSize   int     `yaml:"fontSize"`
 		Heading    string  `yaml:"heading"`
 	} `yaml:"toc"`
-	Spaces struct {
-		Paragraph float64 `yaml:"paragraph"`
-		Heading   float64 `yaml:"heading"`
-		Code      float64 `yaml:"code"`
-	}
+	Margins struct {
+		Paragraph     float64 `yaml:"paragraph"`
+		HeadingTop    float64 `yaml:"heading_top"`
+		HeadingBottom float64 `yaml:"heading_bottom"`
+		List          float64 `yaml:"list"`
+		Image         float64 `yaml:"image"`
+		Code          float64 `yaml:"code"`
+	} `yaml:"margins"`
 	Paper struct {
 		Title  string `yaml:"title"`
 		Author string `yaml:"authors"`
@@ -35,18 +38,18 @@ type Config struct {
 		Enabled bool   `yaml:"enabled"`
 		File    string `yaml:"file"`
 		Heading string `yaml:"heading"`
-	}
+	} `yaml:"citation"`
 	Code struct {
 		Style            string  `yaml:"style"`
 		FontSize         int     `yaml:"fontSize"`
 		CharacterSpacing float64 `yaml:"characterSpacing"`
 		LineNumbers      bool    `yaml:"lineNumbers"`
 		Mermaid          bool    `yaml:"mermaid"`
-	}
+	} `yaml:"code"`
 	Cover struct {
 		Enabled  bool   `yaml:"enabled"`
 		Subtitle string `yaml:"subtitle"`
-	}
+	} `yaml:"cover"`
 }
 
 var Default = Config{
@@ -87,14 +90,20 @@ var Default = Config{
 		FontSize:   11,
 		Heading:    "Table of Contents",
 	},
-	Spaces: struct {
-		Paragraph float64 `yaml:"paragraph"`
-		Heading   float64 `yaml:"heading"`
-		Code      float64 `yaml:"code"`
+	Margins: struct {
+		Paragraph     float64 `yaml:"paragraph"`
+		HeadingTop    float64 `yaml:"heading_top"`
+		HeadingBottom float64 `yaml:"heading_bottom"`
+		List          float64 `yaml:"list"`
+		Image         float64 `yaml:"image"`
+		Code          float64 `yaml:"code"`
 	}{
-		Paragraph: 2.0,
-		Heading:   2.0,
-		Code:      2.0,
+		Paragraph:     2.0,
+		HeadingTop:    3.0,
+		HeadingBottom: 1.0,
+		List:          2.0,
+		Image:         4.0,
+		Code:          2.0,
 	},
 	Paper: struct {
 		Title  string `yaml:"title"`

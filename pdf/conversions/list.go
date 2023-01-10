@@ -3,15 +3,23 @@ package conversions
 import (
 	"github.com/sett17/mdpaper/globals"
 	"github.com/sett17/mdpaper/pdf/elements"
+	"github.com/sett17/mdpaper/pdf/spacing"
 	"github.com/sett17/mdpaper/pdf/spec"
 	"github.com/yuin/goldmark/ast"
 	"strconv"
 )
 
 func List(list *ast.List) (adds []*spec.Addable) {
+	spacer1 := spacing.NewSpacer(globals.Cfg.Margins.List)
+	var a1 spec.Addable = spacer1
+	adds = append(adds, &a1)
 	i := 1
 	for n := list.FirstChild(); n != nil; n = n.NextSibling() {
-		// do not support nested lists for now
+		if i > 1 {
+			spacer := spacing.NewSpacer(globals.Cfg.Margins.List)
+			var a2 spec.Addable = spacer
+			adds = append(adds, &a2)
+		}
 		switch n.Kind() {
 		case ast.KindListItem:
 			number := -1
@@ -20,7 +28,11 @@ func List(list *ast.List) (adds []*spec.Addable) {
 			}
 			adds = append(adds, ListItem(n.(*ast.ListItem), number, string(list.Marker)))
 		}
+		i++
 	}
+	spacer2 := spacing.NewSpacer(globals.Cfg.Margins.List)
+	var a2 spec.Addable = spacer2
+	adds = append(adds, &a2)
 	return
 }
 

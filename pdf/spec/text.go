@@ -250,10 +250,10 @@ func (p *Text) Add(a ...*Segment) {
 
 func (p *Text) Bytes() []byte {
 	buf := bytes.Buffer{}
-	buf.WriteString("BT\n")
 
+	buf.WriteString("BT\n")
 	buf.WriteString(fmt.Sprintf("%f %f TD\n", p.Pos[0], p.Pos[1]))
-	buf.WriteString(fmt.Sprintf("%f TL\n", p.LineHeight*float64(p.FontSize)))
+	buf.WriteString(fmt.Sprintf("%f TL\n", float64(p.FontSize)*p.LineHeight))
 
 	// we can assume that paragraph has been processed
 

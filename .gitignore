@@ -11,4 +11,6 @@ images/**
 demo/mdpaper
 .idea/dbnavigator.xml
 !REFERENCE.md
+!reference.yaml
+!Reference.pdf
 !README.md

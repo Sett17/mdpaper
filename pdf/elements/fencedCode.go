@@ -39,6 +39,13 @@ type FencedCode struct {
 func (f *FencedCode) Split(percent float64) (spec.Addable, spec.Addable) {
 	cutoffLine := int(math.Round(float64(len(f.Processed)) * percent))
 
+	if cutoffLine == 0 {
+		return nil, f
+	}
+	if cutoffLine == len(f.Processed) {
+		return f, nil
+	}
+
 	cutoffBlockLines := f.Processed[cutoffLine:]
 	cutoffBlock := FencedCode{
 		Processed:   cutoffBlockLines,
@@ -60,6 +67,8 @@ func (f *FencedCode) Split(percent float64) (spec.Addable, spec.Addable) {
 func (f *FencedCode) Bytes() []byte {
 	buf := bytes.Buffer{}
 
+	extraSpaceRatio := .4 // only for SourceCodePro-Regular TODO: calculate with font
+
 	backcol := f.Style.Get(chroma.Text).Background
 	rectColor := [3]float64{math.Min(float64(backcol.Red())/255, 1), math.Min(float64(backcol.Green())/255, 1), math.Min(float64(backcol.Blue())/255, 1)}
 	borderColor := rectColor
@@ -67,9 +76,9 @@ func (f *FencedCode) Bytes() []byte {
 		borderColor = [3]float64{math.Abs(rectColor[0] - 1), math.Abs(rectColor[1] - 1), math.Abs(rectColor[2] - 1)}
 	}
 	r := spec.GraphicRect{
-		Pos:           [2]float64{f.Pos[0], f.Pos[1] - globals.MmToPt(2)},
+		Pos:           [2]float64{f.Pos[0], f.Pos[1]},
 		W:             f.w,
-		H:             f.Height() - globals.Cfg.Spaces.Code,
+		H:             float64(len(f.Processed))*float64(f.FontSize) + float64(f.FontSize)*extraSpaceRatio,
 		Color:         rectColor,
 		BorderColor:   borderColor,
 		Filled:        true,
@@ -80,10 +89,12 @@ func (f *FencedCode) Bytes() []byte {
 
 	buf.WriteString("BT\n")
 	buf.WriteString("q\n")
-	buf.WriteString(fmt.Sprintf("%f %f Td\n", f.Pos[0]+globals.MmToPt(1), f.Pos[1]-float64(f.FontSize)-globals.MmToPt(2+1)))
+	buf.WriteString(fmt.Sprintf("%f %f Td\n", f.Pos[0]+globals.MmToPt(1), f.Pos[1]))
 	buf.WriteString(fmt.Sprintf("%f TL\n", float64(f.FontSize)))
 	buf.WriteString(fmt.Sprintf("%f Tc\n", globals.Cfg.Code.CharacterSpacing))
 	buf.WriteString(fmt.Sprintf("/%s %d Tf\n", spec.Monospace.Name, f.FontSize))
+
+	buf.WriteString("T*\n")
 
 	lineNumberLength := len(fmt.Sprintf("%d", len(f.Processed)))
 	for k, line := range f.Processed {
@@ -107,11 +118,11 @@ func (f *FencedCode) Bytes() []byte {
 }
 
 func (f *FencedCode) SetPos(x, y float64) {
-	f.Pos = [2]float64{x, y + globals.MmToPt(2)}
+	f.Pos = [2]float64{x, y - globals.MmToPt(globals.Cfg.Margins.Code)}
 }
 
 func (f *FencedCode) Height() float64 {
-	return float64(len(f.Processed))*float64(f.FontSize) + globals.MmToPt(4) + globals.Cfg.Spaces.Code
+	return float64(len(f.Processed))*float64(f.FontSize) + globals.MmToPt(globals.Cfg.Margins.Code*2)
 }
 
 type token struct {

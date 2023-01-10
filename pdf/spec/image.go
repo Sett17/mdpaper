@@ -115,11 +115,11 @@ func (i *ImageAddable) Bytes() []byte {
 }
 
 func (i *ImageAddable) SetPos(x, y float64) {
-	i.Pos = [2]float64{x, y - globals.MmToPt(3)}
+	i.Pos = [2]float64{x, y - globals.MmToPt(globals.Cfg.Margins.Image)}
 }
 
 func (i *ImageAddable) Height() float64 {
-	return i.H + globals.MmToPt(3.5)
+	return i.H + globals.MmToPt(globals.Cfg.Margins.Image*2)
 }
 
 func (i *ImageAddable) Process(width float64) {

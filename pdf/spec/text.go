@@ -23,11 +23,22 @@ type TextLine struct {
 	Offset      float64
 }
 
+func escape(str string) (ret string) {
+	ret = strings.ReplaceAll(str, "\\", "\\\\")
+	ret = strings.ReplaceAll(ret, "(", "\\(")
+	ret = strings.ReplaceAll(ret, ")", "\\)")
+	return
+}
+
+func deEscape(str string) (ret string) {
+	ret = strings.ReplaceAll(str, "\\\\", "\\")
+	ret = strings.ReplaceAll(ret, "\\(", "(")
+	ret = strings.ReplaceAll(ret, "\\)", ")")
+	return
+}
+
 func (l *TextLine) Add(str string, font *Font) {
-	//s := strings.NewReplacer("(", "\\(", ")", "\\)", "\\", "\\\\").Replace(str)
-	s := strings.ReplaceAll(str, "\\", "\\\\")
-	s = strings.ReplaceAll(s, "(", "\\(")
-	s = strings.ReplaceAll(s, ")", "\\)")
+	s := escape(str)
 
 	l.Words = append(l.Words, s)
 	l.Fonts = append(l.Fonts, font)
@@ -65,6 +76,7 @@ type Text struct {
 	Processed  []*TextLine
 	Offset     float64
 	Width      float64
+	Margin     float64
 }
 
 func (p *Text) String() string {
@@ -143,11 +155,12 @@ func (p *Text) SplitDelegate(percent float64) (Addable, Addable) {
 		return nil, p
 	}
 	cutoffText := p.Processed[procCutoff].String()
+	cutoffText = deEscape(cutoffText)
 	var leftoverSegs []*Segment
 
 	cutOffSeg, cutoffLocation := findCutoffSegment(p.Segments, cutoffText)
 	if cutOffSeg == -1 {
-		cli.Error(fmt.Errorf("could not find cutoff segment"), true)
+		cli.Error(fmt.Errorf("could not find cutoff segment for '%s'", cutoffText), true)
 	}
 
 	splitSegment := p.Segments[cutOffSeg]
@@ -155,20 +168,6 @@ func (p *Text) SplitDelegate(percent float64) (Addable, Addable) {
 
 	leftoverSegs = append(leftoverSegs, splitSegment)
 	leftoverSegs = append(leftoverSegs, p.Segments[cutOffSeg+1:]...)
-
-	//for i, segment := range p.Segments {
-	//	if strings.Contains(segment.Content, cutoffText) {
-	//		// Split the segment
-	//		split := strings.Split(segment.Content, cutoffText)
-	//		split[1] = cutoffText + split[1]
-	//		p.Segments[i].Content = split[0]
-	//		segsAfter = p.Segments[i+1:]
-	//		p.Segments = p.Segments[:i+1]
-	//		leftoverSegs = append(leftoverSegs, &Segment{Content: split[1], Font: segment.Font})
-	//		leftoverSegs = append(leftoverSegs, segsAfter...)
-	//		break
-	//	}
-	//}
 
 	a1 := &Text{
 		Segments:   p.Segments,
@@ -193,7 +192,7 @@ func (p *Text) SetPos(x, y float64) {
 }
 
 func (p *Text) Height() float64 {
-	return (float64(len(p.Processed)))*p.LineHeight*float64(p.FontSize) + globals.MmToPt(globals.Cfg.Spaces.Paragraph)
+	return (float64(len(p.Processed)))*p.LineHeight*float64(p.FontSize) + p.Margin
 }
 
 func (p *Text) Process(maxWidth float64) {
@@ -201,20 +200,17 @@ func (p *Text) Process(maxWidth float64) {
 
 	maxWidth -= p.Offset / 2
 	p.Width = maxWidth
-	l := &TextLine{WordSpacing: 1.0}
+	l := &TextLine{WordSpacing: 1.0, Offset: p.Offset}
 	for i := 0; i < len(p.Segments); {
 		s := p.Segments[i]
 		if len(s.Content) == 0 {
 			i++
 			continue
 		}
-		//split := strings.Split(s.Content, " ")
 		splitSmall := strings.Split(s.Content, " ")
 		split := make([]string, 0)
 		for _, s := range splitSmall {
-			//if len(s) > 0 {
 			split = append(split, strings.SplitAfter(s, "/")...)
-			//}
 		}
 		for j := 0; j < len(split); {
 			w := split[j]
@@ -236,7 +232,7 @@ func (p *Text) Process(maxWidth float64) {
 				}
 				l.CalculateSpacing(maxWidth)
 				p.Processed = append(p.Processed, l)
-				l = &TextLine{WordSpacing: 1.0}
+				l = &TextLine{WordSpacing: 1.0, Offset: p.Offset}
 			}
 		}
 		i++
@@ -245,28 +241,24 @@ func (p *Text) Process(maxWidth float64) {
 		return
 	}
 	l.Words[len(l.Words)-1] = strings.TrimRight(l.Words[len(l.Words)-1], " ")
-	//l.Center(maxWidth)
-	//l.CalculateSpacing(maxWidth)
 	p.Processed = append(p.Processed, l)
-	//}
 }
 
-func (p *Text) Add(a *Segment) {
-	p.Segments = append(p.Segments, a)
+func (p *Text) Add(a ...*Segment) {
+	p.Segments = append(p.Segments, a...)
 }
 
 func (p *Text) Bytes() []byte {
 	buf := bytes.Buffer{}
 	buf.WriteString("BT\n")
 
-	buf.WriteString(fmt.Sprintf("%f %f TD\n", p.Pos[0]+p.Offset, p.Pos[1]))
+	buf.WriteString(fmt.Sprintf("%f %f TD\n", p.Pos[0], p.Pos[1]))
 	buf.WriteString(fmt.Sprintf("%f TL\n", p.LineHeight*float64(p.FontSize)))
 
 	// we can assume that paragraph has been processed
 
 	buf.WriteString("T*\n")
 
-	//TODO refactor all the text byte stuff to some common place
 	var currFont *Font = nil
 	for i, l := range p.Processed {
 		lineBuffer := strings.Builder{}
@@ -283,13 +275,11 @@ func (p *Text) Bytes() []byte {
 					lineBuffer.Reset()
 				}
 				buf.WriteString(fmt.Sprintf("/%s %d Tf\n", l.Fonts[j].Name, p.FontSize))
-				//buf.WriteString(fmt.Sprintf("/%s %d Tf\n", "Times-Roman", p.FontSize))
 				currFont = l.Fonts[j]
 			}
 			lineBuffer.WriteString(l.Words[j])
 		}
 		if lineBuffer.Len() > 0 {
-			//buf.WriteString(fmt.Sprintf("(%s) Tj\n", u))
 			buf.WriteString(fmt.Sprintf("("))
 			buf.Write(globals.PDFEncode(lineBuffer.String()))
 			buf.WriteString(fmt.Sprintf(") Tj\n"))
@@ -303,15 +293,6 @@ func (p *Text) Bytes() []byte {
 	}
 
 	buf.WriteString("ET\n")
-
-	//rect := GraphicRect{
-	//	Pos:   [2]float64{p.Pos[0] + p.Offset, p.Pos[1]},
-	//	W:     p.Width,
-	//	H:     p.Height(),
-	//	Color: [3]float64{0.5, 0.5, 0.0},
-	//}
-	//buf.WriteString("\n")
-	//buf.Write(rect.Bytes())
 
 	return buf.Bytes()
 }

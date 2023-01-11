@@ -5,7 +5,10 @@ import (
 	"fmt"
 	"github.com/sett17/mdpaper/cli"
 	"github.com/sett17/mdpaper/globals"
+	_ "golang.org/x/image/bmp"
+	"golang.org/x/image/draw"
 	"image"
+	_ "image/gif"
 	_ "image/jpeg"
 	_ "image/png"
 	"os"
@@ -28,7 +31,7 @@ func NewImageObject(iData image.Image, iName string, mul float64) (XObject, Adda
 	for j := 0; j < iData.Bounds().Dy()/pixelMul; j++ {
 		for k := 0; k < iData.Bounds().Dx()/pixelMul; k++ {
 			r, g, b, _ := iData.At(k*pixelMul, j*pixelMul).RGBA()
-			x.Write([]byte{byte(r), byte(g), byte(b)})
+			x.Write([]byte{byte(r >> 8), byte(g >> 8), byte(b >> 8)})
 		}
 	}
 	x.WriteString("\n")
@@ -49,8 +52,6 @@ func NewImageObjectFromFile(path string, mul float64) (XObject, Addable) {
 	iFile, err := os.Open(path)
 	if err != nil {
 		cli.Warning("Image %s not found", path)
-	}
-	if err != nil {
 		r := FillingRect{
 			GraphicRect: GraphicRect{
 				Pos: [2]float64{},
@@ -60,21 +61,10 @@ func NewImageObjectFromFile(path string, mul float64) (XObject, Addable) {
 		}
 		return XObject{}, &r
 	} else {
-		iData, _, err = image.Decode(iFile)
-		iName = iFile.Name()
+		var format string
+		iData, format, err = image.Decode(iFile)
 		if err != nil {
-			//if strings.Split(iName, ".")[len(strings.Split(iName, "."))-1] == "svg" {
-			//	cli.Warning("\nSVG currently not supported\n")
-			//	r := FillingRect{
-			//		GraphicRect: GraphicRect{
-			//			Pos: [2]float64{},
-			//		},
-			//		Ratio: 1.5,
-			//		Mul:   mul,
-			//	}
-			//	return XObject{}, &r
-			//} else {
-			cli.Error(err, false)
+			cli.Error(fmt.Errorf("format %s not supported for %q", format, iFile.Name()), false)
 			r := FillingRect{
 				GraphicRect: GraphicRect{
 					Pos: [2]float64{},
@@ -83,8 +73,12 @@ func NewImageObjectFromFile(path string, mul float64) (XObject, Addable) {
 				Mul:   mul,
 			}
 			return XObject{}, &r
-			//}
 		}
+		newImg := image.NewRGBA(iData.Bounds())
+		draw.Draw(newImg, iData.Bounds(), image.White, image.Point{}, draw.Src)
+		draw.Draw(newImg, iData.Bounds(), iData, iData.Bounds().Min, draw.Over)
+		iData = newImg
+		iName = iFile.Name()
 	}
 	defer func(iFile *os.File) {
 		err := iFile.Close()

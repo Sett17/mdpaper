@@ -253,6 +253,9 @@ The `image alt text` is used to set options, which will be explained in the [Blo
 
 All images in mdpaper are centered in the column and the title is centered below the image. If there is an error when including the image, an empty rectangle will be displayed.
 
+Note that only `png`, `jpeg`, `gif`, and `bmp` image files are supported.
+Before images are put into the PDF, they are put on top of a white background.
+
 Here is an example of an image:
 
 ```markdown

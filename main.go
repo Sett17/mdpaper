@@ -81,29 +81,16 @@ func main() {
 	ppT := time.Now()
 	cli.Output("PDF generated in %v\n", ppT.Sub(parsed))
 
-	outName := strings.ReplaceAll(globals.Cfg.Paper.Title, "#", "")
-	outName = strings.ReplaceAll(outName, "<", "")
-	outName = strings.ReplaceAll(outName, ">", "")
-	outName = strings.ReplaceAll(outName, "$", "")
-	outName = strings.ReplaceAll(outName, "+", "")
-	outName = strings.ReplaceAll(outName, "%", "")
-	outName = strings.ReplaceAll(outName, "!", "")
-	outName = strings.ReplaceAll(outName, "`", "")
-	outName = strings.ReplaceAll(outName, "&", "")
-	outName = strings.ReplaceAll(outName, "*", "")
-	outName = strings.ReplaceAll(outName, "'", "")
-	outName = strings.ReplaceAll(outName, "|", "")
-	outName = strings.ReplaceAll(outName, "{", "")
-	outName = strings.ReplaceAll(outName, "}", "")
-	outName = strings.ReplaceAll(outName, "?", "")
-	outName = strings.ReplaceAll(outName, "\"", "")
-	outName = strings.ReplaceAll(outName, "=", "")
-	outName = strings.ReplaceAll(outName, "\\", "")
-	outName = strings.ReplaceAll(outName, "/", "")
-	outName = strings.ReplaceAll(outName, ":", "")
-	outName = strings.ReplaceAll(outName, "@", "")
-	outName = strings.ReplaceAll(outName, " ", "_")
-	outName += ".pdf"
+	replaceSet := []byte{'#', '<', '>', '$', '+', '%', '!', '`', '&', '*', '\'', '|', '{', '}', '?', '"', '=', '\\', '/', ':', '@', ' '}
+	outBytes := []byte(strings.ToLower(globals.Cfg.Paper.Title))
+	for i, v := range outBytes {
+		for _, r := range replaceSet {
+			if v == r {
+				outBytes[i] = '_'
+			}
+		}
+	}
+	outName := string(outBytes) + ".pdf"
 	outp, err := os.Create(outName)
 	if err != nil {
 		cli.Error(err, true)

@@ -4,6 +4,7 @@ config.yaml
 *.yaml
 *.txt
 *.bib
+*.tape
 images/**
 **/mdpaper
 **/mdpaper.exe

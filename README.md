@@ -20,6 +20,20 @@ Every available option can be set in the markdown file with a YAML frontmatter.
 mdpaper my_paper.md
 ```
 
+You can also include multiple markdown files, which will act as if they were concatenated into a single file.
+
+```bash
+mdpaper abstract.md draft.md ackowledgements.md
+```
+
+You can also set the path to the config file (e.g. if you want to have multiple configs) with `-c` or `--config`.
+
+```bash
+mdpaper -c single.yaml my_paper.md
+```
+
+![](usage.gif "Usage example")
+
 ## How do I write a paper?
 
 Everything from features through to configuration, and supported elements is documented in the [References](REFERENCE.md) file.

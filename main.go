@@ -26,8 +26,8 @@ func main() {
 	cli.ParseForHelp(os.Args[1:])
 	cli.ParseForVersion(os.Args[1:])
 
-	mdFile := cli.Parse(os.Args[1:])
-	if mdFile == "" {
+	mdFiles := cli.Parse(os.Args[1:])
+	if len(mdFiles) == 0 {
 		cli.Error(fmt.Errorf("no input file"), false)
 		cli.HelpProgArg.Func("")
 	}
@@ -36,13 +36,17 @@ func main() {
 		cli.CfgFunc("config.yaml")
 	}
 
-	cli.Output("Input file: %s\n", mdFile)
+	cli.Output("Input files: %q\n", mdFiles)
 
-	inp, err := os.ReadFile(mdFile)
-	if err != nil {
-		cli.Error(err, true)
+	for _, file := range mdFiles {
+		inp, err := os.ReadFile(file)
+		if err != nil {
+			cli.Error(err, false)
+			continue
+		}
+		globals.File = append(globals.File, inp...)
+		globals.File = append(globals.File, 0x0a)
 	}
-	globals.File = inp
 
 	start := time.Now()
 
@@ -53,7 +57,7 @@ func main() {
 			meta.Meta, // just to ignore frontmatter
 		),
 		goldmark.WithParserOptions()).Parser()
-	ast := p.Parse(text.NewReader(inp))
+	ast := p.Parse(text.NewReader(globals.File))
 
 	//ast.Dump(inp, 0)
 	//return

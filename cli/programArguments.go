@@ -26,8 +26,7 @@ var HelpProgArg = ProgArg{
 	Long:  "help",
 	Func: func(_ string) {
 		_, _ = cfmt.Printf(`
-{{Usage:}}::underline mdpaper [OPTIONS] MARKDOWN_FILE
-{{If multiple files are specified, only the last one will be used}}::gray`)
+{{Usage:}}::underline mdpaper [OPTIONS] MARKDOWN_FILE ...`)
 		fmt.Println(Logo)
 		for _, arg := range ProgArgs {
 			_, _ = cfmt.Printf("  {{-%s}}::purple, {{--%s}}::purple\t{{%s}}::gray\n", arg.Short, arg.Long, arg.Help)

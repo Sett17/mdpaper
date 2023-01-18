@@ -5,11 +5,11 @@ import (
 	"strings"
 )
 
-func Parse(args []string) (mdFile string) {
+func Parse(args []string) (mdFiles []string) {
 	for i := 0; i < len(args); i++ {
 		arg := args[i]
 		if !strings.HasPrefix(arg, "-") && !strings.HasPrefix(arg, "--") {
-			mdFile = arg
+			mdFiles = append(mdFiles, arg)
 		} else {
 			arg = strings.TrimLeft(arg, "-")
 			for _, pArg := range ProgArgs {

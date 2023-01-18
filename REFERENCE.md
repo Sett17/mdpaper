@@ -2,7 +2,7 @@
 
 This reference guide serves as a comprehensive resource for users of the mdpaper tool. It explains the various components and settings of mdpaper and provides examples of how they can be used to generate scientifically formatted PDFs from markdown files. Whether you are new to mdpaper or an experienced user, this guide will help you understand and make the most of the tool's capabilities.
 
-Please note that this reference guide is **not necessarily up-to-date** with the latest version of the mdpaper tool. It currently corresponds to version `v1.10.2`, and some features or functionality may have changed in later versions. If you are using a different version of mdpaper, some information in this guide may not apply.
+Please note that this reference guide is **not necessarily up-to-date** with the latest version of the mdpaper tool. It currently corresponds to version `v2.0.0`, and some features or functionality may have changed in later versions. If you are using a different version of mdpaper, some information in this guide may not apply.
 
 # What is mdpaper?
 
@@ -21,6 +21,12 @@ mdpaper follows these steps to generate formatted PDFs from markdown files:
 Throughout this process, mdpaper takes into account the various features and settings that the user has specified in order to customize the PDF to their specific needs. By following these steps, mdpaper is able to generate high-quality PDFs that are optimized for a variety of purposes.
 
 \fill
+
+# CLI
+
+The command line interface (CLI) is the primary way of interacting with mdpaper. It allows users to specify the input markdown file(s) and if needed the configuration file, and then generate the PDF.
+
+![](help.gif "help message in terminal")
 
 # Configuration
 

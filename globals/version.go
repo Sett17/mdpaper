@@ -1,3 +1,3 @@
 package globals
 
-const Version = "1.10.2"
+const Version = "2.0.0"

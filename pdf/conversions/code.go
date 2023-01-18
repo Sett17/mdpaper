@@ -18,7 +18,7 @@ import (
 )
 
 func Mermaid(fcb *ast.FencedCodeBlock) (retO *spec.XObject, retA *spec.Addable) {
-	optionString := strings.TrimPrefix(string(fcb.Info.Text(globals.File)), "mermaid ")
+	optionString := strings.TrimPrefix(string(fcb.Info.Text(globals.File)), "mermaid")
 	opts, err := options.Parse(optionString)
 	if err != nil {
 		cli.Error(fmt.Errorf("error parsing mermaid options: %w", err), false)

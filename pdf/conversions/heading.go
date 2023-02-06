@@ -5,6 +5,7 @@ import (
 	"github.com/sett17/mdpaper/pdf/elements"
 	"github.com/sett17/mdpaper/pdf/spec"
 	"github.com/yuin/goldmark/ast"
+	"math"
 	"strings"
 )
 
@@ -16,13 +17,10 @@ func Heading(h *ast.Heading) *spec.Addable {
 		Font:    spec.SansBold,
 	}
 	fs := globals.Cfg.Text.FontSize
-	if h.Level <= 2 {
-		fs = int(float64(fs) * 1.2)
-	}
+	fs = int(math.Max(float64(fs+1), float64(fs)*(1+(float64(6-h.Level)/10))))
 	para := elements.Heading{
 		Text: spec.Text{
-			FontSize: fs,
-			//LineHeight: globals.Cfg.LineHeight * 1.5,
+			FontSize:   fs,
 			LineHeight: 1.0,
 			Offset:     globals.MmToPt(0 + 1.5*float64(h.Level)),
 		},

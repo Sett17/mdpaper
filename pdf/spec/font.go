@@ -3,18 +3,16 @@ package spec
 import (
 	"fmt"
 	"github.com/beta/freetype/truetype"
+	"github.com/sett17/goafm"
 	"github.com/sett17/mdpaper/cli"
 	"github.com/sett17/mdpaper/globals"
-	"golang.org/x/image/font"
-	"os"
 	"strings"
 )
 
 type Font struct {
-	Width      map[int]int
 	FilePath   string
 	Font       *truetype.Font
-	Face       font.Face
+	Metrics    *goafm.FontMetric
 	Data       *StreamObject
 	Name       string
 	Descriptor Dictionary
@@ -26,13 +24,17 @@ func (f *Font) AddToPDF(p *PDF) (ref string, name string) {
 	fontObj := NewDictObject()
 	fontObj.Set("Type", "/Font")
 	fontObj.Set("Subtype", "/TrueType")
-	fontObj.Set("BaseFont", "/"+f.Font.Name(truetype.NameIDPostscriptName))
+	fontObj.Set("Encoding", "/WinAnsiEncoding")
+	fontObj.Set("BaseFont", "/"+f.Metrics.FontName)
 
 	fontObj.Set("FirstChar", 32)
 	fontObj.Set("LastChar", 255)
+
 	w := NewArrayObject()
 	for i := 32; i < 256; i++ {
-		w.Items = append(w.Items, int(f.CharWidth(rune(i))*(1000)))
+		r := rune(i)
+		rb := globals.WinAnsiEncode(string(r))[0]
+		w.Items = append(w.Items, int(f.CharWidth(rune(rb))*(1000)))
 	}
 	p.AddObject(w.Pointer())
 	fontObj.Set("Widths", w.Reference())
@@ -50,22 +52,25 @@ func (f *Font) AddToPDF(p *PDF) (ref string, name string) {
 
 func NewFont(filePath string, flags int) (f *Font) {
 	f = &Font{}
-	fontFileBuf, err := os.ReadFile(filePath)
+	fontFileBuf, err := globals.Fonts.ReadFile("fonts/" + filePath + ".ttf")
 	if err != nil {
-		fontFileBuf, err = globals.Fonts.ReadFile(filePath) // look in embedded fonts if not found
-		if err != nil {
-			cli.Error(fmt.Errorf("could not read font file %s", filePath), true)
-		}
+		cli.Error(fmt.Errorf("could not read font file %s", filePath), true)
 	}
 	fontFile, err := truetype.Parse(fontFileBuf)
 	if err != nil {
 		cli.Error(fmt.Errorf("could not parse font file %s", filePath), true)
 	}
+	afmFileBuf, err := globals.Fonts.ReadFile("fonts/" + filePath + ".afm")
+	if err != nil {
+		cli.Error(fmt.Errorf("could not read afm file %s", filePath), true)
+	}
+	f.Metrics, err = goafm.Parse(afmFileBuf)
+	if err != nil {
+		cli.Error(fmt.Errorf("could not parse afm file %s", filePath), true)
+	}
+
 	f.Name = strings.ToLower(strings.ReplaceAll(fontFile.Name(truetype.NameIDPostscriptName), " ", "_"))
 	f.Font = fontFile
-	f.Face = truetype.NewFace(fontFile, &truetype.Options{
-		Size: float64(globals.Cfg.Text.FontSize),
-	})
 
 	ttfStream := NewStreamObject()
 	ttfStream.AlwaysDeflate = true
@@ -77,8 +82,8 @@ func NewFont(filePath string, flags int) (f *Font) {
 	desc.Set("FontFile2", ttfStream.Reference())
 	f.Descriptor = desc
 
-	f.Bold = flags&0b1000000000000000000 != 0
-	f.Mono = flags&0b1 != 0
+	f.Bold = flags&ForceBold != 0
+	f.Mono = flags&FixedPitch != 0
 
 	return
 }
@@ -86,23 +91,17 @@ func NewFont(filePath string, flags int) (f *Font) {
 func generateDescriptor(f *Font, flags int) Dictionary {
 	d := NewDict()
 	d.Set("Type", "/FontDescriptor")
-	d.Set("FontName", "/"+f.Font.Name(truetype.NameIDPostscriptName))
+	d.Set("FontName", "/"+f.Metrics.FontName)
 	d.Set("Name", "/"+f.Name)
 	d.Set("Flags", flags)
-	bbox := f.Font.Bounds(1000)
-	d.Set("FontBBox", Array{Items: []interface{}{
-		int(bbox.Min.X), int(bbox.Min.Y), int(bbox.Max.X), int(bbox.Max.Y),
-	}})
-	d.Set("Ascent", int(f.Face.Metrics().Ascent))
-	d.Set("Descent", int(f.Face.Metrics().Descent))
-	slope := f.Face.Metrics().CaretSlope
-	angle := 0
-	if !(slope.X == 0 && slope.Y == 0) {
-		angle = int(float64(slope.X) / float64(slope.Y))
-	}
-	d.Set("ItalicAngle", angle)
+	d.Set("FontBBox", Array{Items: []interface{}{f.Metrics.FontBBox[0].GetInt(), f.Metrics.FontBBox[1].GetInt(), f.Metrics.FontBBox[2].GetInt(), f.Metrics.FontBBox[3].GetInt()}})
+	d.Set("Ascent", int(f.Metrics.Ascender))
+	d.Set("Descent", int(f.Metrics.Descender))
+	d.Set("ItalicAngle", f.Metrics.ItalicAngle)
+	//d.Set("StemV", f.Metrics.StdVW)
 	d.Set("StemV", 80)
-	d.Set("CapHeight", int(f.Face.Metrics().CapHeight))
+	d.Set("XHeight", f.Metrics.XHeight)
+	d.Set("CapHeight", f.Metrics.CapHeight)
 	return d
 }
 
@@ -115,24 +114,30 @@ func (f *Font) WordWidth(w string, fs int) float64 {
 }
 
 func (f *Font) CharWidth(r rune) float64 {
-	regularMul := 1.3
-	if f.Mono {
-		regularMul = .75
+	m := f.Metrics.MetricByRune(r)
+	if m == nil {
+		return f.Metrics.FontBBox[3].GetFloat() / 1e3
 	}
-	hm := f.Font.HMetric(1000, f.Font.Index(r))
-	return float64(hm.AdvanceWidth) / float64(f.Font.Bounds(1000).Max.X) * regularMul
+	return f.Metrics.MetricByRune(r).WX.GetFloat() / 1e3
 }
 
-var SerifRegular = NewFont("fonts/Tinos-Regular.ttf", 0b00000000000000000000000000000110)
-var SerifBold = NewFont("fonts/Tinos-Bold.ttf", 0b00000000000001000000000000000110)
-var SerifItalic = NewFont("fonts/Tinos-Italic.ttf", 0b00000000000000000000000001000110)
+const (
+	FixedPitch  = 0b1
+	Serif       = 0b10
+	Symbolic    = 0b100
+	Script      = 0b1000
+	NonSymbolic = 0b100000
+	Italic      = 0b1000000
+	AllCap      = 0b10000000000000000
+	SmallCap    = 0b100000000000000000
+	ForceBold   = 0b1000000000000000000
+)
 
-//var TinosBoldItalic = NewFont("fonts/Tinos-BoldItalic.ttf")
+var SerifRegular = NewFont("SourceSerifPro-Regular", Serif|Symbolic)
+var SerifBold = NewFont("SourceSerifPro-Bold", Serif|Symbolic|ForceBold)
+var SerifItalic = NewFont("SourceSerifPro-Italic", Serif|Symbolic|Italic)
 
-var SansRegular = NewFont("fonts/Lato-Regular.ttf", 0b00000000000000000000000000000100)
-var SansBold = NewFont("fonts/Lato-Bold.ttf", 0b00000000000001000000000000000100)
+var SansRegular = NewFont("SourceSans3-Regular", NonSymbolic)
+var SansBold = NewFont("SourceSans3-Bold", Symbolic|ForceBold)
 
-//var LatoItalic = NewFont("fonts/Lato-Italic.ttf")
-//var LatoBoldItalic = NewFont("fonts/Lato-BoldItalic.ttf")
-
-var Monospace = NewFont("fonts/CutiveMono-Regular.ttf", 0b00000000000000000000000000000101)
+var Monospace = NewFont("SourceCodePro-Regular", FixedPitch|Symbolic)

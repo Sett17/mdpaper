@@ -3,10 +3,10 @@ package toc
 import (
 	"bytes"
 	"fmt"
-	"github.com/sett17/mdpaper/globals"
-	"github.com/sett17/mdpaper/pdf/abstracts"
-	"github.com/sett17/mdpaper/pdf/elements"
-	"github.com/sett17/mdpaper/pdf/spec"
+	"github.com/sett17/mdpaper/v2/globals"
+	"github.com/sett17/mdpaper/v2/pdf/abstracts"
+	"github.com/sett17/mdpaper/v2/pdf/elements"
+	"github.com/sett17/mdpaper/v2/pdf/spec"
 	"strings"
 )
 

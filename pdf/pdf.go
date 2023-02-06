@@ -1,15 +1,15 @@
 package pdf
 
 import (
-	"github.com/sett17/mdpaper/cli"
-	"github.com/sett17/mdpaper/globals"
-	goldmark_math "github.com/sett17/mdpaper/goldmark-math"
-	"github.com/sett17/mdpaper/pdf/abstracts"
-	"github.com/sett17/mdpaper/pdf/conversions"
-	"github.com/sett17/mdpaper/pdf/elements"
-	"github.com/sett17/mdpaper/pdf/references"
-	"github.com/sett17/mdpaper/pdf/spec"
-	"github.com/sett17/mdpaper/pdf/toc"
+	"github.com/sett17/mdpaper/v2/cli"
+	"github.com/sett17/mdpaper/v2/globals"
+	goldmark_math "github.com/sett17/mdpaper/v2/goldmark-math"
+	"github.com/sett17/mdpaper/v2/pdf/abstracts"
+	"github.com/sett17/mdpaper/v2/pdf/conversions"
+	"github.com/sett17/mdpaper/v2/pdf/elements"
+	"github.com/sett17/mdpaper/v2/pdf/references"
+	"github.com/sett17/mdpaper/v2/pdf/spec"
+	"github.com/sett17/mdpaper/v2/pdf/toc"
 	"github.com/yuin/goldmark/ast"
 	"time"
 )

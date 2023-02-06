@@ -2,8 +2,8 @@ package elements
 
 import (
 	"fmt"
-	"github.com/sett17/mdpaper/globals"
-	"github.com/sett17/mdpaper/pdf/spec"
+	"github.com/sett17/mdpaper/v2/globals"
+	"github.com/sett17/mdpaper/v2/pdf/spec"
 	"strings"
 )
 

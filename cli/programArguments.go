@@ -4,7 +4,7 @@ import (
 	"crypto/md5"
 	"fmt"
 	"github.com/i582/cfmt/cmd/cfmt"
-	"github.com/sett17/mdpaper/globals"
+	"github.com/sett17/mdpaper/v2/globals"
 	"gopkg.in/yaml.v3"
 	"os"
 )

@@ -1,4 +1,4 @@
-module github.com/sett17/mdpaper
+module github.com/sett17/mdpaper/v2
 
 go 1.19
 

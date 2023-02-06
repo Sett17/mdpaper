@@ -3,8 +3,8 @@ package spec
 import (
 	"bytes"
 	"fmt"
-	"github.com/sett17/mdpaper/cli"
-	"github.com/sett17/mdpaper/globals"
+	"github.com/sett17/mdpaper/v2/cli"
+	"github.com/sett17/mdpaper/v2/globals"
 	_ "golang.org/x/image/bmp"
 	"golang.org/x/image/draw"
 	"image"

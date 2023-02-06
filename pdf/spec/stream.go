@@ -2,8 +2,8 @@ package spec
 
 import (
 	"bytes"
-	"github.com/sett17/mdpaper/cli"
-	"github.com/sett17/mdpaper/globals"
+	"github.com/sett17/mdpaper/v2/cli"
+	"github.com/sett17/mdpaper/v2/globals"
 	"io"
 )
 

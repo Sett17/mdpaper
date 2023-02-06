@@ -2,11 +2,11 @@ package conversions
 
 import (
 	"fmt"
-	"github.com/sett17/mdpaper/cli"
-	"github.com/sett17/mdpaper/globals"
-	"github.com/sett17/mdpaper/goldmark-math"
-	"github.com/sett17/mdpaper/pdf/conversions/options"
-	"github.com/sett17/mdpaper/pdf/spec"
+	"github.com/sett17/mdpaper/v2/cli"
+	"github.com/sett17/mdpaper/v2/globals"
+	"github.com/sett17/mdpaper/v2/goldmark-math"
+	"github.com/sett17/mdpaper/v2/pdf/conversions/options"
+	"github.com/sett17/mdpaper/v2/pdf/spec"
 	"os"
 	"os/exec"
 )

@@ -1,8 +1,8 @@
 package abstracts
 
 import (
-	"github.com/sett17/mdpaper/pdf/spacing"
-	"github.com/sett17/mdpaper/pdf/spec"
+	"github.com/sett17/mdpaper/v2/pdf/spacing"
+	"github.com/sett17/mdpaper/v2/pdf/spec"
 )
 
 type Column struct {

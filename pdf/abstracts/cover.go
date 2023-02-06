@@ -1,10 +1,10 @@
 package abstracts
 
 import (
-	"github.com/sett17/mdpaper/globals"
-	"github.com/sett17/mdpaper/pdf/elements"
-	"github.com/sett17/mdpaper/pdf/spacing"
-	"github.com/sett17/mdpaper/pdf/spec"
+	"github.com/sett17/mdpaper/v2/globals"
+	"github.com/sett17/mdpaper/v2/pdf/elements"
+	"github.com/sett17/mdpaper/v2/pdf/spacing"
+	"github.com/sett17/mdpaper/v2/pdf/spec"
 )
 
 func GenerateCover() *Column {

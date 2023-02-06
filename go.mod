@@ -8,6 +8,7 @@ require (
 	github.com/dustin/go-humanize v1.0.0
 	github.com/i582/cfmt v1.4.0
 	github.com/nickng/bibtex v1.2.0
+	github.com/sett17/goafm v1.1.0
 	github.com/yuin/goldmark v1.5.2
 	github.com/yuin/goldmark-meta v1.1.0
 	golang.org/x/image v0.1.0

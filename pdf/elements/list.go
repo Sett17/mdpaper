@@ -1,8 +1,11 @@
 package elements
 
 import (
+	"bytes"
+	"fmt"
 	"github.com/sett17/mdpaper/v2/globals"
 	"github.com/sett17/mdpaper/v2/pdf/spec"
+	"strings"
 )
 
 type ListItem struct {
@@ -11,24 +14,80 @@ type ListItem struct {
 }
 
 func (p *ListItem) Bytes() []byte {
-	if len(p.Processed) == 0 {
-		p.Processed = make([]*spec.TextLine, 1)
-		p.Processed[0] = &spec.TextLine{}
+	buf := bytes.Buffer{}
+
+	buf.WriteString("BT\n")
+	buf.WriteString(fmt.Sprintf("%f %f TD\n", p.Pos[0], p.Pos[1]))
+	buf.WriteString(fmt.Sprintf("%f TL\n", float64(p.FontSize)*p.LineHeight))
+
+	// we can assume that paragraph has been processed
+
+	buf.WriteString("T*\n")
+
+	var currFont *spec.Font = nil
+
+	lineBuffer := strings.Builder{}
+	l := spec.TextLine{}
+	l.Add(p.Prefix, spec.SerifRegular)
+	if l.Offset != 0 {
+		buf.WriteString(fmt.Sprintf("%f 0 Td\n", l.Offset))
 	}
-	firstLine := p.Processed[0]
-	words := firstLine.Words
-	fonts := firstLine.Fonts
-	newWords := []string{p.Prefix}
-	newFonts := []*spec.Font{spec.SerifRegular}
-	newWords = append(newWords, words...)
-	newFonts = append(newFonts, fonts...)
-	newLine := spec.TextLine{
-		Words:       newWords,
-		Fonts:       newFonts,
-		WordSpacing: firstLine.WordSpacing,
-		Width:       firstLine.Width + spec.SerifRegular.WordWidth(p.Prefix, globals.Cfg.Text.FontSize),
-		Offset:      0,
+	buf.WriteString(fmt.Sprintf("%f Tw\n", 0.0))
+	for j := 0; j < len(l.Words); j++ {
+		if l.Fonts[j] != currFont {
+			if lineBuffer.Len() > 0 {
+				buf.WriteString(fmt.Sprintf("("))
+				buf.Write(globals.WinAnsiEncode(lineBuffer.String()))
+				buf.WriteString(fmt.Sprintf(") Tj\n"))
+				lineBuffer.Reset()
+			}
+			buf.WriteString(fmt.Sprintf("/%s %d Tf\n", l.Fonts[j].Name, p.FontSize))
+			currFont = l.Fonts[j]
+		}
+		lineBuffer.WriteString(l.Words[j])
 	}
-	p.Processed[0] = &newLine
-	return p.Text.Bytes()
+	if lineBuffer.Len() > 0 {
+		buf.WriteString(fmt.Sprintf("("))
+		buf.Write(globals.WinAnsiEncode(lineBuffer.String()))
+		buf.WriteString(fmt.Sprintf(") Tj\n"))
+	}
+
+	for i, l := range p.Processed {
+		lineBuffer := strings.Builder{}
+		if l.Offset != 0 {
+			buf.WriteString(fmt.Sprintf("%f 0 Td\n", l.Offset))
+		}
+		buf.WriteString(fmt.Sprintf("%f Tw\n", l.WordSpacing))
+		for j := 0; j < len(l.Words); j++ {
+			if l.Fonts[j] != currFont {
+				if lineBuffer.Len() > 0 {
+					buf.WriteString(fmt.Sprintf("("))
+					//buf.Write(globals.PDFEncode(lineBuffer.String()))
+					buf.Write(globals.WinAnsiEncode(lineBuffer.String()))
+					buf.WriteString(fmt.Sprintf(") Tj\n"))
+					lineBuffer.Reset()
+				}
+				buf.WriteString(fmt.Sprintf("/%s %d Tf\n", l.Fonts[j].Name, p.FontSize))
+				currFont = l.Fonts[j]
+			}
+			lineBuffer.WriteString(l.Words[j])
+		}
+		if lineBuffer.Len() > 0 {
+			buf.WriteString(fmt.Sprintf("("))
+			//buf.Write(globals.PDFEncode(lineBuffer.String()))
+			buf.Write(globals.WinAnsiEncode(lineBuffer.String()))
+			buf.WriteString(fmt.Sprintf(") Tj\n"))
+		}
+		if i != len(p.Processed)-1 {
+			buf.WriteString("T* ")
+		}
+		if l.Offset != 0 {
+			buf.WriteString(fmt.Sprintf("%f 0 Td\n", -l.Offset))
+		}
+	}
+
+	buf.WriteString("ET\n")
+
+	return buf.Bytes()
+
 }

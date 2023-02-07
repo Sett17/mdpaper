@@ -59,7 +59,7 @@ func main() {
 		goldmark.WithParserOptions()).Parser()
 	ast := p.Parse(text.NewReader(globals.File))
 
-	//ast.Dump(inp, 0)
+	//ast.Dump(globals.File, 0)
 	//return
 
 	parsed := time.Now()

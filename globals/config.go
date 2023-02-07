@@ -5,6 +5,7 @@ type Config struct {
 		FontSize       int     `yaml:"fontSize"`
 		LineHeight     float64 `yaml:"lineHeight"`
 		ListLineHeight float64 `yaml:"listLineHeight"`
+		ListMarker     string  `yaml:"listMarker"`
 	} `yaml:"text"`
 	Page struct {
 		MarginTop       float64 `yaml:"marginTop"`
@@ -57,10 +58,12 @@ var Default = Config{
 		FontSize       int     `yaml:"fontSize"`
 		LineHeight     float64 `yaml:"lineHeight"`
 		ListLineHeight float64 `yaml:"listLineHeight"`
+		ListMarker     string  `yaml:"listMarker"`
 	}{
 		FontSize:       11,
 		LineHeight:     1.2,
 		ListLineHeight: 1.0,
+		ListMarker:     "•",
 	},
 	Page: struct {
 		MarginTop       float64 `yaml:"marginTop"`

@@ -39,7 +39,7 @@ func List(list *ast.List) (adds []*spec.Addable) {
 func ListItem(item *ast.ListItem, number int, marker string) *spec.Addable {
 	prefix := marker + " "
 	if number >= 0 {
-		prefix = strconv.Itoa(number) + prefix
+		prefix = strconv.Itoa(number) + ". "
 	}
 	ret := elements.ListItem{
 		Text: spec.Text{

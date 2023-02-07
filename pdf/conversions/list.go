@@ -26,8 +26,7 @@ func List(list *ast.List) (adds []*spec.Addable) {
 			if list.IsOrdered() {
 				number = i
 			}
-			//adds = append(adds, ListItem(n.(*ast.ListItem), number, string(list.Marker)))
-			adds = append(adds, ListItem(n.(*ast.ListItem), number, "•"))
+			adds = append(adds, ListItem(n.(*ast.ListItem), number, globals.Cfg.Text.ListMarker))
 		}
 		i++
 	}

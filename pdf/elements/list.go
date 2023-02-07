@@ -11,6 +11,10 @@ type ListItem struct {
 }
 
 func (p *ListItem) Bytes() []byte {
+	if len(p.Processed) == 0 {
+		p.Processed = make([]*spec.TextLine, 1)
+		p.Processed[0] = &spec.TextLine{}
+	}
 	firstLine := p.Processed[0]
 	words := firstLine.Words
 	fonts := firstLine.Fonts

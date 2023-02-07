@@ -26,7 +26,8 @@ func List(list *ast.List) (adds []*spec.Addable) {
 			if list.IsOrdered() {
 				number = i
 			}
-			adds = append(adds, ListItem(n.(*ast.ListItem), number, string(list.Marker)))
+			//adds = append(adds, ListItem(n.(*ast.ListItem), number, string(list.Marker)))
+			adds = append(adds, ListItem(n.(*ast.ListItem), number, "•"))
 		}
 		i++
 	}
@@ -54,9 +55,11 @@ func ListItem(item *ast.ListItem, number int, marker string) *spec.Addable {
 	var txt *spec.Addable
 	if block, ok := child.(*ast.TextBlock); ok {
 		txt = TextBlock(block)
-	}
-	if txt != nil {
 		ret.Add((*txt).(*spec.Text).Segments...)
+	}
+	if paragraph, ok := child.(*ast.Paragraph); ok {
+		txt = Paragraph(paragraph, false)
+		ret.Add((*txt).(*elements.Paragraph).Segments...)
 	}
 	var a spec.Addable = &ret
 	return &a

@@ -6,14 +6,12 @@ import (
 	"github.com/yuin/goldmark/util"
 )
 
-type Extender struct {
-	Indices *map[string]int
-}
+// CitationExtension is a custom goldmark extension for parsing citations in the format [@citekey].
+type CitationExtension struct{}
 
-func (e *Extender) Extend(md goldmark.Markdown) {
-	md.Parser().AddOptions(
-		parser.WithInlineParsers(
-			util.Prioritized(&Parser{Indices: e.Indices}, 199),
-		),
-	)
+// Extend implements the goldmark.Extender interface.
+func (e *CitationExtension) Extend(md goldmark.Markdown) {
+	md.Parser().AddOptions(parser.WithInlineParsers(
+		util.Prioritized(NewCitationParser(), 5),
+	))
 }

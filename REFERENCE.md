@@ -122,15 +122,17 @@ paper:
 ```yaml
 citation:
   enabled: true
-  file: citations.bib
+  file: citations.json
   heading: References
+  csl: ""
+  locale: ""
 ```
 
 - `enabled`: This setting enables or disables citations in the generated PDF. The default value is `true`.
-- `file`: This setting determines the file path of the BibTeX file containing the citations. The file path is relative to the directory of the config and markdown files. The default value is `citations.bib`.
+- `file`: This setting determines the file path of the JSON file containing the citations. The file path is relative to the directory of the config and markdown files. The default value is `citations.json`.
 - `heading`: This setting determines the heading of the references section in the generated PDF. The default value is `References`.
-
-**Note**: Citations are currently in a kind of beta, and only online citations work properly at the moment. The IEEE citation style is used.
+- `csl`: This setting determines the file path of the Citation Style Language (CSL) file used to format the citations in the generated PDF. If left empty, the IEEE citation style will be used.
+- `locale`: This setting determines the file path of the locale file used to format the citations in the generated PDF. If left empty, the `en-US` locale will be used.
 
 ## Code options
 

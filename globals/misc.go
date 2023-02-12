@@ -2,9 +2,8 @@ package globals
 
 import (
 	"embed"
-	"fmt"
-	"github.com/nickng/bibtex"
-	"strings"
+	citeproc "github.com/sett17/citeproc-js-go"
+	"github.com/sett17/citeproc-js-go/csljson"
 )
 
 func InToPt(in float64) float64 {
@@ -20,26 +19,9 @@ var Fonts embed.FS
 
 var File []byte
 
-var Bibs = make(map[string]*bibtex.BibEntry)
-var BibIndices = make(map[string]int)
+var Citations = make(map[string]csljson.Item)
 
-func IEEE(entry *bibtex.BibEntry) string {
-	if entry == nil {
-		return ""
-	}
-	title := strings.ReplaceAll(entry.Fields["title"].String(), "{", "")
-	title = strings.ReplaceAll(title, "}", "")
-	url := ""
-	if entry.Fields["url"] != nil {
-		url = entry.Fields["url"].String()
-	}
-	date := ""
-	if entry.Fields["urldate"] != nil {
-		date = entry.Fields["urldate"].String()
-	}
-
-	return fmt.Sprintf(" \"%s\" %s, %s", title, url, date)
-}
+var Citeproc *citeproc.Session
 
 func PDFEncode(str string) []byte {
 	buf := make([]byte, 0, len(str))

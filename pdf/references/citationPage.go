@@ -1,7 +1,7 @@
 package references
 
 import (
-	"fmt"
+	"github.com/sett17/mdpaper/v2/cli"
 	"github.com/sett17/mdpaper/v2/globals"
 	"github.com/sett17/mdpaper/v2/pdf/elements"
 	"github.com/sett17/mdpaper/v2/pdf/spec"
@@ -25,17 +25,18 @@ func GenerateCitationHeading() {
 }
 
 func Citations() (ret []*spec.Addable) {
-	bibs := make([]string, len(globals.BibIndices)+1)
-	for key, idx := range globals.BibIndices {
-		bibs[idx] = fmt.Sprintf("[%d] %s", idx, globals.IEEE(globals.Bibs[key]))
+	bib, err := globals.Citeproc.MakeBibliography()
+	if err != nil {
+		cli.Error(err, false)
+		return
 	}
-	for _, bib := range bibs {
+	for _, entry := range bib {
 		block := spec.Text{
-			FontSize:   14,
+			FontSize:   12,
 			LineHeight: 1.4,
 		}
 		seg := spec.Segment{
-			Content: bib,
+			Content: entry,
 			Font:    spec.SerifRegular,
 		}
 		block.Add(&seg)

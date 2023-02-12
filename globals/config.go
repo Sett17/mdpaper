@@ -36,9 +36,11 @@ type Config struct {
 		Debug  bool   `yaml:"debug"`
 	}
 	Citation struct {
-		Enabled bool   `yaml:"enabled"`
-		File    string `yaml:"file"`
-		Heading string `yaml:"heading"`
+		Enabled    bool   `yaml:"enabled"`
+		File       string `yaml:"file"`
+		Heading    string `yaml:"heading"`
+		CSLFile    string `yaml:"csl"`
+		LocaleFile string `yaml:"locale"`
 	} `yaml:"citation"`
 	Code struct {
 		Style            string  `yaml:"style"`
@@ -118,13 +120,17 @@ var Default = Config{
 		Debug:  false,
 	},
 	Citation: struct {
-		Enabled bool   `yaml:"enabled"`
-		File    string `yaml:"file"`
-		Heading string `yaml:"heading"`
+		Enabled    bool   `yaml:"enabled"`
+		File       string `yaml:"file"`
+		Heading    string `yaml:"heading"`
+		CSLFile    string `yaml:"csl"`
+		LocaleFile string `yaml:"locale"`
 	}{
-		Enabled: true,
-		File:    "citations.bib",
-		Heading: "References",
+		Enabled:    true,
+		File:       "citations.json",
+		Heading:    "References",
+		CSLFile:    "",
+		LocaleFile: "",
 	},
 	Code: struct {
 		Style            string  `yaml:"style"`

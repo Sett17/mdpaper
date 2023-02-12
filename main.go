@@ -1,10 +1,12 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"github.com/dustin/go-humanize"
 	"github.com/i582/cfmt/cmd/cfmt"
-	"github.com/nickng/bibtex"
+	citeproc "github.com/sett17/citeproc-js-go"
+	"github.com/sett17/citeproc-js-go/csljson"
 	"github.com/sett17/mdpaper/v2/cli"
 	"github.com/sett17/mdpaper/v2/globals"
 	"github.com/sett17/mdpaper/v2/goldmark-cite"
@@ -52,7 +54,7 @@ func main() {
 
 	p := goldmark.New(
 		goldmark.WithExtensions(
-			&goldmark_cite.Extender{Indices: &globals.BibIndices},
+			&goldmark_cite.CitationExtension{},
 			&goldmark_math.Extender{},
 			meta.Meta, // just to ignore frontmatter
 		),
@@ -66,18 +68,53 @@ func main() {
 	cli.Output("Parsed in %v\n", parsed.Sub(start))
 
 	if globals.Cfg.Citation.Enabled {
-		bibFile, err := os.OpenFile(globals.Cfg.Citation.File, os.O_RDONLY, 0644)
-		if err == nil {
-			bt, err := bibtex.Parse(bibFile)
+		globals.Citeproc = citeproc.NewSession()
+
+		if globals.Cfg.Citation.CSLFile != "" {
+			err := globals.Citeproc.SetCslFile(globals.Cfg.Citation.CSLFile)
 			if err != nil {
 				cli.Error(err, true)
 			}
-			for _, v := range bt.Entries {
-				globals.Bibs[v.CiteName] = v
+		}
+
+		if globals.Cfg.Citation.LocaleFile != "" {
+			err := globals.Citeproc.SetLocaleFile(globals.Cfg.Citation.LocaleFile)
+			if err != nil {
+				cli.Error(err, true)
 			}
 		}
+
+		err := globals.Citeproc.Init()
+		if err != nil {
+			cli.Error(err, false)
+			cli.Info("Citations will be turned off\n")
+			globals.Cfg.Citation.Enabled = false
+		}
+
+		bibFile, err := os.ReadFile(globals.Cfg.Citation.File)
+		if err == nil {
+			citsList := make([]csljson.Item, 0)
+			err := json.Unmarshal(bibFile, &citsList)
+			if err != nil {
+				cli.Error(err, true)
+			}
+			for _, cit := range citsList {
+				//globals.Citations[cit.CitationKey] = cit
+				globals.Citations[cit.ID] = cit
+			}
+			err = globals.Citeproc.AddCitation(citsList...)
+			if err != nil {
+				cli.Error(err, false)
+				cli.Info("Citations will be turned off\n")
+				globals.Cfg.Citation.Enabled = false
+			}
+		} else {
+			cli.Error(fmt.Errorf("could not read bibliography file"), false)
+			cli.Info("Citations will be turned off\n")
+			globals.Cfg.Citation.Enabled = false
+		}
 		citT := time.Now()
-		cli.Output("Bibtex loaded in %v\n\n", citT.Sub(parsed))
+		cli.Output("CSLJSON loaded in %v\n\n", citT.Sub(parsed))
 	}
 
 	pp := pdf.FromAst(ast)

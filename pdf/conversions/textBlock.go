@@ -2,12 +2,14 @@ package conversions
 
 import (
 	"bytes"
-	"fmt"
+	"github.com/sett17/citeproc-js-go/csljson"
+	"github.com/sett17/mdpaper/v2/cli"
 	"github.com/sett17/mdpaper/v2/globals"
 	"github.com/sett17/mdpaper/v2/goldmark-cite"
 	"github.com/sett17/mdpaper/v2/pdf/spacing"
 	"github.com/sett17/mdpaper/v2/pdf/spec"
 	"github.com/yuin/goldmark/ast"
+	"strings"
 )
 
 func TextBlock(t *ast.TextBlock) *spec.Addable {
@@ -31,7 +33,7 @@ func TextBlock(t *ast.TextBlock) *spec.Addable {
 			seg := Emphasis(n.(*ast.Emphasis))
 			txt.Add(&seg)
 		case goldmark_cite.Kind:
-			seg := CiteProc(n.(*goldmark_cite.Node))
+			seg := Citation(n.(*goldmark_cite.Citation))
 			txt.Add(&seg)
 		default:
 			continue
@@ -85,9 +87,31 @@ func Emphasis(span *ast.Emphasis) spec.Segment {
 	return t
 }
 
-func CiteProc(cite *goldmark_cite.Node) spec.Segment {
+func Citation(cite *goldmark_cite.Citation) spec.Segment {
+	items := make([]csljson.Item, len(cite.Keys))
+
+	for i, key := range cite.Keys {
+		item, ok := globals.Citations[key]
+		if !ok {
+			//cli.Warning("Citation %s not found\n", key)
+		} else {
+			items[i] = item
+		}
+	}
+
+	citationInsert, err := globals.Citeproc.ProcessCitationCluster(items...)
+	if err != nil {
+		cli.Warning("Citation cluster %+v could not be processed (%s)", cite.Keys, err)
+		return spec.Segment{}
+	}
+
+	citationInsert = strings.TrimSpace(citationInsert) + " "
+
+	//this is temporary, until I can really properly figure out all the font stuff + this bothers me for ieee
+	citationInsert = strings.ReplaceAll(citationInsert, "–", "-")
+
 	return spec.Segment{
-		Content: fmt.Sprintf("[%d]", globals.BibIndices[cite.Key]),
+		Content: citationInsert,
 		Font:    spec.SerifRegular,
 	}
 }

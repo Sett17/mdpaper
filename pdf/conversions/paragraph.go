@@ -34,7 +34,7 @@ func Paragraph(p *ast.Paragraph, centered bool) *spec.Addable {
 			seg := Emphasis(n.(*ast.Emphasis))
 			para.Add(&seg)
 		case goldmark_cite.Kind:
-			seg := CiteProc(n.(*goldmark_cite.Node))
+			seg := Citation(n.(*goldmark_cite.Citation))
 			para.Add(&seg)
 		default:
 			continue

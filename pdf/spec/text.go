@@ -207,16 +207,28 @@ func (p *Text) Process(maxWidth float64) {
 			i++
 			continue
 		}
-		splitSmall := strings.Split(s.Content, " ")
-		split := make([]string, 0)
-		for _, s := range splitSmall {
-			split = append(split, strings.SplitAfter(s, "/")...)
-		}
+		split := strings.Split(s.Content, " ")
+		//split := make([]string, 0)
+		//for _, s := range splitSmall {
+		//	split = append(split, strings.SplitAfter(s, "/")...)
+		//}
 		for j := 0; j < len(split); {
 			w := split[j]
 			if j != 0 && strings.TrimSpace(w) == "" {
 				j++
 				continue
+			}
+			if s.Font.WordWidth(w, p.FontSize) > maxWidth {
+				if maxWidth-l.Width > s.Font.WordWidth("xxx", p.FontSize) {
+					pre, rem := SplitLongString(w, maxWidth-l.Width, p.FontSize, s.Font)
+					split = append(split[:j+1], append([]string{rem}, split[j+1:]...)...)
+					if pre == "" {
+						j++
+						continue
+					}
+					w = pre
+					split[j] = w
+				}
 			}
 			if s.Font.WordWidth(w, p.FontSize)+l.Width <= maxWidth {
 				suffix := ""
@@ -297,4 +309,87 @@ func (p *Text) Bytes() []byte {
 	buf.WriteString("ET\n")
 
 	return buf.Bytes()
+}
+
+func SplitLongString(s string, splitWidth float64, fontSize int, font *Font) (pre string, rem string) {
+	// if remaining space is smaller than 3 charcters just putit into the next line...
+	//if splitWidth <= font.WordWidth("xxx", fontSize) {
+	//	return "", s
+	//}
+
+	//first try to split at slashes for links ot filepaths
+	pre = s
+	for i := strings.LastIndexAny(pre, "/\\"); i != -1; i = strings.LastIndexAny(pre, "/\\") {
+		pre = pre[:i]
+		preWidth := font.WordWidth(pre, fontSize)
+		if preWidth < splitWidth {
+			if preWidth > splitWidth*.8 {
+				return pre, s[len(pre):]
+			} else {
+				break
+			}
+		}
+	}
+
+	//if regular string use kinda of a binary search
+	pre = s
+
+	extra := ""
+	if Entropy(s) < 4 { // not sure about the number 4, but if under 4 likely to be some regular text and not part of a url or something
+		extra = "-"
+	}
+
+	//cutoff := len(s) / 2
+	//for {
+	//	if font.WordWidth(pre+extra, fontSize) < splitWidth {
+	//		if cutoff == 1 {
+	//			return pre + extra, s[len(pre):]
+	//		}
+	//		cutoff /= 2
+	//		pre = s[:len(pre)+cutoff]
+	//	} else {
+	//		if cutoff == 1 {
+	//			return pre[:len(pre)-1] + extra, s[len(pre)-1:]
+	//		}
+	//		cutoff /= 2
+	//		pre = s[:len(pre)-cutoff]
+	//	}
+	//}
+
+	for {
+		if font.WordWidth(pre+extra, fontSize) < splitWidth {
+			return pre + extra, s[len(pre):]
+		}
+		pre = pre[:len(pre)-1]
+	}
+
+	//f := func(str string) float64 {
+	//	return font.WordWidth(str+extra, fontSize)
+	//}
+	//lo := 0
+	//hi := len(s)
+	//for lo < hi {
+	//	var mid int = (hi + lo) / 2
+	//	if splitWidth < f(s[:mid]) {
+	//		hi = mid - 1
+	//	} else if splitWidth > f(s[:mid]) {
+	//		lo = mid + 1
+	//	} else {
+	//		return s[:mid], s[:mid]
+	//	}
+	//}
+	//return s[:lo], s[lo:]
+}
+
+func Entropy(s string) float64 {
+	counts := make(map[rune]int)
+	for _, r := range s {
+		counts[r]++
+	}
+	var entropy float64
+	for _, c := range counts {
+		p := float64(c) / float64(len(s))
+		entropy -= p * math.Log2(p)
+	}
+	return entropy
 }

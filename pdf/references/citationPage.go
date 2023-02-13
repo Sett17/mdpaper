@@ -4,6 +4,7 @@ import (
 	"github.com/sett17/mdpaper/v2/cli"
 	"github.com/sett17/mdpaper/v2/globals"
 	"github.com/sett17/mdpaper/v2/pdf/elements"
+	"github.com/sett17/mdpaper/v2/pdf/spacing"
 	"github.com/sett17/mdpaper/v2/pdf/spec"
 )
 
@@ -31,9 +32,11 @@ func Citations() (ret []*spec.Addable) {
 		return
 	}
 	for _, entry := range bib {
-		block := spec.Text{
-			FontSize:   globals.Cfg.Citation.BibFontSize,
-			LineHeight: globals.Cfg.Citation.BibLineHeight,
+		block := BibEntry{
+			spec.Text{
+				FontSize:   globals.Cfg.Citation.BibFontSize,
+				LineHeight: globals.Cfg.Citation.BibLineHeight,
+			},
 		}
 		seg := spec.Segment{
 			Content: entry,
@@ -42,6 +45,9 @@ func Citations() (ret []*spec.Addable) {
 		block.Add(&seg)
 		var a spec.Addable = &block
 		ret = append(ret, &a)
+		space := spacing.Spacer{H: globals.MmToPt(1.0)}
+		var b spec.Addable = &space
+		ret = append(ret, &b)
 	}
 	return
 }

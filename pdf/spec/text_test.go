@@ -1,6 +1,8 @@
 package spec
 
-import "testing"
+import (
+	"testing"
+)
 
 func Test_findCutoffSegment(t *testing.T) {
 	type args struct {
@@ -58,4 +60,36 @@ func Test_findCutoffSegment(t *testing.T) {
 			}
 		})
 	}
+}
+
+func TestEntropy(t *testing.T) {
+	realStrings := []string{
+		"definite need to test it with a full",
+		"My specific task was to containerize the",
+		"hout the phase, my workflow was predom",
+		"changed a lot during the duration",
+		" at its core, a way to develop something. I",
+	}
+
+	jumbledStrings := []string{
+		"oq=dikka&aqs=chrome..69i57.913j0j1&sourceid=chrome&ie=UTF-8",
+		"discrete#EntropyChaoShenBaseE",
+		"B086VWXJCM/ref=atv_dp_season_select_s3",
+		"T3_2000%20Paper%20Raik%20Rohde.pdf",
+	}
+
+	avgRealEnt := 0.0
+	for _, s := range realStrings {
+		avgRealEnt += Entropy(s)
+	}
+	avgRealEnt /= float64(len(realStrings))
+
+	avgJumbledEnt := 0.0
+	for _, s := range jumbledStrings {
+		avgJumbledEnt += Entropy(s)
+	}
+	avgJumbledEnt /= float64(len(jumbledStrings))
+
+	t.Logf("Average entropy of real strings: %f", avgRealEnt)
+	t.Logf("Average entropy of jumbled strings: %f", avgJumbledEnt)
 }

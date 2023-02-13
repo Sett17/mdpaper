@@ -124,13 +124,17 @@ citation:
   enabled: true
   file: citations.json
   heading: References
+  bibFontSize: 14
+  bibLineHeight: 1.4
   csl: ""
   locale: ""
 ```
 
 - `enabled`: This setting enables or disables citations in the generated PDF. The default value is `true`.
-- `file`: This setting determines the file path of the JSON file containing the citations. The file path is relative to the directory of the config and markdown files. The default value is `citations.json`.
+- `file`: This setting determines the file path of the JSON file in the CSL-JSON format containing the citations. The file path is relative to the directory of the config and markdown files. The default value is `citations.json`.
 - `heading`: This setting determines the heading of the references section in the generated PDF. The default value is `References`.
+- `bibFontSize`: This setting determines the font size of the bibliography in the generated PDF. The default value is `14`.
+- `bibLineHeight`: This setting determines the line height of the bibliography in the generated PDF. The default value is `1.4`.
 - `csl`: This setting determines the file path of the Citation Style Language (CSL) file used to format the citations in the generated PDF. If left empty, the IEEE citation style will be used.
 - `locale`: This setting determines the file path of the locale file used to format the citations in the generated PDF. If left empty, the `en-US` locale will be used.
 
@@ -304,6 +308,25 @@ Code blocks can also contain options, which can be set between square brackets (
 print("Hello, World!")
 ```
 ````
+
+## Citations
+
+Citations in mdpaper are managed using the citeproc-js-go library and are written in the format `[@citekey]`. To use citations in your document, you need a `.json` file in the CSL-JSON format from a reference manager such as Zotero or a similar tool.
+
+When multiple citations are in a row, they will be handled as a cluster. The language of the citations is always forced to the language provided in the `.csljson` file or to `en-US` if no language is specified.
+
+Here is an example of a citation in mdpaper:
+
+```markdown
+The theory of evolution by natural selection was first proposed by Charles Darwin. [@Darwin1859]
+```
+
+This will create a citation in the document with the `citekey` `Darwin1859`. The actual citation information, such as the author's name and publication year, will be retrieved from the `.json` file.
+The bibliography will be automatically generated at the end of the document.
+
+How the citations and the bibliography are formatted is determined by a provided `.csl` file, which can easily be found online or is shipped with most reference managers. The default is the `ieee` style.
+
+Note that mdpaper uses the [citeproc-js-go](https://github.com/Sett17/citeproc-js-go/) library to manage citations, which intern uses citeproc-js.
 
 ## Mermaid Diagrams
 

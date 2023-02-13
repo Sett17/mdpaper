@@ -32,8 +32,8 @@ func Citations() (ret []*spec.Addable) {
 	}
 	for _, entry := range bib {
 		block := spec.Text{
-			FontSize:   12,
-			LineHeight: 1.4,
+			FontSize:   globals.Cfg.Citation.BibFontSize,
+			LineHeight: globals.Cfg.Citation.BibLineHeight,
 		}
 		seg := spec.Segment{
 			Content: entry,

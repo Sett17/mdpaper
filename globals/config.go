@@ -36,11 +36,13 @@ type Config struct {
 		Debug  bool   `yaml:"debug"`
 	}
 	Citation struct {
-		Enabled    bool   `yaml:"enabled"`
-		File       string `yaml:"file"`
-		Heading    string `yaml:"heading"`
-		CSLFile    string `yaml:"csl"`
-		LocaleFile string `yaml:"locale"`
+		Enabled       bool    `yaml:"enabled"`
+		File          string  `yaml:"file"`
+		Heading       string  `yaml:"heading"`
+		BibFontSize   int     `yaml:"bibFontSize"`
+		BibLineHeight float64 `yaml:"bibLineHeight"`
+		CSLFile       string  `yaml:"csl"`
+		LocaleFile    string  `yaml:"locale"`
 	} `yaml:"citation"`
 	Code struct {
 		Style            string  `yaml:"style"`
@@ -120,17 +122,21 @@ var Default = Config{
 		Debug:  false,
 	},
 	Citation: struct {
-		Enabled    bool   `yaml:"enabled"`
-		File       string `yaml:"file"`
-		Heading    string `yaml:"heading"`
-		CSLFile    string `yaml:"csl"`
-		LocaleFile string `yaml:"locale"`
+		Enabled       bool    `yaml:"enabled"`
+		File          string  `yaml:"file"`
+		Heading       string  `yaml:"heading"`
+		BibFontSize   int     `yaml:"bibFontSize"`
+		BibLineHeight float64 `yaml:"bibLineHeight"`
+		CSLFile       string  `yaml:"csl"`
+		LocaleFile    string  `yaml:"locale"`
 	}{
-		Enabled:    true,
-		File:       "citations.json",
-		Heading:    "References",
-		CSLFile:    "",
-		LocaleFile: "",
+		Enabled:       true,
+		File:          "citations.json",
+		Heading:       "References",
+		BibFontSize:   12,
+		BibLineHeight: 1.4,
+		CSLFile:       "",
+		LocaleFile:    "",
 	},
 	Code: struct {
 		Style            string  `yaml:"style"`

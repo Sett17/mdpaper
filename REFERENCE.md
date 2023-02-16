@@ -146,14 +146,14 @@ code:
   fontSize: 10
   characterSpacing: -0.75
   lineNumbers: true
-  mermaid: false
+  dot: false
 ```
 
 - `style`: This setting determines the color style of the code blocks in the generated PDF. The default value is `dracula`. Possible styles are visible in the [chroma](https://github.com/alecthomas/chroma) repository.
 - `fontSize`: This setting determines the font size of the code blocks in the generated PDF. The default value is `10`. This setting can also be overridden for individual code blocks.
 - `characterSpacing`: This setting determines the character spacing of the code blocks in the generated PDF. The default value is `-0.75`. This setting can be used to adjust the spacing between characters to improve readability.
 - `lineNumbers`: This setting determines whether line numbers should be included in the code blocks in the generated PDF. The default value is true. This setting can also be overridden for individual code blocks.
-- `mermaid`: This setting enables or disables the rendering of Mermaid diagrams in the generated PDF. The default value is `false`. This feature requires the installation of the `mmdc` command line tool from the [mermaid-cli](https://github.com/mermaid-js/mermaid-cli) repo.
+- `mermaid`: This setting enables or disables the rendering of Graphviz DOT diagrams in the generated PDF. The default value is `true`.
 
 ## Cover page options
 
@@ -328,30 +328,28 @@ How the citations and the bibliography are formatted is determined by a provided
 
 Note that mdpaper uses the [citeproc-js-go](https://github.com/Sett17/citeproc-js-go/) library to manage citations, which intern uses citeproc-js.
 
-## Mermaid Diagrams
+## Graphviz Dot Diagrams
 
-Mdpaper supports the creation of [mermaid](https://mermaid-js.github.io/) diagrams, which are a simple and powerful way to visualize and document processes, data flows, and other information. To create a mermaid diagram, use three backticks (\`\`\`) followed by `mermaid`, a newline, and the diagram code. The diagram will end with another line containing three backticks.
-Here is an example of a mermaid diagram:
+Mdpaper also supports the creation of [Graphviz Dot](https://graphviz.org/) diagrams, which are a simple and flexible way to create directed graphs and other visual representations of relationships between objects. To create a Graphviz Dot diagram, use three backticks (\`\`\`) followed by `dot`, a newline, and the diagram code. The diagram will end with another line containing three backticks.
+
+Here is an example of a Graphviz Dot diagram:
 
 ````markdown
-```mermaid
-graph LR
-    A[Square Rect] -- Link text --> B((Circle))
-    A --> C(Round Rect)
-    B --> D{Rhombus}
-    C --> D
+```dot
+digraph {
+A -> B;
+B -> C;
+C -> D;
+D -> E;
+E -> F;
+F -> A;
+}
 ```
 ````
 
-This will create a mermaid diagram with four shapes connected by three links. The diagram will be rendered using the default mermaid style.
+This will create a Graphviz Dot diagram with six nodes and six edges. The diagram will be rendered using the default Graphviz style.
 
-To use mermaid diagrams in mdpaper, you must have the [mermaid command line tool](https://github.com/mermaid-js/mermaid-cli) installed on your system. The tool must be available in the system `PATH` so that mdpaper can execute it. You can install the tool using the following command:
-
-```bash
-npm install -g @mermaid-js/mermaid-cli
-```
-
-Mermaid blocks can also contain options, which can be set between square brackets (`[]`) after the language identifier.
+_Note: The DPI **cannot** be set inside the dot code as it is overwritten afterwards. You can, however, set it with [options](#dpi)_
 
 ## Math
 
@@ -499,10 +497,20 @@ def foo():
 
 This will set the first line number to 5 and count up from there. This option das not change the `linenumbers` option.
 
-## Specific Options for Mermaid Code Blocks
+## Specific Options for Graphviz/Dot Code Blocks
 
-Mermaid code blocks are code blocks that contain diagram definitions in the [Mermaid](https://mermaid-js.github.io/) language. They can be rendered as diagrams in the generated PDF.
+If dot is disabled, mermaid code blocks behave the same as regular code blocks and have the [same options](#specific-options-for-code-blocks) available.
 
-If mermaid is disabled, mermaid code blocks behave the same as regular code blocks and have the same options available (`linenumbers`, and `fontsize`, and `startnumber`).
+### `width`
 
-If mermaid is enabled, the same options as for images are also available for mermaid code blocks: `width`. These options can be used to customize the appearance and behavior of the rendered diagrams.
+The `width` option specifies the percentage width of the column that the graph should occupy. The value should be a float between 0 and 1. This is the same as the [`width` option for images](#width).
+
+### `title` (also written as `caption` or 'label')
+
+The `title`, `caption`, `label` options specify the title of the graph. The value should be a string. It will be displayed similarly to the [caption of an image](#images).
+
+The options are checked and used in the order `title`, `caption`, `label`.
+
+### `dpi`
+
+The `dpi` option specifies the DPI of the graph. And has the same effect as the [`dpi` attribute from graphviz](https://www.graphviz.org/docs/attrs/dpi/). The value can be an integer or a float. The default value is `331`.

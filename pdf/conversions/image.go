@@ -31,7 +31,7 @@ func Image(image *ast.Image, node ast.Node) (retO *spec.XObject, retA *spec.Adda
 	para := elements.Paragraph{
 		Text: spec.Text{
 			FontSize:   globals.Cfg.Text.FontSize - 1,
-			LineHeight: 1.0,
+			LineHeight: 1.15,
 		},
 		Centered: true,
 	}

@@ -2,7 +2,7 @@ package spec
 
 import (
 	"fmt"
-	"github.com/beta/freetype/truetype"
+	"github.com/golang/freetype/truetype"
 	"github.com/sett17/goafm"
 	"github.com/sett17/mdpaper/v2/cli"
 	"github.com/sett17/mdpaper/v2/globals"

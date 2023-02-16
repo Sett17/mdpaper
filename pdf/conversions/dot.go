@@ -3,14 +3,17 @@ package conversions
 import (
 	"fmt"
 	"github.com/goccy/go-graphviz"
+	"github.com/golang/freetype/truetype"
 	"github.com/sett17/mdpaper/v2/cli"
 	"github.com/sett17/mdpaper/v2/globals"
 	"github.com/sett17/mdpaper/v2/pdf/conversions/options"
 	"github.com/sett17/mdpaper/v2/pdf/elements"
 	"github.com/sett17/mdpaper/v2/pdf/spec"
 	"github.com/yuin/goldmark/ast"
-	"golang.org/x/image/draw"
+	"golang.org/x/image/font"
 	"image"
+	"math/rand"
+	"strconv"
 )
 
 func Dot(fcb *ast.FencedCodeBlock) (retO *spec.XObject, retA *spec.Addable, retP *spec.Addable) {
@@ -68,16 +71,20 @@ func Dot(fcb *ast.FencedCodeBlock) (retO *spec.XObject, retA *spec.Addable, retP
 		retA = &R
 	} else {
 		g := graphviz.New()
+
+		//https://github.com/goccy/go-graphviz/issues/63
+		g.SetFontFace(func(size float64) (font.Face, error) {
+			return truetype.NewFace(spec.SerifRegular.Font, &truetype.Options{Size: size * .91}), nil
+		})
+
 		graph.SetDPI(dpi)
 		img, err = g.RenderImage(graph)
 		if err != nil {
 			cli.Error(fmt.Errorf("error rendering graphviz code: %w", err), false)
 			return
 		}
-		newImg := image.NewRGBA(image.Rect(0, 0, img.Bounds().Dx()-1, img.Bounds().Dy()-1))
-		draw.Draw(newImg, newImg.Bounds(), img, img.Bounds().Min, draw.Src)
 
-		io, ia := spec.NewImageObject(newImg, "", mul)
+		io, ia := spec.NewImageObject(img, strconv.Itoa(rand.Int()), mul)
 		retO = &io
 		retA = &ia
 	}

@@ -1,9 +1,9 @@
 package main
 
 import (
-	"encoding/json"
 	"fmt"
 	"github.com/dustin/go-humanize"
+	"github.com/goccy/go-json"
 	"github.com/i582/cfmt/cmd/cfmt"
 	citeproc "github.com/sett17/citeproc-js-go"
 	"github.com/sett17/citeproc-js-go/csljson"

@@ -6,6 +6,7 @@ require (
 	github.com/alecthomas/chroma v0.10.0
 	github.com/dustin/go-humanize v1.0.1
 	github.com/goccy/go-graphviz v0.1.0
+	github.com/goccy/go-json v0.10.0
 	github.com/golang/freetype v0.0.0-20170609003504-e2365dfdc4a0
 	github.com/i582/cfmt v1.4.0
 	github.com/sett17/citeproc-js-go v1.1.0

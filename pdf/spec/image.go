@@ -96,6 +96,8 @@ type ImageAddable struct {
 	Pos       [2]float64
 	Mul       float64
 	Offset    float64
+
+	blockLoop bool // to prevent infinite loop in Process
 }
 
 func (i *ImageAddable) Bytes() []byte {
@@ -118,8 +120,17 @@ func (i *ImageAddable) Height() float64 {
 
 func (i *ImageAddable) Process(width float64) {
 	adjWidth := width * i.Mul
-	i.Offset = (width - adjWidth) / 2
+	//i.Offset = (width - adjWidth) / 2
+	i.Offset += (width - adjWidth) / 2
 	ratio := i.W / i.H
 	i.W = adjWidth
 	i.H = adjWidth / ratio
+	if !i.blockLoop && i.Height() > globals.ColumnHeight {
+		i.blockLoop = true
+		i.Mul = (globals.ColumnHeight - 100) / i.Height()
+		i.Process(i.W)
+		cli.Warning("Image taller than column, reducing size\n")
+	}
+
+	i.blockLoop = false
 }

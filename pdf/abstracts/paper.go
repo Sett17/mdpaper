@@ -23,6 +23,7 @@ func (p *Paper) Finished() bool {
 }
 
 func (p *Paper) SingleColumn() *Column {
+	globals.ColumnHeight = globals.A4Height - (globals.MmToPt(globals.Cfg.Page.MarginTop) + globals.MmToPt(globals.Cfg.Page.MarginBottom))
 	return p.nextColumn(
 		globals.A4Width-(globals.MmToPt(globals.Cfg.Page.MarginHori)*2),
 		globals.A4Height-(globals.MmToPt(globals.Cfg.Page.MarginTop)+globals.MmToPt(globals.Cfg.Page.MarginBottom)),
@@ -34,6 +35,8 @@ func (p *Paper) SingleColumn() *Column {
 func (p *Paper) DoubleColumn() (c1, c2 *Column) {
 	width := globals.A4Width/2 - globals.MmToPt(globals.Cfg.Page.MarginHori+globals.Cfg.Page.ColumnGap/2)
 	height := globals.A4Height - globals.MmToPt(globals.Cfg.Page.MarginTop+globals.Cfg.Page.MarginBottom)
+
+	globals.ColumnHeight = height
 
 	top := globals.A4Height - globals.MmToPt(globals.Cfg.Page.MarginTop)
 	c1 = p.nextColumn(

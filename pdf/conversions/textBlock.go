@@ -88,6 +88,12 @@ func Emphasis(span *ast.Emphasis) spec.Segment {
 }
 
 func Citation(cite *goldmark_cite.Citation) spec.Segment {
+	if !globals.Cfg.Citation.Enabled {
+		return spec.Segment{
+			Content: "[" + strings.Join(cite.Keys, ", ") + "]",
+			Font:    spec.SerifRegular,
+		}
+	}
 	items := make([]csljson.Item, len(cite.Keys))
 
 	for i, key := range cite.Keys {

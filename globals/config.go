@@ -49,7 +49,7 @@ type Config struct {
 		FontSize         int     `yaml:"fontSize"`
 		CharacterSpacing float64 `yaml:"characterSpacing"`
 		LineNumbers      bool    `yaml:"lineNumbers"`
-		Mermaid          bool    `yaml:"mermaid"`
+		Dot              bool    `yaml:"dot"`
 	} `yaml:"code"`
 	Cover struct {
 		Enabled  bool   `yaml:"enabled"`
@@ -143,13 +143,13 @@ var Default = Config{
 		FontSize         int     `yaml:"fontSize"`
 		CharacterSpacing float64 `yaml:"characterSpacing"`
 		LineNumbers      bool    `yaml:"lineNumbers"`
-		Mermaid          bool    `yaml:"mermaid"`
+		Dot              bool    `yaml:"dot"`
 	}{
 		Style:            "dracula",
 		FontSize:         10,
 		CharacterSpacing: -.75,
 		LineNumbers:      true,
-		Mermaid:          false,
+		Dot:              true,
 	},
 	Cover: struct {
 		Enabled  bool   `yaml:"enabled"`

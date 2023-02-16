@@ -12,55 +12,13 @@ import (
 	"github.com/sett17/mdpaper/v2/pdf/elements"
 	"github.com/sett17/mdpaper/v2/pdf/spec"
 	"github.com/yuin/goldmark/ast"
-	"os"
-	"os/exec"
-	"strings"
 )
-
-func Mermaid(fcb *ast.FencedCodeBlock) (retO *spec.XObject, retA *spec.Addable) {
-	optionString := strings.TrimPrefix(string(fcb.Info.Text(globals.File)), "mermaid")
-	opts, err := options.Parse(optionString)
-	if err != nil {
-		cli.Error(fmt.Errorf("error parsing mermaid options: %w", err), false)
-		cli.Warning(optionString)
-	}
-
-	inputFile, err := os.CreateTemp("", "mdpapermmd")
-	if err != nil {
-		cli.Error(err, true)
-	}
-	defer os.Remove(inputFile.Name())
-	buf := bytes.Buffer{}
-	for i := 0; i < fcb.Lines().Len(); i++ {
-		at := fcb.Lines().At(i)
-		buf.Write(at.Value(globals.File))
-	}
-	_, err = inputFile.Write(buf.Bytes())
-	if err != nil {
-		panic(err)
-	}
-	inputFile.Close()
-	err = exec.Command("mmdc", "-i", inputFile.Name(), "-o", inputFile.Name()+".png", "-w", "1000").Run()
-	if err != nil {
-		cli.Warning("mmdc failed")
-	}
-	mul := 1.0
-	if f, ok := opts.GetFloat("width"); ok {
-		mul = f
-	}
-	io, ia := spec.NewImageObjectFromFile(inputFile.Name()+".png", mul)
-	retO = &io
-	retA = &ia
-	defer os.Remove(inputFile.Name() + ".png")
-	return
-}
 
 func Code(fcb *ast.FencedCodeBlock) *spec.Addable {
 	optionString := ""
 	if fcb.Info != nil {
 		optionString = options.Extract(string(fcb.Info.Text(globals.File)))
 	}
-
 	opts, err := options.Parse(optionString)
 	if err != nil {
 		cli.Error(fmt.Errorf("error parsing code options: %w", err), false)

@@ -6,3 +6,5 @@ const (
 	//DBG      = true
 	//DBG = false
 )
+
+var ColumnHeight = A4Height

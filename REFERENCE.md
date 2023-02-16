@@ -337,19 +337,19 @@ Here is an example of a Graphviz Dot diagram:
 ````markdown
 ```dot
 digraph {
-A -> B;
-B -> C;
-C -> D;
-D -> E;
-E -> F;
-F -> A;
+  A -> B;
+  B -> C;
+  C -> D;
+  D -> E;
+  E -> F;
+  F -> A;
 }
 ```
 ````
 
 This will create a Graphviz Dot diagram with six nodes and six edges. The diagram will be rendered using the default Graphviz style.
 
-_Note: The DPI **cannot** be set inside the dot code as it is overwritten afterwards. You can, however, set it with [options](#dpi)_
+_Note: The DPI **cannot** be set inside the dot code as it is overwritten afterwards. You can, however, set it with [options](#dpi). Due to the DPI likely being different from default, lines are maybe not as thick as you expected. To increase the line thickness you can use the `penwidth` attribute._
 
 ## Math
 

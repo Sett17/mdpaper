@@ -1,28 +1,5 @@
 package globals
 
-import (
-	"embed"
-	citeproc "github.com/sett17/citeproc-js-go"
-	"github.com/sett17/citeproc-js-go/csljson"
-)
-
-func InToPt(in float64) float64 {
-	return in * 72.0
-}
-
-func MmToPt(Mm float64) float64 {
-	return InToPt(Mm / 25.4)
-}
-
-//go:embed fonts/*
-var Fonts embed.FS
-
-var File []byte
-
-var Citations = make(map[string]csljson.Item)
-
-var Citeproc *citeproc.Session
-
 func PDFEncode(str string) []byte {
 	buf := make([]byte, 0, len(str))
 	for _, c := range str {

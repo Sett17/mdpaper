@@ -3,6 +3,7 @@ package conversions
 import (
 	"github.com/sett17/mdpaper/v2/globals"
 	"github.com/sett17/mdpaper/v2/goldmark-cite"
+	goldmark_figref "github.com/sett17/mdpaper/v2/goldmark-figref"
 	"github.com/sett17/mdpaper/v2/pdf/spacing"
 	"github.com/sett17/mdpaper/v2/pdf/spec"
 	"github.com/yuin/goldmark/ast"
@@ -30,6 +31,9 @@ func TextBlock(t *ast.TextBlock) *spec.Addable {
 			txt.Add(&seg)
 		case goldmark_cite.Kind:
 			seg := Citation(n.(*goldmark_cite.Citation))
+			txt.Add(&seg)
+		case goldmark_figref.Kind:
+			seg := FigRef(n.(*goldmark_figref.FigRef))
 			txt.Add(&seg)
 		default:
 			continue

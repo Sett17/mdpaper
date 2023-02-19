@@ -6,8 +6,10 @@ import (
 	"github.com/sett17/mdpaper/v2/cli"
 	"github.com/sett17/mdpaper/v2/globals"
 	goldmark_cite "github.com/sett17/mdpaper/v2/goldmark-cite"
+	goldmark_figref "github.com/sett17/mdpaper/v2/goldmark-figref"
 	"github.com/sett17/mdpaper/v2/pdf/spec"
 	"github.com/yuin/goldmark/ast"
+	"strconv"
 	"strings"
 )
 
@@ -87,5 +89,20 @@ func Citation(cite *goldmark_cite.Citation) spec.Segment {
 	return spec.Segment{
 		Content: citationInsert,
 		Font:    spec.SerifRegular,
+	}
+}
+
+func FigRef(ref *goldmark_figref.FigRef) spec.Segment {
+	fig := globals.Figures[ref.FigureKey]
+	if fig == nil {
+		//return spec.Segment{}
+		return spec.Segment{
+			Content: globals.Cfg.Text.FigureText + " " + ref.FigureKey + " not found",
+			Font:    spec.SerifItalic,
+		}
+	}
+	return spec.Segment{
+		Content: globals.Cfg.Text.FigureText + " " + strconv.Itoa(fig.Number),
+		Font:    spec.SerifItalic,
 	}
 }

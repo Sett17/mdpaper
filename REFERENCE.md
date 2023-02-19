@@ -42,12 +42,14 @@ text:
   lineHeight: 1.2
   listLineHeight: 1.0
   listMarker: •
+  figureText: Figure
 ```
 
 - `fontSize`: This option determines the size of the font used in the generated PDF, measured in points (pt). The default value is 11.
 - `lineHeight`: This option determines the distance between lines of text in the generated PDF. The default value is 1.2.
 - `listLineHeight`: This option determines the distance between lines of text in lists in the generated PDF. The default value is 1.0.
 - `listMarker`: This option determines the marker used for lists in the generated PDF. The default value is •.
+- `figureText`: This option determines the text used for figures in the generated PDF. This should be a translation of the word figure. The default value is Figure.
 
 ## Page options
 

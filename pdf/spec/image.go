@@ -120,8 +120,7 @@ func (i *ImageAddable) Height() float64 {
 
 func (i *ImageAddable) Process(width float64) {
 	adjWidth := width * i.Mul
-	//i.Offset = (width - adjWidth) / 2
-	i.Offset += (width - adjWidth) / 2
+	i.Offset = (width - adjWidth) / 2
 	ratio := i.W / i.H
 	i.W = adjWidth
 	i.H = adjWidth / ratio

@@ -1,16 +1,19 @@
 package pdf
 
 import (
+	"fmt"
 	"github.com/sett17/mdpaper/v2/cli"
 	"github.com/sett17/mdpaper/v2/globals"
 	goldmark_math "github.com/sett17/mdpaper/v2/goldmark-math"
 	"github.com/sett17/mdpaper/v2/pdf/abstracts"
 	"github.com/sett17/mdpaper/v2/pdf/conversions"
+	"github.com/sett17/mdpaper/v2/pdf/conversions/options"
 	"github.com/sett17/mdpaper/v2/pdf/elements"
 	"github.com/sett17/mdpaper/v2/pdf/references"
 	"github.com/sett17/mdpaper/v2/pdf/spec"
 	"github.com/sett17/mdpaper/v2/pdf/toc"
 	"github.com/yuin/goldmark/ast"
+	"path"
 	"time"
 )
 
@@ -48,6 +51,62 @@ func FromAst(md ast.Node) *spec.PDF {
 	fonts.Set(latoBoldName, latoBoldRef)
 	fonts.Set(scpName, scpRef)
 	pageResources.Set("Font", fonts)
+	//endregion
+
+	//region EXTRACT INFO FOR TABLES
+	for n := md.FirstChild(); n != nil; n = n.NextSibling() {
+		switch n.Kind() {
+		case ast.KindParagraph:
+			if n.(*ast.Paragraph).ChildCount() <= 2 && n.FirstChild().Kind() == ast.KindImage {
+				image := n.FirstChild().(*ast.Image)
+
+				opt, err := options.Parse(string(image.Text(globals.File)))
+				if err != nil {
+					cli.Error(fmt.Errorf("error parsing image options: %w", err), false)
+				}
+
+				var id string
+				_, id = path.Split(string(image.Destination))
+				id = globals.NameEncode(id)
+				optId, ok := opt.GetString("id")
+				if ok {
+					id = optId
+				}
+				figInfo := globals.NewFigureInformation(string(image.Title), id)
+				globals.Figures[id] = figInfo
+			}
+		case ast.KindFencedCodeBlock:
+			lang := string(n.(*ast.FencedCodeBlock).Language(globals.File))
+			if globals.Cfg.Code.Dot && lang == "dot" {
+				fcb := n.(*ast.FencedCodeBlock)
+				optionString := ""
+				if fcb.Info != nil {
+					optionString = options.Extract(string(fcb.Info.Text(globals.File)))
+				}
+				opts, err := options.Parse(optionString)
+				if err != nil {
+					cli.Error(fmt.Errorf("error parsing code options: %w", err), false)
+				}
+
+				title := ""
+				if t, ok := opts.GetString("title"); ok {
+					title = t
+				} else if t, ok := opts.GetString("caption"); ok {
+					title = t
+				} else if t, ok := opts.GetString("label"); ok {
+					title = t
+				}
+
+				id := fmt.Sprintf("dot_%d", len(globals.Figures))
+				optId, ok := opts.GetString("id")
+				if ok {
+					id = optId
+				}
+				figInfo := globals.NewFigureInformation(title, id)
+				globals.Figures[id] = figInfo
+			}
+		}
+	}
 	//endregion
 
 	//region CONVERSIONS

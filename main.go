@@ -10,13 +10,13 @@ import (
 	"github.com/sett17/mdpaper/v2/cli"
 	"github.com/sett17/mdpaper/v2/globals"
 	"github.com/sett17/mdpaper/v2/goldmark-cite"
+	goldmark_figref "github.com/sett17/mdpaper/v2/goldmark-figref"
 	goldmark_math "github.com/sett17/mdpaper/v2/goldmark-math"
 	"github.com/sett17/mdpaper/v2/pdf"
 	"github.com/yuin/goldmark"
 	meta "github.com/yuin/goldmark-meta"
 	"github.com/yuin/goldmark/text"
 	"os"
-	"strings"
 	"time"
 )
 
@@ -56,6 +56,7 @@ func main() {
 		goldmark.WithExtensions(
 			&goldmark_cite.CitationExtension{},
 			&goldmark_math.Extender{},
+			&goldmark_figref.FigRefExtension{},
 			meta.Meta, // just to ignore frontmatter
 		),
 		goldmark.WithParserOptions()).Parser()
@@ -122,16 +123,7 @@ func main() {
 	ppT := time.Now()
 	cli.Output("PDF generated in %v\n", ppT.Sub(parsed))
 
-	replaceSet := []byte{'#', '<', '>', '$', '+', '%', '!', '`', '&', '*', '\'', '|', '{', '}', '?', '"', '=', '\\', '/', ':', '@', ' '}
-	outBytes := []byte(strings.ToLower(globals.Cfg.Paper.Title))
-	for i, v := range outBytes {
-		for _, r := range replaceSet {
-			if v == r {
-				outBytes[i] = '_'
-			}
-		}
-	}
-	outName := string(outBytes) + ".pdf"
+	outName := globals.NameEncode(globals.Cfg.Paper.Title) + ".pdf"
 	outp, err := os.Create(outName)
 	if err != nil {
 		cli.Error(err, true)

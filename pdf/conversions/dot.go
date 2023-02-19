@@ -89,21 +89,31 @@ func Dot(fcb *ast.FencedCodeBlock) (retO *spec.XObject, retA *spec.Addable, retP
 		retA = &ia
 	}
 
+	id := fmt.Sprintf("dot_%d", len(globals.Figures))
+	optId, ok := opts.GetString("id")
+	if ok {
+		id = optId
+	}
+
+	para := elements.Paragraph{
+		Text: spec.Text{
+			FontSize:   globals.Cfg.Text.FontSize - 1,
+			LineHeight: 1.15,
+		},
+		Centered: true,
+	}
+	para.Add(&spec.Segment{
+		Content: fmt.Sprintf("%s %d ", globals.Cfg.Text.FigureText, globals.Figures[id].Number),
+		Font:    spec.SerifBold,
+	})
 	if title != "" {
-		para := elements.Paragraph{
-			Text: spec.Text{
-				FontSize:   globals.Cfg.Text.FontSize - 1,
-				LineHeight: 1.15,
-			},
-			Centered: true,
-		}
 		para.Add(&spec.Segment{
 			Content: title,
 			Font:    spec.SerifRegular,
 		})
-		var a spec.Addable = &para
-		retP = &a
 	}
+	var a spec.Addable = &para
+	retP = &a
 
 	return
 }

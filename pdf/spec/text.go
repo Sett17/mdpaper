@@ -15,65 +15,12 @@ type Segment struct {
 	Font    *Font
 }
 
-type TextLine struct {
-	Words       []string
-	Fonts       []*Font
-	WordSpacing float64
-	Width       float64
-	Offset      float64
-}
-
-func escape(str string) (ret string) {
-	ret = strings.ReplaceAll(str, "\\", "\\\\")
-	ret = strings.ReplaceAll(ret, "(", "\\(")
-	ret = strings.ReplaceAll(ret, ")", "\\)")
-	return
-}
-
-func deEscape(str string) (ret string) {
-	ret = strings.ReplaceAll(str, "\\\\", "\\")
-	ret = strings.ReplaceAll(ret, "\\(", "(")
-	ret = strings.ReplaceAll(ret, "\\)", ")")
-	return
-}
-
-func (l *TextLine) Add(str string, font *Font) {
-	s := escape(str)
-
-	l.Words = append(l.Words, s)
-	l.Fonts = append(l.Fonts, font)
-}
-
-func (l *TextLine) CalculateSpacing(maxWidth float64) {
-	buf := strings.Builder{}
-	for _, w := range l.Words {
-		buf.WriteString(w)
-	}
-	spaces := float64(strings.Count(buf.String(), " "))
-	if spaces == 0 {
-		l.WordSpacing = 1.0
-		return
-	}
-	diff := maxWidth - l.Width + globals.MmToPt(.7)
-	l.WordSpacing = diff / spaces
-}
-
-func (l *TextLine) Center(fullWidth float64) {
-	l.WordSpacing = 0
-	diff := fullWidth - l.Width
-	l.Offset = diff / 2
-}
-
-func (l *TextLine) String() string {
-	return strings.Join(l.Words, " ")
-}
-
 type Text struct {
 	Segments   []*Segment
 	Pos        [2]float64
 	FontSize   int
 	LineHeight float64
-	Processed  []*TextLine
+	Processed  JustifiedText
 	Offset     float64
 	Width      float64
 	Margin     float64
@@ -196,64 +143,8 @@ func (p *Text) Height() float64 {
 }
 
 func (p *Text) Process(maxWidth float64) {
-	p.Processed = make([]*TextLine, 0)
-
-	maxWidth -= p.Offset / 2
-	p.Width = maxWidth
-	l := &TextLine{WordSpacing: 1.0, Offset: p.Offset}
-	for i := 0; i < len(p.Segments); {
-		s := p.Segments[i]
-		if len(s.Content) == 0 {
-			i++
-			continue
-		}
-		split := strings.Split(s.Content, " ")
-		//split := make([]string, 0)
-		//for _, s := range splitSmall {
-		//	split = append(split, strings.SplitAfter(s, "/")...)
-		//}
-		for j := 0; j < len(split); {
-			w := split[j]
-			if j != 0 && strings.TrimSpace(w) == "" {
-				j++
-				continue
-			}
-			if s.Font.WordWidth(w, p.FontSize) > maxWidth {
-				if maxWidth-l.Width > s.Font.WordWidth("xxx", p.FontSize) {
-					pre, rem := SplitLongString(w, maxWidth-l.Width, p.FontSize, s.Font)
-					split = append(split[:j+1], append([]string{rem}, split[j+1:]...)...)
-					if pre == "" {
-						j++
-						continue
-					}
-					w = pre
-					split[j] = w
-				}
-			}
-			if s.Font.WordWidth(w, p.FontSize)+l.Width <= maxWidth {
-				suffix := ""
-				if j != len(split)-1 {
-					suffix = " "
-				}
-				l.Width += s.Font.WordWidth(w+suffix, p.FontSize)
-				l.Add(w+suffix, s.Font)
-				j++
-			} else {
-				if l.Width != 0 {
-					l.Words[len(l.Words)-1] = strings.TrimRight(l.Words[len(l.Words)-1], " ")
-				}
-				l.CalculateSpacing(maxWidth)
-				p.Processed = append(p.Processed, l)
-				l = &TextLine{WordSpacing: 1.0, Offset: p.Offset}
-			}
-		}
-		i++
-	}
-	if len(l.Words) == 0 {
-		return
-	}
-	l.Words[len(l.Words)-1] = strings.TrimRight(l.Words[len(l.Words)-1], " ")
-	p.Processed = append(p.Processed, l)
+	p.Width = maxWidth - p.Offset/2
+	p.Processed = ProcessSegments(p.Segments, maxWidth, p.FontSize, p.Offset)
 }
 
 func (p *Text) Add(a ...*Segment) {

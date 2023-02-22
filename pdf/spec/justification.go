@@ -1,11 +1,50 @@
 package spec
 
 import (
+	"bytes"
+	"fmt"
 	"github.com/sett17/mdpaper/v2/globals"
 	"strings"
 )
 
 type JustifiedText []*TextLine
+
+func (jt JustifiedText) Bytes(fs int) []byte {
+	buf := bytes.Buffer{}
+	var currFont *Font = nil
+	for i, l := range jt {
+		lineBuffer := strings.Builder{}
+		if l.Offset != 0 {
+			buf.WriteString(fmt.Sprintf("%f 0 Td\n", l.Offset))
+		}
+		buf.WriteString(fmt.Sprintf("%f Tw\n", l.WordSpacing))
+		for j := 0; j < len(l.Words); j++ {
+			if l.Fonts[j] != currFont {
+				if lineBuffer.Len() > 0 {
+					buf.WriteString(fmt.Sprintf("("))
+					buf.Write(globals.WinAnsiEncode(lineBuffer.String()))
+					buf.WriteString(fmt.Sprintf(") Tj\n"))
+					lineBuffer.Reset()
+				}
+				buf.WriteString(fmt.Sprintf("/%s %d Tf\n", l.Fonts[j].Name, fs))
+				currFont = l.Fonts[j]
+			}
+			lineBuffer.WriteString(l.Words[j])
+		}
+		if lineBuffer.Len() > 0 {
+			buf.WriteString(fmt.Sprintf("("))
+			buf.Write(globals.WinAnsiEncode(lineBuffer.String()))
+			buf.WriteString(fmt.Sprintf(") Tj\n"))
+		}
+		if i != len(jt)-1 {
+			buf.WriteString("T* ")
+		}
+		if l.Offset != 0 {
+			buf.WriteString(fmt.Sprintf("%f 0 Td\n", -l.Offset))
+		}
+	}
+	return buf.Bytes()
+}
 
 type TextLine struct {
 	Words       []string

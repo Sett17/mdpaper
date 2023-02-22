@@ -112,10 +112,13 @@ func Dot(fcb *ast.FencedCodeBlock) (retO *spec.XObject, retA *spec.Addable, retP
 		Font:    spec.SerifBold,
 	})
 	if title != "" {
-		para.Add(&spec.Segment{
-			Content: title,
-			Font:    spec.SerifRegular,
-		})
+		titlePara := String(title)
+		titleSegs := (*titlePara).(*elements.Paragraph).Segments
+		para.Add(titleSegs...)
+		//para.Add(&spec.Segment{
+		//	Content: title,
+		//	Font:    spec.SerifRegular,
+		//})
 	}
 	var a spec.Addable = &para
 	retP = &a

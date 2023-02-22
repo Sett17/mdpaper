@@ -49,10 +49,14 @@ func Image(image *ast.Image, node ast.Node) (retO *spec.XObject, retA *spec.Adda
 		Content: fmt.Sprintf("%s %d ", globals.Cfg.Text.FigureText, globals.Figures[id].Number),
 		Font:    spec.SerifBold,
 	})
-	para.Add(&spec.Segment{
-		Content: string(image.Title),
-		Font:    spec.SerifRegular,
-	})
+
+	titlePara := String(string(image.Title))
+	titleSegs := (*titlePara).(*elements.Paragraph).Segments
+	para.Add(titleSegs...)
+	//para.Add(&spec.Segment{
+	//	Content: string(image.Title),
+	//	Font:    spec.SerifRegular,
+	//})
 	var a spec.Addable = &para
 	retP = &a
 	return

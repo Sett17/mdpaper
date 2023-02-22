@@ -161,40 +161,6 @@ func (p *Text) Bytes() []byte {
 
 	buf.WriteString("T*\n")
 
-	//var currFont *Font = nil
-	//for i, l := range p.Processed {
-	//	lineBuffer := strings.Builder{}
-	//	if l.Offset != 0 {
-	//		buf.WriteString(fmt.Sprintf("%f 0 Td\n", l.Offset))
-	//	}
-	//	buf.WriteString(fmt.Sprintf("%f Tw\n", l.WordSpacing))
-	//	for j := 0; j < len(l.Words); j++ {
-	//		if l.Fonts[j] != currFont {
-	//			if lineBuffer.Len() > 0 {
-	//				buf.WriteString(fmt.Sprintf("("))
-	//				//buf.Write(globals.PDFEncode(lineBuffer.String()))
-	//				buf.Write(globals.WinAnsiEncode(lineBuffer.String()))
-	//				buf.WriteString(fmt.Sprintf(") Tj\n"))
-	//				lineBuffer.Reset()
-	//			}
-	//			buf.WriteString(fmt.Sprintf("/%s %d Tf\n", l.Fonts[j].Name, p.FontSize))
-	//			currFont = l.Fonts[j]
-	//		}
-	//		lineBuffer.WriteString(l.Words[j])
-	//	}
-	//	if lineBuffer.Len() > 0 {
-	//		buf.WriteString(fmt.Sprintf("("))
-	//		//buf.Write(globals.PDFEncode(lineBuffer.String()))
-	//		buf.Write(globals.WinAnsiEncode(lineBuffer.String()))
-	//		buf.WriteString(fmt.Sprintf(") Tj\n"))
-	//	}
-	//	if i != len(p.Processed)-1 {
-	//		buf.WriteString("T* ")
-	//	}
-	//	if l.Offset != 0 {
-	//		buf.WriteString(fmt.Sprintf("%f 0 Td\n", -l.Offset))
-	//	}
-	//}
 	buf.Write(p.Processed.Bytes(p.FontSize))
 
 	buf.WriteString("ET\n")
@@ -230,46 +196,12 @@ func SplitLongString(s string, splitWidth float64, fontSize int, font *Font) (pr
 		extra = "-"
 	}
 
-	//cutoff := len(s) / 2
-	//for {
-	//	if font.WordWidth(pre+extra, fontSize) < splitWidth {
-	//		if cutoff == 1 {
-	//			return pre + extra, s[len(pre):]
-	//		}
-	//		cutoff /= 2
-	//		pre = s[:len(pre)+cutoff]
-	//	} else {
-	//		if cutoff == 1 {
-	//			return pre[:len(pre)-1] + extra, s[len(pre)-1:]
-	//		}
-	//		cutoff /= 2
-	//		pre = s[:len(pre)-cutoff]
-	//	}
-	//}
-
 	for {
 		if font.WordWidth(pre+extra, fontSize) < splitWidth {
 			return pre + extra, s[len(pre):]
 		}
 		pre = pre[:len(pre)-1]
 	}
-
-	//f := func(str string) float64 {
-	//	return font.WordWidth(str+extra, fontSize)
-	//}
-	//lo := 0
-	//hi := len(s)
-	//for lo < hi {
-	//	var mid int = (hi + lo) / 2
-	//	if splitWidth < f(s[:mid]) {
-	//		hi = mid - 1
-	//	} else if splitWidth > f(s[:mid]) {
-	//		lo = mid + 1
-	//	} else {
-	//		return s[:mid], s[:mid]
-	//	}
-	//}
-	//return s[:lo], s[lo:]
 }
 
 func Entropy(s string) float64 {

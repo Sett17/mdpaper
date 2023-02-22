@@ -1,6 +1,7 @@
 package conversions
 
 import (
+	"crypto/md5"
 	"fmt"
 	"github.com/goccy/go-graphviz"
 	"github.com/golang/freetype/truetype"
@@ -89,7 +90,11 @@ func Dot(fcb *ast.FencedCodeBlock) (retO *spec.XObject, retA *spec.Addable, retP
 		retA = &ia
 	}
 
-	id := fmt.Sprintf("dot_%d", len(globals.Figures))
+	hashBuf := buf
+	startByte := fcb.Lines().At(0).Start
+	hashBuf = append(hashBuf, (byte)(startByte>>24), (byte)(startByte>>16), (byte)(startByte>>8), (byte)(startByte)) //include this to make it unique to this special block
+	id := fmt.Sprintf("%x", md5.Sum(hashBuf))
+
 	optId, ok := opts.GetString("id")
 	if ok {
 		id = optId

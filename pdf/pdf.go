@@ -1,6 +1,7 @@
 package pdf
 
 import (
+	"crypto/md5"
 	"fmt"
 	"github.com/sett17/mdpaper/v2/cli"
 	"github.com/sett17/mdpaper/v2/globals"
@@ -53,7 +54,7 @@ func FromAst(md ast.Node) *spec.PDF {
 	pageResources.Set("Font", fonts)
 	//endregion
 
-	//region EXTRACT INFO FOR TABLES
+	//region EXTRACT INFO FOR REGISTERS
 	for n := md.FirstChild(); n != nil; n = n.NextSibling() {
 		switch n.Kind() {
 		case ast.KindParagraph:
@@ -97,7 +98,16 @@ func FromAst(md ast.Node) *spec.PDF {
 					title = t
 				}
 
-				id := fmt.Sprintf("dot_%d", len(globals.Figures))
+				//couldn't think of another 'nice' way to get a unique id
+				hashBuf := make([]byte, 0)
+				for i := 0; i < fcb.Lines().Len(); i++ {
+					at := fcb.Lines().At(i)
+					hashBuf = append(hashBuf, at.Value(globals.File)...)
+				}
+				startByte := fcb.Lines().At(0).Start
+				hashBuf = append(hashBuf, (byte)(startByte>>24), (byte)(startByte>>16), (byte)(startByte>>8), (byte)(startByte)) //include this to make it unique to this special block
+				id := fmt.Sprintf("%x", md5.Sum(hashBuf))
+
 				optId, ok := opts.GetString("id")
 				if ok {
 					id = optId

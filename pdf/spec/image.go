@@ -21,9 +21,9 @@ func NewImageObject(iData image.Image, iName string, mul float64) (XObject, Adda
 	x.Dictionary.Set("Type", "/XObject")
 	x.Dictionary.Set("Subtype", "/Image")
 	pixelMul := 1
-	if float64(iData.Bounds().Dx()) > 1080 {
-		pixelMul = 2
-	}
+	//if float64(iData.Bounds().Dx()) > 1080 {
+	//	pixelMul = 2
+	//}
 	x.Dictionary.Set("Width", iData.Bounds().Dx()/pixelMul)
 	x.Dictionary.Set("Height", iData.Bounds().Dy()/pixelMul)
 	x.Dictionary.Set("ColorSpace", "/DeviceRGB")

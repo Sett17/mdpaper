@@ -10,7 +10,7 @@ import (
 	"github.com/sett17/mdpaper/v2/pdf/conversions"
 	"github.com/sett17/mdpaper/v2/pdf/conversions/options"
 	"github.com/sett17/mdpaper/v2/pdf/elements"
-	"github.com/sett17/mdpaper/v2/pdf/references"
+	"github.com/sett17/mdpaper/v2/pdf/register"
 	"github.com/sett17/mdpaper/v2/pdf/spec"
 	"github.com/sett17/mdpaper/v2/pdf/toc"
 	"github.com/yuin/goldmark/ast"
@@ -183,9 +183,9 @@ func FromAst(md ast.Node) *spec.PDF {
 		}
 	}
 	if globals.Cfg.Citation.Enabled {
-		references.GenerateCitationHeading()
-		headings = append(headings, references.CitationHeading)
+		headings = append(headings)
 	}
+	//TODO add other registry headings
 	toc.GenerateChapterTree(headings)
 	chapters := toc.GenerateChapterTree(headings)
 	for i, c := range chapters.Roots() {
@@ -204,57 +204,63 @@ func FromAst(md ast.Node) *spec.PDF {
 	//endregion
 
 	//region PAGES
-	pages := spec.NewDictObject()
-	pages.Set("Type", "/Pages")
-	pdf.AddObject(pages.Pointer())
-	catalog.Set("Pages", pages.Reference())
+	pagesDict := spec.NewDictObject()
+	pagesDict.Set("Type", "/Pages")
+	pdf.AddObject(pagesDict.Pointer())
+	catalog.Set("Pages", pagesDict.Reference())
 
-	displayPageNumber := globals.Cfg.Page.StartPageNumber - 1
-	realPageNumber := 0
+	pages := make([]*abstracts.Page, 0)
+
 	pagesArray := spec.NewArray()
-	var coverPage *abstracts.Page
-	if globals.Cfg.Cover.Enabled {
-		realPageNumber++
-		coverPage = abstracts.NewEmptyPage(-1, realPageNumber)
-	}
-	var tocPage *abstracts.Page
-	if globals.Cfg.Toc.Enabled {
-		realPageNumber++
-		tocPage = abstracts.NewEmptyPage(0, realPageNumber)
-	}
 	for !paper.Finished() {
-		displayPageNumber++
-		realPageNumber++
-		page := abstracts.NewPage(&paper, displayPageNumber, realPageNumber, globals.Cfg.Page.Columns)
-		page.AddToPdf(&pdf, pageResources, pages.Reference(), &pagesArray)
+		page := abstracts.NewPage(&paper, globals.Cfg.Page.Columns)
+		pages = append(pages, page)
 	}
-	if globals.Cfg.Citation.Enabled {
-		cits := abstracts.Paper{}
-		var a spec.Addable = references.CitationHeading
-		cits.Add(&a)
-		cits.Add(references.Citations()...)
-		for !cits.Finished() {
-			displayPageNumber++
-			realPageNumber++
-			page := abstracts.NewPage(&cits, displayPageNumber, realPageNumber, 1)
-			page.AddToPdf(&pdf, pageResources, pages.Reference(), &pagesArray)
-		}
+	var tableOfContents *register.Content
+	if globals.Cfg.Toc.Enabled {
+		tableOfContents = register.NewContent()
+		tableOfContents.Tree = toc.GenerateChapterTree(headings)
+		tableOfContents.GenerateEntries()
+		tableOfContents.GeneratePages()
+		pages = append(tableOfContents.Pages, pages...) //prepend
 	}
 	if globals.Cfg.Cover.Enabled {
 		cover := abstracts.GenerateCover()
+		coverPage := abstracts.NewEmptyPage()
 		coverPage.Columns = append(coverPage.Columns, cover)
-		coverPage.AddToPdf(&pdf, pageResources, pages.Reference(), &pagesArray)
+		pages = append([]*abstracts.Page{coverPage}, pages...) //prepend
 	}
-	if globals.Cfg.Toc.Enabled {
-		tableOfContents := toc.GenerateTOC(&chapters)
-		tocPage.Columns = append(tocPage.Columns, tableOfContents.GenerateColumn())
-		links := tableOfContents.GenerateLinks()
-		tocPage.Annots = append(tocPage.Annots, links...)
-		tocPage.AddToPdf(&pdf, pageResources, pages.Reference(), &pagesArray)
+	if globals.Cfg.Citation.Enabled {
+		cits := register.NewCitation()
+		cits.GenerateEntries()
+		cits.GeneratePages()
+		pages = append(pages, cits.Pages...)
 	}
 
-	pages.Set("Kids", pagesArray)
-	pages.Set("Count", len(pagesArray.Items))
+	for i, page := range pages {
+		page.Number = i + 1
+		for _, col := range page.Columns {
+			for _, e := range col.Content {
+				if h, ok := (*e).(*elements.Heading); ok {
+					h.Page = page.Number
+				}
+			}
+		}
+	}
+
+	if globals.Cfg.Toc.Enabled {
+		//this is not so smart, kind of just do everything that takes long again...
+		//basically backtracking
+		tableOfContents.InsertPageNumbers()
+		tableOfContents.InsertLinks()
+	}
+
+	for _, page := range pages {
+		page.AddToPdf(&pdf, pageResources, pagesDict.Reference(), &pagesArray)
+	}
+
+	pagesDict.Set("Kids", pagesArray)
+	pagesDict.Set("Count", len(pagesArray.Items))
 	//endregion
 
 	//region OUTLINE

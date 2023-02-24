@@ -15,6 +15,13 @@ type Column struct {
 
 func NewColumn(width, maxHeight, x, y float64) *Column {
 	c := Column{Width: width, MaxHeight: maxHeight, Pos: [2]float64{x, y}, StreamObject: spec.NewStreamObject(), bottom: y}
+	//rect := spec.GraphicRect{
+	//	Pos: [2]float64{x, y - maxHeight},
+	//	W:   width,
+	//	H:   -maxHeight,
+	//}
+	//var a spec.Addable = &rect
+	//c.StreamObject.Add(&a)
 	return &c
 }
 

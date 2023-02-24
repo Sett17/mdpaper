@@ -3,20 +3,18 @@ package abstracts
 import (
 	"fmt"
 	"github.com/sett17/mdpaper/v2/globals"
-	"github.com/sett17/mdpaper/v2/pdf/elements"
 	"github.com/sett17/mdpaper/v2/pdf/spec"
 )
 
 type Page struct {
 	spec.DictionaryObject
-	DisplayNumber int
-	RealNumber    int
-	Columns       []*Column
-	Annots        []*spec.DictionaryObject
+	Number  int
+	Columns []*Column
+	Annots  []*spec.DictionaryObject
 }
 
-func NewPage(paper *Paper, displayNumber, realNumber, columns int) *Page {
-	p := &Page{DisplayNumber: displayNumber, RealNumber: realNumber, DictionaryObject: spec.NewDictObject()}
+func NewPage(paper *Paper, columns int) *Page {
+	p := &Page{Number: 0, DictionaryObject: spec.NewDictObject()}
 	p.Set("Type", "/Page")
 	mediaBox := spec.NewArray()
 	mediaBox.Add(0, 0, globals.A4Width, globals.A4Height)
@@ -27,19 +25,20 @@ func NewPage(paper *Paper, displayNumber, realNumber, columns int) *Page {
 		c1, c2 := paper.DoubleColumn()
 		p.Columns = append(p.Columns, c1, c2)
 	}
-	for _, col := range p.Columns {
-		for _, a := range col.Content {
-			if h, ok := (*a).(*elements.Heading); ok {
-				h.Page = realNumber
-				h.DisplayPage = displayNumber
-			}
-		}
-	}
+
+	//todo do this somewhere else
+	//for _, col := range p.Columns {
+	//	for _, a := range col.Content {
+	//		if h, ok := (*a).(*elements.Heading); ok {
+	//			h.Page = number
+	//		}
+	//	}
+	//}
 	return p
 }
 
-func NewEmptyPage(displayNumber int, realNumber int) *Page {
-	p := &Page{DisplayNumber: displayNumber, RealNumber: realNumber, DictionaryObject: spec.NewDictObject()}
+func NewEmptyPage() *Page {
+	p := &Page{Number: 0, DictionaryObject: spec.NewDictObject()}
 	p.Set("Type", "/Page")
 	mediaBox := spec.NewArray()
 	mediaBox.Add(0, 0, globals.A4Width, globals.A4Height)
@@ -61,15 +60,15 @@ func (p *Page) AddToPdf(pdf *spec.PDF, res spec.Dictionary, pagesRef string, pag
 		pdf.AddObject(col.Pointer())
 		c.Add(col.Reference())
 	}
-	if p.DisplayNumber > 0 && globals.Cfg.Page.PageNumbers {
+	if p.Number > 0 && globals.Cfg.Page.PageNumbers {
 		pN := spec.NewStreamObject()
 		//pN.Deflate = true
 		seg := spec.Segment{
-			Content: fmt.Sprintf("%d", p.DisplayNumber),
+			Content: fmt.Sprintf("%d", p.Number),
 			Font:    spec.SansRegular,
 		}
 		para := spec.Text{
-			FontSize:   10,
+			FontSize:   globals.Cfg.Text.FontSize,
 			LineHeight: 1,
 		}
 		para.Add(&seg)
@@ -82,13 +81,6 @@ func (p *Page) AddToPdf(pdf *spec.PDF, res spec.Dictionary, pagesRef string, pag
 	}
 	p.Set("Contents", c)
 	pdf.AddObject(p.DictionaryObject.Pointer())
-	if p.RealNumber > len(pages.Items) {
-		pages.Add(p.DictionaryObject.Reference())
-	} else {
-		pagesOld := pages.Items
-		pages.Items = make([]interface{}, 0)
-		pages.Items = append(pages.Items, pagesOld[:p.RealNumber-1]...)
-		pages.Items = append(pages.Items, p.DictionaryObject.Reference())
-		pages.Items = append(pages.Items, pagesOld[p.RealNumber-1:]...)
-	}
+
+	pages.Add(p.DictionaryObject.Reference())
 }

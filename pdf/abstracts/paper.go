@@ -74,5 +74,5 @@ func (p *Paper) nextColumn(width, height, x, y float64) (c *Column) {
 		i++
 	}
 
-	return c
+	return
 }

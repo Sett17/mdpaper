@@ -102,7 +102,7 @@ func (l *TextLine) String() string {
 func ProcessSegments(segs []*Segment, width float64, fontSize int, offset float64) JustifiedText {
 	ret := make([]*TextLine, 0)
 
-	width -= offset / 2
+	//width -= offset / 2
 	l := &TextLine{WordSpacing: 1.0, Offset: offset}
 	for i := 0; i < len(segs); {
 		s := segs[i]

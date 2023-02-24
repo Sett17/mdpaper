@@ -67,7 +67,7 @@ func (f *FencedCode) Split(percent float64) (spec.Addable, spec.Addable) {
 func (f *FencedCode) Bytes() []byte {
 	buf := bytes.Buffer{}
 
-	extraSpaceRatio := .4 // only for SourceCodePro-Regular TODO: calculate with font
+	extraSpaceRatio := spec.Monospace.Metrics.XHeight.GetFloat() / spec.Monospace.Metrics.Ascender.GetFloat() / 1.5
 
 	backcol := f.Style.Get(chroma.Text).Background
 	rectColor := [3]float64{math.Min(float64(backcol.Red())/255, 1), math.Min(float64(backcol.Green())/255, 1), math.Min(float64(backcol.Blue())/255, 1)}

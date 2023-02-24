@@ -9,10 +9,9 @@ import (
 
 type Heading struct {
 	spec.Text
-	Level       int
-	Page        int
-	DisplayPage int
-	Prefix      [6]int
+	Level  int
+	Page   int
+	Prefix [6]int
 }
 
 func (h *Heading) Destination() string {

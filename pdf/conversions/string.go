@@ -20,7 +20,6 @@ func String(s string) *spec.Addable {
 		goldmark.WithParserOptions()).Parser()
 	buf := []byte(strings.TrimSpace(s))
 
-	//TODO bad if i ever want to have some more concurrence
 	prevFile := globals.File
 	globals.File = buf
 	parsed := p.Parse(text.NewReader(buf))

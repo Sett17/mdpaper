@@ -229,6 +229,9 @@ func (p *Text) Add(a ...*Segment) {
 }
 
 func (p *Text) Bytes() []byte {
+	if len(p.Processed) == 0 {
+		return []byte{}
+	}
 	buf := bytes.Buffer{}
 
 	buf.WriteString("BT\n")

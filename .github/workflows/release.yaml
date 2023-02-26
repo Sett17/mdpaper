@@ -1,8 +1,8 @@
 # .github/workflows/release.yaml
 
 on:
-  release:
-    types: [created]
+#  release:
+#    types: [created]
   workflow_dispatch:
 
 jobs:

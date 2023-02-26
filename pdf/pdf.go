@@ -14,6 +14,7 @@ import (
 	"github.com/sett17/mdpaper/v2/pdf/spec"
 	"github.com/sett17/mdpaper/v2/pdf/toc"
 	"github.com/yuin/goldmark/ast"
+	east "github.com/yuin/goldmark/extension/ast"
 	"path"
 	"time"
 )
@@ -170,6 +171,9 @@ func FromAst(md ast.Node) *spec.PDF {
 			if xo != nil {
 				paper.AddXObject(xo)
 			}
+		case east.KindTable:
+			t := conversions.Table(n.(*east.Table))
+			paper.Add(t)
 		}
 		cli.Other(".")
 		i++

@@ -15,6 +15,7 @@ import (
 	"github.com/sett17/mdpaper/v2/pdf"
 	"github.com/yuin/goldmark"
 	meta "github.com/yuin/goldmark-meta"
+	"github.com/yuin/goldmark/extension"
 	"github.com/yuin/goldmark/text"
 	"os"
 	"time"
@@ -58,6 +59,7 @@ func main() {
 			&goldmark_math.Extender{},
 			&goldmark_figref.FigRefExtension{},
 			meta.Meta, // just to ignore frontmatter
+			extension.NewTable(),
 		),
 		goldmark.WithParserOptions()).Parser()
 	ast := p.Parse(text.NewReader(globals.File))

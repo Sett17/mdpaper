@@ -179,6 +179,7 @@ func FromAst(md ast.Node) *spec.PDF {
 	}
 	cli.Other("\n")
 	parsed := time.Now()
+	globals.ImageSync.Wait()
 	cli.Other("Added %v elements in %v\n", i, parsed.Sub(start))
 
 	headings := make([]*elements.Heading, 0)

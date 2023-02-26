@@ -15,13 +15,13 @@ func Test_findCutoffSegment(t *testing.T) {
 		segIdx   int
 		location int
 	}{
-		{"over single segment", args{
+		{"this failed with word method", args{
 			segments: []*Segment{
-				{Content: "This is the first segment."},
-				{Content: "This is the second segment."},
-				{Content: "This is the third segment."},
+				{Content: "This is the first segment"},
+				{Content: "This is the second segment"},
+				{Content: ", This is the third segment."},
 			},
-			cutoffText: "second segment.",
+			cutoffText: "second segment,",
 		}, 1, 12},
 		{"false positive", args{
 			segments: []*Segment{
@@ -38,8 +38,8 @@ func Test_findCutoffSegment(t *testing.T) {
 				{Content: "cutoffText. "},
 				{Content: "This is the fourth segment."},
 			},
-			cutoffText: "second segment. It has some text in common with the cutoffText. This is",
-		}, 1, 12},
+			cutoffText: "in common with the cutoffText. This is",
+		}, 1, 45},
 		{"Not found", args{
 			segments: []*Segment{
 				{Content: "This is the first segment."},

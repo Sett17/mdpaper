@@ -120,9 +120,6 @@ func main() {
 
 	pp := pdf.FromAst(ast)
 
-	ppT := time.Now()
-	cli.Output("PDF generated in %v\n", ppT.Sub(parsed))
-
 	outName := globals.NameEncode(globals.Cfg.Paper.Title) + ".pdf"
 	outp, err := os.Create(outName)
 	if err != nil {
@@ -147,4 +144,6 @@ func main() {
 		fi, err = dbgOut.Stat()
 		cli.Output("%s of debug info put into debug.txt, in %v\n", humanize.Bytes(uint64(fi.Size())), doneWrite.Sub(beforeWrite))
 	}
+
+	cli.Warning("Please look over the PDF yourself and make sure that it is correct.\nmdpaper is not responsible for the correctness of the output.\n")
 }

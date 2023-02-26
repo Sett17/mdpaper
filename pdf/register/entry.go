@@ -66,7 +66,7 @@ func (e *Entry) Height() float64 {
 }
 
 func (e *Entry) HeightOffset() float64 {
-	return globals.Cfg.Toc.LineHeight * float64(globals.Cfg.Toc.FontSize) * (math.Max(float64(len(e.leftJustified)), float64(len(e.rightJustified))) - 1)
+	return e.LineHeight * float64(e.FontSize) * (math.Max(float64(len(e.leftJustified)), float64(len(e.rightJustified))) - 1)
 }
 
 func (e *Entry) Process(width float64) {
@@ -97,9 +97,9 @@ func (e *Entry) Process(width float64) {
 	}
 
 	if e.Line {
-		lineY := globals.Cfg.Toc.LineHeight * float64(globals.Cfg.Toc.FontSize) * float64(len(e.leftJustified)-1)
+		lineY := e.LineHeight * float64(e.FontSize) * float64(len(e.leftJustified)-1)
 		e.line = spec.GraphicLine{
-			PosA:   [2]float64{e.Font.WordWidth(e.leftJustified[len(e.leftJustified)-1].String(), globals.Cfg.Toc.FontSize) + e.Offset + e.Pos[0], e.Pos[1] - lineY},
+			PosA:   [2]float64{e.Font.WordWidth(e.leftJustified[len(e.leftJustified)-1].String(), e.FontSize) + e.Offset + e.Pos[0] + globals.MmToPt(1), e.Pos[1] - lineY},
 			PosB:   [2]float64{e.rightOffset + e.Offset + e.Pos[0] - globals.MmToPt(1), e.Pos[1] - lineY},
 			Dotted: true,
 		}

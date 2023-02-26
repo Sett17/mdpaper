@@ -7,6 +7,6 @@ import (
 
 type Register interface {
 	GenerateEntries()
-	GeneratePages(startDisplayNumber, startRealNumber int) []*abstracts.Page
+	GeneratePages() []*abstracts.Page
 	Heading() *elements.Heading
 }

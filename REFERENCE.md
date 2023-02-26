@@ -2,7 +2,8 @@
 
 This reference guide serves as a comprehensive resource for users of the mdpaper tool. It explains the various components and settings of mdpaper and provides examples of how they can be used to generate scientifically formatted PDFs from markdown files. Whether you are new to mdpaper or an experienced user, this guide will help you understand and make the most of the tool's capabilities.
 
-Please note that this reference guide is **not necessarily up-to-date** with the latest version of the mdpaper tool. It currently corresponds to version `v2.0.0`, and some features or functionality may have changed in later versions. If you are using a different version of mdpaper, some information in this guide may not apply.
+Please note that this reference guide is **not necessarily up-to-date
+** with the latest version of the mdpaper tool. It currently corresponds to version `v2.0.0`, and some features or functionality may have changed in later versions. If you are using a different version of mdpaper, some information in this guide may not apply.
 
 # What is mdpaper?
 
@@ -140,6 +141,15 @@ citation:
 - `csl`: This setting determines the file path of the Citation Style Language (CSL) file used to format the citations in the generated PDF. If left empty, the IEEE citation style will be used.
 - `locale`: This setting determines the file path of the locale file used to format the citations in the generated PDF. If left empty, the `en-US` locale will be used.
 
+## Table
+
+```yaml
+table:
+  padding: 1.5
+```
+
+- `padding`: This setting determines the padding of the table cells, in mm. The default value is `1.5`.
+
 ## Code options
 
 ```yaml
@@ -178,12 +188,10 @@ Note that mdpaper follows the [commonmark](https://commonmark.org/) specificatio
 
 ## Paragraphs
 
-Paragraphs are the most basic building block of a document. In mdpaper, paragraphs are simply blocks of text separated by one or more blank lines. To create a new paragraph, simply hit the Enter key twice.
-Here is an example of a paragraph:
+Paragraphs are the most basic building block of a document. In mdpaper, paragraphs are simply blocks of text separated by one or more blank lines. To create a new paragraph, simply hit the Enter key twice. Here is an example of a paragraph:
 
 ```markdown
-This is a paragraph. It can contain any number of words and lines,
-as long as it is separated from other paragraphs by one or more blank lines.
+This is a paragraph. It can contain any number of words and lines, as long as it is separated from other paragraphs by one or more blank lines.
 ```
 
 ### Inline Styling
@@ -222,8 +230,7 @@ You can also use inline styling in headings, just like in regular paragraphs. Fo
 
 ## Lists
 
-Lists are a convenient way to organize and present information in a structured way. Mdpaper supports both unordered lists (bulleted lists) and ordered lists (numbered lists).
-The Text inside a list-item supports inline styling.
+Lists are a convenient way to organize and present information in a structured way. Mdpaper supports both unordered lists (bulleted lists) and ordered lists (numbered lists). The Text inside a list-item supports inline styling.
 
 ### Unordered Lists
 
@@ -269,8 +276,7 @@ The `image alt text` is used to set options, which will be explained in the [Blo
 
 All images in mdpaper are centered in the column and the title is centered below the image. If there is an error when including the image, an empty rectangle will be displayed.
 
-Note that only `png`, `jpeg`, `gif`, and `bmp` image files are supported.
-Before images are put into the PDF, they are put on top of a white background.
+Note that only `png`, `jpeg`, `gif`, and `bmp` image files are supported. Before images are put into the PDF, they are put on top of a white background.
 
 Here is an example of an image:
 
@@ -282,8 +288,7 @@ This will include the image `image.png` in the document, with the `image title` 
 
 ## Code Blocks
 
-Code blocks are used to highlight and format code snippets in your document. To create a code block, use three backticks (\`\`\`) followed by the language identifier, a newline, and the code itself. The code block will end with another line containing three backticks.
-Here is an example of a code block in Go:
+Code blocks are used to highlight and format code snippets in your document. To create a code block, use three backticks (\`\`\`) followed by the language identifier, a newline, and the code itself. The code block will end with another line containing three backticks. Here is an example of a code block in Go:
 
 ````markdown
 ```golang
@@ -323,8 +328,7 @@ Here is an example of a citation in mdpaper:
 The theory of evolution by natural selection was first proposed by Charles Darwin. [@Darwin1859]
 ```
 
-This will create a citation in the document with the `citekey` `Darwin1859`. The actual citation information, such as the author's name and publication year, will be retrieved from the `.json` file.
-The bibliography will be automatically generated at the end of the document.
+This will create a citation in the document with the `citekey` `Darwin1859`. The actual citation information, such as the author's name and publication year, will be retrieved from the `.json` file. The bibliography will be automatically generated at the end of the document.
 
 How the citations and the bibliography are formatted is determined by a provided `.csl` file, which can easily be found online or is shipped with most reference managers. The default is the `ieee` style.
 
@@ -351,7 +355,9 @@ digraph {
 
 This will create a Graphviz Dot diagram with six nodes and six edges. The diagram will be rendered using the default Graphviz style.
 
-_Note: The DPI **cannot** be set inside the dot code as it is overwritten afterwards. You can, however, set it with [options](#dpi). Due to the DPI likely being different from default, lines are maybe not as thick as you expected. To increase the line thickness you can use the `penwidth` attribute._
+_Note: The DPI **cannot** be set inside the dot code as it is overwritten afterwards. You can, however, set it
+with [options](#dpi). Due to the DPI likely being different from default, lines are maybe not as thick as you expected.
+To increase the line thickness you can use the `penwidth` attribute._
 
 ## Math
 
@@ -362,9 +368,7 @@ To include a math block, use two dollar signs (`$$`) followed by the LaTeX code,
 ```markdown
 Younglings, younglings gather ’round.
 
-$$
-\int_a^b f(x) dx
-$$
+$$ \int_a^b f(x) dx $$
 
 The Force will be with you, always.
 ```
@@ -397,7 +401,8 @@ Fills can be used for formatting purposes, such as separating chapters or sectio
 
 Block options are special settings that can be applied to images and code blocks to customize their appearance and behavior.
 
-**Note:** Block options are applied on a per-block basis and override any default or global settings. They are intended for fine-tuning the appearance and behavior of individual blocks, and should be used sparingly.
+**Note:
+** Block options are applied on a per-block basis and override any default or global settings. They are intended for fine-tuning the appearance and behavior of individual blocks, and should be used sparingly.
 
 ## Syntax and Value Types
 
@@ -407,8 +412,7 @@ Block options are specified using key-value pairs, with the key and value separa
 key1=value1 key2=value2
 ```
 
-The value can be a float, integer, boolean, or string. Floats and integers will be automatically converted to floats, and booleans can be specified as `true` or `false`. Strings must be delimited by double quotes (`"`) and can contain any characters, including spaces and special characters.
-For example:
+The value can be a float, integer, boolean, or string. Floats and integers will be automatically converted to floats, and booleans can be specified as `true` or `false`. Strings must be delimited by double quotes (`"`) and can contain any characters, including spaces and special characters. For example:
 
 ```plaintext
 float=3.14 int=42 bool=true string="Hello, World!"
@@ -426,8 +430,7 @@ There is one specific block option that can be applied to images to customize th
 
 ### `width`
 
-The `width` option specifies the percentage width of the column that the image should occupy. This is particularly useful for portrait images. The value should be a float between 0 and 1.
-To specify the `width` option, it should be included in the image's alt text, like this:
+The `width` option specifies the percentage width of the column that the image should occupy. This is particularly useful for portrait images. The value should be a float between 0 and 1. To specify the `width` option, it should be included in the image's alt text, like this:
 This will set the width of the image to 60% of the column width.
 
 ````
@@ -444,21 +447,18 @@ The only available block option for math blocks is `width`.
 
 ### `width`
 
-The `width` option specifies the percentage width of the column that the math block should occupy. The value should be a float between 0 and 1.
-To specify the `width` option, it should be included in the start line of the math block, like this:
+The `width` option specifies the percentage width of the column that the math block should occupy. The value should be a float between 0 and 1. To specify the `width` option, it should be included in the start line of the math block, like this:
 
 ````markdown
 $$ [width=.9]
-\int_a^b f(x) dx
-$$
+\int_a^b f(x) dx $$
 ````
 
 By default, it is set to `.65`.
 
 ## Specific Options for Code Blocks
 
-There are two specific block options that can be applied to code blocks to customize their appearance and behavior.
-To specify block options for code blocks, they should be included in the square brackets (`[]`) after the language and a space.
+There are two specific block options that can be applied to code blocks to customize their appearance and behavior. To specify block options for code blocks, they should be included in the square brackets (`[]`) after the language and a space.
 
 ### `linenumbers` (also written as `lineNumbers` or `ln`)
 

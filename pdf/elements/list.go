@@ -62,7 +62,6 @@ func (p *ListItem) Bytes() []byte {
 			if l.Fonts[j] != currFont {
 				if lineBuffer.Len() > 0 {
 					buf.WriteString(fmt.Sprintf("("))
-					//buf.Write(globals.PDFEncode(lineBuffer.String()))
 					buf.Write(globals.WinAnsiEncode(lineBuffer.String()))
 					buf.WriteString(fmt.Sprintf(") Tj\n"))
 					lineBuffer.Reset()
@@ -74,7 +73,6 @@ func (p *ListItem) Bytes() []byte {
 		}
 		if lineBuffer.Len() > 0 {
 			buf.WriteString(fmt.Sprintf("("))
-			//buf.Write(globals.PDFEncode(lineBuffer.String()))
 			buf.Write(globals.WinAnsiEncode(lineBuffer.String()))
 			buf.WriteString(fmt.Sprintf(") Tj\n"))
 		}

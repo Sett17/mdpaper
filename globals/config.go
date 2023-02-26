@@ -58,6 +58,9 @@ type Config struct {
 		LineNumbers      bool    `yaml:"lineNumbers"`
 		Dot              bool    `yaml:"dot"`
 	} `yaml:"code"`
+	Table struct {
+		Padding float64 `yaml:"padding"`
+	} `yaml:"table"`
 	Cover struct {
 		Enabled  bool   `yaml:"enabled"`
 		Subtitle string `yaml:"subtitle"`
@@ -157,6 +160,11 @@ var Default = Config{
 		BibLineHeight: 1.4,
 		CSLFile:       "",
 		LocaleFile:    "",
+	},
+	Table: struct {
+		Padding float64 `yaml:"padding"`
+	}{
+		Padding: 1.5,
 	},
 	Code: struct {
 		Style            string  `yaml:"style"`

@@ -96,7 +96,7 @@ func (l *TextLine) Center(fullWidth float64) {
 }
 
 func (l *TextLine) String() string {
-	return strings.Join(l.Words, " ")
+	return strings.Join(l.Words, "")
 }
 
 func ProcessSegments(segs []*Segment, width float64, fontSize int, offset float64) JustifiedText {

@@ -7,6 +7,7 @@ import (
 	"math"
 	"sort"
 	"strings"
+	"unicode"
 )
 
 type Segment struct {
@@ -35,25 +36,24 @@ func (p *Text) String() string {
 
 type segmentFit struct {
 	segmentIdx int
-	wordCount  int
+	charCount  int
 }
 
-func findCutoffSegment(segments []*Segment, cutoffText string) (int, int) {
+//todo redo this to split and find with characters instead of words
+// e.g. if breaking on 'a tool like `tcpdump`, or if available you start' (~line 95 in paper)
+// it sees 'tcpdump' as a word but can't find it anywhere because 'tcpdump' is a singular segment
+
+func findCutoffSegment(segments []*Segment, cutoffText string) (segmentId int, loc int) {
 	if segments == nil {
 		return -1, -1
 	}
 	fit := make([]segmentFit, len(segments))
-	cutoffSplitDirty := strings.Split(cutoffText, " ")
-	cutoffSplit := make([]string, 0)
-	for _, s := range cutoffSplitDirty {
-		if s != "" {
-			cutoffSplit = append(cutoffSplit, s)
-		}
-	}
+	cutoff := []rune(cutoffText)
 
+	//calculate fits
 	for i, segment := range segments {
-		for j := len(cutoffSplit); j > 0; j-- {
-			search := strings.Join(cutoffSplit[:j], " ")
+		for j := len(cutoff); j > 0; j-- {
+			search := string(cutoff[:j])
 			if strings.Contains(segment.Content, search) {
 				fit[i] = segmentFit{i, j}
 				break
@@ -61,39 +61,117 @@ func findCutoffSegment(segments []*Segment, cutoffText string) (int, int) {
 		}
 	}
 
-	sort.Slice(fit, func(i, j int) bool {
-		return fit[i].wordCount > fit[j].wordCount
+	sort.SliceStable(fit, func(i, j int) bool {
+		return fit[i].charCount > fit[j].charCount
 	})
 
 	for _, f := range fit {
-		if checkCorrectCutoff(segments, f.segmentIdx, f, cutoffSplit) {
-			cutoffFromThisSegment := strings.Join(cutoffSplit[:f.wordCount], " ")
-			cutoffLocation := strings.Index(segments[f.segmentIdx].Content, cutoffFromThisSegment)
-			return f.segmentIdx, cutoffLocation
+		if checkCorrectCutoff(segments, f, cutoff) {
+			cutoffFromThisSegment := cutoff[:f.charCount]
+			cutoffLoc := strings.Index(segments[f.segmentIdx].Content, string(cutoffFromThisSegment))
+			return f.segmentIdx, cutoffLoc
 		}
 	}
 
 	return -1, -1
 }
 
-func checkCorrectCutoff(segments []*Segment, segmentIdx int, fit segmentFit, cutoffSplit []string) bool {
-	wordCount := fit.wordCount
-	cutoffPartInSegment := strings.Join(cutoffSplit[:wordCount], " ")
-	if cutoffPartInSegment == strings.Join(cutoffSplit, " ") {
+func checkCorrectCutoff(segments []*Segment, fit segmentFit, cutoff []rune) bool {
+	if fit.charCount == len(cutoff) {
 		return true
 	}
-
-	remainingCutoff := cutoffSplit[wordCount:]
-	nextSegContent := strings.TrimSpace(segments[segmentIdx+1].Content)
-	nextSegContentWordCount := len(strings.Split(nextSegContent, " "))
-
-	nextCutoff := remainingCutoff
-	if nextSegContentWordCount < len(remainingCutoff) {
-		nextCutoff = remainingCutoff[:nextSegContentWordCount]
+	if fit.segmentIdx == len(segments)-1 {
+		return false
 	}
 
-	return strings.HasPrefix(nextSegContent, strings.Join(nextCutoff, " "))
+	lookInSegmentIdx := fit.segmentIdx + 1
+
+	remainingCutoff := cutoff[fit.charCount:]
+	for len(remainingCutoff) > 0 && unicode.IsSpace(remainingCutoff[0]) {
+		remainingCutoff = remainingCutoff[1:]
+	}
+	for len(remainingCutoff) > 0 {
+		nextSegContentRunes := []rune(segments[lookInSegmentIdx].Content)
+		nextSegContentRunesCount := len(nextSegContentRunes)
+		if nextSegContentRunesCount == 0 {
+			return false
+		}
+
+		nextCutoff := remainingCutoff
+		if nextSegContentRunesCount < len(remainingCutoff) {
+			nextCutoff = remainingCutoff[:nextSegContentRunesCount]
+		}
+
+		if !strings.HasPrefix(segments[lookInSegmentIdx].Content, string(nextCutoff)) &&
+			strings.HasPrefix(strings.TrimPrefix(segments[lookInSegmentIdx].Content, " "), string(nextCutoff)) {
+			return false
+		}
+
+		remainingCutoff = remainingCutoff[len(nextCutoff):]
+		lookInSegmentIdx++
+	}
+
+	return true
 }
+
+//func checkCorrectCutoff(segments []*Segment, segmentIdx int, fit segmentFit, cutoffSplit []string) bool {
+//	wordCount := fit.wordCount
+//	cutoffPartInSegment := strings.Join(cutoffSplit[:wordCount], " ")
+//	if cutoffPartInSegment == strings.Join(cutoffSplit, " ") {
+//		return true
+//	}
+//
+//	remainingCutoff := cutoffSplit[wordCount:]
+//	nextSegContent := strings.TrimSpace(segments[segmentIdx+1].Content)
+//	nextSegContentWordCount := len(strings.Split(nextSegContent, " "))
+//
+//	nextCutoff := remainingCutoff
+//	if nextSegContentWordCount < len(remainingCutoff) {
+//		nextCutoff = remainingCutoff[:nextSegContentWordCount]
+//	}
+//
+//	return strings.HasPrefix(nextSegContent, strings.Join(nextCutoff, " "))
+//}
+
+//func findCutoffSegment(segments []*Segment, cutoffText string) (int, int) {
+//	if segments == nil {
+//		return -1, -1
+//	}
+//	fit := make([]segmentFit, len(segments))
+//	cutoffSplit := strings.Split(cutoffText, " ")
+//	//cutoffSplit := make([]string, 0)
+//	//for _, s := range cutoffSplitDirty {
+//	//	if s != "" {
+//	//		cutoffSplit = append(cutoffSplit, s)
+//	//	}
+//	//}
+//
+//	for i, segment := range segments {
+//		for j := len(cutoffSplit); j > 0; j-- {
+//			search := strings.Join(cutoffSplit[:j], " ")
+//			if strings.Contains(segment.Content, search) {
+//				fit[i] = segmentFit{i, j}
+//				//cutoffSplit = cutoffSplit[j:]
+//				break
+//			}
+//		}
+//	}
+//
+//	sort.Slice(fit, func(i, j int) bool {
+//		return fit[i].wordCount > fit[j].wordCount
+//	})
+//
+//	for _, f := range fit {
+//		//disabled check because of to do above
+//		//if checkCorrectCutoff(segments, f.segmentIdx, f, cutoffSplit) {
+//		cutoffFromThisSegment := strings.Join(cutoffSplit[:f.wordCount], " ")
+//		cutoffLocation := strings.Index(segments[f.segmentIdx].Content, cutoffFromThisSegment)
+//		return f.segmentIdx, cutoffLocation
+//		//}
+//	}
+//
+//	return -1, -1
+//}
 
 func (p *Text) SplitDelegate(percent float64) (Addable, Addable) {
 	procCutoff := int(math.Floor(float64(len(p.Processed)) * percent))

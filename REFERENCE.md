@@ -29,6 +29,10 @@ The command line interface (CLI) is the primary way of interacting with mdpaper.
 
 ![](help.gif "help message in terminal")
 
+# Known _oddities_
+
+When hyphenating a word mdpaper will try to detect if it's some sort of string that should not be hyphenated. If this fails the entropy of the string is used to determine if it is a _regular_ word. This only happens when a single unbroken word is longer than the width of the column or cell it is in. If applicable, the user should take this behavior into account.
+
 # Configuration
 
 The configuration file in mdpaper is a .yaml file that can be used to customize the behavior of the tool and the appearance of the generated PDFs. If the configuration file is not present, mdpaper will create one for the user with default values. Any keys that are missing in the configuration file will be automatically inserted with default values, so you do not need to worry about new config options or missing values if you update the tool or reset the configuration. Simply delete the configuration file if you want to reset it.

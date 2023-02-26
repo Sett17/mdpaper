@@ -63,12 +63,21 @@ func Test_findCutoffSegment(t *testing.T) {
 }
 
 func TestEntropy(t *testing.T) {
+	//realStrings := []string{
+	//	"definite need to test it with a full",
+	//	"My specific task was to containerize the",
+	//	"hout the phase, my workflow was predom",
+	//	"changed a lot during the duration",
+	//	" at its core, a way to develop something. I",
+	//}
+
 	realStrings := []string{
-		"definite need to test it with a full",
-		"My specific task was to containerize the",
-		"hout the phase, my workflow was predom",
-		"changed a lot during the duration",
-		" at its core, a way to develop something. I",
+		"quas",
+		"causae",
+		"massa",
+		"netus",
+		"honestatis",
+		"mus",
 	}
 
 	jumbledStrings := []string{
@@ -79,17 +88,28 @@ func TestEntropy(t *testing.T) {
 	}
 
 	avgRealEnt := 0.0
+	biggestRealEnt := 0.0
 	for _, s := range realStrings {
 		avgRealEnt += Entropy(s)
+		if Entropy(s) > biggestRealEnt {
+			biggestRealEnt = Entropy(s)
+		}
 	}
 	avgRealEnt /= float64(len(realStrings))
 
 	avgJumbledEnt := 0.0
+	smallJumbledEnt := 100.0
 	for _, s := range jumbledStrings {
 		avgJumbledEnt += Entropy(s)
+		if Entropy(s) < smallJumbledEnt {
+			smallJumbledEnt = Entropy(s)
+		}
 	}
 	avgJumbledEnt /= float64(len(jumbledStrings))
 
 	t.Logf("Average entropy of real strings: %f", avgRealEnt)
+	t.Logf("Biggest entropy of real strings: %f", biggestRealEnt)
 	t.Logf("Average entropy of jumbled strings: %f", avgJumbledEnt)
+	t.Logf("Smallest entropy of jumbled strings: %f", smallJumbledEnt)
+
 }

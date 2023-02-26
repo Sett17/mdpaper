@@ -38,6 +38,8 @@ func Image(image *ast.Image, node ast.Node) (retO *spec.XObject, retA *spec.Adda
 		id = optId
 	}
 
+	(*retA).(*spec.ImageAddable).Id = id
+
 	para := elements.Paragraph{
 		Text: spec.Text{
 			FontSize:   globals.Cfg.Text.FontSize - 1,

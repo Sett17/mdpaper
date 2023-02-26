@@ -10,13 +10,13 @@ import (
 	"github.com/sett17/mdpaper/v2/pdf/toc"
 )
 
-type Content struct {
+type content struct {
 	common
 	Tree    toc.ChapterTree
 	entries map[*Entry]*elements.Heading
 }
 
-func (c *Content) Heading() *elements.Heading {
+func (c *content) Heading() *elements.Heading {
 	if c.heading == nil {
 		head := elements.Heading{
 			Text: spec.Text{
@@ -35,7 +35,7 @@ func (c *Content) Heading() *elements.Heading {
 	return c.heading
 }
 
-func (c *Content) GenerateEntries() {
+func (c *content) GenerateEntries() {
 	c.paper = &abstracts.Paper{}
 
 	var h spec.Addable = c.Heading()
@@ -62,7 +62,7 @@ func (c *Content) GenerateEntries() {
 	}
 }
 
-func (c *Content) InsertPageNumbers() {
+func (c *content) InsertPageNumbers() {
 	for _, page := range c.Pages {
 		for _, col := range page.Columns {
 			for _, el := range col.Content {
@@ -77,7 +77,7 @@ func (c *Content) InsertPageNumbers() {
 	}
 }
 
-func (c *Content) InsertLinks() {
+func (c *content) InsertLinks() {
 	for _, page := range c.Pages {
 		for _, col := range page.Columns {
 			for _, el := range col.Content {
@@ -97,6 +97,4 @@ func (c *Content) InsertLinks() {
 	}
 }
 
-func NewContent() *Content {
-	return &Content{entries: make(map[*Entry]*elements.Heading)}
-}
+var Content = &content{entries: make(map[*Entry]*elements.Heading)}

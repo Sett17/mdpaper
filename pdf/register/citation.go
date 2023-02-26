@@ -9,11 +9,11 @@ import (
 	"github.com/sett17/mdpaper/v2/pdf/spec"
 )
 
-type Citation struct {
+type citation struct {
 	common
 }
 
-func (c *Citation) Heading() *elements.Heading {
+func (c *citation) Heading() *elements.Heading {
 	if c.heading == nil {
 		h := elements.Heading{
 			Text: spec.Text{
@@ -31,8 +31,7 @@ func (c *Citation) Heading() *elements.Heading {
 	return c.heading
 }
 
-func (c *Citation) GenerateEntries() {
-	//c.common.GenerateEntries()
+func (c *citation) GenerateEntries() {
 	c.paper = &abstracts.Paper{}
 
 	var h spec.Addable = c.Heading()
@@ -66,6 +65,4 @@ func (c *Citation) GenerateEntries() {
 	}
 }
 
-func NewCitation() *Citation {
-	return &Citation{}
-}
+var Citation = &citation{}

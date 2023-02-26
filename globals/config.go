@@ -23,6 +23,12 @@ type Config struct {
 		FontSize   int     `yaml:"fontSize"`
 		Heading    string  `yaml:"heading"`
 	} `yaml:"toc"`
+	Tof struct {
+		Enabled    bool    `yaml:"enabled"`
+		LineHeight float64 `yaml:"lineHeight"`
+		FontSize   int     `yaml:"fontSize"`
+		Heading    string  `yaml:"heading"`
+	} `yaml:"tof"`
 	Margins struct {
 		Paragraph     float64 `yaml:"paragraph"`
 		HeadingTop    float64 `yaml:"heading_top"`
@@ -97,8 +103,19 @@ var Default = Config{
 	}{
 		Enabled:    true,
 		LineHeight: 1.3,
-		FontSize:   11,
+		FontSize:   12,
 		Heading:    "Table of Contents",
+	},
+	Tof: struct {
+		Enabled    bool    `yaml:"enabled"`
+		LineHeight float64 `yaml:"lineHeight"`
+		FontSize   int     `yaml:"fontSize"`
+		Heading    string  `yaml:"heading"`
+	}{
+		Enabled:    true,
+		LineHeight: 1.3,
+		FontSize:   12,
+		Heading:    "Table of Figures",
 	},
 	Margins: struct {
 		Paragraph     float64 `yaml:"paragraph"`

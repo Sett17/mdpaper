@@ -97,6 +97,8 @@ type ImageAddable struct {
 	Mul       float64
 	Offset    float64
 
+	Id string // for figref
+
 	blockLoop bool // to prevent infinite loop in Process
 }
 

@@ -100,6 +100,8 @@ func Dot(fcb *ast.FencedCodeBlock) (retO *spec.XObject, retA *spec.Addable, retP
 		id = optId
 	}
 
+	(*retA).(*spec.ImageAddable).Id = id
+
 	para := elements.Paragraph{
 		Text: spec.Text{
 			FontSize:   globals.Cfg.Text.FontSize - 1,

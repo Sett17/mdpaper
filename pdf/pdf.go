@@ -19,6 +19,7 @@ import (
 )
 
 func FromAst(md ast.Node) *spec.PDF {
+	start := time.Now()
 	pdf := spec.PDF{}
 	paper := abstracts.Paper{}
 
@@ -117,6 +118,9 @@ func FromAst(md ast.Node) *spec.PDF {
 			}
 		}
 	}
+	if len(globals.Figures) == 0 {
+		globals.Cfg.Tof.Enabled = false
+	}
 	//endregion
 
 	//region CONVERSIONS
@@ -174,7 +178,8 @@ func FromAst(md ast.Node) *spec.PDF {
 		}
 	}
 	cli.Other("\n")
-	cli.Other("Added %v elements\n", len(paper.Elements))
+	parsed := time.Now()
+	cli.Other("Added %v elements in %v\n", i, parsed.Sub(start))
 
 	headings := make([]*elements.Heading, 0)
 	for _, e := range paper.Elements {
@@ -183,7 +188,10 @@ func FromAst(md ast.Node) *spec.PDF {
 		}
 	}
 	if globals.Cfg.Citation.Enabled {
-		headings = append(headings)
+		headings = append(headings, register.Citation.Heading())
+	}
+	if globals.Cfg.Tof.Enabled {
+		headings = append(headings, register.Figures.Heading())
 	}
 	//TODO add other registry headings
 	toc.GenerateChapterTree(headings)
@@ -216,13 +224,11 @@ func FromAst(md ast.Node) *spec.PDF {
 		page := abstracts.NewPage(&paper, globals.Cfg.Page.Columns)
 		pages = append(pages, page)
 	}
-	var tableOfContents *register.Content
 	if globals.Cfg.Toc.Enabled {
-		tableOfContents = register.NewContent()
-		tableOfContents.Tree = toc.GenerateChapterTree(headings)
-		tableOfContents.GenerateEntries()
-		tableOfContents.GeneratePages()
-		pages = append(tableOfContents.Pages, pages...) //prepend
+		register.Content.Tree = toc.GenerateChapterTree(headings)
+		register.Content.GenerateEntries()
+		register.Content.GeneratePages()
+		pages = append(register.Content.Pages, pages...) //prepend
 	}
 	if globals.Cfg.Cover.Enabled {
 		cover := abstracts.GenerateCover()
@@ -230,11 +236,15 @@ func FromAst(md ast.Node) *spec.PDF {
 		coverPage.Columns = append(coverPage.Columns, cover)
 		pages = append([]*abstracts.Page{coverPage}, pages...) //prepend
 	}
+	if globals.Cfg.Tof.Enabled {
+		register.Figures.GenerateEntries()
+		register.Figures.GeneratePages()
+		pages = append(pages, register.Figures.Pages...)
+	}
 	if globals.Cfg.Citation.Enabled {
-		cits := register.NewCitation()
-		cits.GenerateEntries()
-		cits.GeneratePages()
-		pages = append(pages, cits.Pages...)
+		register.Citation.GenerateEntries()
+		register.Citation.GeneratePages()
+		pages = append(pages, register.Citation.Pages...)
 	}
 
 	for i, page := range pages {
@@ -243,16 +253,22 @@ func FromAst(md ast.Node) *spec.PDF {
 			for _, e := range col.Content {
 				if h, ok := (*e).(*elements.Heading); ok {
 					h.Page = page.Number
+				} else if i, ok := (*e).(*spec.ImageAddable); ok {
+					if f, ok := globals.Figures[i.Id]; ok {
+						f.Used = append(f.Used, page.Number)
+					}
 				}
 			}
 		}
 	}
 
+	//basically backtracking to insert page numbers where needed
+	if globals.Cfg.Tof.Enabled {
+		register.Figures.InsertPageNumbers()
+	}
 	if globals.Cfg.Toc.Enabled {
-		//this is not so smart, kind of just do everything that takes long again...
-		//basically backtracking
-		tableOfContents.InsertPageNumbers()
-		tableOfContents.InsertLinks()
+		register.Content.InsertPageNumbers()
+		register.Content.InsertLinks()
 	}
 
 	for _, page := range pages {
@@ -275,7 +291,6 @@ func FromAst(md ast.Node) *spec.PDF {
 	}
 	//endregion
 
-	//fmt.Println(chapters.String())
-
+	cli.Output("PDF generated in %v\n", time.Since(parsed))
 	return &pdf
 }

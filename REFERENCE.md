@@ -2,9 +2,6 @@
 
 This reference guide serves as a comprehensive resource for users of the mdpaper tool. It explains the various components and settings of mdpaper and provides examples of how they can be used to generate scientifically formatted PDFs from markdown files. Whether you are new to mdpaper or an experienced user, this guide will help you understand and make the most of the tool's capabilities.
 
-Please note that this reference guide is **not necessarily up-to-date
-** with the latest version of the mdpaper tool. It currently corresponds to version `v2.0.0`, and some features or functionality may have changed in later versions. If you are using a different version of mdpaper, some information in this guide may not apply.
-
 # What is mdpaper?
 
 mdpaper is a tool written in `GO` that allows users to generate scientifically formatted PDFs from markdown files. It has a variety of features and settings that enable users to customize the PDFs to their specific needs. mdpaper can be installed and used via the command line interface (CLI) on any operating system by using the `go install` command and cloning the GitHub repository at [github.com/sett17/mdpaper](https://github.com/sett17/mdpaper). Alternatively, users can download the pre-compiled executable from the repository page. In this reference guide, we will explain the various components and settings of mdpaper and how they can be used to generate high-quality PDFs.
@@ -290,6 +287,18 @@ Here is an example of an image:
 
 This will include the image `image.png` in the document, with the `image title` as the caption and the width of the image set to `70%` of the column width.
 
+### Image references
+
+Referencing an image inside of the text uses a similiar syntax as citations.
+
+````markdown
+![id=nice](image.png "Nice Image")
+
+As visible in  [!nice], there are ...
+````
+
+If in above example the image is the first one in the document, the resulting text will be `As visible in Figure 1, there are ...)
+
 ## Code Blocks
 
 Code blocks are used to highlight and format code snippets in your document. To create a code block, use three backticks (\`\`\`) followed by the language identifier, a newline, and the code itself. The code block will end with another line containing three backticks. Here is an example of a code block in Go:
@@ -372,7 +381,9 @@ To include a math block, use two dollar signs (`$$`) followed by the LaTeX code,
 ```markdown
 Younglings, younglings gather ’round.
 
-$$ \int_a^b f(x) dx $$
+$$
+\int_a^b f(x) dx
+$$
 
 The Force will be with you, always.
 ```

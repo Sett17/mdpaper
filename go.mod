@@ -18,6 +18,9 @@ require (
 )
 
 require (
+	github.com/JohannesKaufmann/html-to-markdown v1.3.6 // indirect
+	github.com/PuerkitoBio/goquery v1.8.0 // indirect
+	github.com/andybalholm/cascadia v1.3.1 // indirect
 	github.com/dlclark/regexp2 v1.8.0 // indirect
 	github.com/dop251/goja v0.0.0-20230203172422-5460598cfa32 // indirect
 	github.com/dop251/goja_nodejs v0.0.0-20230207183254-2229640ea097 // indirect
@@ -27,6 +30,7 @@ require (
 	github.com/nfnt/resize v0.0.0-20180221191011-83c6a9932646 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
 	github.com/xo/terminfo v0.0.0-20220910002029-abceb7e1c41e // indirect
+	golang.org/x/net v0.7.0 // indirect
 	golang.org/x/sys v0.5.0 // indirect
 	golang.org/x/text v0.7.0 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect

@@ -46,13 +46,17 @@ func (c *content) GenerateEntries() {
 	c.paper.Add(&s)
 
 	for _, chapter := range c.Tree {
+		leftSegs := make([]*spec.Segment, 0)
+		leftSegs = append(leftSegs, &spec.Segment{
+			Content: chapter.Heading.String(),
+			Font:    spec.SansRegular,
+		})
 		entry := Entry{
-			Left:       chapter.Heading.String(),
-			Right:      "X",
+			Left:       leftSegs,
+			Right:      make([]*spec.Segment, 0),
 			FontSize:   globals.Cfg.Toc.FontSize,
 			LineHeight: globals.Cfg.Toc.LineHeight,
 			Line:       true,
-			Font:       spec.SansRegular,
 			Offset:     globals.MmToPt(float64((chapter.Heading.Level - 1) * 10)),
 			LeftAlign:  true,
 		}
@@ -68,7 +72,13 @@ func (c *content) InsertPageNumbers() {
 			for _, el := range col.Content {
 				if entry, ok := (*el).(*Entry); ok {
 					if h, ok := c.entries[entry]; ok {
-						entry.Right = fmt.Sprintf("%d", h.Page)
+						if entry.Right == nil {
+							entry.Right = make([]*spec.Segment, 0)
+						}
+						entry.Right = append(entry.Right, &spec.Segment{
+							Content: fmt.Sprintf("%d", h.Page),
+							Font:    spec.SansRegular,
+						})
 						entry.Process(entry.width)
 					}
 				}

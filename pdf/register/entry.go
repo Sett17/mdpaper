@@ -9,10 +9,9 @@ import (
 )
 
 type Entry struct {
-	Left           string
-	Right          string
+	Left           []*spec.Segment
+	Right          []*spec.Segment
 	Pos            [2]float64
-	Font           *spec.Font
 	FontSize       int
 	LineHeight     float64
 	Line           bool
@@ -73,25 +72,50 @@ func (e *Entry) Process(width float64) {
 	e.width = width
 	width -= e.Offset
 
-	e.rightOffset = math.Max(width-e.Font.WordWidth(e.Right, e.FontSize)-globals.MmToPt(3), width*.66)
+	e.rightJustified = spec.ProcessSegments(
+		e.Right,
+		width*.66,
+		e.FontSize,
+		0,
+	)
+	maxRightWidth := 0.0
+	for _, r := range e.rightJustified {
+		r.WordSpacing = 0
+		if r.Width > maxRightWidth {
+			maxRightWidth = r.Width
+		}
+	}
+	e.rightOffset = math.Max(width-maxRightWidth-globals.MmToPt(3), width*.66)
 
 	e.leftJustified = spec.ProcessSegments(
-		[]*spec.Segment{{Content: e.Left, Font: e.Font}},
+		e.Left,
 		e.rightOffset-globals.MmToPt(3),
 		e.FontSize,
 		0,
 	)
-	e.rightJustified = spec.ProcessSegments(
-		[]*spec.Segment{{Content: e.Right, Font: e.Font}},
-		width-e.rightOffset,
-		e.FontSize,
-		0)
+	maxLeftWidth := 0.0
+	for _, l := range e.leftJustified {
+		if l.Width > maxLeftWidth {
+			maxLeftWidth = l.Width
+		}
+	}
+
+	//e.rightOffset = math.Max(width-e.Font.WordWidth(e.Right, e.FontSize)-globals.MmToPt(3), width*.66)
+	//
+	//e.leftJustified = spec.ProcessSegments(
+	//	[]*spec.Segment{{Content: e.Left, Font: e.Font}},
+	//	e.rightOffset-globals.MmToPt(3),
+	//	e.FontSize,
+	//	0,
+	//)
+	//e.rightJustified = spec.ProcessSegments(
+	//	[]*spec.Segment{{Content: e.Right, Font: e.Font}},
+	//	width-e.rightOffset,
+	//	e.FontSize,
+	//	0)
 
 	if e.LeftAlign {
 		for _, l := range e.leftJustified {
-			l.WordSpacing = 0
-		}
-		for _, l := range e.rightJustified {
 			l.WordSpacing = 0
 		}
 	}
@@ -99,7 +123,7 @@ func (e *Entry) Process(width float64) {
 	if e.Line {
 		lineY := e.LineHeight * float64(e.FontSize) * float64(len(e.leftJustified)-1)
 		e.line = spec.GraphicLine{
-			PosA:   [2]float64{e.Font.WordWidth(e.leftJustified[len(e.leftJustified)-1].String(), e.FontSize) + e.Offset + e.Pos[0] + globals.MmToPt(1), e.Pos[1] - lineY},
+			PosA:   [2]float64{maxLeftWidth + e.Offset + e.Pos[0] + globals.MmToPt(1), e.Pos[1] - lineY},
 			PosB:   [2]float64{e.rightOffset + e.Offset + e.Pos[0] - globals.MmToPt(1), e.Pos[1] - lineY},
 			Dotted: true,
 		}

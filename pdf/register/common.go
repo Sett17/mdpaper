@@ -13,13 +13,6 @@ type common struct {
 
 func (c *common) GenerateEntries() {
 	c.paper = &abstracts.Paper{}
-	//
-	//var h spec.Addable = c.Heading()
-	//c.paper.Add(&h)
-	//
-	//spacer := spacing.NewSpacer(c.Heading().Height() + globals.Cfg.Margins.HeadingBottom)
-	//var s spec.Addable = spacer
-	//c.paper.Add(&s)
 }
 
 func (c *common) GeneratePages() {

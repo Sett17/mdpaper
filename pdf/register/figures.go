@@ -51,13 +51,22 @@ func (f *figures) GenerateEntries() {
 	})
 
 	for _, fig := range figs {
+		leftSegs := make([]*spec.Segment, 0)
+		leftSegs = append(leftSegs, &spec.Segment{
+			Content: fmt.Sprintf("%d: %s", fig.Number, fig.Title),
+			Font:    spec.SansRegular,
+		})
+		rightSegs := make([]*spec.Segment, 0)
+		rightSegs = append(rightSegs, &spec.Segment{
+			Content: fig.Key,
+			Font:    spec.SansRegular,
+		})
 		entry := Entry{
-			Left:       fmt.Sprintf("%d: %s", fig.Number, fig.Title),
-			Right:      fig.Key, // keep this here to replace later... seems very hacky
+			Left:       leftSegs,
+			Right:      rightSegs, // keep this here to replace later... seems very hacky
 			LineHeight: globals.Cfg.Tof.LineHeight,
 			FontSize:   globals.Cfg.Tof.FontSize,
 			Line:       true,
-			Font:       spec.SansRegular,
 			LeftAlign:  true,
 		}
 		var a spec.Addable = &entry
@@ -74,15 +83,18 @@ func (f *figures) InsertPageNumbers() {
 		for _, col := range page.Columns {
 			for _, el := range col.Content {
 				if entry, ok := (*el).(*Entry); ok {
-					k := entry.Right
-					entry.Right = ""
+					kSegs := entry.Right
+					entry.Right = make([]*spec.Segment, 0)
+					k := kSegs[0].Content // no checks here, because only set above to key; dangerous?
 					if fig, ok := globals.Figures[k]; ok {
 						for i, p := range fig.Used {
+							seg := spec.Segment{Font: spec.SansRegular}
 							if i < len(fig.Used)-1 {
-								entry.Right += fmt.Sprintf("%d, ", p)
+								seg.Content = fmt.Sprintf("%d, ", p)
 							} else {
-								entry.Right += fmt.Sprintf("%d", p)
+								seg.Content = fmt.Sprintf("%d", p)
 							}
+							entry.Right = append(entry.Right, &seg)
 						}
 					}
 					entry.Process(entry.width)

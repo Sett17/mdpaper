@@ -15,6 +15,10 @@ type Segment struct {
 	Font    *Font
 }
 
+func (s Segment) String() string {
+	return fmt.Sprintf("%s (%s)", s.Content, s.Font.Name)
+}
+
 type Text struct {
 	Segments   []*Segment
 	Pos        [2]float64

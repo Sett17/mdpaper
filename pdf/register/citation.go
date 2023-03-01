@@ -4,9 +4,11 @@ import (
 	"github.com/sett17/mdpaper/v2/cli"
 	"github.com/sett17/mdpaper/v2/globals"
 	"github.com/sett17/mdpaper/v2/pdf/abstracts"
+	"github.com/sett17/mdpaper/v2/pdf/conversions"
 	"github.com/sett17/mdpaper/v2/pdf/elements"
 	"github.com/sett17/mdpaper/v2/pdf/spacing"
 	"github.com/sett17/mdpaper/v2/pdf/spec"
+	"strings"
 )
 
 type citation struct {
@@ -46,14 +48,27 @@ func (c *citation) GenerateEntries() {
 		cli.Error(err, false)
 		return
 	}
+
 	for _, bibEntry := range bib {
+		leftSegs := make([]*spec.Segment, 0)
+		//bib text can hold inline html styling (i've only seen <i>)
+		//for now just handle italic and bold
+		bibEntry = strings.ReplaceAll(bibEntry, "<i>", "_")
+		bibEntry = strings.ReplaceAll(bibEntry, "</i>", "_")
+		bibEntry = strings.ReplaceAll(bibEntry, "<em>", "_")
+		bibEntry = strings.ReplaceAll(bibEntry, "</em>", "_")
+		bibEntry = strings.ReplaceAll(bibEntry, "<b>", "**")
+		bibEntry = strings.ReplaceAll(bibEntry, "</b>", "**")
+		bibEntry = strings.ReplaceAll(bibEntry, "<strong>", "**")
+		bibEntry = strings.ReplaceAll(bibEntry, "</strong>", "**")
+		leftSegs = (*conversions.String(bibEntry)).(*elements.Paragraph).Segments
+
 		entry := Entry{
-			Left:       bibEntry,
-			Right:      "",
+			Left:       leftSegs,
+			Right:      make([]*spec.Segment, 0),
 			LineHeight: globals.Cfg.Citation.BibLineHeight,
 			FontSize:   globals.Cfg.Citation.BibFontSize,
 			Line:       false,
-			Font:       spec.SerifRegular,
 			LeftAlign:  true,
 		}
 		var a spec.Addable = &entry

@@ -15,7 +15,7 @@ type citationParser struct{}
 
 // Trigger returns characters that trigger this parser.
 func (p *citationParser) Trigger() []byte {
-	return []byte{'['}
+	return []byte("[")
 }
 
 func (p *citationParser) Parse(_ ast.Node, block text.Reader, _ parser.Context) ast.Node {
@@ -31,6 +31,8 @@ func (p *citationParser) Parse(_ ast.Node, block text.Reader, _ parser.Context) 
 				block.Advance(1)
 			}
 			block.Advance(1)
+		} else {
+			return nil
 		}
 		key = string(buf)
 	}

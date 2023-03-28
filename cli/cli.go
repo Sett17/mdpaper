@@ -1,7 +1,12 @@
 package cli
 
 import (
+	"encoding/json"
+	"fmt"
 	"github.com/i582/cfmt/cmd/cfmt"
+	"github.com/sett17/mdpaper/v2/globals"
+	"io/ioutil"
+	"net/http"
 	"strings"
 )
 
@@ -44,6 +49,41 @@ func ParseForVersion(args []string) {
 				return
 			}
 		}
+	}
+}
+
+type Release struct {
+	TagName string `json:"tag_name"`
+}
+
+func CheckVersion() {
+	url := "https://api.github.com/repos/Sett17/mdpaper/releases/latest"
+
+	resp, err := http.Get(url)
+	if err != nil {
+		fmt.Printf("[CheckVersion] Error sending HTTP request: %v\n", err)
+		return
+	}
+	defer resp.Body.Close()
+
+	body, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		fmt.Printf("[CheckVersion] Error reading HTTP response body: %v\n", err)
+		return
+	}
+
+	var release Release
+	err = json.Unmarshal(body, &release)
+	if err != nil {
+		fmt.Printf("[CheckVersion] Error parsing JSON response: %v\n", err)
+		return
+	}
+
+	// Remove leading 'v' character from GitHub API response tag name
+	onlineVersion := strings.TrimPrefix(release.TagName, "v")
+
+	if onlineVersion != globals.Version {
+		fmt.Printf("A new version (%s) of mdpaper is available! Run 'go install github.com/Sett17/mdpaper/v2@{%s}' to update.\n", release.TagName, release.TagName)
 	}
 }
 

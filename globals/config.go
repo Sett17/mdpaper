@@ -78,7 +78,7 @@ var Default = Config{
 		FontSize:       11,
 		LineHeight:     1.2,
 		ListLineHeight: 1.0,
-		ListMarker:     "•",
+		ListMarker:     "-",
 		FigureText:     "Figure",
 	},
 	Page: struct {

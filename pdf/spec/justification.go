@@ -76,6 +76,7 @@ func (l *TextLine) Add(str string, font *Font) {
 }
 
 func (l *TextLine) CalculateSpacing(maxWidth float64) {
+	maxWidth -= l.Offset
 	buf := strings.Builder{}
 	for _, w := range l.Words {
 		buf.WriteString(w)

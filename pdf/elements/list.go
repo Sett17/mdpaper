@@ -13,6 +13,15 @@ type ListItem struct {
 	Prefix string
 }
 
+func (p *ListItem) Process(maxWidth float64) {
+	newSeg := spec.Segment{
+		Content: p.Prefix,
+		Font:    spec.SerifRegular,
+	}
+	p.Segments = append([]*spec.Segment{&newSeg}, p.Segments...)
+	p.Text.Process(maxWidth)
+}
+
 func (p *ListItem) Bytes() []byte {
 	buf := bytes.Buffer{}
 
@@ -28,7 +37,7 @@ func (p *ListItem) Bytes() []byte {
 
 	lineBuffer := strings.Builder{}
 	l := spec.TextLine{}
-	l.Add(p.Prefix, spec.SerifRegular)
+	//l.Add(p.Prefix, spec.SerifRegular)
 	if l.Offset != 0 {
 		buf.WriteString(fmt.Sprintf("%f 0 Td\n", l.Offset))
 	}

@@ -165,8 +165,8 @@ func (p *Text) Height() float64 {
 }
 
 func (p *Text) Process(maxWidth float64) {
-	p.Width = maxWidth - p.Offset/2
-	p.Processed = ProcessSegments(p.Segments, p.Width, p.FontSize, 0)
+	p.Width = maxWidth
+	p.Processed = ProcessSegments(p.Segments, p.Width, p.FontSize, p.Offset)
 }
 
 func (p *Text) Add(a ...*Segment) {

@@ -118,65 +118,6 @@ func checkCorrectCutoff(segments []*Segment, fit segmentFit, cutoff []rune) bool
 	return true
 }
 
-//func checkCorrectCutoff(segments []*Segment, segmentIdx int, fit segmentFit, cutoffSplit []string) bool {
-//	wordCount := fit.wordCount
-//	cutoffPartInSegment := strings.Join(cutoffSplit[:wordCount], " ")
-//	if cutoffPartInSegment == strings.Join(cutoffSplit, " ") {
-//		return true
-//	}
-//
-//	remainingCutoff := cutoffSplit[wordCount:]
-//	nextSegContent := strings.TrimSpace(segments[segmentIdx+1].Content)
-//	nextSegContentWordCount := len(strings.Split(nextSegContent, " "))
-//
-//	nextCutoff := remainingCutoff
-//	if nextSegContentWordCount < len(remainingCutoff) {
-//		nextCutoff = remainingCutoff[:nextSegContentWordCount]
-//	}
-//
-//	return strings.HasPrefix(nextSegContent, strings.Join(nextCutoff, " "))
-//}
-
-//func findCutoffSegment(segments []*Segment, cutoffText string) (int, int) {
-//	if segments == nil {
-//		return -1, -1
-//	}
-//	fit := make([]segmentFit, len(segments))
-//	cutoffSplit := strings.Split(cutoffText, " ")
-//	//cutoffSplit := make([]string, 0)
-//	//for _, s := range cutoffSplitDirty {
-//	//	if s != "" {
-//	//		cutoffSplit = append(cutoffSplit, s)
-//	//	}
-//	//}
-//
-//	for i, segment := range segments {
-//		for j := len(cutoffSplit); j > 0; j-- {
-//			search := strings.Join(cutoffSplit[:j], " ")
-//			if strings.Contains(segment.Content, search) {
-//				fit[i] = segmentFit{i, j}
-//				//cutoffSplit = cutoffSplit[j:]
-//				break
-//			}
-//		}
-//	}
-//
-//	sort.Slice(fit, func(i, j int) bool {
-//		return fit[i].wordCount > fit[j].wordCount
-//	})
-//
-//	for _, f := range fit {
-//		//disabled check because of to do above
-//		//if checkCorrectCutoff(segments, f.segmentIdx, f, cutoffSplit) {
-//		cutoffFromThisSegment := strings.Join(cutoffSplit[:f.wordCount], " ")
-//		cutoffLocation := strings.Index(segments[f.segmentIdx].Content, cutoffFromThisSegment)
-//		return f.segmentIdx, cutoffLocation
-//		//}
-//	}
-//
-//	return -1, -1
-//}
-
 func (p *Text) SplitDelegate(percent float64) (Addable, Addable) {
 	procCutoff := int(math.Floor(float64(len(p.Processed)) * percent))
 	if procCutoff == 0 {

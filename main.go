@@ -48,7 +48,7 @@ func main() {
 			continue
 		}
 		globals.File = append(globals.File, inp...)
-		globals.File = append(globals.File, 0x0a)
+		globals.File = append(globals.File, 0x0a, 0x0a)
 	}
 
 	start := time.Now()

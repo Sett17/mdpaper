@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/sett17/mdpaper/v2/globals"
 	"github.com/sett17/mdpaper/v2/pdf/spec"
+	"reflect"
 	"strings"
 )
 
@@ -18,7 +19,9 @@ func (p *ListItem) Process(maxWidth float64) {
 		Content: p.Prefix,
 		Font:    spec.SerifRegular,
 	}
-	p.Segments = append([]*spec.Segment{&newSeg}, p.Segments...)
+	if !reflect.DeepEqual(p.Segments[0], &newSeg) {
+		p.Segments = append([]*spec.Segment{&newSeg}, p.Segments...)
+	}
 	p.Text.Process(maxWidth)
 }
 

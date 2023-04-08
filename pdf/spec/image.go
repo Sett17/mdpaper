@@ -28,18 +28,18 @@ func NewImageObject(iData image.Image, iName string, mul float64) (XObject, Adda
 	x.Dictionary.Set("Height", iData.Bounds().Dy()/pixelMul)
 	x.Dictionary.Set("ColorSpace", "/DeviceRGB")
 	x.Dictionary.Set("BitsPerComponent", 8)
-	go func(obj *XObject) {
-		globals.ImageSync.Add(1)
-		defer globals.ImageSync.Done()
-		for j := 0; j < iData.Bounds().Dy()/pixelMul; j++ {
-			for k := 0; k < iData.Bounds().Dx()/pixelMul; k++ {
-				r, g, b, _ := iData.At(k*pixelMul, j*pixelMul).RGBA()
-				obj.Write([]byte{byte(r >> 8), byte(g >> 8), byte(b >> 8)})
-			}
+	//go func(obj *XObject) {
+	//	globals.ImageSync.Add(1)
+	//	defer globals.ImageSync.Done()
+	for j := 0; j < iData.Bounds().Dy()/pixelMul; j++ {
+		for k := 0; k < iData.Bounds().Dx()/pixelMul; k++ {
+			r, g, b, _ := iData.At(k*pixelMul, j*pixelMul).RGBA()
+			x.Write([]byte{byte(r >> 8), byte(g >> 8), byte(b >> 8)})
 		}
-		obj.WriteString("\n")
-		obj.Set("Size", x.Len())
-	}(&x)
+	}
+	x.WriteString("\n")
+	x.Set("Size", x.Len())
+	//}(&x)
 	ia := ImageAddable{
 		ImageName: x.Name,
 		W:         float64(iData.Bounds().Dx()),

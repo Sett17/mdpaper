@@ -147,5 +147,6 @@ func main() {
 		cli.Output("%s of debug info put into debug.txt, in %v\n", humanize.Bytes(uint64(fi.Size())), doneWrite.Sub(beforeWrite))
 	}
 
-	cli.Warning("Please look over the PDF yourself and make sure that it is correct.\nmdpaper is not responsible for the correctness of the output.\n")
+	cli.Warning("Please look over the PDF yourself and make sure that it is correct.\nmdpaper is not responsible for the correctness of the output.")
+	println()
 }

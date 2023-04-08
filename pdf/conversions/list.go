@@ -45,9 +45,8 @@ func ListItem(item *ast.ListItem, number int, marker string) *spec.Addable {
 		Text: spec.Text{
 			FontSize:   globals.Cfg.Text.FontSize,
 			LineHeight: globals.Cfg.Text.ListLineHeight,
-			//Offset:     spec.SerifRegular.WordWidth(prefix, globals.Cfg.Text.FontSize) * 1.2,
-			Offset: spec.SerifRegular.WordWidth(prefix, globals.Cfg.Text.FontSize),
-			Margin: (globals.Cfg.Text.ListLineHeight - 1) * float64(globals.Cfg.Text.FontSize) * .2,
+			Offset:     spec.SerifRegular.WordWidth(prefix, globals.Cfg.Text.FontSize),
+			Margin:     (globals.Cfg.Text.ListLineHeight - 1) * float64(globals.Cfg.Text.FontSize) * .2,
 		},
 		Prefix: prefix,
 	}

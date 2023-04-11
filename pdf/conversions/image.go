@@ -55,10 +55,6 @@ func Image(image *ast.Image, node ast.Node) (retO *spec.XObject, retA *spec.Adda
 	titlePara := String(string(image.Title))
 	titleSegs := (*titlePara).(*elements.Paragraph).Segments
 	para.Add(titleSegs...)
-	//para.Add(&spec.Segment{
-	//	Content: string(image.Title),
-	//	Font:    spec.SerifRegular,
-	//})
 	var a spec.Addable = &para
 	retP = &a
 	return

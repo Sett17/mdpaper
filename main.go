@@ -149,4 +149,5 @@ func main() {
 
 	cli.Warning("Please look over the PDF yourself and make sure that it is correct.\nmdpaper is not responsible for the correctness of the output.")
 	println()
+	cli.CheckVersion()
 }

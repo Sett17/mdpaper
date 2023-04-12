@@ -83,7 +83,7 @@ func CheckVersion() {
 	onlineVersion := strings.TrimPrefix(release.TagName, "v")
 
 	if onlineVersion != globals.Version {
-		fmt.Printf("A new version (%s) of mdpaper is available! Run 'go install github.com/Sett17/mdpaper/v2@{%s}' to update.\n", release.TagName, release.TagName)
+		fmt.Printf("A new version (%s) of mdpaper is available! Run \ngo install github.com/Sett17/mdpaper/v2@%s\n to update.\n", release.TagName, release.TagName)
 	}
 }
 

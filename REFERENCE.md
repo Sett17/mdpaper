@@ -390,6 +390,8 @@ The Force will be with you, always.
 
 This will create a math block with the LaTeX code `\int_a^b f(x) dx`, which will be rendered as an integral.
 
+The actual latex codes includes the package `amsmath` and wraps the equation in an `align*` block. This means that you can use `\\` to create a new line in your equation, and `&` to align multiple equations. This also mean that empty liens are not allowed.
+
 Math support in mdpaper requires a LaTeX installation with the `latex` and `dvipng` programs. These programs are typically included in most LaTeX installations, but if you are new to LaTeX, we recommend installing [TeX Live](https://www.tug.org/texlive/).
 
 ## Fills

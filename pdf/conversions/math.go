@@ -26,10 +26,12 @@ func Math(m *goldmark_math.MathBlock) (retO *spec.XObject, retA *spec.Addable) {
 	}
 
 	_, err = inputFile.WriteString(`\documentclass{article}
+\usepackage{amsmath}
 \pagenumbering{gobble}
 \thispagestyle{empty}
 \begin{document}
-$\displaystyle `)
+\begin{align*}
+`)
 	if err != nil {
 		cli.Error(err, false)
 		return nil, nil
@@ -39,7 +41,10 @@ $\displaystyle `)
 		cli.Error(err, false)
 		return nil, nil
 	}
-	_, err = inputFile.WriteString(`$
+	if m.Text(globals.File)[len(m.Text(globals.File))-1] != '\n' {
+		_, err = inputFile.WriteString(`\n`)
+	}
+	_, err = inputFile.WriteString(`\end{align*}
 \end{document}`)
 	if err != nil {
 		cli.Error(err, false)
@@ -79,7 +84,7 @@ $\displaystyle `)
 
 	retO = &io
 	retA = &ia
-	defer os.Remove(inputFile.Name())
+	//defer os.Remove(inputFile.Name())
 	defer os.Remove(inputFile.Name() + ".png")
 	defer os.Remove(inputFile.Name() + ".dvi")
 	defer os.Remove(inputFile.Name() + ".aux")

@@ -58,6 +58,9 @@ func escape(str string) (ret string) {
 	ret = strings.ReplaceAll(str, "\\", "\\\\")
 	ret = strings.ReplaceAll(ret, "(", "\\(")
 	ret = strings.ReplaceAll(ret, ")", "\\)")
+	ret = strings.ReplaceAll(ret, "“", "\"")
+	ret = strings.ReplaceAll(ret, "„", "\"")
+	ret = strings.ReplaceAll(ret, "”", "\"")
 	return
 }
 

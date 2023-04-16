@@ -9,7 +9,7 @@ require (
 	github.com/goccy/go-json v0.10.0
 	github.com/golang/freetype v0.0.0-20170609003504-e2365dfdc4a0
 	github.com/i582/cfmt v1.4.0
-	github.com/sett17/citeproc-js-go v1.1.0
+	github.com/sett17/citeproc-js-go v1.2.0
 	github.com/sett17/goafm v1.1.1
 	github.com/yuin/goldmark v1.5.4
 	github.com/yuin/goldmark-meta v1.1.0

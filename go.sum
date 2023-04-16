@@ -66,6 +66,8 @@ github.com/sergi/go-diff v1.0.0/go.mod h1:0CfEIISq7TuYL3j771MWULgwwjU+GofnZX9QAm
 github.com/sergi/go-diff v1.2.0/go.mod h1:STckp+ISIX8hZLjrqAeVduY0gWCT9IjLuqbuNXdaHfM=
 github.com/sett17/citeproc-js-go v1.1.0 h1:oTLhJZyRtxWx9poa/N9DV1qN0qhZ9Ef5xq6M8mYSPNw=
 github.com/sett17/citeproc-js-go v1.1.0/go.mod h1:7cDbK0h14G0I5STQ3UT1yiGlbOVZS/MH3ojVXTt+0Vk=
+github.com/sett17/citeproc-js-go v1.2.0 h1:OuOZX09qQaO2q4f9tdp0T6FL9KuWdKp1l8oDmZQuzPM=
+github.com/sett17/citeproc-js-go v1.2.0/go.mod h1:7cDbK0h14G0I5STQ3UT1yiGlbOVZS/MH3ojVXTt+0Vk=
 github.com/sett17/goafm v1.1.1 h1:5cpfz8REUh1zDvcYYkq6ns3HlFMcveDbfbweFsz0PGI=
 github.com/sett17/goafm v1.1.1/go.mod h1:tSnCo/ZX92VGFG/hahqAicxgOXYV2c2M5JHriX1v0Hc=
 github.com/stretchr/objx v0.1.0/go.mod h1:HFkY916IF+rwdDfMAkV7OtwuqBVzrE8GR6GFx+wExME=

@@ -192,13 +192,12 @@ func FromAst(md ast.Node) *spec.PDF {
 			headings = append(headings, h)
 		}
 	}
-	if globals.Cfg.Citation.Enabled {
-		headings = append(headings, register.Citation.Heading())
-	}
 	if globals.Cfg.Tof.Enabled {
 		headings = append(headings, register.Figures.Heading())
 	}
-	//TODO add other registry headings
+	if globals.Cfg.Citation.Enabled {
+		headings = append(headings, register.Citation.Heading())
+	}
 	toc.GenerateChapterTree(headings)
 	chapters := toc.GenerateChapterTree(headings)
 	for i, c := range chapters.Roots() {

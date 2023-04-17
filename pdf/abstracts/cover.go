@@ -9,13 +9,13 @@ import (
 
 func GenerateCover() *Column {
 	col := NewColumn(
-		globals.A4Width-(globals.MmToPt(globals.Cfg.Page.MarginHori)*2),
-		globals.A4Height-(globals.MmToPt(globals.Cfg.Page.MarginTop)+globals.MmToPt(globals.Cfg.Page.MarginBottom)),
-		globals.MmToPt(globals.Cfg.Page.MarginHori),
-		globals.A4Height-globals.MmToPt(globals.Cfg.Page.MarginTop),
+		globals.A4Width-(globals.MmToPt(40)*2),
+		globals.A4Height-(globals.MmToPt(30*2)),
+		globals.MmToPt(40),
+		globals.A4Height-globals.MmToPt(30),
 	)
 
-	spacer1 := spacing.NewSpacer(globals.MmToPt(10))
+	//spacer1 := spacing.NewSpacer(globals.MmToPt(10))
 
 	headSeg := spec.Segment{
 		Content: globals.Cfg.Paper.Title,
@@ -47,6 +47,21 @@ func GenerateCover() *Column {
 
 	spacer2 := spacing.NewSpacer(globals.MmToPt(10))
 
+	abstractSeg := spec.Segment{
+		Content: globals.Cfg.Cover.Abstract,
+		Font:    spec.SerifRegular,
+	}
+	abstract := elements.Paragraph{
+		Text: spec.Text{
+			FontSize:   11,
+			LineHeight: 1.2,
+		},
+	}
+	abstract.Add(&abstractSeg)
+	var abs spec.Addable = &abstract
+
+	spacer3 := spacing.NewSpacer(globals.MmToPt(10))
+
 	authorSeg := spec.Segment{
 		Content: globals.Cfg.Paper.Author,
 		Font:    spec.SansRegular,
@@ -61,17 +76,21 @@ func GenerateCover() *Column {
 	author.Add(&authorSeg)
 	var a spec.Addable = &author
 
-	contentHeight := head.Height() + sub.Height() + author.Height()
-	spacerHeight := (col.MaxHeight - contentHeight) / 3.5
-	spacer1.H = spacerHeight
+	contentHeight := head.Height() + sub.Height() + abstract.Height() + author.Height()
+	spacerHeight := (col.MaxHeight - contentHeight) / 4
+	//spacer1.H = spacerHeight
 	spacer2.H = spacerHeight
+	spacer3.H = spacerHeight
 
-	var s1 spec.Addable = spacer1
-	col.Add(&s1)
+	//var s1 spec.Addable = spacer1
+	//col.Add(&s1)
 	col.Add(&h)
 	col.Add(&s)
 	var s2 spec.Addable = spacer2
 	col.Add(&s2)
+	col.Add(&abs)
+	var s3 spec.Addable = spacer3
+	col.Add(&s3)
 	col.Add(&a)
 
 	return col

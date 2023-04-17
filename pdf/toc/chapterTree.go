@@ -154,7 +154,7 @@ func (n *ChapterNode) childrenOutline(items *map[*ChapterNode]*spec.DictionaryOb
 
 	for i, node := range c {
 		d := spec.NewDictObject()
-		d.Set("Title", "("+node.Heading.Numbering()+" "+node.Heading.String()+")")
+		d.Set("Title", "("+node.Heading.String()+")")
 		d.Set("Parent", (*items)[n].Reference())
 		d.Set("Count", node.recChildCount())
 		d.Set("Dest", node.Heading.Destination())

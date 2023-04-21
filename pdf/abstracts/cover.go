@@ -2,6 +2,7 @@ package abstracts
 
 import (
 	"github.com/sett17/mdpaper/v2/globals"
+	"github.com/sett17/mdpaper/v2/pdf/conversions"
 	"github.com/sett17/mdpaper/v2/pdf/elements"
 	"github.com/sett17/mdpaper/v2/pdf/spacing"
 	"github.com/sett17/mdpaper/v2/pdf/spec"
@@ -47,18 +48,11 @@ func GenerateCover() *Column {
 
 	spacer2 := spacing.NewSpacer(globals.MmToPt(10))
 
-	abstractSeg := spec.Segment{
-		Content: globals.Cfg.Cover.Abstract,
-		Font:    spec.SerifRegular,
-	}
-	abstract := elements.Paragraph{
-		Text: spec.Text{
-			FontSize:   11,
-			LineHeight: 1.2,
-		},
-	}
-	abstract.Add(&abstractSeg)
-	var abs spec.Addable = &abstract
+	abstract := (*conversions.String(globals.Cfg.Cover.Abstract)).(*elements.Paragraph)
+	abstract.FontSize = 11
+	abstract.LineHeight = 1.1
+
+	var abs spec.Addable = abstract
 
 	spacer3 := spacing.NewSpacer(globals.MmToPt(10))
 
